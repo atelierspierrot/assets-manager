@@ -46,10 +46,12 @@ class AssetsAutoloadGenerator
     public function generate()
     {
         $app_base_path = $this->assets_installer->getAppBasePath();
+        $assets_dir = str_replace($app_base_path . '/', '', $this->assets_installer->getAssetsDir());
+        $assets_vendor_dir = str_replace($app_base_path . '/' . $assets_dir . '/', '', $this->assets_installer->getAssetsVendorDir());
         $assets_file = $this->assets_installer->getVendorDir() . '/' . $this->assets_installer->getAssetsDbFilename();
         $full_db = array(
-            'assets-dir' => str_replace($app_base_path, '', $this->assets_installer->getAssetsDir()),
-            'assets-vendor-dir' => str_replace($app_base_path, '', $this->assets_installer->getAssetsVendorDir()),
+            'assets-dir' => $assets_dir,
+            'assets-vendor-dir' => $assets_vendor_dir,
             'document-root' => $this->assets_installer->getDocumentRoot(),
             'packages' => $this->assets_db
         );

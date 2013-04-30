@@ -44,14 +44,7 @@ class AssetsInstaller extends LibraryInstaller
         parent::__construct($io, $composer, $type);
 
         $config = $composer->getConfig();
-
-echo PHP_EOL.'vendor dir config: '.$config->get('vendor-dir');
-echo PHP_EOL.'vendor dir path: '.$this->getVendorDir();
-
-
         $this->appBasePath = rtrim(str_replace($config->get('vendor-dir'), '', $this->getVendorDir()), '/');
-echo PHP_EOL.'appBasePath: '.$this->appBasePath;
-
         $this->filesystem = new AssetsFilesystem();
         $this->assetsDir = $this->guessAssetsDir($composer->getPackage());
         $this->assetsVendorDir = $this->guessAssetsVendorDir($composer->getPackage());
