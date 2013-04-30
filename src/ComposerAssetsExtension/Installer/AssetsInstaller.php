@@ -32,6 +32,7 @@ class AssetsInstaller extends LibraryInstaller
     protected $assetsVendorDir;
     protected $assetsDbFilename;
     protected $documentRoot;
+    protected $appBasePath;
 
     /**
      * Initializes installer: creation of "assets-dir" directory if so.
@@ -41,6 +42,9 @@ class AssetsInstaller extends LibraryInstaller
     public function __construct(IOInterface $io, Composer $composer, $type = 'library')
     {
         parent::__construct($io, $composer, $type);
+
+        $config = $composer->getConfig();
+        $this->appBasePath = rtrim(str_replace($config->get('vendor-dir'), '', $this->getVendorDir()), '/');
 
         $this->filesystem = new AssetsFilesystem();
         $this->assetsDir = $this->guessAssetsDir($composer->getPackage());
@@ -179,6 +183,11 @@ class AssetsInstaller extends LibraryInstaller
         return $this->io;
     }
 
+    public function getAppBasePath()
+    {
+        return $this->appBasePath;
+    }
+
     public function getVendorDir()
     {
         return $this->vendorDir;
@@ -248,6 +257,7 @@ class AssetsInstaller extends LibraryInstaller
     public function parseComposerExtra(PackageInterface $package, $package_dir)
     {
         $presets = array();
+        $extra = $package->getExtra();
         if (isset($extra['assets-presets'])) {
             foreach ($extra['assets-presets'] as $index=>$item) {
                 $use_item = array();
@@ -270,7 +280,7 @@ class AssetsInstaller extends LibraryInstaller
         return array(
             'name'          => $package->getPrettyName(),
             'version'       => $package->getVersion(),
-            'relative_path' => $package_dir,
+            'relative_path' => str_replace($this->appBasePath, '', $package_dir),
             'assets_path'   => $this->guessAssetsDir($package),
             'assets_presets'=> $presets
         );

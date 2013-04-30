@@ -27,7 +27,7 @@ class Preset
      * Composition of a `assets_presets` statement in `composer.json`
      * @static array
      */
-    public static $use_statements = array( 'css', 'jsfiles_footer', 'jsfiles_header' );
+    public static $use_statements = array( 'css', 'js', 'jsfiles_footer', 'jsfiles_header' );
 
     /**
      * @var string
