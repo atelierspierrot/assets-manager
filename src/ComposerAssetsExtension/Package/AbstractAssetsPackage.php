@@ -67,11 +67,6 @@ abstract class AbstractAssetsPackage
     const DEFAULT_DOCUMENT_ROOT = _SERVER_DOCROOT;
 
     /**
-     * The default presets (empty)
-     */
-    const DEFAULT_PRESETS = array();
-
-    /**
      * The assets database file created on install
      */
     const ASSETS_DB_FILENAME = 'assets.json';
