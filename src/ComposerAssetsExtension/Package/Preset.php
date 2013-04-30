@@ -10,11 +10,7 @@
 namespace ComposerAssetsExtension\Package;
 
 use InvalidArgumentException;
-
-use Library\Helper\Directory as DirectoryHelper;
-
-use ComposerAssetsExtension\Loader as AssetsLoader,
-    ComposerAssetsExtension\Package\Cluster;
+use ComposerAssetsExtension\Package\AssetsPackage;
 
 /**
  * Preset
@@ -44,30 +40,18 @@ class Preset
     protected $preset_data;
 
     /**
-     * @var Assets\Package\Cluster
+     * @var Assets\Package
      */
-    protected $cluster;
-
-    /**
-     * @var Assets\Loader
-     */
-    protected $assets_loader;
-
-    /**
-     * @var TemplateEngine\TemplateEngine
-     */
-    protected $template_engine;
+    protected $package;
 
     /**
      * @param string $package_name
      * @param object $loader Assets\Loader
-     * @param object $engine TemplateEngine\TemplateEngine
      * @throws `InvalidArgumentException` if the preset can't be found
      */
-    public function __construct($preset_name, AssetsLoader $loader, TemplateEngine $engine)
+    public function __construct($preset_name, AssetsPackage $package)
     {
-        $this->assets_loader = $loader;
-        $this->template_engine = $engine;
+        $this->package = $package;
         $this->preset_name = $preset_name;
 
         $data = $this->_findPresetData();

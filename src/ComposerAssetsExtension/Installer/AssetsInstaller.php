@@ -16,6 +16,8 @@ use Composer\Composer,
     Composer\Installer\LibraryInstaller;
 
 use ComposerAssetsExtension\Package\AbstractAssetsPackage,
+    ComposerAssetsExtension\Package\Preset,
+    ComposerAssetsExtension\Autoload\AssetsAutoloadGenerator,
     ComposerAssetsExtension\Util\Filesystem as AssetsFilesystem;
 
 /**
@@ -26,6 +28,8 @@ class AssetsInstaller extends LibraryInstaller
 
     protected $assetsDir;
     protected $assetsVendorDir;
+    protected $assetsDbFilename;
+    protected $documentRoot;
 
     /**
      * Initializes installer: creation of "assets-dir" directory if so.
@@ -37,8 +41,10 @@ class AssetsInstaller extends LibraryInstaller
         parent::__construct($io, $composer, $type);
 
         $this->filesystem = new AssetsFilesystem();
-        $this->assetsDir = $this->getAssetsDir($composer->getPackage());
-        $this->assetsVendorDir = $this->getAssetsVendorDir($composer->getPackage());
+        $this->assetsDir = $this->guessAssetsDir($composer->getPackage());
+        $this->assetsVendorDir = $this->guessAssetsVendorDir($composer->getPackage());
+        $this->documentRoot = $this->guessDocumentRoot($composer->getPackage());
+        $this->assetsDbFilename = $this->guessAssetsDbFilename($composer->getPackage());
     }
 
     /**
@@ -102,28 +108,20 @@ class AssetsInstaller extends LibraryInstaller
 
         $from = $this->getPackageBasePath($package) . '/' . $assets;
         $target = $this->getAssetsInstallPath($package);
-
-echo 'trying to install from '.$from.' to '.$target;
-
         if (file_exists($from)) {
             $this->io->write( 
-                sprintf('  - Installing assets of package <info>%s</info> to <info>%s</info>.', 
+                sprintf('  - Installing <info>%s</info> assets to <info>%s</info>', 
                     $package->getPrettyName(),
-                    dirname(str_replace(dirname($this->assetsDir) . '/', '', $target))
+                    str_replace(dirname($this->assetsDir) . '/', '', $target)
                 )
             );
             $this->filesystem->copy($from, $target);
-
+            AssetsAutoloadGenerator::registerPackage($package, $target);
         } else {
             throw new \InvalidArgumentException(
                 'Unable to find assets in package "'.$package->getPrettyName().'"'
             );
         }
-/*
-            $this->assets_db[$package->getPrettyName()] = 
-                $this->cluster->parseComposerExtra($package, $this);
-        return dirname(str_replace(rtrim($this->appBasePath, '/') . '/', '', $target));
-*/
     }
 
     protected function removeAssets(PackageInterface $package)
@@ -136,13 +134,13 @@ echo 'trying to install from '.$from.' to '.$target;
         $target = $this->getAssetsInstallPath($package);
         if (file_exists($target)) {
             $this->io->write( 
-                sprintf('  - Uninstalling assets of package <info>%s</info> from <info>%s</info>.', 
+                sprintf('  - Removing <info>%s</info> assets to <info>%s</info>', 
                     $package->getPrettyName(),
-                    dirname(str_replace(dirname($this->assetsDir) . '/', '', $target))
+                    str_replace(dirname($this->assetsDir) . '/', '', $target)
                 )
             );
             $this->filesystem->remove($target);
-
+            AssetsAutoloadGenerator::unregisterPackage($package);
         } else {
             throw new \InvalidArgumentException(
                 'Unable to find assets from package "'.$package->getPrettyName().'"'
@@ -150,21 +148,48 @@ echo 'trying to install from '.$from.' to '.$target;
         }
     }
 
-    public function getAssetsInstallPath(PackageInterface $package)
-    {
-        return $this->getRootPackageAssetsVendorPath() . $package->getPrettyName();
-    }
-
-    public function getAssetsDir(PackageInterface $package)
+    protected function guessAssetsDir(PackageInterface $package)
     {
         $extra = $package->getExtra();
         return isset($extra['assets-dir']) ? $extra['assets-dir'] : AbstractAssetsPackage::DEFAULT_ASSETS_DIR;
     }
 
-    public function getAssetsVendorDir(PackageInterface $package)
+    protected function guessAssetsVendorDir(PackageInterface $package)
     {
         $extra = $package->getExtra();
         return isset($extra['assets-vendor-dir']) ? $extra['assets-vendor-dir'] : AbstractAssetsPackage::DEFAULT_ASSETS_VENDOR_DIR;
+    }
+
+    protected function guessDocumentRoot(PackageInterface $package)
+    {
+        $extra = $package->getExtra();
+        return isset($extra['document-root']) ? $extra['document-root'] : AbstractAssetsPackage::DEFAULT_DOCUMENT_ROOT;
+    }
+
+    protected function guessAssetsDbFilename(PackageInterface $package)
+    {
+        $extra = $package->getExtra();
+        return isset($extra['assets-db-filename']) ? $extra['assets-db-filename'] : AbstractAssetsPackage::ASSETS_DB_FILENAME;
+    }
+
+    public function getAssetsDir()
+    {
+        return $this->assetsDir;
+    }
+
+    public function getAssetsVendorDir()
+    {
+        return $this->assetsVendorDir;
+    }
+
+    public function getDocumentRoot()
+    {
+        return $this->documentRoot;
+    }
+
+    public function getAssetsDbFilename()
+    {
+        return $this->assetsDbFilename;
     }
 
     protected function getPackageAssetsBasePath(PackageInterface $package)
@@ -195,6 +220,48 @@ echo 'trying to install from '.$from.' to '.$target;
         $path = $this->getRootPackageAssetsPath() . '/' . ($this->assetsVendorDir ? $this->assetsVendorDir : '');
         $this->filesystem->ensureDirectoryExists($path);
         $this->assetsVendorDir = realpath($path);
+    }
+
+    public function getAssetsInstallPath(PackageInterface $package)
+    {
+        return $this->getRootPackageAssetsVendorPath() . '/' . $package->getPrettyName();
+    }
+
+    /**
+     * Parse the `composer.json` "extra" block of a package and return its transformed data
+     *
+     * @param array $package The package, Composer\Package\PackageInterface
+     * @return void
+     */
+    public function parseComposerExtra(PackageInterface $package, $package_dir)
+    {
+        $presets = array();
+        if (isset($extra['assets-presets'])) {
+            foreach ($extra['assets-presets'] as $index=>$item) {
+                $use_item = array();
+                foreach (Preset::$use_statements as $statement) {
+                    if (isset($item[$statement])) {
+                        $item_statement = is_array($item[$statement]) ?
+                            $item[$statement] : array($item[$statement]);
+                        $use_item[$statement] = array();
+                        foreach ($item_statement as $path) {
+                            $use_item[$statement][] = $path;
+                        }
+                    }
+                    if (!empty($use_item)) {
+                        $presets[$index] = $use_item;
+                    }
+                }
+            }
+        }
+
+        return array(
+            'name'          => $package->getPrettyName(),
+            'version'       => $package->getVersion(),
+            'relative_path' => $package_dir,
+            'assets_path'   => $this->guessAssetsDir($package),
+            'assets_presets'=> $presets
+        );
     }
 
 }

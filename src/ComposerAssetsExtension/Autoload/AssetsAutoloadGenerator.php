@@ -10,8 +10,8 @@
 namespace ComposerAssetsExtension\Autoload;
 
 use ComposerAssetsExtension\Installer\AssetsInstaller;
-
-use Composer\Json\JsonFile;
+use Composer\Package\PackageInterface,
+    Composer\Json\JsonFile;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
@@ -20,27 +20,37 @@ class AssetsAutoloadGenerator
 {
 
     protected $assets_installer;
+    protected $assets_db;
+    private $_instance;
+
+    public static function getInstance(AssetsInstaller $installer)
+    {
+        if (empty(self::$_instance)) {
+            $cls = __CLASS__;
+            self::$_instance = new $cls($installer);
+        }
+        return self::$_instance;
+    }
 
     public function __construct(AssetsInstaller $installer)
     {
         $this->assets_installer = $installer;
+        $this->assets_db = array();
     }
 
-    protected function _getAssetsDbPath()
+    public function __destruct()
     {
-        return ($this->assets_installer->vendorDir ? $this->assets_installer->vendorDir.'/' : '') . $this->assets_installer->assetsDbFilename;
+        $this->generate();
     }
 
     public function generate()
     {
-        $assets_file = $this->_getAssetsDbPath();
-        $assets_db = $this->assets_installer->getAssetsDb();
-        
+        $assets_file = $this->assets_installer->getVendorDir() . '/' . $this->assets_installer->getAssetsDbFilename();
         $full_db = array(
             'assets-dir' => $this->assets_installer->assetsDir,
             'assets-vendor-dir' => $this->assets_installer->assetsVendorDir,
             'document-root' => $this->assets_installer->documentRoot,
-            'packages' => $assets_db
+            'packages' => $this->assets_db
         );
 
         try {
@@ -55,6 +65,16 @@ class AssetsAutoloadGenerator
         return false;
     }
     
+    public static function registerPackage(PackageInterface $package, $target)
+    {
+        $this->assets_db[$package->getPrettyName()] = $this->assets_installer->parseComposerExtra($package);
+    }
+
+    public static function unregisterPackage(PackageInterface $package)
+    {
+        unset($this->assets_db[$package->getPrettyName()]);
+    }
+
 }
 
 // Endfile
