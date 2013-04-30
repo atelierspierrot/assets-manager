@@ -11,8 +11,9 @@ namespace ComposerAssetsExtension\Installer;
 
 use Composer\Composer,
     Composer\IO\IOInterface,
-    Composer\Installer\LibraryInstaller,
-    Composer\Package\PackageInterface;
+    Composer\Package\PackageInterface,
+    Composer\Repository\InstalledRepositoryInterface,
+    Composer\Installer\LibraryInstaller;
 
 use ComposerAssetsExtension\Package\AbstractAssetsPackage,
     ComposerAssetsExtension\Util\Filesystem as AssetsFilesystem;
@@ -143,7 +144,7 @@ class AssetsInstaller extends LibraryInstaller
 */
     }
 
-    protected function removeBinaries(PackageInterface $package)
+    protected function removeAssets(PackageInterface $package)
     {
         $assets = $this->getAssetsDir($package);
         if (!$assets) {
