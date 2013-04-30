@@ -102,6 +102,9 @@ class AssetsInstaller extends LibraryInstaller
 
         $from = $this->getPackageAssetsBasePath($package) . '/' . $assets;
         $target = $this->getAssetsInstallPath($package);
+
+echo 'trying to install from '.$from.' to '.$target;
+
         if (file_exists($from)) {
             $this->io->write( 
                 sprintf('  - Installing assets of package <info>%s</info> to <info>%s</info>.', 
