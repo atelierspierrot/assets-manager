@@ -100,7 +100,7 @@ class AssetsInstaller extends LibraryInstaller
             return;
         }
 
-        $from = $this->getPackageAssetsBasePath($package) . '/' . $assets;
+        $from = $this->getPackageBasePath($package) . '/' . $assets;
         $target = $this->getAssetsInstallPath($package);
 
 echo 'trying to install from '.$from.' to '.$target;
@@ -152,8 +152,7 @@ echo 'trying to install from '.$from.' to '.$target;
 
     public function getAssetsInstallPath(PackageInterface $package)
     {
-        $targetDir = $package->getTargetDir();
-        return $this->getPackageAssetsBasePath($package) . ($targetDir ? '/'.$targetDir : '');
+        return $package->getTargetDir();
     }
 
     public function getAssetsDir(PackageInterface $package)
