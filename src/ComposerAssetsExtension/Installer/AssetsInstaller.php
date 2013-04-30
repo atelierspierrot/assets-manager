@@ -282,7 +282,7 @@ class AssetsInstaller extends LibraryInstaller
         return array(
             'name'          => $package->getPrettyName(),
             'version'       => $package->getVersion(),
-            'relative_path' => str_replace($this->assetsVendorDir . '/', '', $package_dir),
+            'relative_path' => str_replace($this->getAssetsVendorDir() . '/', '', $package_dir),
             'assets_presets'=> $presets
         );
     }
