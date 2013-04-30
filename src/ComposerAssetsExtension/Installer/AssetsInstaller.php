@@ -174,6 +174,11 @@ class AssetsInstaller extends LibraryInstaller
         return isset($extra['assets-db-filename']) ? $extra['assets-db-filename'] : AbstractAssetsPackage::ASSETS_DB_FILENAME;
     }
 
+    public function getIo()
+    {
+        return $this->io;
+    }
+
     public function getVendorDir()
     {
         return $this->vendorDir;

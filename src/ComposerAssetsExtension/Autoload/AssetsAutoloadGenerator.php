@@ -53,7 +53,7 @@ class AssetsAutoloadGenerator
             'packages' => $this->assets_db
         );
 
-        $_this->io->write( 
+        $this->assets_installer->getIo()->write( 
             sprintf('Writing assets json DB to <info>%s</info>',
                 str_replace(dirname($this->assets_installer->getVendorDir()).'/', '', $assets_file)
             )
