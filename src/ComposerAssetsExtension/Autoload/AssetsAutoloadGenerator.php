@@ -21,7 +21,7 @@ class AssetsAutoloadGenerator
 
     protected $assets_installer;
     protected $assets_db;
-    private $_instance;
+    private static $_instance;
 
     public static function getInstance(AssetsInstaller $installer)
     {
