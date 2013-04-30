@@ -42,7 +42,6 @@ class AssetsInstaller extends LibraryInstaller
     public function __construct(IOInterface $io, Composer $composer, $type = 'library')
     {
         parent::__construct($io, $composer, $type);
-        $this->initializeVendorDir();
 
         $config = $composer->getConfig();
 
@@ -199,6 +198,7 @@ echo PHP_EOL.'appBasePath: '.$this->appBasePath;
 
     public function getVendorDir()
     {
+        $this->initializeVendorDir();
         return $this->vendorDir;
     }
 
