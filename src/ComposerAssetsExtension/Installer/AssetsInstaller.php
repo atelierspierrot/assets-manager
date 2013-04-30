@@ -44,7 +44,13 @@ class AssetsInstaller extends LibraryInstaller
         parent::__construct($io, $composer, $type);
 
         $config = $composer->getConfig();
+
+echo PHP_EOL.'vendor dir config: '.$config->get('vendor-dir');
+echo PHP_EOL.'vendor dir path: '.$this->getVendorDir();
+
+
         $this->appBasePath = rtrim(str_replace($config->get('vendor-dir'), '', $this->getVendorDir()), '/');
+echo PHP_EOL.'appBasePath: '.$this->appBasePath;
 
         $this->filesystem = new AssetsFilesystem();
         $this->assetsDir = $this->guessAssetsDir($composer->getPackage());
@@ -123,6 +129,7 @@ class AssetsInstaller extends LibraryInstaller
             );
             $this->filesystem->copy($from, $target);
             AssetsAutoloadGenerator::registerPackage($package, $target, $this);
+            $this->io->write('');
         } else {
             throw new \InvalidArgumentException(
                 'Unable to find assets in package "'.$package->getPrettyName().'"'
@@ -147,6 +154,7 @@ class AssetsInstaller extends LibraryInstaller
             );
             $this->filesystem->remove($target);
             AssetsAutoloadGenerator::unregisterPackage($package, $this);
+            $this->io->write('');
         } else {
             throw new \InvalidArgumentException(
                 'Unable to find assets from package "'.$package->getPrettyName().'"'
