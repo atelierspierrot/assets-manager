@@ -48,7 +48,6 @@ class AssetsAutoloadGenerator
         $app_base_path = $this->assets_installer->getAppBasePath();
         $assets_dir = str_replace($app_base_path . '/', '', $this->assets_installer->getAssetsDir());
         $assets_vendor_dir = str_replace($app_base_path . '/' . $assets_dir . '/', '', $this->assets_installer->getAssetsVendorDir());
-        $assets_file = $this->assets_installer->getVendorDir() . '/' . $this->assets_installer->getAssetsDbFilename();
         $full_db = array(
             'assets-dir' => $assets_dir,
             'assets-vendor-dir' => $assets_vendor_dir,
@@ -56,6 +55,7 @@ class AssetsAutoloadGenerator
             'packages' => $this->assets_db
         );
 
+        $assets_file = $this->assets_installer->getVendorDir() . '/' . $this->assets_installer->getAssetsDbFilename();
         $this->assets_installer->getIo()->write( 
             sprintf('Writing assets json DB to <info>%s</info>',
                 str_replace(dirname($this->assets_installer->getVendorDir()).'/', '', $assets_file)
