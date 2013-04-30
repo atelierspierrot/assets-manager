@@ -116,7 +116,7 @@ class AssetsInstaller extends LibraryInstaller
                 )
             );
             $this->filesystem->copy($from, $target);
-            AssetsAutoloadGenerator::registerPackage($package, $target);
+            AssetsAutoloadGenerator::registerPackage($package, $target, $this);
         } else {
             throw new \InvalidArgumentException(
                 'Unable to find assets in package "'.$package->getPrettyName().'"'
@@ -140,7 +140,7 @@ class AssetsInstaller extends LibraryInstaller
                 )
             );
             $this->filesystem->remove($target);
-            AssetsAutoloadGenerator::unregisterPackage($package);
+            AssetsAutoloadGenerator::unregisterPackage($package, $this);
         } else {
             throw new \InvalidArgumentException(
                 'Unable to find assets from package "'.$package->getPrettyName().'"'
