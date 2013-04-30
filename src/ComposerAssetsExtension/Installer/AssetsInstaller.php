@@ -42,6 +42,7 @@ class AssetsInstaller extends LibraryInstaller
     public function __construct(IOInterface $io, Composer $composer, $type = 'library')
     {
         parent::__construct($io, $composer, $type);
+        $this->initializeVendorDir();
 
         $config = $composer->getConfig();
 
