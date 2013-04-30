@@ -73,7 +73,7 @@ class AssetsAutoloadGenerator
     public static function registerPackage(PackageInterface $package, $target, AssetsInstaller $installer)
     {
         $_this = self::getInstance($installer);
-        $_this->assets_db[$package->getPrettyName()] = $_this->assets_installer->parseComposerExtra($package);
+        $_this->assets_db[$package->getPrettyName()] = $_this->assets_installer->parseComposerExtra($package, $target);
     }
 
     public static function unregisterPackage(PackageInterface $package, AssetsInstaller $installer)
