@@ -45,16 +45,6 @@ class Filesystem extends OriginalFilesystem
         }
     }
 
-    public static function unslash($path)
-    {
-        return rtrim($path, DIRECTORY_SEPARATOR);
-    }
-
-    public static function slash($path)
-    {
-        return self::unslash($path) . DIRECTORY_SEPARATOR;
-    }
-
 }
 
 // Endfile

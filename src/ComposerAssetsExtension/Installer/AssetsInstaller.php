@@ -9,6 +9,8 @@
 
 namespace ComposerAssetsExtension\Installer;
 
+use Library\Helper\Directory as DirectoryHelper;
+
 use Composer\Composer,
     Composer\IO\IOInterface,
     Composer\Package\PackageInterface,
@@ -194,7 +196,7 @@ class AssetsInstaller extends LibraryInstaller
 
     protected function getPackageAssetsBasePath(PackageInterface $package)
     {
-        return $this->filesystem->slash($this->getRootPackageAssetsVendorPath()) . $package->getPrettyName();
+        return DirectoryHelper::slashDirname($this->getRootPackageAssetsVendorPath()) . $package->getPrettyName();
     }
 
     protected function getRootPackageAssetsPath()
