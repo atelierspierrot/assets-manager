@@ -52,18 +52,6 @@ class AssetsInstaller
     protected $assets_path;
 
     /**
-     * Current package views paths (relative to `$relative_path`)
-     * @var array
-     */
-    protected $views_paths;
-
-    /**
-     * Current package views aliases files (relative to `$relative_path`)
-     * @var array
-     */
-    protected $views_functions_paths;
-
-    /**
      * Current package presets
      * @var array
      */
@@ -117,8 +105,6 @@ class AssetsInstaller
         $this->version                  = null;
         $this->relative_path            = null;
         $this->assets_path              = null;
-        $this->views_paths              = array();
-        $this->views_functions_paths    = array();
         $this->assets_presets           = array();
     }
 
@@ -223,106 +209,6 @@ class AssetsInstaller
     }
 
     /**
-     * @param array $paths
-     * @param string $type Type of the original relative path (can be `asset` or `vendor` or `null` - default is `vendor`)
-     * @return self
-     */
-    public function setViewsPaths(array $paths, $type = 'vendor')
-    {
-        foreach ($paths as $path) {
-            $this->addViewsPath($path, $type);
-        }
-        return $this;
-    }
-
-    /**
-     * @param string $path Relative to `vendor`
-     * @param string $type Type of the original relative path (can be `asset` or `vendor` or `null` - default is `vendor`)
-     * @return self
-     * @throws `InvalidArgumentException` if the path doesn't exist
-     */
-    public function addViewsPath($path, $type = 'vendor')
-    {
-        $realpath = $this->getFullPath($path, $type);
-        if (@file_exists($realpath) && is_dir($realpath)) {
-            if (!in_array($path, $this->views_paths)) {
-                $this->views_paths[] = $path;
-            }
-        } else {
-            $relative_path = Filesystem::slash($this->getRelativePath()) . $path;
-            $realpath = $this->getFullPath($relative_path, null);
-            if (@file_exists($realpath) && is_dir($realpath)) {
-                if (!in_array($relative_path, $this->views_paths)) {
-                    $this->views_paths[] = $relative_path;
-                }
-            } else {
-                throw new InvalidArgumentException(
-                    sprintf('Views path directory "%s" for cluster "%s" not found !', $path, $this->getName())
-                );
-            }
-        }
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getViewsPaths()
-    {
-        return $this->views_paths;
-    }
-
-    /**
-     * @param array $paths
-     * @param string $type Type of the original relative path (can be `asset` or `vendor` or `null` - default is `vendor`)
-     * @return self
-     */
-    public function setViewsFunctionsPaths(array $paths, $type = 'vendor')
-    {
-        foreach ($paths as $path) {
-            $this->addViewsFunctionsPath($path, $type);
-        }
-        return $this;
-    }
-
-    /**
-     * @param string $path Relative to `vendor`
-     * @param string $type Type of the original relative path (can be `asset` or `vendor` or `null` - default is `vendor`)
-     * @return self
-     * @throws `InvalidArgumentException` if the path doesn't exist
-     */
-    public function addViewsFunctionsPath($path, $type = 'vendor')
-    {
-        $realpath = $this->getFullPath($path, $type);
-        if (@file_exists($realpath) && is_file($realpath)) {
-            if (!in_array($path, $this->views_functions_paths)) {
-                $this->views_functions_paths[] = $path;
-            }
-        } else {
-            $relative_path = Filesystem::slash($this->getRelativePath()) . $path;
-            $realpath = $this->getFullPath($relative_path, null);
-            if (@file_exists($realpath) && is_file($realpath)) {
-                if (!in_array($relative_path, $this->views_functions_paths)) {
-                    $this->views_functions_paths[] = $relative_path;
-                }
-            } else {
-                throw new InvalidArgumentException(
-                    sprintf('Views functions file "%s" for cluster "%s" not found !', $path, $this->getName())
-                );
-            }
-        }
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getViewsFunctionsPaths()
-    {
-        return $this->views_functions_paths;
-    }
-
-    /**
      * @param array $presets
      * @return self
      */
@@ -393,8 +279,6 @@ class AssetsInstaller
             'version'=>$this->getVersion(),
             'relative_path'=>$this->getRelativePath(),
             'assets_path'=>$this->getAssetsPath(),
-            'views_path'=>$this->getViewsPaths(),
-            'views_functions'=>$this->getViewsFunctionsPaths(),
             'assets_presets'=>$this->getAssetsPresets(),
         );
         return $cluster;
@@ -414,8 +298,6 @@ class AssetsInstaller
                 case 'version': $this->setVersion($val); break;
                 case 'relative_path': $this->setRelativePath($val); break;
                 case 'assets_path': $this->setAssetsPath($val); break;
-                case 'views_path': $this->setViewsPaths(is_array($val) ? $val : array($val), null); break;
-                case 'views_functions': $this->setViewsFunctionsPaths(is_array($val) ? $val : array($val), null); break;
                 case 'assets_presets': $this->setAssetsPresets($val); break;
             }
         }
