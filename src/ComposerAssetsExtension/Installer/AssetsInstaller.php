@@ -88,27 +88,6 @@ class AssetsInstaller extends LibraryInstaller
     }
 
     /**
-     * {@inheritDoc}
-     */
-    public function getAssetsInstallPath(PackageInterface $package)
-    {
-        $targetDir = $package->getTargetDir();
-        return $this->getPackageAssetsBasePath($package) . ($targetDir ? '/'.$targetDir : '');
-    }
-
-    public function getAssetsDir(PackageInterface $package)
-    {
-        $extra = $package->getExtra();
-        return isset($extra['assets-dir']) ? $extra['assets-dir'] : AbstractAssetsPackage::DEFAULT_ASSETS_DIR;
-    }
-
-    public function getAssetsVendorDir(PackageInterface $package)
-    {
-        $extra = $package->getExtra();
-        return isset($extra['assets-vendor-dir']) ? $extra['assets-vendor-dir'] : AbstractAssetsPackage::DEFAULT_ASSETS_VENDOR_DIR;
-    }
-
-    /**
      * Move the assets of a package
      *
      * @param object $package Composer\Package\PackageInterface
@@ -168,18 +147,36 @@ class AssetsInstaller extends LibraryInstaller
         }
     }
 
-    protected function getPackageAssetsBasePath(PackageInterface $package)
+    public function getAssetsInstallPath(PackageInterface $package)
     {
-        return $this->filesystem->slash($this->getPackageAssetsVendorPath()) . $package->getPrettyName();
+        $targetDir = $package->getTargetDir();
+        return $this->getPackageAssetsBasePath($package) . ($targetDir ? '/'.$targetDir : '');
     }
 
-    protected function getPackageAssetsPath(PackageInterface $package)
+    public function getAssetsDir(PackageInterface $package)
+    {
+        $extra = $package->getExtra();
+        return isset($extra['assets-dir']) ? $extra['assets-dir'] : AbstractAssetsPackage::DEFAULT_ASSETS_DIR;
+    }
+
+    public function getAssetsVendorDir(PackageInterface $package)
+    {
+        $extra = $package->getExtra();
+        return isset($extra['assets-vendor-dir']) ? $extra['assets-vendor-dir'] : AbstractAssetsPackage::DEFAULT_ASSETS_VENDOR_DIR;
+    }
+
+    protected function getPackageAssetsBasePath(PackageInterface $package)
+    {
+        return $this->filesystem->slash($this->getRootPackageAssetsVendorPath()) . $package->getPrettyName();
+    }
+
+    protected function getRootPackageAssetsPath()
     {
         $this->initializeAssetsDir();
         return $this->assetsDir ? $this->assetsDir : '';
     }
 
-    protected function getPackageAssetsVendorPath(PackageInterface $package)
+    protected function getRootPackageAssetsVendorPath()
     {
         $this->initializeAssetsVendorDir();
         return $this->assetsVendorDir ? $this->assetsVendorDir : '';
@@ -193,7 +190,7 @@ class AssetsInstaller extends LibraryInstaller
 
     protected function initializeAssetsVendorDir()
     {
-        $path = $this->getPackageAssetsPath() . '/' . ($this->assetsVendorDir ? $this->assetsVendorDir : '');
+        $path = $this->getRootPackageAssetsPath() . '/' . ($this->assetsVendorDir ? $this->assetsVendorDir : '');
         $this->filesystem->ensureDirectoryExists($path);
         $this->assetsVendorDir = realpath($path);
     }
