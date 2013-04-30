@@ -11,11 +11,10 @@ namespace ComposerAssetsExtension\Package;
 
 use InvalidArgumentException;
 
-use Library\Helper\Directory as DirectoryHelper;
-
 use ComposerAssetsExtension\Loader as AssetsLoader,
     ComposerAssetsExtension\Package\AbstractAssetsPackage,
-    ComposerAssetsExtension\Package\Preset;
+    ComposerAssetsExtension\Package\Preset,
+    ComposerAssetsExtension\Util\Filesystem;
 
 /**
  * Cluster
@@ -202,7 +201,7 @@ class AssetsInstaller
         if (@file_exists($realpath) && is_dir($realpath)) {
             $this->assets_path = $path;
         } else {
-            $relative_path = DirectoryHelper::slashDirname($this->getRelativePath()) . $path;
+            $relative_path = Filesystem::slash($this->getRelativePath()) . $path;
             $realpath = $this->getFullPath($relative_path);
             if (@file_exists($realpath) && is_dir($realpath)) {
                 $this->assets_path = $relative_path;
@@ -250,7 +249,7 @@ class AssetsInstaller
                 $this->views_paths[] = $path;
             }
         } else {
-            $relative_path = DirectoryHelper::slashDirname($this->getRelativePath()) . $path;
+            $relative_path = Filesystem::slash($this->getRelativePath()) . $path;
             $realpath = $this->getFullPath($relative_path, null);
             if (@file_exists($realpath) && is_dir($realpath)) {
                 if (!in_array($relative_path, $this->views_paths)) {
@@ -300,7 +299,7 @@ class AssetsInstaller
                 $this->views_functions_paths[] = $path;
             }
         } else {
-            $relative_path = DirectoryHelper::slashDirname($this->getRelativePath()) . $path;
+            $relative_path = Filesystem::slash($this->getRelativePath()) . $path;
             $realpath = $this->getFullPath($relative_path, null);
             if (@file_exists($realpath) && is_file($realpath)) {
                 if (!in_array($relative_path, $this->views_functions_paths)) {
@@ -373,7 +372,7 @@ class AssetsInstaller
      */
     public function getRelativeFullPath($path)
     {
-        return DirectoryHelper::slashDirname($this->getRelativePath()) . $path;
+        return Filesystem::slash($this->getRelativePath()) . $path;
     }
 
 // -------------------------
@@ -440,9 +439,9 @@ class AssetsInstaller
             $this->setName($package->getPrettyName());
             $package_dir = $main_package ? '' : 
                 str_replace(
-                    DirectoryHelper::slashDirname($this->getRootDirectory()) .
-                    DirectoryHelper::slashDirname($this->getAssetsDirectory()) .
-                    DirectoryHelper::slashDirname($this->getAssetsVendorDirectory()),
+                    Filesystem::slash($this->getRootDirectory()) .
+                    Filesystem::slash($this->getAssetsDirectory()) .
+                    Filesystem::slash($this->getAssetsVendorDirectory()),
                     '',
                     $installer->getInstallPath($package)
                 );

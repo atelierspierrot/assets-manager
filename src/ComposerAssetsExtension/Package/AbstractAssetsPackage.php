@@ -10,9 +10,7 @@
 namespace ComposerAssetsExtension\Package;
 
 use InvalidArgumentException;
-
-use Library\Helper\Filesystem as FilesystemHelper,
-    Library\Helper\Directory as DirectoryHelper;
+use ComposerAssetsExtension\Util\Filesystem;
 
 @define('_SERVER_DOCROOT', $_SERVER['DOCUMENT_ROOT']);
 
@@ -67,6 +65,11 @@ abstract class AbstractAssetsPackage
      * The default package root directory is set on `$_SERVER['DOCUMENT_ROOT']`
      */
     const DEFAULT_DOCUMENT_ROOT = _SERVER_DOCROOT;
+
+    /**
+     * The default presets (empty)
+     */
+    const DEFAULT_PRESETS = array();
 
     /**
      * The assets database file created on install
@@ -254,14 +257,14 @@ abstract class AbstractAssetsPackage
      */
     public function getFullPath($path, $type = null, $out = false)
     {
-        $base = DirectoryHelper::slashDirname($this->getRootDirectory());
+        $base = Filesystem::slash($this->getRootDirectory());
         if (in_array($type, array('asset', 'assets'))) {
-            $base .= DirectoryHelper::slashDirname($this->getAssetsDirectory());
+            $base .= Filesystem::slash($this->getAssetsDirectory());
         } elseif ($type==='vendor') {
-            $base .= DirectoryHelper::slashDirname($this->getVendorDirectory());
+            $base .= Filesystem::slash($this->getVendorDirectory());
         } elseif ($type==='assets_vendor') {
-            $base .= DirectoryHelper::slashDirname($this->getAssetsDirectory())
-                . DirectoryHelper::slashDirname($this->getAssetsVendorDirectory());
+            $base .= Filesystem::slash($this->getAssetsDirectory())
+                . Filesystem::slash($this->getAssetsVendorDirectory());
         }
         $f = $base . $path;
         if (@file_exists($f)) {
@@ -291,7 +294,7 @@ abstract class AbstractAssetsPackage
      */
     public function getAssetsRealPath()
     {
-        return DirectoryHelper::slashDirname($this->getRootDirectory()) . $this->getAssetsDirectory();
+        return Filesystem::slash($this->getRootDirectory()) . $this->getAssetsDirectory();
     }
     
     /**
@@ -301,7 +304,7 @@ abstract class AbstractAssetsPackage
      */
     public function getVendorRealPath()
     {
-        return DirectoryHelper::slashDirname($this->getRootDirectory()) . $this->getVendorDirectory();
+        return Filesystem::slash($this->getRootDirectory()) . $this->getVendorDirectory();
     }
     
     /**
@@ -311,7 +314,7 @@ abstract class AbstractAssetsPackage
      */
     public function getAssetsVendorRealPath()
     {
-        return DirectoryHelper::slashDirname($this->getAssetsRealPath()) . $this->getAssetsVendorDirectory();
+        return Filesystem::slash($this->getAssetsRealPath()) . $this->getAssetsVendorDirectory();
     }
     
 }

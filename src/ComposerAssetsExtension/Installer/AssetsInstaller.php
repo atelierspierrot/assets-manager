@@ -14,7 +14,8 @@ use Composer\Composer,
     Composer\Installer\LibraryInstaller,
     Composer\Package\PackageInterface;
 
-use ComposerAssetsExtension\Package\AbstractAssetsPackage;
+use ComposerAssetsExtension\Package\AbstractAssetsPackage,
+    ComposerAssetsExtension\Util\Filesystem as AssetsFilesystem;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
@@ -34,11 +35,9 @@ class AssetsInstaller extends LibraryInstaller
     {
         parent::__construct($io, $composer, $type);
 
-$io->write(var_export($composer->getConfig()->getConfigSource(),1));
-
-        $this->assetsDir = rtrim($composer->getConfig()->get('assets-dir'), '/');
-        $this->assetsVendorDir = rtrim($composer->getConfig()->get('assets-vendor-dir'), '/');
-        $this->filesystem->ensureDirectoryExists(CarteBlancheInstaller::CARTEBLANCHE_BUNDLES_DIR);
+        $this->filesystem = new AssetsFilesystem();
+        $this->assetsDir = $this->getAssetsDir($composer->getPackage());
+        $this->assetsVendorDir = $this->getAssetsVendorDir($composer->getPackage());
     }
 
     /**
@@ -46,72 +45,156 @@ $io->write(var_export($composer->getConfig()->getConfigSource(),1));
      */
     public function supports($packageType)
     {
-
-var_export($packageType);
-var_export(AbstractAssetsPackage::DEFAULT_PACKAGE_TYPE);
-exit('yo');
         return $packageType === AbstractAssetsPackage::DEFAULT_PACKAGE_TYPE;
     }
 
     /**
-     * Determines the install path for templates,
-     *
-     * The installation path is determined by checking whether the package is included in another composer configuration
-     * or installed as part of the normal CarteBlanche installation.
-     *
-     * When the package is included as part of a different project it will be installed in the `src/tools` folder
-     * of phpDocumentor (thus `/atelierspierrot/carte-blanche/src/bundles`); if it is installed as part of
-     * CarteBlanche it will be installed in the root of the project (thus `/src/bundles`).
-     *
-     * @param PackageInterface $package
-     * @throws \InvalidArgumentException if the name of the package does not start with `carte-blanche/tool-`.
-     * @return string a path relative to the root of the composer.json that is being installed.
+     * {@inheritDoc}
      */
-    public function getInstallPath(PackageInterface $package)
+    public function isInstalled(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        if ($this->extractPrefix($package) != CarteBlancheInstaller::CARTEBLANCHE_BUNDLENAME) {
-            throw new \InvalidArgumentException(
-                'Unable to install bundle, CarteBlanche bundles should always start their package name with '
-                .'"'.CarteBlancheInstaller::CARTEBLANCHE_BUNDLENAME.'"'
-            );
+        $parent = parent::isInstalled($repo, $package);
+        if (!$parent) return $parent;
+        return file_exists($this->getAssetsInstallPath($package)) && is_readable($this->getAssetsInstallPath($package));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
+    {
+        parent::install($repo, $package);
+        $this->installAssets($package);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
+    {
+        $this->removeAssets($package);
+        parent::update($repo, $package);
+        $this->installAssets($package);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
+    {
+        $this->removeAssets($package);
+        parent::uninstall($repo, $package);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAssetsInstallPath(PackageInterface $package)
+    {
+        $targetDir = $package->getTargetDir();
+        return $this->getPackageAssetsBasePath($package) . ($targetDir ? '/'.$targetDir : '');
+    }
+
+    public function getAssetsDir(PackageInterface $package)
+    {
+        $extra = $package->getExtra();
+        return isset($extra['assets-dir']) ? $extra['assets-dir'] : AbstractAssetsPackage::DEFAULT_ASSETS_DIR;
+    }
+
+    public function getAssetsVendorDir(PackageInterface $package)
+    {
+        $extra = $package->getExtra();
+        return isset($extra['assets-vendor-dir']) ? $extra['assets-vendor-dir'] : AbstractAssetsPackage::DEFAULT_ASSETS_VENDOR_DIR;
+    }
+
+    /**
+     * Move the assets of a package
+     *
+     * @param object $package Composer\Package\PackageInterface
+     * @return bool
+     */
+    protected function installAssets(PackageInterface $package)
+    {
+        $assets = $this->getAssetsDir($package);
+        if (!$assets) {
+            return;
         }
 
-        return $this->getBundleRootPath() . '/' . $this->extractShortName($package);
+        $from = $this->getPackageAssetsBasePath($package) . '/' . $assets;
+        $target = $this->getAssetsInstallPath($package);
+        if (file_exists($from)) {
+            $this->io->write( 
+                sprintf('  - Installing assets of package <info>%s</info> to <info>%s</info>.', 
+                    $package->getPrettyName(),
+                    dirname(str_replace(dirname($this->assetsDir) . '/', '', $target))
+                )
+            );
+            $this->filesystem->copy($from, $target);
+
+        } else {
+            throw new \InvalidArgumentException(
+                'Unable to find assets in package "'.$package->getPrettyName().'"'
+            );
+        }
+/*
+            $this->assets_db[$package->getPrettyName()] = 
+                $this->cluster->parseComposerExtra($package, $this);
+        return dirname(str_replace(rtrim($this->appBasePath, '/') . '/', '', $target));
+*/
     }
 
-    /**
-     * Extract the first 21 characters ("carte-blanche/bundle-") of the package name; which is expected to be the prefix.
-     *
-     * @param PackageInterface $package
-     * @return string
-     */
-    public static function extractPrefix(PackageInterface $package)
+    protected function removeBinaries(PackageInterface $package)
     {
-        return substr($package->getPrettyName(), 0, strlen(CarteBlancheInstaller::CARTEBLANCHE_BUNDLENAME));
+        $assets = $this->getAssetsDir($package);
+        if (!$assets) {
+            return;
+        }
+
+        $target = $this->getAssetsInstallPath($package);
+        if (file_exists($target)) {
+            $this->io->write( 
+                sprintf('  - Uninstalling assets of package <info>%s</info> from <info>%s</info>.', 
+                    $package->getPrettyName(),
+                    dirname(str_replace(dirname($this->assetsDir) . '/', '', $target))
+                )
+            );
+            $this->filesystem->remove($target);
+
+        } else {
+            throw new \InvalidArgumentException(
+                'Unable to find assets from package "'.$package->getPrettyName().'"'
+            );
+        }
     }
 
-    /**
-     * Extract the everything after the first 21 characters of the package name; which is expected to be the short name.
-     *
-     * @param PackageInterface $package
-     * @return string
-     */
-    public static function extractShortName(PackageInterface $package)
+    protected function getPackageAssetsBasePath(PackageInterface $package)
     {
-        return substr($package->getPrettyName(), strlen(CarteBlancheInstaller::CARTEBLANCHE_BUNDLENAME));
+        return $this->filesystem->slash($this->getPackageAssetsVendorPath()) . $package->getPrettyName();
     }
 
-    /**
-     * Returns the root installation path for templates.
-     *
-     * @return string a path relative to the root of the composer.json that is being installed where the templates
-     *     are stored.
-     */
-    protected function getBundleRootPath()
+    protected function getPackageAssetsPath(PackageInterface $package)
     {
-        return (file_exists($this->vendorDir . '/atelierspierrot/carte-blanche/composer.json'))
-            ? $this->vendorDir . '/atelierspierrot/carte-blanche/src/bundles'
-            : 'src/bundles';
+        $this->initializeAssetsDir();
+        return $this->assetsDir ? $this->assetsDir : '';
+    }
+
+    protected function getPackageAssetsVendorPath(PackageInterface $package)
+    {
+        $this->initializeAssetsVendorDir();
+        return $this->assetsVendorDir ? $this->assetsVendorDir : '';
+    }
+
+    protected function initializeAssetsDir()
+    {
+        $this->filesystem->ensureDirectoryExists($this->assetsDir);
+        $this->assetsDir = realpath($this->assetsDir);
+    }
+
+    protected function initializeAssetsVendorDir()
+    {
+        $path = $this->getPackageAssetsPath() . '/' . ($this->assetsVendorDir ? $this->assetsVendorDir : '');
+        $this->filesystem->ensureDirectoryExists($path);
+        $this->assetsVendorDir = realpath($path);
     }
 
 }

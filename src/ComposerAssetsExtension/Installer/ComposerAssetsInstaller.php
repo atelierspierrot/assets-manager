@@ -17,8 +17,6 @@ use Composer\Composer,
     Composer\Script\Event,
     Composer\Script\EventDispatcher;
 
-use Library\Helper\Directory as DirectoryHelper;
-
 use ComposerAssetsExtension\Util\Filesystem,
     ComposerAssetsExtension\Package\AbstractAssetsPackage,
     ComposerAssetsExtension\Autoload\AssetsAutoloadGenerator,
@@ -168,7 +166,7 @@ class AssetsInstaller
         $this->cluster = new Cluster(
             $this->appBasePath,
             $this->assetsDir,
-            str_replace(DirectoryHelper::slashDirname($this->appBasePath), '', $this->vendorDir),
+            str_replace(Filesystem::slash($this->appBasePath), '', $this->vendorDir),
             $this->assetsVendorDir
         );
         if (!empty($this->packageExtra)) {

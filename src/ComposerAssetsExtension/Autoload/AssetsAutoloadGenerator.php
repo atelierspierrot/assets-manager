@@ -37,9 +37,9 @@ class AssetsAutoloadGenerator
         $assets_db = $this->assets_installer->getAssetsDb();
         
         $full_db = array(
-            'assets_dir' => $this->assets_installer->assetsDir,
-            'assets_vendor_dir' => $this->assets_installer->assetsVendorDir,
-            'document_root' => $this->assets_installer->documentRoot,
+            'assets-dir' => $this->assets_installer->assetsDir,
+            'assets-vendor-dir' => $this->assets_installer->assetsVendorDir,
+            'document-root' => $this->assets_installer->documentRoot,
             'packages' => $assets_db
         );
 
