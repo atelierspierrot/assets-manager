@@ -152,7 +152,7 @@ echo 'trying to install from '.$from.' to '.$target;
 
     public function getAssetsInstallPath(PackageInterface $package)
     {
-        return $package->getTargetDir();
+        return $this->getRootPackageAssetsVendorPath() . $package->getPrettyName();
     }
 
     public function getAssetsDir(PackageInterface $package)
