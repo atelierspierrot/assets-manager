@@ -263,7 +263,7 @@ class AssetsInstaller extends LibraryInstaller
         if (isset($extra['assets-presets'])) {
             foreach ($extra['assets-presets'] as $index=>$item) {
                 $use_item = array();
-                foreach (Preset::$use_statements as $statement) {
+                foreach (array_keys(Preset::$use_statements) as $statement) {
                     if (isset($item[$statement])) {
                         $item_statement = is_array($item[$statement]) ?
                             $item[$statement] : array($item[$statement]);

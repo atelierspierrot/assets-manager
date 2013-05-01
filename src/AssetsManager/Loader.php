@@ -10,7 +10,8 @@
 namespace AssetsManager;
 
 use AssetsManager\Package\AbstractAssetsPackage,
-    AssetsManager\Package\AssetsPackage;
+    AssetsManager\Package\AssetsPackage,
+    AssetsManager\Package\Preset;
 
 use Library\Helper\Directory as DirectoryHelper,
     Library\Helper\Filesystem as FilesystemHelper;
@@ -43,6 +44,16 @@ class Loader extends AbstractAssetsPackage
 {
 
     /**
+     * Flag to use to avoid throwing an exception in case of presets conflicts
+     */
+    const PRESETS_NO_CONFLICT = 1;
+    
+    /**
+     * Flag to use to throw exception in case of presets conflicts (default)
+     */
+    const PRESETS_CONFLICT = 2;
+    
+    /**
      * The document root path (absolute - used to build assets web path - no trailing slash)
      * @var string
      */
@@ -56,20 +67,91 @@ class Loader extends AbstractAssetsPackage
      */
     protected $assets_db;
 
+    /**
+     * @var array
+     */
+    protected $packages_instances;
+
+    /**
+     * Table of all presets, each entry like :
+     *
+     *     preset name => array(
+     *         package=>original package name,
+     *         data=>array,
+     *         instance=>Preset object
+     *     )
+     *
+     * @var array
+     */
+    protected $presets_data;
+
+    /**
+     * @var self singleton self instance
+     */
+    private static $__instance;
+
+    /**
+     * @var bool flag for instance creation
+     */
+    private static $__isStaticInstance = false;
+
+    /**
+     * @var int
+     */
+    private $conflict_flag;
+
+    /**
+     * @var string
+     */
+    protected static $assets_package_class = 'AssetsManager\Package\AssetsPackage';
+
+    /**
+     * @var string
+     */
+    protected static $assets_preset_class = 'AssetsManager\Package\Preset';
+
 // ---------------------
 // Construction
 // ---------------------
 
     /**
-     * Loader constructor
+     * Loader static instance constructor
      *
      * @param string $root_dir The project package root directory
      * @param string $assets_dir The project package assets directory, related from `$root_dir`
      * @param string $document_root The project assets root directory to build web accessible assets paths
-     * @throws Throws an Excpetion if the package's `ASSETS_DB_FILENAME` was not found
+     * @param int $conflict_gfalg Define if the class must throw excpetions in case of presets conflicts
      */
-    public function __construct($root_dir = null, $assets_dir = null, $document_root = null)
+    public static function getInstance($root_dir = null, $assets_dir = null, $document_root = null, $conflict_flag = self::PRESETS_CONFLICT)
     {
+        if (empty(self::$__instance)) {
+            $cls = __CLASS__;
+            self::$__isStaticInstance = true;
+            self::$__instance = new $cls($root_dir, $assets_dir, $document_root, $conflict_flag);
+        }
+        return self::$__instance;
+    }
+    
+    /**
+     * Loader protected constructor, use the class as a Singleton 
+     *
+     * @param string $root_dir The project package root directory
+     * @param string $assets_dir The project package assets directory, related from `$root_dir`
+     * @param string $document_root The project assets root directory to build web accessible assets paths
+     * @param int $conflict_gfalg Define if the class must throw excpetions in case of presets conflicts
+     * @throws Throws an Excpetion if the package's `ASSETS_DB_FILENAME` was not found
+     * @throws Throws an Excpetion if the object is not called as a singleton
+     */
+    public function __construct($root_dir = null, $assets_dir = null, $document_root = null, $conflict_flag = self::PRESETS_CONFLICT)
+    {
+        if (false===self::$__isStaticInstance) {
+            throw new \Exception(
+                sprintf('Object of class "%s" must be used as a singleton!', __CLASS__)
+            );
+            return;
+        }
+
+        $this->conflict_flag = conflict_flag;
         $this->setRootDirectory(!is_null($root_dir) ? $root_dir : __DIR__.'/../../../../../');
 
         $composer = $this->getRootDirectory() . '/composer.json';
@@ -79,6 +161,10 @@ class Loader extends AbstractAssetsPackage
             if (isset($package['config']) && isset($package['config']['vendor-dir'])) {
                 $vendor_dir = $package['config']['vendor-dir'];
             }
+        } else {
+            throw new \Exception(
+                sprintf('Composer json "%s" not found!', $composer)
+            );
         }
         $this->setVendorDirectory($vendor_dir);
 
@@ -101,6 +187,8 @@ class Loader extends AbstractAssetsPackage
                 sprintf('Assets json DB "%s" not found!', $db_file)
             );
         }
+        
+        $this->validatePresets();
     }
 
 // ---------------------
@@ -108,7 +196,7 @@ class Loader extends AbstractAssetsPackage
 // ---------------------
 
     /**
-     * Sets the document root directory
+     * Set the document root directory
      *
      * @param string $path The path of the document root directory
      * @return self Returns `$this` for chainability
@@ -129,7 +217,7 @@ class Loader extends AbstractAssetsPackage
     }
     
     /**
-     * Gets the document root directory
+     * Get the document root directory
      *
      * @return string
      */
@@ -139,7 +227,7 @@ class Loader extends AbstractAssetsPackage
     }
 
     /**
-     * Sets the package's assets database
+     * Set the package's assets database
      *
      * @param array $db The array of package's assets as written in package's `ASSETS_DB_FILENAME`
      * @return self Returns `$this` for chainability
@@ -151,6 +239,7 @@ class Loader extends AbstractAssetsPackage
                 $db[$package_name]['path'] = DirectoryHelper::slashDirname(
                     DirectoryHelper::slashDirname($this->getRootDirectory()) .
                     DirectoryHelper::slashDirname($this->getAssetsDirectory()) .
+                    DirectoryHelper::slashDirname($this->getAssetsVendorDirectory()) .
                     $package['relative_path']
                 );
             }
@@ -160,7 +249,7 @@ class Loader extends AbstractAssetsPackage
     }
     
     /**
-     * Gets the package's assets database
+     * Get the package's assets database
      *
      * @return array
      */
@@ -174,6 +263,225 @@ class Loader extends AbstractAssetsPackage
 // ---------------------
 
     /**
+     * Get the web path for assets
+     *
+     * @return string
+     * @see AssetsManager\Package\Loader::buildWebPath()
+     */
+    public function getAssetsWebPath()
+    {
+        return $this->buildWebPath($this->getAssetsRealPath());
+    }
+    
+    /**
+     * Get the assets full path for a specific package
+     *
+     * @param string $package_name The name of the package to get assets path from
+     * @return string
+     */
+    public function getPackageAssetsPath($package_name)
+    {
+        $package = $this->getPackage($package_name);
+        return $package->getAssetsPath();
+    }
+    
+    /**
+     * Get the web path for assets of a specific package
+     *
+     * @param string $package_name The name of the package to get assets path from
+     * @return string
+     * @see AssetsManager\Package\Loader::buildWebPath()
+     */
+    public function getPackageAssetsWebPath($package_name)
+    {
+        $package = $this->getPackage($package_name);
+        return $this->buildWebPath($package->getAssetsPath());
+    }
+    
+// ---------------------
+// Packages manager
+// ---------------------
+
+    /**
+     * Get a package instance
+     *
+     * @param string $package_name
+     * @return object AssetsManager\Package\AssetsPackage
+     */
+    public function getPackage($package_name)
+    {
+        if (!isset($this->packages_instances[$package_name])) {
+            $this->packages_instances[$package_name] = $this->_buildNewPackage($package_name);
+        }
+        return $this->packages_instances[$package_name];
+    }
+    
+    /**
+     * Build a new package instance
+     *
+     * @param string $package_name
+     * @return object AssetsManager\Package\AssetsPackage
+     */
+    protected function _buildNewPackage($package_name)
+    {
+        $package = isset($this->assets_db[$package_name]) ? $this->assets_db[$package_name] : null;
+        if (!empty($package)) {
+            $cls_name = self::$assets_package_class;
+            if (@class_exists($cls_name)) {
+                $interfaces = class_implements($cls_name);
+                if (in_array('AssetsManager\Package\AssetsPackageInterface', $interfaces)) {
+                    $package_object = $cls_name::createFromAssetsLoader($this);
+                    $package_object->loadFromArray($package);
+                    return $package_object;
+                } else {
+                    throw new \DomainException(
+                        sprintf('Package class "%s" must implements interface "%s"!',
+                            $cls_name, 'AssetsManager\Package\AssetsPackageInterface')
+                    );
+                }
+            } else {
+                throw new \DomainException(
+                    sprintf('Package class "%s" not found!', $cls_name)
+                );
+            }
+        } else {
+            throw new \InvalidArgumentException(
+                sprintf('Unknown package "%s"!', $package_name)
+            );
+        }
+        return null;
+    }
+    
+// ---------------------
+// Presets manager
+// ---------------------
+
+    /**
+     * Load and validate all packages presets in one table
+     * @return void
+     * @throws An `Excpetion` is thrown if the `$conflict_flag` is set on `self::PRESETS_CONFLICT` in case of duplicate preset name
+     */
+    public function validatePresets()
+    {
+        $this->presets_data = array();
+        if (!empty($this->assets_db)) {
+            foreach ($this->assets_db as $package_name=>$package_data) {
+                if (!empty($package_data['assets_presets'])) {
+                    foreach ($package_data['assets_presets'] as $preset_name=>$preset_data) {
+                        if (!array_key_exists($preset_name, $this->presets_data)) {
+                            $this->presets_data[$preset_name] = array(
+                                'data'=>$preset_data,
+                                'package'=>$package_name
+                            );
+                        } elseif ($this->conflict_flag & self::PRESETS_CONFLICT) {
+                            throw new \Exception(
+                                sprintf('Presets conflict: duplicate entry named "%s"!', $preset_name)
+                            );
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Get a preset instance
+     *
+     * @param string $preset_name
+     * @return object AssetsManager\Package\Preset
+     */
+    public function getPreset($preset_name)
+    {
+        if (isset($this->presets_data[$preset_name])) {
+            if (!isset($this->presets_data[$preset_name]['instance'])) {
+                $this->presets_data[$preset_name]['instance'] = $this->_buildNewPreset($preset_name);
+            }
+            return $this->presets_data[$preset_name]['instance'];
+        } else {
+            throw new \InvalidArgumentException(
+                sprintf('Preset "%s" not found!', $preset_name)
+            );
+        }
+    }
+    
+    /**
+     * Build a new preset instance
+     *
+     * @param string $preset_name
+     * @return object AssetsManager\Package\Preset
+     */
+    protected function _buildNewPreset($preset_name)
+    {
+        $preset = isset($this->presets_data[$preset_name]) ? $this->presets_data[$preset_name]['data'] : null;
+        if (!empty($preset)) {
+            $package = $this->getPackage($this->presets_data[$preset_name]['package']);
+            $cls_name = self::$assets_preset_class;
+            if (@class_exists($cls_name)) {
+                $interfaces = class_implements($cls_name);
+                if (in_array('AssetsManager\Package\AssetsPresetInterface', $interfaces)) {
+                    $preset_object = new $cls_name(
+                        $preset_name, $preset, $package
+                    );
+                    return $preset_object;
+                } else {
+                    throw new \DomainException(
+                        sprintf('Preset class "%s" must implements interface "%s"!',
+                            $cls_name, 'AssetsManager\Package\AssetsPresetInterface')
+                    );
+                }
+            } else {
+                throw new \DomainException(
+                    sprintf('Preset class "%s" not found!', $cls_name)
+                );
+            }
+        } else {
+            throw new \InvalidArgumentException(
+                sprintf('Unknown preset "%s"!', $preset_name)
+            );
+        }
+        return null;
+    }
+    
+// ---------------------
+// Static usage
+// ---------------------
+
+    /**
+     * Get the package's assets database
+     *
+     * @return array
+     */
+    public static function getAssets()
+    {
+        $_this = self::getInstance();
+        return $_this->getAssetsDb();
+    }
+    
+    /**
+     * Get a preset instance from static loader
+     *
+     * @param string $preset_name
+     * @return object AssetsManager\Package\Preset
+     */
+    public static function findPreset($preset_name)
+    {
+        $_this = self::getInstance();
+        return $_this->getPreset($preset_name);
+    }
+    
+    /**
+     * Get a package instance from static loader
+     *
+     * @param string $package_name
+     * @return object AssetsManager\Package\AssetsPackage
+     */
+    public static function findPackage($package_name)
+    {
+        $_this = self::getInstance();
+        return $_this->getPackage($package_name);
+    }
+    
+    /**
      * Build a web path ready to use in HTML
      *
      * This will build a relative path related to the object `$document_root` and ready-to-use
@@ -185,60 +493,12 @@ class Loader extends AbstractAssetsPackage
      * @return string
      * @see Library\Helper\Filesystem::resolveRelatedPath()
      */
-    public function buildWebPath($path)
+    public static function buildWebPath($path)
     {
-        return trim(FilesystemHelper::resolveRelatedPath($this->getDocumentRoot(), realpath($path)), '/');
+        $_this = self::getInstance();
+        return trim(FilesystemHelper::resolveRelatedPath($_this->getDocumentRoot(), realpath($path)), '/');
     }
     
-    /**
-     * Get the assets full path for a specific package
-     *
-     * @param string $package_name The name of the package to get assets path from
-     * @return string
-     */
-    public function getPackageAssetsPath($package_name)
-    {
-        return isset($this->assets_db[$package_name]) ? $this->assets_db[$package_name]['path'] : null;
-    }
-    
-    /**
-     * Gets the package's assets database (alias of `getAssetsDb()`)
-     *
-     * @return array
-     * @see Assets\Loader::getAssetsDb()
-     */
-    public function getAssets()
-    {
-        return $this->getAssetsDb();
-    }
-    
-    /**
-     * Gets the web path for assets
-     *
-     * @return string
-     * @see Assets\Loader::buildWebPath()
-     */
-    public function getAssetsWebPath()
-    {
-        return $this->buildWebPath($this->getAssetsRealPath());
-    }
-    
-    /**
-     * Gets the web path for assets of a specific package
-     *
-     * @param string $package_name The name of the package to get assets path from
-     * @return string
-     * @see Assets\Loader::buildWebPath()
-     */
-    public function getPackageAssetsWebPath($package_name)
-    {
-        return isset($this->assets_db[$package_name]) ? $this->buildWebPath($this->assets_db[$package_name]['path']) : null;
-    }
-    
-// ---------------------
-// Assets finder
-// ---------------------
-
     /**
      * Find an asset file in the filesystem
      *
@@ -246,12 +506,13 @@ class Loader extends AbstractAssetsPackage
      * @param string $package The name of a package to search in (optional)
      * @return string|null The web path of the asset if found, `null` otherwise
      */
-    public function find($filename, $package = null)
+    public static function find($filename, $package = null)
     {
+        $_this = self::getInstance();
         if (!is_null($package)) {
-            return $this->findInPackage($filename, $package);
+            return self::findInPackage($filename, $package);
         } else {
-            return $this->findInPath($filename, $this->getAssetsRealPath());
+            return self::findInPath($filename, $_this->getAssetsRealPath());
         }
     }
 
@@ -262,13 +523,14 @@ class Loader extends AbstractAssetsPackage
      * @param string $package The name of a package to search in
      * @return string|null The web path of the asset if found, `null` otherwise
      */
-    public function findInPackage($filename, $package)
+    public static function findInPackage($filename, $package)
     {
-        $package_path = DirectoryHelper::slashDirname($this->getPackageAssetsPath($package));
+        $_this = self::getInstance();
+        $package_path = DirectoryHelper::slashDirname($_this->getPackageAssetsPath($package));
         if (!is_null($package_path)) {
             $asset_path = $package_path . $filename;
             if (file_exists($asset_path)) {
-                return $this->buildWebPath($asset_path);
+                return self::buildWebPath($asset_path);
             }
         }
         return null;
@@ -281,11 +543,11 @@ class Loader extends AbstractAssetsPackage
      * @param string $path The path to search from
      * @return string|null The web path of the asset if found, `null` otherwise
      */
-    public function findInPath($filename, $path)
+    public static function findInPath($filename, $path)
     {
         $asset_path = DirectoryHelper::slashDirname($path) . $filename;
         if (file_exists($asset_path)) {
-            return $this->buildWebPath($asset_path);
+            return self::buildWebPath($asset_path);
         }
         return null;
     }

@@ -2,7 +2,7 @@
     "name": "atelierspierrot/assets-manager",
     "type": "composer-installer",
     "description": "A custom Composer installer to manage \"library-assets\" package type",
-    "keywords": [ "composer", "package", "assets" ],
+    "keywords": [ "composer", "package", "assets", "extension" ],
     "homepage": "https://github.com/atelierspierrot/assets-manager",
     "version": "0.0.2-dev",
     "license": "GPL-3.0",
@@ -19,8 +19,6 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "psr/log": "dev-master",
-        "atelierspierrot/patterns": "dev-master",
         "atelierspierrot/library": "dev-master"
     },
     "require-dev": { "sami/sami": "dev-master" },

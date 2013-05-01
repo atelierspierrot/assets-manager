@@ -253,6 +253,10 @@ abstract class AbstractAssetsPackage
      */
     public function getFullPath($path, $type = null, $out = false)
     {
+        if (@file_exists($path)) {
+            return realpath($path);
+        }
+        
         $base = DirectoryHelper::slashDirname($this->getRootDirectory());
         if (in_array($type, array('asset', 'assets'))) {
             $base .= DirectoryHelper::slashDirname($this->getAssetsDirectory());

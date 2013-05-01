@@ -14,6 +14,7 @@ use InvalidArgumentException;
 use Library\Helper\Directory as DirectoryHelper;
 
 use AssetsManager\Loader as AssetsLoader,
+    AssetsManager\Package\AssetsPackageInterface,
     AssetsManager\Package\AbstractAssetsPackage,
     AssetsManager\Package\Preset;
 
@@ -24,8 +25,7 @@ use AssetsManager\Loader as AssetsLoader,
  *
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class AssetsInstaller
-    extends AbstractAssetsPackage
+class AssetsPackage extends AbstractAssetsPackage implements AssetsPackageInterface
 {
 
     /**
@@ -59,7 +59,7 @@ class AssetsInstaller
     protected $assets_presets;
 
     /**
-     * Cluster contruction
+     * Contruction
      *
      * @param string $_root_dir The global package root directory (must exist)
      * @param string $_assets_dir The global package assets directory (must exist in `$_root_dir`)
@@ -82,10 +82,10 @@ class AssetsInstaller
     }
 
     /**
-     * Create a new Cluster object from an `Assets\Loader` instance
+     * Create a new instance from an `AssetsManager\Loader` instance
      * @return object
      */
-    public static function newAssetsPackageFromAssetsLoader(AssetsLoader $loader)
+    public static function createFromAssetsLoader(AssetsLoader $loader)
     {
         return new AssetsPackage(
             $loader->getRootDirectory(),
@@ -96,7 +96,7 @@ class AssetsInstaller
     }
 
     /**
-     * Reset the cluster to empty values (except for global package)
+     * Reset the package to empty values (except for global package)
      *
      * @return void
      */
@@ -110,7 +110,7 @@ class AssetsInstaller
     }
 
     /**
-     * Reset the cluster when clone
+     * Reset the package when clone
      *
      * @return void
      */
@@ -194,7 +194,7 @@ class AssetsInstaller
                 $this->assets_path = $relative_path;
             } else {
                 throw new InvalidArgumentException(
-                    sprintf('Assets directory "%s" for cluster "%s" not found !', $path, $this->getName())
+                    sprintf('Assets directory "%s" for package "%s" not found !', $path, $this->getName())
                 );
             }
         }
@@ -267,7 +267,7 @@ class AssetsInstaller
 // -------------------------
 
     /**
-     * Get all necessary arranged cluster infos as an array
+     * Get all necessary arranged package infos as an array
      *
      * This is the data stored in the `Loader\Assets::ASSETS_DB_FILENAME`.
      *
@@ -275,18 +275,18 @@ class AssetsInstaller
      */    
     public function getArray()
     {
-        $cluster = array(
+        $package = array(
             'name'=>$this->getName(),
             'version'=>$this->getVersion(),
             'relative_path'=>$this->getRelativePath(),
             'assets_path'=>$this->getAssetsPath(),
             'assets_presets'=>$this->getAssetsPresets(),
         );
-        return $cluster;
+        return $package;
     }
 
     /**
-     * Load a new cluster from the `Loader\Assets::ASSETS_DB_FILENAME` entry
+     * Load a new package from the `AssetsManager\Package\AbstractAssetsPackage::ASSETS_DB_FILENAME` entry
      *
      * @param array
      * @return self
@@ -298,12 +298,25 @@ class AssetsInstaller
                 case 'name': $this->setName($val); break;
                 case 'version': $this->setVersion($val); break;
                 case 'relative_path': $this->setRelativePath($val); break;
-                case 'assets_path': $this->setAssetsPath($val); break;
+                case 'assets_path':
+                case 'path':
+                    $this->setAssetsPath($val); break;
                 case 'assets_presets': $this->setAssetsPresets($val); break;
             }
         }
         return $this;
      }
+
+    /**
+     * Find an asset file in the filesystem of a specific package
+     *
+     * @param string $filename The asset filename to find
+     * @return string|null The web path of the asset if found, `null` otherwise
+     */
+    public function findInPackage($filename)
+    {
+        return AssetsLoader::findInPackage($filename, $this->getName());
+    }
 
     /**
      * Parse the `composer.json` "extra" block of a package and return its transformed data
