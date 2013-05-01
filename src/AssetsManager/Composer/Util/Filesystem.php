@@ -7,11 +7,12 @@
  * Sources <https://github.com/atelierspierrot/templatengine>
  */
 
-namespace ComposerAssetsExtension\Util;
+namespace AssetsManager\Composer\Util;
 
 use Composer\Util\Filesystem as OriginalFilesystem;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
+
+use RecursiveDirectoryIterator,
+    RecursiveIteratorIterator;
 
 /**
  * This class just completes the default `Composer\Util\Filesystem` with a `copy` method

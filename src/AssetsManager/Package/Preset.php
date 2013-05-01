@@ -7,10 +7,11 @@
  * Sources <https://github.com/atelierspierrot/templatengine>
  */
 
-namespace ComposerAssetsExtension\Package;
+namespace AssetsManager\Package;
 
 use InvalidArgumentException;
-use ComposerAssetsExtension\Package\AssetsPackage;
+
+use AssetsManager\Package\AssetsPackage;
 
 /**
  * Preset

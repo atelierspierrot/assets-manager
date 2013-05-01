@@ -7,9 +7,10 @@
  * Sources <https://github.com/atelierspierrot/templatengine>
  */
 
-namespace ComposerAssetsExtension\Autoload;
+namespace AssetsManager\Autoload;
 
-use ComposerAssetsExtension\Installer\AssetsInstaller;
+use AssetsManager\Composer\Installer\AssetsInstaller;
+
 use Composer\Package\PackageInterface,
     Composer\Json\JsonFile;
 

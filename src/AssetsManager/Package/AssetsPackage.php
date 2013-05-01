@@ -7,15 +7,15 @@
  * Sources <https://github.com/atelierspierrot/templatengine>
  */
 
-namespace ComposerAssetsExtension\Package;
+namespace AssetsManager\Package;
 
 use InvalidArgumentException;
 
 use Library\Helper\Directory as DirectoryHelper;
 
-use ComposerAssetsExtension\Loader as AssetsLoader,
-    ComposerAssetsExtension\Package\AbstractAssetsPackage,
-    ComposerAssetsExtension\Package\Preset;
+use AssetsManager\Loader as AssetsLoader,
+    AssetsManager\Package\AbstractAssetsPackage,
+    AssetsManager\Package\Preset;
 
 /**
  * Cluster

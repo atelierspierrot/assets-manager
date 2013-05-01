@@ -1,10 +1,7 @@
-Composer Assets Extension
-=========================
+Assets Manager - A Composer extension to manage assets packages
+===============================================================
 
-This document describes the [Composer](https://getcomposer.org/) extension to manage assets
-used by our [Template Engine](https://github.com/atelierspierrot/templatengine) package.
-
-The plugin can be used separately as a stand-alone Composer extension.
+A custom Composer installer to manage "library-assets" package type.
 
 
 ## How it works?

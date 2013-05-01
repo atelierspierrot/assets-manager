@@ -7,7 +7,7 @@
  * Sources <https://github.com/atelierspierrot/carte-blanche>
  */
 
-namespace ComposerAssetsExtension\Installer;
+namespace AssetsManager\Composer\Installer;
 
 use Library\Helper\Directory as DirectoryHelper;
 
@@ -17,10 +17,10 @@ use Composer\Composer,
     Composer\Repository\InstalledRepositoryInterface,
     Composer\Installer\LibraryInstaller;
 
-use ComposerAssetsExtension\Package\AbstractAssetsPackage,
-    ComposerAssetsExtension\Package\Preset,
-    ComposerAssetsExtension\Autoload\AssetsAutoloadGenerator,
-    ComposerAssetsExtension\Util\Filesystem as AssetsFilesystem;
+use AssetsManager\Package\AbstractAssetsPackage,
+    AssetsManager\Package\Preset,
+    AssetsManager\Composer\Autoload\AssetsAutoloadGenerator,
+    AssetsManager\Composer\Util\Filesystem as AssetsFilesystem;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>

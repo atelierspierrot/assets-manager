@@ -7,11 +7,10 @@
  * Sources <https://github.com/atelierspierrot/templatengine>
  */
 
-namespace ComposerAssetsExtension;
+namespace AssetsManager;
 
-use ComposerAssetsExtension\Package\AbstractAssetsPackage,
-    ComposerAssetsExtension\Package\AssetsPackage,
-    ComposerAssetsExtension\Util\Filesystem;
+use AssetsManager\Package\AbstractAssetsPackage,
+    AssetsManager\Package\AssetsPackage;
 
 use Library\Helper\Directory as DirectoryHelper,
     Library\Helper\Filesystem as FilesystemHelper;

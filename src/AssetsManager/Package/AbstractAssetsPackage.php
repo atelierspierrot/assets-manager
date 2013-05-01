@@ -7,7 +7,7 @@
  * Sources <https://github.com/atelierspierrot/templatengine>
  */
 
-namespace ComposerAssetsExtension\Package;
+namespace AssetsManager\Package;
 
 use InvalidArgumentException;
 
