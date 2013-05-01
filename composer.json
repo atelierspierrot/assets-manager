@@ -1,10 +1,10 @@
 {
-    "name": "atelierspierrot/composer-assets-extension",
+    "name": "atelierspierrot/assets-manager",
     "type": "composer-installer",
     "description": "A custom Composer installer to manage \"library-assets\" package type",
     "keywords": [ "composer", "package", "assets" ],
-    "homepage": "https://github.com/atelierspierrot/composer-assets-extension",
-    "version": "0.0.1-dev",
+    "homepage": "https://github.com/atelierspierrot/assets-manager",
+    "version": "0.0.2-dev",
     "license": "GPL-3.0",
     "authors": [
         {
@@ -17,12 +17,13 @@
             "homepage": "https://github.com/PieroWbmstr"
         }
     ],
-    "require": { "php": ">=5.3.0" },
-    "repositories": [
-        { "type": "vcs", "url": "https://github.com/PieroWbmstr/devtest" }
-    ],
+    "require": {
+        "php": ">=5.3.0",
+        "psr/log": "dev-master",
+        "atelierspierrot/patterns": "dev-master",
+        "atelierspierrot/library": "dev-master"
+    },
     "require-dev": { "sami/sami": "dev-master" },
-    "autoload": { "psr-0": { "ComposerAssetsExtension": "src" } },
-    "extra": { "class": "\\ComposerAssetsExtension\\Installer\\AssetsInstaller" },
-    "scripts": { "post-autoload-dump": "\\ComposerAssetsExtension\\Installer\\AssetsInstaller::postAutoloadDump" }
+    "autoload": { "psr-0": { "AssetsManager": "src" } },
+    "extra": { "class": "\\AssetsManager\\Composer\\Installer\\AssetsInstaller" }
 }
