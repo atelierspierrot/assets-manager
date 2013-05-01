@@ -7,7 +7,7 @@
  * Sources <https://github.com/atelierspierrot/templatengine>
  */
 
-namespace AssetsManager\Autoload;
+namespace AssetsManager\Composer\Autoload;
 
 use AssetsManager\Composer\Installer\AssetsInstaller;
 
