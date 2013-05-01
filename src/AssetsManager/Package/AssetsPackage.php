@@ -67,16 +67,13 @@ class AssetsPackage extends AbstractAssetsPackage implements AssetsPackageInterf
      * @param string $_assets_vendor_dir The global package assets vendor directory (must exist in `$_assets_dir`)
      */
     public function __construct(
-        $_root_dir,
-        $_assets_dir = AbstractAssetsPackage::DEFAULT_ASSETS_DIR,
-        $_vendor_dir = AbstractAssetsPackage::DEFAULT_VENDOR_DIR,
-        $_assets_vendor_dir = AbstractAssetsPackage::DEFAULT_VENDOR_DIR
+        $_root_dir, $_assets_dir = null, $_vendor_dir = null, $_assets_vendor_dir = null
     ) {
         $this
             ->setRootDirectory($_root_dir)
-            ->setAssetsDirectory($_assets_dir)
-            ->setVendorDirectory($_vendor_dir)
-            ->setAssetsVendorDirectory($_assets_vendor_dir)
+            ->setAssetsDirectory(!is_null($_assets_dir) ? $_assets_dir : Config::get('assets-dir'))
+            ->setVendorDirectory(!is_null($_vendor_dir) ? $_vendor_dir : Config::get('vendor-dir'))
+            ->setAssetsVendorDirectory(!is_null($_assets_vendor_dir) ? $_assets_vendor_dir : Config::get('assets-vendor-dir'))
             ->reset()
             ;
     }
@@ -286,7 +283,7 @@ class AssetsPackage extends AbstractAssetsPackage implements AssetsPackageInterf
     }
 
     /**
-     * Load a new package from the `AssetsManager\Package\AbstractAssetsPackage::ASSETS_DB_FILENAME` entry
+     * Load a new package from the `ASSETS_DB_FILENAME` entry
      *
      * @param array
      * @return self
@@ -325,7 +322,6 @@ class AssetsPackage extends AbstractAssetsPackage implements AssetsPackageInterf
      * @param object $installer Assets\ComposerInstaller
      * @param bool $main_package Is this the global package
      * @return void
-     */
     public function parseComposerExtra(\Composer\Package\PackageInterface $package, \Assets\ComposerInstaller $installer, $main_package = false)
     {
         $this->reset();
@@ -376,6 +372,7 @@ class AssetsPackage extends AbstractAssetsPackage implements AssetsPackageInterf
         }
         return $this->getArray();
     }
+     */
     
 }
 

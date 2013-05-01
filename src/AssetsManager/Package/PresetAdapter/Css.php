@@ -32,7 +32,7 @@ class Css implements PresetAdapterInterface
 
     /**
      * @param array|string $data The preset data
-     * @param object $preset AssetsManager\Package\Preset
+     * @param object $preset AssetsManager\Package\AssetsPresetInterface
      */
     public function __construct(array $data, \AssetsManager\Package\AssetsPresetInterface $preset)
     {

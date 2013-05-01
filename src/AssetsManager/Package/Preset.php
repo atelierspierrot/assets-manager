@@ -11,7 +11,8 @@ namespace AssetsManager\Package;
 
 use InvalidArgumentException;
 
-use AssetsManager\Package\AssetsPackage,
+use AssetsManager\Config,
+    AssetsManager\Package\AssetsPackage,
     AssetsManager\Package\AssetsPackageInterface,
     AssetsManager\Package\AssetsPresetInterface;
 
@@ -25,18 +26,6 @@ use AssetsManager\Package\AssetsPackage,
  */
 class Preset implements AssetsPresetInterface
 {
-
-    /**
-     * Composition of an `assets-presets` statement in `composer.json`
-     * @static array Pairs like "statement name => adapter"
-     */
-    public static $use_statements = array(
-        'css' => 'Css',
-        'js' => 'Javascript',
-        'jsfiles_footer' => 'Javascript',
-        'jsfiles_header' => 'Javascript',
-        'require' => 'Requirement'
-    );
 
     /**
      * @var string
@@ -94,7 +83,8 @@ class Preset implements AssetsPresetInterface
 
 	    foreach ($this->data as $type=>$item) {
 	        if (!is_array($item)) $item = array( $item );
-	        $adapter_name = isset(self::$use_statements[$type]) ? self::$use_statements[$type] : null;
+	        $use_statements = Config::get('use-statements');
+	        $adapter_name = isset($use_statements[$type]) ? $use_statements[$type] : null;
 	        if (!empty($adapter_name)) {
 	            $cls_name = 'AssetsManager\Package\PresetAdapter\\'.$adapter_name;
                 if (@class_exists($cls_name)) {
