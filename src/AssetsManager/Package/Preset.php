@@ -89,7 +89,8 @@ class Preset implements AssetsPresetInterface
 	            $cls_name = 'AssetsManager\Package\PresetAdapter\\'.$adapter_name;
                 if (@class_exists($cls_name)) {
                     $interfaces = class_implements($cls_name);
-                    if (in_array('AssetsManager\Package\PresetAdapterInterface', $interfaces)) {
+                    $config_interface = Config::getInternal('assets-preset-adapter-interface');
+                    if (in_array($config_interface, $interfaces)) {
                         if (!isset($this->_statements[$type])) {
                             $this->_statements[$type] = array();
                         }
@@ -102,7 +103,7 @@ class Preset implements AssetsPresetInterface
                     } else {
                         throw new \DomainException(
                             sprintf('Preset statement class "%s" must implements interface "%s"!',
-                                $cls_name, 'AssetsManager\Package\PresetAdapterInterface')
+                                $cls_name, $config_interface)
                         );
                     }
                 } else {

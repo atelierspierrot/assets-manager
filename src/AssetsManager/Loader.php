@@ -101,16 +101,6 @@ class Loader extends AbstractAssetsPackage
      */
     private $conflict_flag;
 
-    /**
-     * @var string
-     */
-    protected static $assets_package_class = 'AssetsManager\Package\AssetsPackage';
-
-    /**
-     * @var string
-     */
-    protected static $assets_preset_class = 'AssetsManager\Package\Preset';
-
 // ---------------------
 // Construction
 // ---------------------
@@ -165,7 +155,7 @@ class Loader extends AbstractAssetsPackage
     {
         $this->setRootDirectory(!is_null($root_dir) ? $root_dir : __DIR__.'/../../../../../');
 
-        $composer = $this->getRootDirectory() . '/composer.json';
+        $composer = $this->getRootDirectory() . '/' . Config::getInternal('composer-db');
         $vendor_dir = Config::get('vendor-dir');
         if (file_exists($composer)) {
             $package = json_decode(file_get_contents($composer), true);
@@ -345,17 +335,18 @@ class Loader extends AbstractAssetsPackage
     {
         $package = isset($this->assets_db[$package_name]) ? $this->assets_db[$package_name] : null;
         if (!empty($package)) {
-            $cls_name = self::$assets_package_class;
+            $cls_name = Config::get('assets-package-class');
             if (@class_exists($cls_name)) {
                 $interfaces = class_implements($cls_name);
-                if (in_array('AssetsManager\Package\AssetsPackageInterface', $interfaces)) {
+                $config_interface = Config::getInternal('assets-package-interface');
+                if (in_array($config_interface, $interfaces)) {
                     $package_object = $cls_name::createFromAssetsLoader($this);
                     $package_object->loadFromArray($package);
                     return $package_object;
                 } else {
                     throw new \DomainException(
                         sprintf('Package class "%s" must implements interface "%s"!',
-                            $cls_name, 'AssetsManager\Package\AssetsPackageInterface')
+                            $cls_name, $config_interface)
                     );
                 }
             } else {
@@ -434,10 +425,11 @@ class Loader extends AbstractAssetsPackage
         $preset = isset($this->presets_data[$preset_name]) ? $this->presets_data[$preset_name]['data'] : null;
         if (!empty($preset)) {
             $package = $this->getPackage($this->presets_data[$preset_name]['package']);
-            $cls_name = self::$assets_preset_class;
+            $cls_name = Config::get('assets-preset-class');
             if (@class_exists($cls_name)) {
                 $interfaces = class_implements($cls_name);
-                if (in_array('AssetsManager\Package\AssetsPresetInterface', $interfaces)) {
+                $config_interface = Config::getInternal('assets-preset-interface');
+                if (in_array($config_interface, $interfaces)) {
                     $preset_object = new $cls_name(
                         $preset_name, $preset, $package
                     );
@@ -445,7 +437,7 @@ class Loader extends AbstractAssetsPackage
                 } else {
                     throw new \DomainException(
                         sprintf('Preset class "%s" must implements interface "%s"!',
-                            $cls_name, 'AssetsManager\Package\AssetsPresetInterface')
+                            $cls_name, $config_interface)
                     );
                 }
             } else {

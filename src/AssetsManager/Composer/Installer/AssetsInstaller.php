@@ -21,12 +21,15 @@ use AssetsManager\Config,
     AssetsManager\Package\AbstractAssetsPackage,
     AssetsManager\Package\Preset,
     AssetsManager\Composer\Autoload\AssetsAutoloadGenerator,
+    AssetsManager\Composer\Installer\AssetsInstallerInterface,
     AssetsManager\Composer\Util\Filesystem as AssetsFilesystem;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class AssetsInstaller extends LibraryInstaller
+class AssetsInstaller
+    extends LibraryInstaller
+    implements AssetsInstallerInterface
 {
 
     protected $assetsDir;

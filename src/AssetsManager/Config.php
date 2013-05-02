@@ -39,24 +39,46 @@ class Config
         'document-root',
         'assets-db-filename',
         'use-statements',
+        'config-class',
+        'assets-package-installer-class',
+        'assets-package-class',
+        'assets-preset-class',
+    );
+
+    /**
+     * The internal configuration entries
+     * @var array
+     */
+    private static $__internals = array(
+        'composer-db' => 'composer.json',
+        'config-class' => 'AssetsManager\Config\DefaultConfig',
+        'config-interface' => 'AssetsManager\Config\ConfiguratorInterface',
+        'assets-package-interface' => 'AssetsManager\Package\AssetsPackageInterface',
+        'assets-preset-interface' => 'AssetsManager\Package\AssetsPresetInterface',
+        'assets-preset-adapter-interface' => 'AssetsManager\Package\PresetAdapterInterface',
+        'assets-package-installer-interface' => 'AssetsManager\Composer\Installer\AssetsInstallerInterface',
     );
 
     /**
      * Load a config object
      * @return void
      */
-    public static function load($class_name = 'AssetsManager\Config\DefaultConfig')
+    public static function load($class_name = null)
     {
+        if (empty($class_name)) $class_name = self::getInternal('config-class');
+    
         // init the registry
         if (empty(self::$__registry)) {
-            self::$__registry = array_combine(self::$_requires, array_pad(array(), count(self::$_requires), null));
+            self::$__registry = array_combine(self::$_requires,
+                array_pad(array(), count(self::$_requires), null));
         }
 
         // init the configurator object
         if (empty(self::$__configurator) || $class_name!=get_class(self::$__configurator)) {
             if (@class_exists($class_name)) {
                 $interfaces = class_implements($class_name);
-                if (in_array('AssetsManager\Config\ConfiguratorInterface', $interfaces)) {
+                $config_interface = self::getInternal('config-interface');
+                if (in_array($config_interface, $interfaces)) {
                     self::$__configurator = new $class_name;
                     $defaults = self::$__configurator->getDefaults();
                     $diff = array_diff(array_keys($defaults), self::$_requires);
@@ -66,13 +88,14 @@ class Config
                         }
                     } else {
                         throw new \Exception(
-                            sprintf('Configuration class "%s" do not define all required values!', $class_name)
+                            sprintf('Configuration class "%s" do not define all required values!', 
+                                $class_name)
                         );
                     }
                 } else {
                     throw new \DomainException(
                         sprintf('Configuration class "%s" must implements interface "%s"!',
-                            $class_name, 'AssetsManager\Config\ConfiguratorInterface')
+                            $class_name, $config_interface)
                     );
                 }
             } else {
@@ -104,7 +127,10 @@ class Config
     public static function get($name, $default = null)
     {
         self::load();
-        return isset(self::$__registry[$name]) ? self::$__registry[$name] : $default;
+        return issetself::$__registry[$name]) ? (
+            is_string(self::$__registry[$name]) ?
+                trim(self::$__registry[$name]) : self::$__registry[$name]
+        ) : $default;
     }
 
     /**
@@ -116,7 +142,22 @@ class Config
         self::load();
         $cls = get_class(self::$__configurator);
         $configs = $cls::$_defaults;
-        return isset($configs[$name]) ? $configs[$name] : null;
+        return isset($configs[$name]) ? (
+            is_string($configs[$name]) ? trim($configs[$name]) : $configs[$name]
+        ) : null;
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    public static function getInternal($name)
+    {
+        self::load();
+        $configs = self::$__internals;
+        return isset($configs[$name]) ? (
+            is_string($configs[$name]) ? trim($configs[$name]) : $configs[$name]
+        ) : null;
     }
 
     /**
