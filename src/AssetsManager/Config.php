@@ -153,7 +153,6 @@ class Config
      */
     public static function getInternal($name)
     {
-        self::load();
         $configs = self::$__internals;
         return isset($configs[$name]) ? (
             is_string($configs[$name]) ? trim($configs[$name]) : $configs[$name]
