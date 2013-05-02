@@ -75,7 +75,7 @@ class Config
 
         // init the configurator object
         if (empty(self::$__configurator) || $class_name!=get_class(self::$__configurator)) {
-            if (@class_exists($class_name)) {
+            if (class_exists($class_name)) {
                 $interfaces = class_implements($class_name);
                 $config_interface = self::getInternal('config-interface');
                 if (in_array($config_interface, $interfaces)) {
@@ -106,6 +106,18 @@ class Config
         }
     }
 
+    /**
+     * Overload a config registry
+     * @return void
+     */
+    public static function overload(array $settings)
+    {
+        self::load();
+        foreach ($settings as $var=>$val) {
+            self::set($var, $val);
+        }
+    }
+    
     /**
      * @param string $name
      * @param misc $value

@@ -37,9 +37,9 @@ class Dispatch implements InstallerInterface
         if (isset($extra['config-class'])) {
             Config::load($extra['config-class']);
         }
+        Config::overload($extra);
 
-        $installer = isset($extra['assets-package-installer-class']) ?
-            $extra['assets-package-installer-class'] : Config::get('assets-package-installer-class');
+        $installer = Config::get('assets-package-installer-class');
 
         if (!empty($installer)) {
             $cls_name = Config::get('assets-package-class');

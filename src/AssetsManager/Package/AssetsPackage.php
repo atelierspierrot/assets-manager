@@ -19,10 +19,6 @@ use AssetsManager\Loader as AssetsLoader,
     AssetsManager\Package\Preset;
 
 /**
- * Cluster
- *
- * This class handles dependencies packages assets from a global root directory.
- *
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
 class AssetsPackage extends AbstractAssetsPackage implements AssetsPackageInterface
