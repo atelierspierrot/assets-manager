@@ -127,7 +127,7 @@ class Config
     public static function get($name, $default = null)
     {
         self::load();
-        return issetself::$__registry[$name]) ? (
+        return isset(self::$__registry[$name]) ? (
             is_string(self::$__registry[$name]) ?
                 trim(self::$__registry[$name]) : self::$__registry[$name]
         ) : $default;
