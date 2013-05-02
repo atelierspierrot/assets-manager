@@ -48,7 +48,7 @@ class DefaultConfig implements ConfiguratorInterface
             'config-class' => null,
             'assets-package-class' => 'AssetsManager\Package\AssetsPackage',
             'assets-preset-class' => 'AssetsManager\Package\Preset',
-            'package-installer-class' => 'AssetsManager\Composer\Installer\AssetsInstaller',
+            'assets-package-installer-class' => 'AssetsManager\Composer\Installer\AssetsInstaller',
         );
     }
 
