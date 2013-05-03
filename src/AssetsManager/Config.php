@@ -61,9 +61,10 @@ class Config
 
     /**
      * Load a config object
+     * @param bool $safe
      * @return void
      */
-    public static function load($class_name = null)
+    public static function load($class_name = null, $safe = false)
     {
         if (empty($class_name)) $class_name = self::getInternal('assets-config-class');
     
@@ -75,6 +76,11 @@ class Config
 
         // init the configurator object
         if (empty(self::$__configurator) || $class_name!=get_class(self::$__configurator)) {
+
+            if ($safe && !class_exists($class_name)) {
+                $class_name = self::getInternal('assets-config-class');
+            }
+
             if (class_exists($class_name)) {
                 $interfaces = class_implements($class_name);
                 $config_interface = self::getInternal('assets-config-interface');

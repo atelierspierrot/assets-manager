@@ -39,7 +39,7 @@ class Dispatch implements InstallerInterface
         $config = $composer->getConfig();
 
         if (isset($extra['assets-config-class'])) {
-            Config::load($extra['assets-config-class']);
+            Config::load($extra['assets-config-class'], true);
         }
         Config::overload($extra);
 
