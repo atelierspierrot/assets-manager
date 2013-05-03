@@ -47,9 +47,6 @@ class Dispatch implements InstallerInterface
         if (!empty($installer)) {
             if (@class_exists($installer)) {
                 $interfaces = class_implements($installer);
-
-var_export($interfaces);
-
                 $config_interface = Config::getInternal('assets-package-installer-interface');
                 if (in_array($config_interface, $interfaces)) {
                     $this->__installer = new $installer($io, $composer, $type);
@@ -74,7 +71,7 @@ var_export($interfaces);
      */
     public function supports($packageType)
     {
-        return $this->__installer->support($packageType);
+        return $this->__installer->supports($packageType);
     }
 
     /**
@@ -90,7 +87,7 @@ var_export($interfaces);
      */
     public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        return $this->__installer->installed($repo, $package);
+        return $this->__installer->install($repo, $package);
     }
 
     /**
