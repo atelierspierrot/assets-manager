@@ -107,7 +107,7 @@ class Dispatch implements InstallerInterface
         if (class_exists($installer_class)) {
             $interfaces = class_implements($installer_class);
             $config_interface = Config::getInternal('assets-package-installer-interface');
-            return in_array($config_interface, $interfaces)) {
+            return in_array($config_interface, $interfaces);
         }
         return false;
     }
