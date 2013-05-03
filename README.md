@@ -83,7 +83,7 @@ Below is the example of the package default configuration values:
                 "jsfiles_footer": "vendor_assets/jquery.highlight.js"
             }
         },
-        "config-class": "AssetsManager\\Config\\DefaultConfig",
+        "assets-config-class": "AssetsManager\\Config\\DefaultConfig",
         "assets-package-class": "AssetsManager\\Package\\AssetsPackage",
         "assets-preset-class": "AssetsManager\\Package\\Preset",
         "assets-package-installer-class": "AssetsManager\\Composer\\Installer\\AssetsInstaller",

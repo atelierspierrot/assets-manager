@@ -158,9 +158,9 @@ class Loader extends AbstractAssetsPackage
         $composer = $this->getRootDirectory() . '/' . Config::getInternal('composer-db');
         $vendor_dir = Config::get('vendor-dir');
         if (file_exists($composer)) {
-            $package = json_decode(file_get_contents($composer), true);
-            if (isset($package['config']) && isset($package['config']['vendor-dir'])) {
-                $vendor_dir = $package['config']['vendor-dir'];
+            $json_package = json_decode(file_get_contents($composer), true);
+            if (isset($json_package['config']) && isset($json_package['config']['vendor-dir'])) {
+                $vendor_dir = $json_package['config']['vendor-dir'];
             }
         } else {
             throw new \Exception(
@@ -169,28 +169,33 @@ class Loader extends AbstractAssetsPackage
         }
         $this->setVendorDirectory($vendor_dir);
 
-        $assets_db_filename = isset($json_db['assets-db-filename']) ? $json_db['assets-db-filename'] : Config::get('assets-db-filename');
+        $extra = isset($json_package['extra']) ? $json_package['extra'] : array();
+        if (isset($extra['assets-config-class'])) {
+            Config::load($extra['assets-config-class']);
+        }
+        if (!empty($extra)) {
+            Config::overload($extra);
+        }
+
+        $assets_db_filename = isset($extra['assets-db-filename']) ? $extra['assets-db-filename'] : Config::get('assets-db-filename');
         $db_file = $this->getRootDirectory() . '/' . $this->getVendorDirectory() . '/' . $assets_db_filename;
         if (file_exists($db_file)) {
-            $json_db = json_decode(file_get_contents($db_file), true);
-            if (isset($json_db['config_class'])) {
-                Config::load($json_db['config_class']);
-            }
+            $json_assets = json_decode(file_get_contents($db_file), true);
             $this
                 ->setAssetsDirectory(
                     !is_null($assets_dir) ? $assets_dir : (
-                        isset($json_db['assets_dir']) ? $json_db['assets_dir'] : Config::get('assets-dir')
+                        isset($json_assets['assets_dir']) ? $json_assets['assets_dir'] : Config::get('assets-dir')
                     )
                 )
                 ->setAssetsVendorDirectory(
-                    isset($json_db['assets_vendor_dir']) ? $json_db['assets_vendor_dir'] : Config::get('assets-vendor-dir')
+                    isset($json_assets['assets_vendor_dir']) ? $json_assets['assets_vendor_dir'] : Config::get('assets-vendor-dir')
                 )
                 ->setDocumentRoot(
                     !is_null($document_root) ? $document_root : (
-                        isset($json_db['document_root']) ? $json_db['document_root'] : Config::get('document-root')
+                        isset($json_assets['document_root']) ? $json_assets['document_root'] : Config::get('document-root')
                     )
                 )
-                ->setAssetsDb(!empty($json_db['packages']) ? $json_db['packages'] : array());
+                ->setAssetsDb(!empty($json_assets['packages']) ? $json_assets['packages'] : array());
         } else {
             throw new \Exception(
                 sprintf('Assets json DB "%s" not found!', $db_file)

@@ -168,8 +168,8 @@ class AssetsInstaller
     protected function guessConfigurator(PackageInterface $package)
     {
         $extra = $package->getExtra();
-        if (isset($extra['config-class'])) {
-            Config::load($extra['config-class']);
+        if (isset($extra['assets-config-class'])) {
+            Config::load($extra['assets-config-class']);
         }
 //        Config::overload($extra);
     }

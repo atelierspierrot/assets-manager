@@ -51,8 +51,8 @@ class Config
      */
     private static $__internals = array(
         'composer-db' => 'composer.json',
-        'config-class' => 'AssetsManager\Config\DefaultConfig',
-        'config-interface' => 'AssetsManager\Config\ConfiguratorInterface',
+        'assets-config-class' => 'AssetsManager\Config\DefaultConfig',
+        'assets-config-interface' => 'AssetsManager\Config\ConfiguratorInterface',
         'assets-package-interface' => 'AssetsManager\Package\AssetsPackageInterface',
         'assets-preset-interface' => 'AssetsManager\Package\AssetsPresetInterface',
         'assets-preset-adapter-interface' => 'AssetsManager\Package\PresetAdapterInterface',
@@ -65,7 +65,7 @@ class Config
      */
     public static function load($class_name = null)
     {
-        if (empty($class_name)) $class_name = self::getInternal('config-class');
+        if (empty($class_name)) $class_name = self::getInternal('assets-config-class');
     
         // init the registry
         if (empty(self::$__registry)) {
@@ -77,7 +77,7 @@ class Config
         if (empty(self::$__configurator) || $class_name!=get_class(self::$__configurator)) {
             if (class_exists($class_name)) {
                 $interfaces = class_implements($class_name);
-                $config_interface = self::getInternal('config-interface');
+                $config_interface = self::getInternal('assets-config-interface');
                 if (in_array($config_interface, $interfaces)) {
                     self::$__configurator = new $class_name;
                     $defaults = self::$__configurator->getDefaults();
