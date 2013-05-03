@@ -23,5 +23,5 @@
     },
     "require-dev": { "sami/sami": "dev-master" },
     "autoload": { "psr-0": { "AssetsManager": "src" } },
-    "extra": { "class": "\\AssetsManager\\Composer\\Installer\\AssetsInstaller" }
+    "extra": { "class": "\\AssetsManager\\Composer\\Dispatch" }
 }
