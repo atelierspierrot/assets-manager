@@ -32,11 +32,11 @@ class AssetsInstaller
     implements AssetsInstallerInterface
 {
 
-    protected $assetsDir;
-    protected $assetsVendorDir;
-    protected $assetsDbFilename;
-    protected $documentRoot;
-    protected $appBasePath;
+    protected $assets_dir;
+    protected $assets_vendor_dir;
+    protected $assets_db_filename;
+    protected $document_root;
+    protected $app_base_path;
 
     /**
      * Initializes installer: creation of "assets-dir" directory if so.
@@ -49,12 +49,12 @@ class AssetsInstaller
 
         $this->guessConfigurator($composer->getPackage());
         $config = $composer->getConfig();
-        $this->appBasePath = rtrim(str_replace($config->get('vendor-dir'), '', $this->getVendorDir()), '/');
+        $this->app_base_path = rtrim(str_replace($config->get('vendor-dir'), '', $this->getVendorDir()), '/');
         $this->filesystem = new AssetsFilesystem();
-        $this->assetsDir = $this->guessAssetsDir($composer->getPackage());
-        $this->assetsVendorDir = $this->guessAssetsVendorDir($composer->getPackage());
-        $this->documentRoot = $this->guessDocumentRoot($composer->getPackage());
-        $this->assetsDbFilename = $this->guessAssetsDbFilename($composer->getPackage());
+        $this->assets_dir = $this->guessAssetsDir($composer->getPackage());
+        $this->assets_vendor_dir = $this->guessAssetsVendorDir($composer->getPackage());
+        $this->document_root = $this->guessDocumentRoot($composer->getPackage());
+        $this->assets_db_filename = $this->guessAssetsDbFilename($composer->getPackage());
     }
 
     /**
@@ -62,7 +62,9 @@ class AssetsInstaller
      */
     public function supports($packageType)
     {
-        return $packageType === Config::get('package-type');
+        $types = Config::get('package-type');
+        $types = is_array($types) ? $types : array($types);
+        return in_array($packageType, $types);
     }
 
     /**
@@ -122,7 +124,7 @@ class AssetsInstaller
             $this->io->write( 
                 sprintf('  - Installing <info>%s</info> assets to <info>%s</info>', 
                     $package->getPrettyName(),
-                    str_replace(dirname($this->assetsDir) . '/', '', $target)
+                    str_replace(dirname($this->assets_dir) . '/', '', $target)
                 )
             );
             $this->filesystem->copy($from, $target);
@@ -147,7 +149,7 @@ class AssetsInstaller
             $this->io->write( 
                 sprintf('  - Removing <info>%s</info> assets to <info>%s</info>', 
                     $package->getPrettyName(),
-                    str_replace(dirname($this->assetsDir) . '/', '', $target)
+                    str_replace(dirname($this->assets_dir) . '/', '', $target)
                 )
             );
             $this->filesystem->remove($target);
@@ -166,6 +168,7 @@ class AssetsInstaller
         if (isset($extra['config-class'])) {
             Config::load($extra['config-class']);
         }
+//        Config::overload($extra);
     }
 
     protected function guessAssetsDir(PackageInterface $package)
@@ -199,7 +202,7 @@ class AssetsInstaller
 
     public function getAppBasePath()
     {
-        return $this->appBasePath;
+        return $this->app_base_path;
     }
 
     public function getVendorDir()
@@ -210,22 +213,22 @@ class AssetsInstaller
 
     public function getAssetsDir()
     {
-        return $this->assetsDir;
+        return $this->assets_dir;
     }
 
     public function getAssetsVendorDir()
     {
-        return $this->assetsVendorDir;
+        return $this->assets_vendor_dir;
     }
 
     public function getDocumentRoot()
     {
-        return $this->documentRoot;
+        return $this->document_root;
     }
 
     public function getAssetsDbFilename()
     {
-        return $this->assetsDbFilename;
+        return $this->assets_db_filename;
     }
 
     protected function getPackageAssetsDir(PackageInterface $package)
@@ -242,28 +245,28 @@ class AssetsInstaller
     protected function getRootPackageAssetsPath()
     {
         $this->initializeAssetsDir();
-        return $this->assetsDir ? $this->assetsDir : '';
+        return $this->assets_dir ? $this->assets_dir : '';
     }
 
     protected function getRootPackageAssetsVendorPath()
     {
         $this->initializeAssetsVendorDir();
-        return $this->assetsVendorDir ? $this->assetsVendorDir : '';
+        return $this->assets_vendor_dir ? $this->assets_vendor_dir : '';
     }
 
     protected function initializeAssetsDir()
     {
-        $this->filesystem->ensureDirectoryExists($this->assetsDir);
-        $this->assetsDir = realpath($this->assetsDir);
+        $this->filesystem->ensureDirectoryExists($this->assets_dir);
+        $this->assets_dir = realpath($this->assets_dir);
     }
 
     protected function initializeAssetsVendorDir()
     {
         $path = $this->getRootPackageAssetsPath() . '/' . (
-            $this->assetsVendorDir ? str_replace($this->getRootPackageAssetsPath(), '', $this->assetsVendorDir) : ''
+            $this->assets_vendor_dir ? str_replace($this->getRootPackageAssetsPath(), '', $this->assets_vendor_dir) : ''
         );
         $this->filesystem->ensureDirectoryExists($path);
-        $this->assetsVendorDir = realpath($path);
+        $this->assets_vendor_dir = realpath($path);
     }
 
     public function getAssetsInstallPath(PackageInterface $package)
