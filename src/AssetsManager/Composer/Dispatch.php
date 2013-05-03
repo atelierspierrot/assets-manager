@@ -118,17 +118,17 @@ class Dispatch implements InstallerInterface
             $interfaces = class_implements($installer_class);
             $config_interface = Config::getInternal('assets-package-installer-interface');
             if (in_array($config_interface, $interfaces)) {
-                $this->__installer = new $installer($this->__io, $this->__composer, $this->__type);
+                $this->__installer = new $installer_class($this->__io, $this->__composer, $this->__type);
             } else {
                 Error::thrower(
                     sprintf('Assets package installer class "%s" must implements interface "%s"!',
-                        $installer, $config_interface),
+                        $installer_class, $config_interface),
                     '\DomainException', __CLASS__, __METHOD__, __LINE__
                 );
             }
         } else {
             Error::thrower(
-                sprintf('Assets package installer class "%s" not found!', $installer),
+                sprintf('Assets package installer class "%s" not found!', $installer_class),
                 '\DomainException', __CLASS__, __METHOD__, __LINE__
             );
         }
