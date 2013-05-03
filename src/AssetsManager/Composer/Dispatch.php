@@ -104,6 +104,14 @@ class Dispatch implements InstallerInterface
         return $this->__installer->uninstall($repo, $package);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function getInstallPath(PackageInterface $package)
+    {
+        return $this->__installer->getInstallPath($package);
+    }
+    
 }
 
 // Endfile
