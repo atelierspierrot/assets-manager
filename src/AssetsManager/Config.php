@@ -87,20 +87,23 @@ class Config
                             self::set($var, $val);
                         }
                     } else {
-                        throw new \Exception(
+                        Error::thrower(
                             sprintf('Configuration class "%s" do not define all required values!', 
-                                $class_name)
+                                $class_name),
+                            '\Exception', __CLASS__, __METHOD__, __LINE__
                         );
                     }
                 } else {
-                    throw new \DomainException(
+                    Error::thrower(
                         sprintf('Configuration class "%s" must implements interface "%s"!',
-                            $class_name, $config_interface)
+                            $class_name, $config_interface),
+                        '\DomainException', __CLASS__, __METHOD__, __LINE__
                     );
                 }
             } else {
-                throw new \DomainException(
-                    sprintf('Configuration class "%s" not found!', $class_name)
+                Error::thrower(
+                    sprintf('Configuration class "%s" not found!', $class_name),
+                    '\DomainException', __CLASS__, __METHOD__, __LINE__
                 );
             }
         }

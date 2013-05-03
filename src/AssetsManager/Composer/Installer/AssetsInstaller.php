@@ -18,6 +18,7 @@ use Composer\Composer,
     Composer\Installer\LibraryInstaller;
 
 use AssetsManager\Config,
+    AssetsManager\Error,
     AssetsManager\Package\AbstractAssetsPackage,
     AssetsManager\Package\Preset,
     AssetsManager\Composer\Autoload\AssetsAutoloadGenerator,
@@ -131,8 +132,9 @@ class AssetsInstaller
             AssetsAutoloadGenerator::registerPackage($package, $target, $this);
             $this->io->write('');
         } else {
-            throw new \InvalidArgumentException(
-                'Unable to find assets in package "'.$package->getPrettyName().'"'
+            Error::thrower(
+                sprintf('Unable to find assets in package "%s"', $package->getPrettyName()),
+                '\InvalidArgumentException', __CLASS__, __METHOD__, __LINE__
             );
         }
     }
@@ -156,8 +158,9 @@ class AssetsInstaller
             AssetsAutoloadGenerator::unregisterPackage($package, $this);
             $this->io->write('');
         } else {
-            throw new \InvalidArgumentException(
-                'Unable to find assets from package "'.$package->getPrettyName().'"'
+            Error::thrower(
+                sprintf('Unable to find assets from package "%s"', $package->getPrettyName()),
+                '\InvalidArgumentException', __CLASS__, __METHOD__, __LINE__
             );
         }
     }
