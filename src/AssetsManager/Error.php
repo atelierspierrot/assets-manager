@@ -22,11 +22,12 @@ class Error
     public static function thrower($str, $throw = '\Exception', $class = null, $method = null, $line = null, $file = null)
     {
         $suffix = '';
-        if (!empty($class)) {
+        if (!empty($method)) {
+            $suffix .= 'thrown by ' . $method;
+        } elseif (!empty($class)) {
             $suffix .= 'thrown by ' . $class;
-            if (!empty($method)) {
-                $suffix .= '::' . $method;
-            }
+        }
+        if (!empty($method) || !empty($class)) {
             if (!empty($file)) {
                 $suffix .= ' in file ' . $file;
             }
