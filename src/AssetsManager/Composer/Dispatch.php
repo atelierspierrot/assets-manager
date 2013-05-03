@@ -16,7 +16,8 @@ use Composer\Composer,
     Composer\Installer\LibraryInstaller,
     Composer\Installer\InstallerInterface;
 
-use AssetsManager\Config;
+use AssetsManager\Config,
+    AssetsManager\Error;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
@@ -51,18 +52,22 @@ class Dispatch implements InstallerInterface
                 if (in_array($config_interface, $interfaces)) {
                     $this->__installer = new $installer($io, $composer, $type);
                 } else {
-                    throw new \DomainException(
+                    Error::thrower(
                         sprintf('Assets package installer class "%s" must implements interface "%s"!',
-                            $installer, $config_interface)
+                            $installer, $config_interface),
+                        '\DomainException', __CLASS__, __METHOD__, __LINE__
                     );
                 }
             } else {
-                throw new \DomainException(
-                    sprintf('Assets package installer class "%s" not found!', $installer)
+                Error::thrower(
+                    sprintf('Assets package installer class "%s" not found!', $installer),
+                    '\DomainException', __CLASS__, __METHOD__, __LINE__
                 );
             }
         } else {
-            throw new \Exception('Assets package isntaller is not defined!');
+            Error::thrower(
+                'Assets package isntaller is not defined!', '\Exception', __CLASS__, __METHOD__, __LINE__
+            );
         }
     }
 
