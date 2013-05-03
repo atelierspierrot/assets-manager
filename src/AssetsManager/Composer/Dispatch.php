@@ -31,6 +31,7 @@ class Dispatch implements InstallerInterface
      */
     public function __construct(IOInterface $io, Composer $composer, $type = 'library')
     {
+        $package = $composer->getPackage();
         $extra = $package->getExtra();
         $config = $composer->getConfig();
 
