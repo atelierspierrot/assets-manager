@@ -23,6 +23,7 @@ class AssetsAutoloadGenerator
     protected $assets_installer;
     protected $assets_db;
     private static $_instance;
+    private static $_generator;
 
     public static function getInstance(AssetsInstaller $installer)
     {
@@ -37,11 +38,12 @@ class AssetsAutoloadGenerator
     {
         $this->assets_installer = $installer;
         $this->assets_db = array();
+        self::setGenerator(array($this, 'generate'));
     }
 
     public function __destruct()
     {
-        $this->generate();
+        call_user_func(self::$_generator);
     }
 
     public function generate()
@@ -84,6 +86,19 @@ class AssetsAutoloadGenerator
     {
         $_this = self::getInstance($installer);
         unset($_this->assets_db[$package->getPrettyName()]);
+    }
+
+    public static function getRegistry()
+    {
+        $_this = self::getInstance($installer);
+        return $_this->assets_db;
+    }
+
+    public static function setGenerator($callable)
+    {
+        if (is_callable($callable)) {
+            self::$_generator = $callable;
+        }
     }
 
 }
