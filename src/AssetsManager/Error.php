@@ -23,18 +23,15 @@ class Error
     {
         $suffix = '';
         if (!empty($class)) {
-            $suffix .= $class;
+            $suffix .= 'thrown by ' . $class;
             if (!empty($method)) {
                 $suffix .= '::' . $method;
             }
-            if (!empty($line) || !empty($file)) {
-                $suffix .= ' - thrown at ';
-                if (!empty($file)) {
-                    $suffix .= $file;
-                }
-                if (!empty($line)) {
-                    $suffix .= ' ' . $line;
-                }
+            if (!empty($file)) {
+                $suffix .= ' in file ' . $file;
+            }
+            if (!empty($line)) {
+                $suffix .= ' at line ' . $line;
             }
         }
         if (strlen($suffix)) {
