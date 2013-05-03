@@ -16,6 +16,8 @@ use Composer\Composer,
     Composer\Installer\LibraryInstaller,
     Composer\Installer\InstallerInterface;
 
+use AssetsManager\Config;
+
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
