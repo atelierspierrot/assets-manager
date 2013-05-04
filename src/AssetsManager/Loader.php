@@ -542,6 +542,10 @@ class Loader extends AbstractAssetsPackage
     public static function findInPackage($filename, $package)
     {
         $_this = self::getInstance();
+        $from_root = self::findInPath($filename, $_this->getAssetsRealPath());
+        if (!is_null($from_root)) {
+            return $from_root;
+        }
         $package_path = DirectoryHelper::slashDirname($_this->getPackageAssetsPath($package));
         if (!is_null($package_path)) {
             $asset_path = $package_path . $filename;

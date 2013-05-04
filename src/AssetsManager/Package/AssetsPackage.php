@@ -80,7 +80,8 @@ class AssetsPackage extends AbstractAssetsPackage implements AssetsPackageInterf
      */
     public static function createFromAssetsLoader(AssetsLoader $loader)
     {
-        return new AssetsPackage(
+        $_class = get_called_class();
+        return new $_class(
             $loader->getRootDirectory(),
             $loader->getAssetsDirectory(),
             $loader->getVendorDirectory(),
@@ -311,65 +312,6 @@ class AssetsPackage extends AbstractAssetsPackage implements AssetsPackageInterf
         return AssetsLoader::findInPackage($filename, $this->getName());
     }
 
-    /**
-     * Parse the `composer.json` "extra" block of a package and return its transformed data
-     *
-     * @param array $package The package, Composer\Package\PackageInterface
-     * @param object $installer Assets\ComposerInstaller
-     * @param bool $main_package Is this the global package
-     * @return void
-    public function parseComposerExtra(\Composer\Package\PackageInterface $package, \Assets\ComposerInstaller $installer, $main_package = false)
-    {
-        $this->reset();
-        $extra = $package->getExtra();
-        if (!empty($extra) && isset($extra['assets'])) {
-            $this->setVersion($package->getVersion());
-            $this->setName($package->getPrettyName());
-            $package_dir = $main_package ? '' : 
-                str_replace(
-                    DirectoryHelper::slashDirname($this->getRootDirectory()) .
-                    DirectoryHelper::slashDirname($this->getAssetsDirectory()) .
-                    DirectoryHelper::slashDirname($this->getAssetsVendorDirectory()),
-                    '',
-                    $installer->getInstallPath($package)
-                );
-            $this->setRelativePath($package_dir);
-            $this->setAssetsPath($main_package ? '' : $extra['assets']);
-            if (isset($extra['views'])) {
-                $this->setViewsPaths(
-                    is_array($extra['views']) ? $extra['views'] : array($extra['views']),
-                    $main_package ? null : 'vendor'
-                );
-            }
-            if (isset($extra['views_functions'])) {
-                $this->setViewsFunctionsPaths(
-                    is_array($extra['views_functions']) ? $extra['views_functions'] : array($extra['views_functions']),
-                    $main_package ? null : 'vendor'
-                );
-            }
-            if (isset($extra['assets_presets'])) {
-                foreach ($extra['assets_presets'] as $index=>$item) {
-                    $use_item = array();
-                    foreach (Preset::$use_statements as $statement) {
-                        if (isset($item[$statement])) {
-                            $item_statement = is_array($item[$statement]) ?
-                                $item[$statement] : array($item[$statement]);
-                            $use_item[$statement] = array();
-                            foreach ($item_statement as $path) {
-                                $use_item[$statement][] = $path;
-                            }
-                        }
-                        if (!empty($use_item)) {
-                            $this->addAssetsPreset($index, $use_item);
-                        }
-                    }
-                }
-            }
-        }
-        return $this->getArray();
-    }
-     */
-    
 }
 
 // Endfile
