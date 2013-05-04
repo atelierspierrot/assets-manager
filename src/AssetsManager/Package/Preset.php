@@ -210,7 +210,8 @@ class Preset implements AssetsPresetInterface
     public function getOrganizedStatements()
     {
         $organized_statements = array();
-        $statements = $this->getStatements();
+	    if (empty($this->_statements)) $this->load();
+        $statements = $this->_statements;
 
         if (!empty($statements['require'])) {
             foreach ($statements['require'] as $statement) {
