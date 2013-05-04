@@ -302,14 +302,15 @@ class AssetsInstaller
                     }
                 }
             }
-        }
 
-        return array(
-            'name'          => $package->getPrettyName(),
-            'version'       => $package->getVersion(),
-            'relative_path' => str_replace($this->getAssetsVendorDir() . '/', '', $package_dir),
-            'assets_presets'=> $presets
-        );
+            return array(
+                'name'          => $package->getPrettyName(),
+                'version'       => $package->getVersion(),
+                'relative_path' => str_replace($this->getAssetsVendorDir() . '/', '', $package_dir),
+                'assets_presets'=> $presets
+            );
+        }
+        return null;
     }
 
 }

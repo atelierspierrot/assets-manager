@@ -62,6 +62,15 @@ class Config
     );
 
     /**
+     * Check if the configurator is not yet loaded
+     * @return bool
+     */
+    public static function mustLoad()
+    {
+        return empty(self::$__configurator);
+    }
+    
+    /**
      * Load a config object
      * @param bool $safe
      * @return void
@@ -89,11 +98,8 @@ class Config
                 if (in_array($config_interface, $interfaces)) {
                     self::$__configurator = new $class_name;
                     $defaults = self::$__configurator->getDefaults();
-                    $diff = array_diff(array_keys($defaults), self::$_requires);
-                    if (empty($diff)) {
-                        foreach ($defaults as $var=>$val) {
-                            self::set($var, $val);
-                        }
+                    if (self::_validateConfig($defaults)) {
+                        self::$__registry = $defaults;
                     } else {
                         Error::thrower(
                             sprintf('Configuration class "%s" do not define all required values!', 
@@ -118,12 +124,28 @@ class Config
     }
 
     /**
+     * Check if a custom Config class defines all required values
+     * @param array $entries
+     * @return bool
+     */
+    protected static function _validateConfig(array $entries)
+    {
+        $base = self::$_requires;
+        foreach ($entries as $var=>$val) {
+            if (in_array($var, $base)) {
+                unset($base[array_search($var, $base)]);
+            }
+        }
+        return (count($base)===0);
+    }
+
+    /**
      * Overload a config registry
      * @return void
      */
     public static function overload(array $settings)
     {
-        self::load();
+        if (self::mustLoad()) self::load();
         foreach ($settings as $var=>$val) {
             self::set($var, $val);
         }
@@ -136,7 +158,7 @@ class Config
      */
     public static function set($name, $value)
     {
-        self::load();
+        if (self::mustLoad()) self::load();
         if (array_key_exists($name, self::$__registry)) {
             self::$__registry[$name] = $value;
         }
@@ -149,7 +171,7 @@ class Config
      */
     public static function get($name, $default = null)
     {
-        self::load();
+        if (self::mustLoad()) self::load();
         return isset(self::$__registry[$name]) ? (
             is_string(self::$__registry[$name]) ?
                 trim(self::$__registry[$name]) : self::$__registry[$name]
@@ -162,9 +184,9 @@ class Config
      */
     public static function getDefault($name)
     {
-        self::load();
+        if (self::mustLoad()) self::load();
         $cls = get_class(self::$__configurator);
-        $configs = $cls::$_defaults;
+        $configs = $cls::getDefaults();
         return isset($configs[$name]) ? (
             is_string($configs[$name]) ? trim($configs[$name]) : $configs[$name]
         ) : null;
@@ -187,7 +209,7 @@ class Config
      */
     public static function getRegistry()
     {
-        self::load();
+        if (self::mustLoad()) self::load();
         return self::$__registry;
     }
 

@@ -83,6 +83,14 @@ abstract class AbstractAutoloadGenerator
     }
 
     /**
+     * @return object AssetsManager\Composer\Installer\AssetsInstallerInterface
+     */
+    public function getAssetsInstaller()
+    {
+        return $this->assets_installer;
+    }
+
+    /**
      * Writes the assets database in a JSON file
      * @param array $full_db
      * @return false|string
