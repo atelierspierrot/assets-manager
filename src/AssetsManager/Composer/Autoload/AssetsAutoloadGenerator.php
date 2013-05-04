@@ -51,16 +51,14 @@ class AssetsAutoloadGenerator extends AbstractAutoloadGenerator
         return false;
     }
     
-    public static function registerPackage(PackageInterface $package, $target, AssetsInstaller $installer)
+    protected function addPackage(PackageInterface $package, $target)
     {
-        $_this = self::getInstance($installer);
-        $_this->assets_db[$package->getPrettyName()] = $_this->assets_installer->parseComposerExtra($package, $target);
+        $this->assets_db[$package->getPrettyName()] = $this->assets_installer->parseComposerExtra($package, $target);
     }
 
-    public static function unregisterPackage(PackageInterface $package, AssetsInstaller $installer)
+    protected function removePackage(PackageInterface $package)
     {
-        $_this = self::getInstance($installer);
-        unset($_this->assets_db[$package->getPrettyName()]);
+        unset($this->assets_db[$package->getPrettyName()]);
     }
 
 }

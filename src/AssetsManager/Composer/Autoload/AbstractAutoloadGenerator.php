@@ -96,6 +96,31 @@ abstract class AbstractAutoloadGenerator
         }
     }
 
+    /**
+     * Add a new installed package in the Assets database
+     * @param object $package
+     * @param string $target
+     * @param object $installer
+     * @return void
+     */
+    public static function registerPackage(PackageInterface $package, $target, AssetsInstaller $installer)
+    {
+        $_this = self::getInstance($installer);
+        $_this->addPackage($package, $target);
+    }
+
+    /**
+     * Remove an uninstalled package from the Assets database
+     * @param object $package
+     * @param object $installer
+     * @return void
+     */
+    public static function unregisterPackage(PackageInterface $package, AssetsInstaller $installer)
+    {
+        $_this = self::getInstance($installer);
+        $this->removePackage($package);
+    }
+
 // --------------------------
 // Abstracts methods
 // --------------------------
@@ -109,18 +134,16 @@ abstract class AbstractAutoloadGenerator
      * Add a new installed package in the Assets database
      * @param object $package
      * @param string $target
-     * @param object $installer
      * @return void
      */
-    abstract public static function registerPackage(PackageInterface $package, $target, AssetsInstaller $installer);
+    abstract protected function addPackage(PackageInterface $package, $target);
 
     /**
      * Remove an uninstalled package from the Assets database
      * @param object $package
-     * @param object $installer
      * @return void
      */
-    abstract public static function unregisterPackage(PackageInterface $package, AssetsInstaller $installer);
+    abstract protected function removePackage(PackageInterface $package);
 
 }
 
