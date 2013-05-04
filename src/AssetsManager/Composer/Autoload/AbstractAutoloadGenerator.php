@@ -11,7 +11,7 @@ namespace AssetsManager\Composer\Autoload;
 
 use AssetsManager\Composer\Installer\AssetsInstaller;
 
-use Composer\Package\PackageInterface;
+use Composer\Package\PackageInterface,
     Composer\Json\JsonFile;
 
 /**
