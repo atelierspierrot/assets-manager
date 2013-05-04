@@ -9,7 +9,7 @@
 
 namespace AssetsManager\Composer\Autoload;
 
-use AssetsManager\Composer\Installer\AssetsInstaller;
+use AssetsManager\Composer\Installer\AssetsInstallerInterface;
 
 use Composer\Package\PackageInterface,
     Composer\Json\JsonFile;
@@ -21,7 +21,7 @@ abstract class AbstractAutoloadGenerator
 {
 
     /**
-     * @var AssetsManager\Composer\Installer\AssetsInstaller
+     * @var AssetsManager\Composer\Installer\AssetsInstallerInterface
      */
     protected $assets_installer;
 
@@ -42,12 +42,19 @@ abstract class AbstractAutoloadGenerator
 
     /**
      * Get a singleton instance
-     * @param object $installer
+     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
      * @return object
      */
-    public static function getInstance(AssetsInstaller $installer)
+    public static function getInstance(AssetsInstallerInterface $installer = null)
     {
         if (empty(self::$_instance)) {
+            if (empty($installer)) {
+                throw new \InvalidArgumentException(
+                    sprintf('Can not instanciate autoloader generator singelton object "%s"' .
+                        ' without an "AssetsInstallerInterface" object argument!',
+                        get_called_class())
+                );
+            }
             $cls = get_called_class();
             self::$_instance = new $cls($installer);
         }
@@ -56,10 +63,10 @@ abstract class AbstractAutoloadGenerator
 
     /**
      * Construct instance
-     * @param object $installer
+     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
      * @return void
      */
-    protected function __construct(AssetsInstaller $installer)
+    protected function __construct(AssetsInstallerInterface $installer)
     {
         $this->assets_installer = $installer;
         $this->assets_db = array();
@@ -124,12 +131,12 @@ abstract class AbstractAutoloadGenerator
 
     /**
      * Add a new installed package in the Assets database
-     * @param object $package
+     * @param object $package Composer\Package\PackageInterface
      * @param string $target
-     * @param object $installer
+     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
      * @return void
      */
-    public static function registerPackage(PackageInterface $package, $target, AssetsInstaller $installer)
+    public static function registerPackage(PackageInterface $package, $target, AssetsInstallerInterface $installer = null)
     {
         $_this = self::getInstance($installer);
         $_this->addPackage($package, $target);
@@ -137,11 +144,11 @@ abstract class AbstractAutoloadGenerator
 
     /**
      * Remove an uninstalled package from the Assets database
-     * @param object $package
-     * @param object $installer
+     * @param object $package Composer\Package\PackageInterface
+     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
      * @return void
      */
-    public static function unregisterPackage(PackageInterface $package, AssetsInstaller $installer)
+    public static function unregisterPackage(PackageInterface $package, AssetsInstallerInterface $installer = null)
     {
         $_this = self::getInstance($installer);
         $this->removePackage($package);
@@ -158,7 +165,7 @@ abstract class AbstractAutoloadGenerator
     
     /**
      * Add a new installed package in the Assets database
-     * @param object $package
+     * @param object $package Composer\Package\PackageInterface
      * @param string $target
      * @return void
      */
@@ -166,7 +173,7 @@ abstract class AbstractAutoloadGenerator
 
     /**
      * Remove an uninstalled package from the Assets database
-     * @param object $package
+     * @param object $package Composer\Package\PackageInterface
      * @return void
      */
     abstract protected function removePackage(PackageInterface $package);
