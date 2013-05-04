@@ -21,6 +21,9 @@ use Composer\Package\PackageInterface,
 class AssetsAutoloadGenerator extends AbstractAutoloadGenerator
 {
 
+    /**
+     * {@inheritDoc}
+     */
     public function generate()
     {
         $app_base_path = $this->assets_installer->getAppBasePath();
@@ -32,30 +35,20 @@ class AssetsAutoloadGenerator extends AbstractAutoloadGenerator
             'document-root' => $this->assets_installer->getDocumentRoot(),
             'packages' => $this->assets_db
         );
-
-        $assets_file = $this->assets_installer->getVendorDir() . '/' . $this->assets_installer->getAssetsDbFilename();
-        $this->assets_installer->getIo()->write( 
-            sprintf('Writing assets json DB to <info>%s</info>',
-                str_replace(dirname($this->assets_installer->getVendorDir()).'/', '', $assets_file)
-            )
-        );
-        try {
-            $json = new JsonFile($assets_file);
-            $json->write($full_db);
-            return $assets_file;
-        } catch(\Exception $e) {
-            if (file_put_contents($assets_file, json_encode($full_db, version_compare(PHP_VERSION, '5.4')>0 ? JSON_PRETTY_PRINT : 0))) {
-                return $assets_file;
-            }
-        }        
-        return false;
+        return $this->writeJsonDatabase($full_db);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     protected function addPackage(PackageInterface $package, $target)
     {
         $this->assets_db[$package->getPrettyName()] = $this->assets_installer->parseComposerExtra($package, $target);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function removePackage(PackageInterface $package)
     {
         unset($this->assets_db[$package->getPrettyName()]);

@@ -12,6 +12,7 @@ namespace AssetsManager\Composer\Autoload;
 use AssetsManager\Composer\Installer\AssetsInstaller;
 
 use Composer\Package\PackageInterface;
+    Composer\Json\JsonFile;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
@@ -72,6 +73,31 @@ abstract class AbstractAutoloadGenerator
     public function __destruct()
     {
         call_user_func(self::$_generator);
+    }
+
+    /**
+     * Writes the assets database in a JSON file
+     * @param array $full_db
+     * @return false|string
+     */
+    public function writeJsonDatabase(array $full_db)
+    {
+        $assets_file = $this->assets_installer->getVendorDir() . '/' . $this->assets_installer->getAssetsDbFilename();
+        $this->assets_installer->getIo()->write( 
+            sprintf('Writing assets json DB to <info>%s</info>',
+                str_replace(dirname($this->assets_installer->getVendorDir()).'/', '', $assets_file)
+            )
+        );
+        try {
+            $json = new JsonFile($assets_file);
+            $json->write($full_db);
+            return $assets_file;
+        } catch(\Exception $e) {
+            if (file_put_contents($assets_file, json_encode($full_db, version_compare(PHP_VERSION, '5.4')>0 ? JSON_PRETTY_PRINT : 0))) {
+                return $assets_file;
+            }
+        }        
+        return false;
     }
 
     /**
