@@ -168,7 +168,6 @@ class Dispatch implements InstallerInterface
      */
     public function supports($packageType)
     {
-        $this->__replay();
         return $this->__installer->supports($packageType);
     }
 
@@ -177,7 +176,6 @@ class Dispatch implements InstallerInterface
      */
     public function isInstalled(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        $this->__replay();
         return $this->__installer->isInstalled($repo, $package);
     }
 
@@ -186,7 +184,6 @@ class Dispatch implements InstallerInterface
      */
     public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        $this->__replay();
         return $this->__installer->install($repo, $package);
     }
 
@@ -195,7 +192,6 @@ class Dispatch implements InstallerInterface
      */
     public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
     {
-        $this->__replay();
         return $this->__installer->update($repo, $initial, $target);
     }
 
@@ -204,7 +200,6 @@ class Dispatch implements InstallerInterface
      */
     public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        $this->__replay();
         return $this->__installer->uninstall($repo, $package);
     }
 
@@ -213,7 +208,6 @@ class Dispatch implements InstallerInterface
      */
     public function getInstallPath(PackageInterface $package)
     {
-        $this->__replay();
         return $this->__installer->getInstallPath($package);
     }
     
