@@ -116,7 +116,7 @@ class Loader extends AbstractAssetsPackage
     public static function getInstance($root_dir = null, $assets_dir = null, $document_root = null, $conflict_flag = self::PRESETS_CONFLICT)
     {
         if (empty(self::$__instance)) {
-            $cls = __CLASS__;
+            $cls = get_called_class();
             self::$__isStaticInstance = true;
             self::$__instance = new $cls($root_dir, $assets_dir, $document_root, $conflict_flag);
         }

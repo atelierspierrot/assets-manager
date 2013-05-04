@@ -303,10 +303,18 @@ class AssetsInstaller
                 }
             }
 
+            $relative_path = str_replace($this->getAssetsVendorDir() . '/', '', $package_dir);
+            if ($relative_path===$package_dir) {
+                $relative_path = str_replace($this->getAppBasePath(), '', $package_dir);
+            }
+            if (strlen($relative_path)) {
+                $relative_path = trim($relative_path, '/');
+            }
+
             return array(
                 'name'          => $package->getPrettyName(),
                 'version'       => $package->getVersion(),
-                'relative_path' => str_replace($this->getAssetsVendorDir() . '/', '', $package_dir),
+                'relative_path' => $relative_path,
                 'assets_presets'=> $presets
             );
         }
