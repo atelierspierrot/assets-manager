@@ -17,7 +17,8 @@ use Composer\Composer,
     Composer\Installer\InstallerInterface;
 
 use AssetsManager\Config,
-    AssetsManager\Error;
+    AssetsManager\Error,
+    AssetsManager\Composer\Installer\AssetsInstallerInterface;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
