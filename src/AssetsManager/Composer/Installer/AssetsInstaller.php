@@ -19,7 +19,7 @@ use Composer\Composer,
 
 use AssetsManager\Config,
     AssetsManager\Error,
-    AssetsManager\Dispatch,
+    AssetsManager\Composer\Dispatch,
     AssetsManager\Composer\Installer\AssetsInstallerInterface,
     AssetsManager\Composer\Util\Filesystem as AssetsFilesystem;
 
