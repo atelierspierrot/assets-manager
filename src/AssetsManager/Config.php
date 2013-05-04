@@ -39,8 +39,9 @@ class Config
         'document-root',
         'assets-db-filename',
         'use-statements',
-        'config-class',
+        'assets-config-class',
         'assets-package-installer-class',
+        'assets-autoload-generator-class',
         'assets-package-class',
         'assets-preset-class',
     );
@@ -57,6 +58,7 @@ class Config
         'assets-preset-interface' => 'AssetsManager\Package\AssetsPresetInterface',
         'assets-preset-adapter-interface' => 'AssetsManager\Package\PresetAdapterInterface',
         'assets-package-installer-interface' => 'AssetsManager\Composer\Installer\AssetsInstallerInterface',
+        'assets-autoload-generator-abstract' => 'AssetsManager\Composer\Autoload\AbstractAutoloadGenerator',
     );
 
     /**

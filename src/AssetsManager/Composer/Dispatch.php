@@ -25,12 +25,12 @@ use AssetsManager\Config,
 class Dispatch implements InstallerInterface
 {
 
-    private $__must_replay = array();
     private $__io;
     private $__composer;
     private $__type;
-    private $__extra;
+
     private $__installer;
+    private $__autoloader;
 
     /**
      * Initializes installer: creation of "assets-dir" directory if so.
@@ -45,94 +45,123 @@ class Dispatch implements InstallerInterface
 
         $package = $this->__composer->getPackage();
         $config = $this->__composer->getConfig();
-        $this->__extra = $package->getExtra();
+        $extra = $package->getExtra();
 
+        // Config
         if (isset($extra['assets-config-class'])) {
             $config_class = $extra['assets-config-class'];
-            if ($this->__validateConfig($config_class)) {
-                $this->__loadConfig($config_class);
-            } else {
-                $this->__must_replay['config'] = $config_class;
+            if ($this->validateConfig($config_class)) {
+                Config::load($config_class);
+                Config::overload($extra);
             }
         }
 
+        // Installer
         $installer_class = Config::get('assets-package-installer-class');
         if (!empty($installer_class)) {
-            if ($this->__validateInstaller($installer_class)) {
-                $this->__newInstaller($installer_class);
-            } else {
-                $this->__must_replay['installer'] = $installer_class;
+            if (!$this->validateInstaller($installer_class)) {
                 $installer_class = Config::getInernal('assets-package-installer-class');
-                $this->__newInstaller($installer_class);
+            }
+            if (class_exists($installer_class)) {
+                $interfaces = class_implements($installer_class);
+                $installer_interface = Config::getInternal('assets-package-installer-interface');
+                if (in_array($installer_interface, $interfaces)) {
+                    $this->__installer = new $installer_class($this->__io, $this->__composer, $this->__type);
+                } else {
+                    Error::thrower(
+                        sprintf('Assets package installer class "%s" must implements interface "%s"!',
+                            $installer_class, $installer_interface),
+                        '\DomainException', __CLASS__, __METHOD__, __LINE__
+                    );
+                }
+            } else {
+                Error::thrower(
+                    sprintf('Assets package installer class "%s" not found!', $installer_class),
+                    '\DomainException', __CLASS__, __METHOD__, __LINE__
+                );
             }
         } else {
             Error::thrower(
                 'Assets package installer is not defined!', '\Exception', __CLASS__, __METHOD__, __LINE__
             );
         }
-    }
 
-    private function __replay()
-    {
-        // config
-        if (isset($this->__must_replay['config'])) {
-            if ($this->__validateConfig($this->__must_replay['config'])) {
-                $this->__loadConfig($this->__must_replay['config']);
-                unset($this->__must_replay['config']);
+        // AutoloadGenerator
+        $autoload_class = Config::get('assets-autoload-generator-class');
+        if (!empty($autoload_class)) {
+            if (!$this->validateAutoloadGenerator($autoload_class)) {
+                $autoload_class = Config::getInernal('assets-autoload-generator-class');
             }
-        }
-
-        // installer
-        if (isset($this->__must_replay['installer'])) {
-            if ($this->__validateInstaller($this->__must_replay['installer'])) {
-                $this->__newInstaller($this->__must_replay['installer']);
-                unset($this->__must_replay['installer']);
-            }
-        }
-    }
-
-    private function __validateConfig($config_class)
-    {
-        return class_exists($config_class);
-    }
-
-    private function __loadConfig($config_class)
-    {
-        Config::load($config_class);
-        Config::overload($this->__extra);
-    }
-
-    private function __validateInstaller($installer_class)
-    {
-        if (class_exists($installer_class)) {
-            $interfaces = class_implements($installer_class);
-            $config_interface = Config::getInternal('assets-package-installer-interface');
-            return in_array($config_interface, $interfaces);
-        }
-        return false;
-    }
-
-    private function __newInstaller($installer_class)
-    {
-        if (class_exists($installer_class)) {
-            $interfaces = class_implements($installer_class);
-            $config_interface = Config::getInternal('assets-package-installer-interface');
-            if (in_array($config_interface, $interfaces)) {
-                $this->__installer = new $installer_class($this->__io, $this->__composer, $this->__type);
+            if (class_exists($autoload_class)) {
+                $parents = class_parents($autoload_class);
+                $autoload_abstract = Config::getInternal('assets-autoload-generator-abstract');
+                if (in_array($autoload_abstract, $parents)) {
+                    $this->__autoloader = $autoload_class::getInstance($this->__installer);
+                } else {
+                    Error::thrower(
+                        sprintf('Assets autoload generator class "%s" must extend abstract class "%s"!',
+                            $autoload_class, $autoload_abstract),
+                        '\DomainException', __CLASS__, __METHOD__, __LINE__
+                    );
+                }
             } else {
                 Error::thrower(
-                    sprintf('Assets package installer class "%s" must implements interface "%s"!',
-                        $installer_class, $config_interface),
+                    sprintf('Assets autoload generator class "%s" not found!', $installer_class),
                     '\DomainException', __CLASS__, __METHOD__, __LINE__
                 );
             }
         } else {
             Error::thrower(
-                sprintf('Assets package installer class "%s" not found!', $installer_class),
-                '\DomainException', __CLASS__, __METHOD__, __LINE__
+                'Assets autoload generator is not defined!', '\Exception', __CLASS__, __METHOD__, __LINE__
             );
         }
+
     }
+
+// ---------------------------------------
+// Config validators
+// ---------------------------------------
+
+    /**
+     * @param string AssetsManager\Config\ConfiguratorInterface
+     * @return bool
+     */
+    public static function validateConfig($config_class)
+    {
+        return class_exists($config_class);
+    }
+
+    /**
+     * @param string AssetsManager\Composer\Installer\AssetsInstallerInterface
+     * @return bool
+     */
+    public static function validateInstaller($installer_class)
+    {
+        if (class_exists($installer_class)) {
+            $interfaces = class_implements($installer_class);
+            $installer_interface = Config::getInternal('assets-package-installer-interface');
+            return in_array($installer_interface, $interfaces);
+        }
+        return false;
+    }
+
+    /**
+     * @param string AssetsManager\Composer\Autoload\AutoloadGeneratorInterface
+     * @return bool
+     */
+    public static function validateAutoloadGenerator($generator_class)
+    {
+        if (class_exists($generator_class)) {
+            $parents = class_parents($generator_class);
+            $autoload_abstract = Config::getInternal('assets-autoload-generator-abstract');
+            return in_array($autoload_abstract, $parents);
+        }
+        return false;
+    }
+
+// ---------------------------------------
+// Composer\Installer\InstallerInterface
+// ---------------------------------------
 
     /**
      * {@inheritDoc}
