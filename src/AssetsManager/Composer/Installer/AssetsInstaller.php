@@ -19,9 +19,7 @@ use Composer\Composer,
 
 use AssetsManager\Config,
     AssetsManager\Error,
-    AssetsManager\Package\AbstractAssetsPackage,
-    AssetsManager\Package\Preset,
-    AssetsManager\Composer\Autoload\AssetsAutoloadGenerator,
+    AssetsManager\Dispatch,
     AssetsManager\Composer\Installer\AssetsInstallerInterface,
     AssetsManager\Composer\Util\Filesystem as AssetsFilesystem;
 
@@ -129,7 +127,7 @@ class AssetsInstaller
                 )
             );
             $this->filesystem->copy($from, $target);
-            AssetsAutoloadGenerator::registerPackage($package, $target, $this);
+            Dispatch::registerPackage($package, $target, $this);
             $this->io->write('');
         } else {
             Error::thrower(
@@ -155,7 +153,7 @@ class AssetsInstaller
                 )
             );
             $this->filesystem->remove($target);
-            AssetsAutoloadGenerator::unregisterPackage($package, $this);
+            Dispatch::unregisterPackage($package, $this);
             $this->io->write('');
         } else {
             Error::thrower(

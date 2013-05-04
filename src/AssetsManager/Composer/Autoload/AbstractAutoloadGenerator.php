@@ -108,10 +108,23 @@ abstract class AbstractAutoloadGenerator
     }
 
     /**
+     * Set the current assets database
+     * @param array
+     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
+     * @return void
+     */
+    public static function setRegistry(array $assets_db, AssetsInstallerInterface $installer = null)
+    {
+        $_this = self::getInstance($installer);
+        $_this->assets_db = $assets_db;
+    }
+
+    /**
      * Get the current assets database
+     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
      * @return array
      */
-    public static function getRegistry()
+    public static function getRegistry(AssetsInstallerInterface $installer = null)
     {
         $_this = self::getInstance($installer);
         return $_this->assets_db;
