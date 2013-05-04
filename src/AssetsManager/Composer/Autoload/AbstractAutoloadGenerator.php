@@ -47,7 +47,7 @@ abstract class AbstractAutoloadGenerator
     public static function getInstance(AssetsInstaller $installer)
     {
         if (empty(self::$_instance)) {
-            $cls = get_class($this);
+            $cls = get_called_class();
             self::$_instance = new $cls($installer);
         }
         return self::$_instance;
