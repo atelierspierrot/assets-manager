@@ -45,10 +45,11 @@ class DefaultConfig implements ConfiguratorInterface
                 'jsfiles_header' => 'Javascript',
                 'require' => 'Requirement'
             ),
-            'config-class' => null,
+            'assets-config-class' => null,
             'assets-package-class' => 'AssetsManager\Package\AssetsPackage',
             'assets-preset-class' => 'AssetsManager\Package\Preset',
             'assets-package-installer-class' => 'AssetsManager\Composer\Installer\AssetsInstaller',
+            'assets-autoload-generator-class' => 'AssetsManager\Composer\Autoload\AssetsAutoloadGenerator',
         );
     }
 
