@@ -23,7 +23,7 @@ class Error
     {
         $suffix = '';
         if (!empty($method)) {
-            $suffix .= 'thrown by ' . $method;
+            $suffix .= 'thrown by ' . $method . '()';
         } elseif (!empty($class)) {
             $suffix .= 'thrown by ' . $class;
         }

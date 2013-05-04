@@ -58,7 +58,7 @@ abstract class AbstractAutoloadGenerator
      * @param object $installer
      * @return void
      */
-    public function __construct(AssetsInstaller $installer)
+    protected function __construct(AssetsInstaller $installer)
     {
         $this->assets_installer = $installer;
         $this->assets_db = array();
