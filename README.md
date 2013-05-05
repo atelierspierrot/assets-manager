@@ -14,6 +14,51 @@ of assets autoloader*).
 
 Just like any standard Composer feature, all names or configuration variables are configurable.
 
+## How-to
+
+As for all our work, we try to follow the coding standards and naming rules most commonly in use:
+
+-   the [PEAR coding standards](http://pear.php.net/manual/en/standards.php)
+-   the [PHP Framework Interoperability Group standards](https://github.com/php-fig/fig-standards).
+
+Knowing that, all classes are named and organized in an architecture to allow the use of the
+[standard SplClassLoader](https://gist.github.com/jwage/221634).
+
+The whole package is embedded in the `AssetsManager` namespace.
+
+
+## Installation
+
+You can use this package in your work in many ways.
+
+First, you can clone the [GitHub](https://github.com/atelierspierrot/assets-manager) repository
+and include it "as is" in your poject:
+
+    https://github.com/atelierspierrot/assets-manager
+
+You can also download an [archive](https://github.com/atelierspierrot/assets-manager/downloads)
+from Github.
+
+Then, to use the package classes, you just need to register the `AssetsManager` namespace directory
+using the [SplClassLoader](https://gist.github.com/jwage/221634) or any other custom autoloader:
+
+    require_once '.../src/SplClassLoader.php'; // if required, a copy is proposed in the package
+    $classLoader = new SplClassLoader('AssetsManager', '/path/to/package/src');
+    $classLoader->register();
+
+If you are a [Composer](http://getcomposer.org/) user, just add the package to your requirements
+in your `composer.json`:
+
+    "require": {
+        ...
+        "atelierspierrot/assets-manager": "dev-master"
+    }
+
+The namespace will be automatically added to the project Composer autoloader.
+
+
+## Usage
+
 ### Schema of usage during a project lifecycle
 
     installation by Composer :
@@ -23,7 +68,7 @@ Just like any standard Composer feature, all names or configuration variables ar
             - write the `assets_db` in `vendor/assets.json`
 
     life of the project :
-        => the Assets\Loader reads the assets db and manages assets packages and presets
+        => the AssetsLoader reads the assets db and manages assets packages and presets
             - read the `assets.json`
             - find some assets packages files (realpath and web URL)
             - manage the assets presets
@@ -73,6 +118,13 @@ Below is the example of the package default configuration values:
         "assets-dir": "www",
         "assets-vendor-dir": "vendor",
         "document-root": "www",
+        "assets-config-class": "AssetsManager\\Config\\DefaultConfig",
+        "assets-package-class": "AssetsManager\\Package\\AssetsPackage",
+        "assets-preset-class": "AssetsManager\\Package\\Preset",
+        "assets-package-installer-class": "AssetsManager\\Composer\\Installer\\AssetsInstaller",
+        "assets-autoload-generator-class": "AssetsManager\\Composer\\Autoload\\AssetsAutoloadGenerator",
+
+        // this part is just for the example, no asset is embedded with the package
         "assets-presets": {
             "jquery.tablesorter": {
                 "css": "vendor_assets/blue/style.css",
@@ -82,11 +134,7 @@ Below is the example of the package default configuration values:
                 "css": "vendor_assets/jquery.highlight.css",
                 "jsfiles_footer": "vendor_assets/jquery.highlight.js"
             }
-        },
-        "assets-config-class": "AssetsManager\\Config\\DefaultConfig",
-        "assets-package-class": "AssetsManager\\Package\\AssetsPackage",
-        "assets-preset-class": "AssetsManager\\Package\\Preset",
-        "assets-package-installer-class": "AssetsManager\\Composer\\Installer\\AssetsInstaller",
+        }
     }
 
 All the paths are relative to the package `vendor` installation directory or its `assets`
@@ -109,7 +157,7 @@ this must be the base directory of your HTTP root.
 This directory must exist and is unique (*its value must be a string*). It is only considered
 for the root package.
 
-## `assets-presets`: array of arrays
+### `assets-presets`: array of arrays
 
 An assets preset is a predefined set of CSS or Javascript files to include to use a specific
 tool (*such as a jQuery plugin for instance*). Each preset can be used in a view file writing:
@@ -120,23 +168,23 @@ A preset is defined as a `key => array` pair where the `key` is the preset name 
 you will call using the `_use()` method*) and the corresponding array defines the required
 assets files to be included in the whole template.
 
-### `css`: string|array
+#### `css`: string|array
 
 The CSS entry of a preset is a list of one or more CSS files to include. This must be a list
 of existing files and file paths must be relative to the package `assets` directory.
 
-### `js`, `jsfiles_header` and `jsfiles_footer`: string|array
+#### `js`, `jsfiles_header` and `jsfiles_footer`: string|array
 
 These Javascript entries defines respectively some scripts to be included in the page header
 or footer. This must be a list of existing files and file paths must be relative to the
 package `assets` directory.
 
-### `require`: string|array
+#### `require`: string|array
 
 If your preset requires another one, use this entry to define one or more of the required
 other presets. These presets must exist in your packages.
 
-### Specific rules
+#### Specific rules
 
 You may inform if one of your preset files is already minified or packed. To do so, you can
 prefix the file path with `min:` or `pack:`. For instance:
@@ -156,3 +204,70 @@ are respectively considered as `100` and `-1`. For instance:
 
     "jsfiles_footer": [ "top:vendor/jquery.metadata.js", "bottom:min:vendor/jquery.tablesorter.min.js" ]
 
+### `assets-config-class`: string - only for **root** package
+
+This defines the class used as the default configuration values of your root package. The
+class must exist and implement the `AssetsManager\Config\ConfiguratorInterface` interface.
+
+It defaults to `AssetsManager\Config\DefaultConfig`.
+
+### `assets-package-class`: string - only for **root** package
+
+This defines the class used to handle each assets package during installation and assets
+loading. The class must exist and implement the `AssetsManager\Package\AssetsPackageInterface`
+interface.
+
+It defaults to `AssetsManager\Package\AssetsPackage`.
+
+### `assets-preset-class`: string - only for **root** package
+
+This defines the class used to handle each assets preset. The class must exist and implement
+the `AssetsManager\Package\AssetsPresetInterface` interface.
+
+It defaults to `AssetsManager\Package\Preset`.
+
+### `assets-package-installer-class`: string - only for **root** package
+
+This defines the class used for packages installation by Composer. The class must exist and
+implement the `AssetsManager\Composer\Installer\AssetsInstallerInterface` interface.
+
+It defaults to `AssetsManager\Composer\Installer\AssetsInstaller`.
+
+### `assets-autoload-generator-class`: string - only for **root** package
+
+This defines the class used for the assets database JSON file generator. The class must exist
+and extend the abstract class `AssetsManager\Composer\Autoload\AbstractAutoloadGenerator`.
+
+It defaults to `AssetsManager\Composer\Autoload\AssetsAutoloadGenerator`.
+
+
+## Development
+
+To install all PHP packages for development, just run:
+
+    ~$ composer install --dev
+
+A documentation can be generated with [Sami](https://github.com/fabpot/Sami) running:
+
+    ~$ php vendor/sami/sami/sami.php render sami.config.php
+
+The latest version of this documentation is available online at <http://docs.ateliers-pierrot.fr/assets-manager/>.
+
+
+## Author & License
+
+>    Assets Manager
+
+>    https://github.com/atelierspierrot/assets-manager
+
+>    Copyleft 2013, Pierre Cassat and contributors
+
+>    Licensed under the GPL Version 3 license.
+
+>    http://opensource.org/licenses/GPL-3.0
+
+>    ----
+
+>    Les Ateliers Pierrot - Paris, France
+
+>    <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
