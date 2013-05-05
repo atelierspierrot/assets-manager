@@ -25,7 +25,7 @@ class DefaultConfig implements ConfiguratorInterface
     {
         return array(
             // The default package type handles by the installer
-            'package-type' => array( 'library-assets', 'composer-installer' ),
+            'package-type' => array( 'library-assets' ),
             // The default package vendor directory name (related to package root dir)
             'vendor-dir' => 'vendor',
             // The default package assets directory name (related to package root dir)
