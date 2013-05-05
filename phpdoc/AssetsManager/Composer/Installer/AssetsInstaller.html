@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>AssetsManager\Composer\Installer\AssetsInstaller | Assets Manager</title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">Assets Manager</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../AssetsManager/Composer/Installer.html">AssetsManager\Composer\Installer</a>\AssetsInstaller</h1>
+    </div>
+        <div class="content">
+                <p>class    <strong>AssetsInstaller</strong>        extends <abbr title="Composer\Installer\LibraryInstaller">LibraryInstaller</abbr>        implements
+        <a href="../../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a></p>
+
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<abbr title="Composer\IO\IOInterface">IOInterface</abbr> $io, <abbr title="Composer\Composer">Composer</abbr> $composer, $type = &#039;library&#039;)
+                    <p>Initializes installer: creation of "assets-dir" directory if so.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_supports">supports</a>($packageType)
+                    <p>{@inheritDoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_isInstalled">isInstalled</a>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)
+                    <p>{@inheritDoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_install">install</a>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)
+                    <p>{@inheritDoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_update">update</a>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $initial, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $target)
+                    <p>{@inheritDoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_uninstall">uninstall</a>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)
+                    <p>{@inheritDoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getIo">getIo</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getAppBasePath">getAppBasePath</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getVendorDir">getVendorDir</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getAssetsDir">getAssetsDir</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getAssetsVendorDir">getAssetsVendorDir</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getDocumentRoot">getDocumentRoot</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getAssetsDbFilename">getAssetsDbFilename</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getAssetsInstallPath">getAssetsInstallPath</a>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_parseComposerExtra">parseComposerExtra</a>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, $package_dir)
+                    <p>Parse the <code>composer.json</code> "extra" block of a package and return its transformed data</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 45</div>
+        <code>            public            
+    <strong>__construct</strong>(<abbr title="Composer\IO\IOInterface">IOInterface</abbr> $io, <abbr title="Composer\Composer">Composer</abbr> $composer, $type = &#039;library&#039;)</code>
+    </h3>
+    <div class="details">
+        <p>Initializes installer: creation of "assets-dir" directory if so.</p>
+        <p>{@inheritDoc}</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\IO\IOInterface">IOInterface</abbr></td>
+                <td>$io</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Composer\Composer">Composer</abbr></td>
+                <td>$composer</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_supports">
+        <div class="location">at line 62</div>
+        <code>            public            
+    <strong>supports</strong>($packageType)</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritDoc}</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$packageType</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isInstalled">
+        <div class="location">at line 72</div>
+        <code>            public            
+    <strong>isInstalled</strong>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritDoc}</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr></td>
+                <td>$repo</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$package</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_install">
+        <div class="location">at line 82</div>
+        <code>            public            
+    <strong>install</strong>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritDoc}</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr></td>
+                <td>$repo</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$package</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_update">
+        <div class="location">at line 91</div>
+        <code>            public            
+    <strong>update</strong>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $initial, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $target)</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritDoc}</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr></td>
+                <td>$repo</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$initial</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$target</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_uninstall">
+        <div class="location">at line 101</div>
+        <code>            public            
+    <strong>uninstall</strong>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritDoc}</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr></td>
+                <td>$repo</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$package</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getIo">
+        <div class="location">at line 199</div>
+        <code>            public            
+    <strong>getIo</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAppBasePath">
+        <div class="location">at line 204</div>
+        <code>            public            
+    <strong>getAppBasePath</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getVendorDir">
+        <div class="location">at line 209</div>
+        <code>            public            
+    <strong>getVendorDir</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAssetsDir">
+        <div class="location">at line 215</div>
+        <code>            public            
+    <strong>getAssetsDir</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAssetsVendorDir">
+        <div class="location">at line 220</div>
+        <code>            public            
+    <strong>getAssetsVendorDir</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getDocumentRoot">
+        <div class="location">at line 225</div>
+        <code>            public            
+    <strong>getDocumentRoot</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAssetsDbFilename">
+        <div class="location">at line 230</div>
+        <code>            public            
+    <strong>getAssetsDbFilename</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAssetsInstallPath">
+        <div class="location">at line 273</div>
+        <code>            public            
+    <strong>getAssetsInstallPath</strong>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$package</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_parseComposerExtra">
+        <div class="location">at line 284</div>
+        <code>            public            void
+    <strong>parseComposerExtra</strong>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, $package_dir)</code>
+    </h3>
+    <div class="details">
+        <p>Parse the <code>composer.json</code> "extra" block of a package and return its transformed data</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$package</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$package_dir</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

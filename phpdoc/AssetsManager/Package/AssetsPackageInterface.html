@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>AssetsManager\Package\AssetsPackageInterface | Assets Manager</title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">Assets Manager</div>
+
+            <div class="type">Interface</div>
+    <h1><a href="../../AssetsManager/Package.html">AssetsManager\Package</a>\AssetsPackageInterface</h1>
+    </div>
+        <div class="content">
+                <p>interface    <strong>AssetsPackageInterface</strong></p>
+
+            <div class="description">
+            <p>AssetsPackageInterface</p>
+            <p>Any Assets Package class must implement this interface methods.</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(string $_root_dir, string $_assets_dir = null, string $_vendor_dir = null, string $_assets_vendor_dir = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;object
+                </td>
+                <td class="last">
+                    <a href="#method_createFromAssetsLoader">createFromAssetsLoader</a>(<abbr title="AssetsManager\Package\AssetsManager\Loader">Loader</abbr> $loader)
+                    <p>Create a new instance from an <code>AssetsManager\Loader</code> instance</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../AssetsManager/Package/AssetsPackageInterface.html"><abbr title="AssetsManager\Package\AssetsPackageInterface">AssetsPackageInterface</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_loadFromArray">loadFromArray</a>(array $entries)
+                    <p>Load a new package from the <code>ASSETS_DB_FILENAME</code> entry</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 28</div>
+        <code>            public            
+    <strong>__construct</strong>(string $_root_dir, string $_assets_dir = null, string $_vendor_dir = null, string $_assets_vendor_dir = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$_root_dir</td>
+                <td>The global package root directory (must exist)</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$_assets_dir</td>
+                <td>The global package assets directory (must exist in <code>$_root_dir</code>)</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$_vendor_dir</td>
+                <td>The global package vendor directory (must exist in <code>$_root_dir</code>)</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$_assets_vendor_dir</td>
+                <td>The global package assets vendor directory (must exist in <code>$_assets_dir</code>)</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_createFromAssetsLoader">
+        <div class="location">at line 35</div>
+        <code>        static    public            object
+    <strong>createFromAssetsLoader</strong>(<abbr title="AssetsManager\Package\AssetsManager\Loader">Loader</abbr> $loader)</code>
+    </h3>
+    <div class="details">
+        <p>Create a new instance from an <code>AssetsManager\Loader</code> instance</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="AssetsManager\Package\AssetsManager\Loader">Loader</abbr></td>
+                <td>$loader</td>
+                <td>AssetsManager\Loader</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>object</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_loadFromArray">
+        <div class="location">at line 43</div>
+        <code>            public            <a href="../../AssetsManager/Package/AssetsPackageInterface.html"><abbr title="AssetsManager\Package\AssetsPackageInterface">AssetsPackageInterface</abbr></a>
+    <strong>loadFromArray</strong>(array $entries)</code>
+    </h3>
+    <div class="details">
+        <p>Load a new package from the <code>ASSETS_DB_FILENAME</code> entry</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$entries</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../AssetsManager/Package/AssetsPackageInterface.html"><abbr title="AssetsManager\Package\AssetsPackageInterface">AssetsPackageInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>AssetsManager\Composer\Dispatch | Assets Manager</title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">Assets Manager</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../AssetsManager/Composer.html">AssetsManager\Composer</a>\Dispatch</h1>
+    </div>
+        <div class="content">
+                <p>class    <strong>Dispatch</strong>        implements
+        <abbr title="Composer\Installer\InstallerInterface">InstallerInterface</abbr></p>
+
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<abbr title="Composer\IO\IOInterface">IOInterface</abbr> $io, <abbr title="Composer\Composer">Composer</abbr> $composer, $type = &#039;library&#039;)
+                    <p>Initializes installer: creation of "assets-dir" directory if so.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;bool
+                </td>
+                <td class="last">
+                    <a href="#method_validateConfig">validateConfig</a>(string $config_class)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;bool
+                </td>
+                <td class="last">
+                    <a href="#method_validateInstaller">validateInstaller</a>(string $installer_class)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;bool
+                </td>
+                <td class="last">
+                    <a href="#method_validateAutoloadGenerator">validateAutoloadGenerator</a>(string $generator_class)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_supports">supports</a>($packageType)
+                    <p>{@inheritDoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_isInstalled">isInstalled</a>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)
+                    <p>{@inheritDoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_install">install</a>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)
+                    <p>{@inheritDoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_update">update</a>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $initial, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $target)
+                    <p>{@inheritDoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_uninstall">uninstall</a>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)
+                    <p>{@inheritDoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getInstallPath">getInstallPath</a>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)
+                    <p>{@inheritDoc}</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;void
+                </td>
+                <td class="last">
+                    <a href="#method_setRegistry">setRegistry</a>(array $assets_db, <a href="../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)
+                    <p>Set the current assets database</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;array
+                </td>
+                <td class="last">
+                    <a href="#method_getRegistry">getRegistry</a>(<a href="../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)
+                    <p>Get the current assets database</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;array
+                </td>
+                <td class="last">
+                    <a href="#method_setGenerator">setGenerator</a>(<abbr title="AssetsManager\Composer\callable">callable</abbr> $callable)
+                    <p>Set the generator called at object destruction</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;void
+                </td>
+                <td class="last">
+                    <a href="#method_registerPackage">registerPackage</a>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, string $target, <a href="../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)
+                    <p>Add a new installed package in the Assets database</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;void
+                </td>
+                <td class="last">
+                    <a href="#method_unregisterPackage">unregisterPackage</a>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, <a href="../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)
+                    <p>Remove an uninstalled package from the Assets database</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 41</div>
+        <code>            public            
+    <strong>__construct</strong>(<abbr title="Composer\IO\IOInterface">IOInterface</abbr> $io, <abbr title="Composer\Composer">Composer</abbr> $composer, $type = &#039;library&#039;)</code>
+    </h3>
+    <div class="details">
+        <p>Initializes installer: creation of "assets-dir" directory if so.</p>
+        <p>{@inheritDoc}</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\IO\IOInterface">IOInterface</abbr></td>
+                <td>$io</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Composer\Composer">Composer</abbr></td>
+                <td>$composer</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_validateConfig">
+        <div class="location">at line 143</div>
+        <code>        static    public            bool
+    <strong>validateConfig</strong>(string $config_class)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$config_class</td>
+                <td>AssetsManager\Config\ConfiguratorInterface</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>bool</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_validateInstaller">
+        <div class="location">at line 152</div>
+        <code>        static    public            bool
+    <strong>validateInstaller</strong>(string $installer_class)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$installer_class</td>
+                <td>AssetsManager\Composer\Installer\AssetsInstallerInterface</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>bool</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_validateAutoloadGenerator">
+        <div class="location">at line 166</div>
+        <code>        static    public            bool
+    <strong>validateAutoloadGenerator</strong>(string $generator_class)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$generator_class</td>
+                <td>AssetsManager\Composer\Autoload\AutoloadGeneratorInterface</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>bool</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_supports">
+        <div class="location">at line 183</div>
+        <code>            public            
+    <strong>supports</strong>($packageType)</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritDoc}</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$packageType</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isInstalled">
+        <div class="location">at line 191</div>
+        <code>            public            
+    <strong>isInstalled</strong>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritDoc}</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr></td>
+                <td>$repo</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$package</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_install">
+        <div class="location">at line 199</div>
+        <code>            public            
+    <strong>install</strong>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritDoc}</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr></td>
+                <td>$repo</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$package</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_update">
+        <div class="location">at line 207</div>
+        <code>            public            
+    <strong>update</strong>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $initial, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $target)</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritDoc}</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr></td>
+                <td>$repo</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$initial</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$target</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_uninstall">
+        <div class="location">at line 215</div>
+        <code>            public            
+    <strong>uninstall</strong>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritDoc}</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr></td>
+                <td>$repo</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$package</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getInstallPath">
+        <div class="location">at line 223</div>
+        <code>            public            
+    <strong>getInstallPath</strong>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)</code>
+    </h3>
+    <div class="details">
+        <p>{@inheritDoc}</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$package</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setRegistry">
+        <div class="location">at line 238</div>
+        <code>        static    public            void
+    <strong>setRegistry</strong>(array $assets_db, <a href="../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)</code>
+    </h3>
+    <div class="details">
+        <p>Set the current assets database</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$assets_db</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a></td>
+                <td>$installer</td>
+                <td>AssetsManager\Composer\Installer\AssetsInstallerInterface</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getRegistry">
+        <div class="location">at line 248</div>
+        <code>        static    public            array
+    <strong>getRegistry</strong>(<a href="../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)</code>
+    </h3>
+    <div class="details">
+        <p>Get the current assets database</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a></td>
+                <td>$installer</td>
+                <td>AssetsManager\Composer\Installer\AssetsInstallerInterface</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setGenerator">
+        <div class="location">at line 258</div>
+        <code>        static    public            array
+    <strong>setGenerator</strong>(<abbr title="AssetsManager\Composer\callable">callable</abbr> $callable)</code>
+    </h3>
+    <div class="details">
+        <p>Set the generator called at object destruction</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="AssetsManager\Composer\callable">callable</abbr></td>
+                <td>$callable</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_registerPackage">
+        <div class="location">at line 270</div>
+        <code>        static    public            void
+    <strong>registerPackage</strong>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, string $target, <a href="../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)</code>
+    </h3>
+    <div class="details">
+        <p>Add a new installed package in the Assets database</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$package</td>
+                <td>Composer\Package\PackageInterface</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$target</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a></td>
+                <td>$installer</td>
+                <td>AssetsManager\Composer\Installer\AssetsInstallerInterface</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_unregisterPackage">
+        <div class="location">at line 281</div>
+        <code>        static    public            void
+    <strong>unregisterPackage</strong>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, <a href="../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)</code>
+    </h3>
+    <div class="details">
+        <p>Remove an uninstalled package from the Assets database</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
+                <td>$package</td>
+                <td>Composer\Package\PackageInterface</td>
+            </tr>
+                    <tr>
+                <td><a href="../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a></td>
+                <td>$installer</td>
+                <td>AssetsManager\Composer\Installer\AssetsInstallerInterface</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>
