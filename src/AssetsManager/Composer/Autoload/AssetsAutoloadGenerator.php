@@ -7,9 +7,10 @@
  * Sources <https://github.com/atelierspierrot/templatengine>
  */
 
-namespace AssetsManager\Autoload;
+namespace AssetsManager\Composer\Autoload;
 
-use AssetsManager\Composer\Installer\AssetsInstaller;
+use AssetsManager\Composer\Autoload\AbstractAutoloadGenerator,
+    AssetsManager\Composer\Installer\AssetsInstaller;
 
 use Composer\Package\PackageInterface,
     Composer\Json\JsonFile;
@@ -17,33 +18,12 @@ use Composer\Package\PackageInterface,
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class AssetsAutoloadGenerator
+class AssetsAutoloadGenerator extends AbstractAutoloadGenerator
 {
 
-    protected $assets_installer;
-    protected $assets_db;
-    private static $_instance;
-
-    public static function getInstance(AssetsInstaller $installer)
-    {
-        if (empty(self::$_instance)) {
-            $cls = __CLASS__;
-            self::$_instance = new $cls($installer);
-        }
-        return self::$_instance;
-    }
-
-    public function __construct(AssetsInstaller $installer)
-    {
-        $this->assets_installer = $installer;
-        $this->assets_db = array();
-    }
-
-    public function __destruct()
-    {
-        $this->generate();
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     public function generate()
     {
         $app_base_path = $this->assets_installer->getAppBasePath();
@@ -55,35 +35,23 @@ class AssetsAutoloadGenerator
             'document-root' => $this->assets_installer->getDocumentRoot(),
             'packages' => $this->assets_db
         );
-
-        $assets_file = $this->assets_installer->getVendorDir() . '/' . $this->assets_installer->getAssetsDbFilename();
-        $this->assets_installer->getIo()->write( 
-            sprintf('Writing assets json DB to <info>%s</info>',
-                str_replace(dirname($this->assets_installer->getVendorDir()).'/', '', $assets_file)
-            )
-        );
-        try {
-            $json = new JsonFile($assets_file);
-            $json->write($full_db);
-            return $assets_file;
-        } catch(\Exception $e) {
-            if (file_put_contents($assets_file, json_encode($full_db, version_compare(PHP_VERSION, '5.4')>0 ? JSON_PRETTY_PRINT : 0))) {
-                return $assets_file;
-            }
-        }        
-        return false;
+        return $this->writeJsonDatabase($full_db);
     }
     
-    public static function registerPackage(PackageInterface $package, $target, AssetsInstaller $installer)
+    /**
+     * {@inheritDoc}
+     */
+    protected function addPackage(PackageInterface $package, $target)
     {
-        $_this = self::getInstance($installer);
-        $_this->assets_db[$package->getPrettyName()] = $_this->assets_installer->parseComposerExtra($package, $target);
+        $this->assets_db[$package->getPrettyName()] = $this->assets_installer->parseComposerExtra($package, $target);
     }
 
-    public static function unregisterPackage(PackageInterface $package, AssetsInstaller $installer)
+    /**
+     * {@inheritDoc}
+     */
+    protected function removePackage(PackageInterface $package)
     {
-        $_this = self::getInstance($installer);
-        unset($_this->assets_db[$package->getPrettyName()]);
+        unset($this->assets_db[$package->getPrettyName()]);
     }
 
 }

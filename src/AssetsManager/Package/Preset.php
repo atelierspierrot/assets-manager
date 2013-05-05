@@ -11,7 +11,10 @@ namespace AssetsManager\Package;
 
 use InvalidArgumentException;
 
-use AssetsManager\Package\AssetsPackage;
+use AssetsManager\Config,
+    AssetsManager\Package\AssetsPackage,
+    AssetsManager\Package\AssetsPackageInterface,
+    AssetsManager\Package\AssetsPresetInterface;
 
 /**
  * Preset
@@ -21,74 +24,51 @@ use AssetsManager\Package\AssetsPackage;
  *
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class Preset
+class Preset implements AssetsPresetInterface
 {
-
-    /**
-     * Composition of a `assets_presets` statement in `composer.json`
-     * @static array
-     */
-    public static $use_statements = array( 'css', 'js', 'jsfiles_footer', 'jsfiles_header', 'require' );
 
     /**
      * @var string
      */
-    protected $preset_name;
+    protected $name;
 
     /**
      * @var array
      */
-    protected $preset_data;
+    protected $data;
 
     /**
-     * @var Assets\Package
+     * @var AssetsManager\Package\AssetsPackage
      */
     protected $package;
 
     /**
-     * @param string $package_name
-     * @param object $loader Assets\Loader
-     * @throws `InvalidArgumentException` if the preset can't be found
+     * @var array
      */
-    public function __construct($preset_name, AssetsPackage $package)
-    {
-        $this->package = $package;
-        $this->preset_name = $preset_name;
+    protected $_statements;
 
-        $data = $this->_findPresetData();
-        if (!empty($data)) {
-            $this->cluster = Cluster::newClusterFromAssetsLoader($this->assets_loader);
-            $this->cluster->loadClusterFromArray(
-                $this->_findPresetPackageData()
-            );
-            $this->preset_data = $data;
-        } else {
-            throw new InvalidArgumentException(
-                sprintf('Unknown preset "%s" !', $this->preset_name)
-            );
-        }
+    /**
+     * @param string $package_name
+     * @param array $package_data
+     * @param object $package AssetsManager\Package\AssetsPackage
+     */
+    public function __construct($preset_name, array $preset_data, AssetsPackageInterface $package)
+    {
+        $this
+            ->setName($preset_name)
+            ->setData($preset_data)
+            ->setPackage($package);
     }
 
     /**
      * Parse and load an assets file in a template object
      *
      * @param string $path
-     * @param object $object The template object to work on
      * @return void
      */
-    public function parse($path, AbstractTemplateObject $object)
+    public function findInPackage($path)
     {
-        $package = $this->_findPresetPackageName();
-        if (substr($path, 0, strlen('min:'))=='min:') {
-            $file_path = $this->assets_loader->findInPackage(substr($path, strlen('min:')), $package);
-            $object->addMinified($file_path);
-        } elseif (substr($path, 0, strlen('pack:'))=='pack:') {
-            $file_path = $this->assets_loader->findInPackage(substr($path, strlen('pack:')), $package);
-            $object->addMinified($file_path);
-        } else {
-            $file_path = $this->assets_loader->findInPackage($path, $package);
-            $object->add($file_path);
-        }
+        return $this->getPackage()->findInPackage($path);
     }
 
 	/**
@@ -99,66 +79,178 @@ class Preset
 	 */
 	public function load()
 	{
-        foreach ($this->preset_data as $type=>$data) {
-            if ('css'===$type) {
-                foreach ($data as $path) {
-                    $this->parse($path, $this->template_engine->getTemplateObject('CssFile'));
+	    if (!empty($this->_statements)) return;
+
+	    foreach ($this->data as $type=>$item) {
+	        if (!is_array($item)) $item = array( $item );
+	        $use_statements = Config::get('use-statements');
+	        $adapter_name = isset($use_statements[$type]) ? $use_statements[$type] : null;
+	        if (!empty($adapter_name)) {
+	            $cls_name = 'AssetsManager\Package\PresetAdapter\\'.$adapter_name;
+                if (@class_exists($cls_name)) {
+                    $interfaces = class_implements($cls_name);
+                    $config_interface = Config::getInternal('assets-preset-adapter-interface');
+                    if (in_array($config_interface, $interfaces)) {
+                        if (!isset($this->_statements[$type])) {
+                            $this->_statements[$type] = array();
+                        }
+                        foreach ($item as $item_ctt) {
+                            if (!is_array($item_ctt)) $item_ctt = array( $item_ctt );
+                            $statement = new $cls_name($item_ctt, $this);
+                            $statement->parse();
+                            $this->_statements[$type][] = $statement;
+                        }
+                    } else {
+                        throw new \DomainException(
+                            sprintf('Preset statement class "%s" must implements interface "%s"!',
+                                $cls_name, $config_interface)
+                        );
+                    }
+                } else {
+                    throw new \DomainException(
+                        sprintf('Preset statement class "%s" not found!', $cls_name)
+                    );
                 }
-            } elseif ('jsfiles_header'===$type) {
-                foreach ($data as $path) {
-                    $this->parse($path, $this->template_engine->getTemplateObject('JavascriptFile', 'jsfiles_header'));
-                }
-            } elseif ('jsfiles_footer'===$type) {
-                foreach ($data as $path) {
-                    $this->parse($path, $this->template_engine->getTemplateObject('JavascriptFile', 'jsfiles_footer'));
-                }
-            }
-        }
+	        } else {
+	            throw new \LogicException(
+	                sprintf('Unknown preset statement type "%s" in preset "%s"!', $type, $this->getName())
+	            );
+	        }
+	    }
 	}
 
     /**
-     * Find the data array defining a preset from the object `$preset_name`
-     *
-     * @return array|null
+     * @return string
      */
-    protected function _findPresetData()
+    public function __toHtml()
     {
-        foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
-            if (!empty($config['assets_presets']) && array_key_exists($this->preset_name, $config['assets_presets'])) {
-                return $config['assets_presets'][$this->preset_name];
+        $str = '';
+        foreach ($this->getOrganizedStatements() as $type=>$statements) {
+            foreach ($statements as $statement) {
+                $str .= $statement->__toHtml();
             }
         }
-        return null;
+        return $str;
+    }
+
+// -------------------------
+// Setters / Getters
+// -------------------------
+
+    /**
+     * @param string $name
+     * @return self
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
     }
 
     /**
-     * Find the data array defining the package of a preset from the object `$preset_name`
-     *
-     * @return array|null
+     * @return string
      */
-    protected function _findPresetPackageData()
+    public function getName()
     {
-        foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
-            if (!empty($config['assets_presets']) && array_key_exists($this->preset_name, $config['assets_presets'])) {
-                return $config;
-            }
-        }
-        return null;
+        return $this->name;
     }
 
     /**
-     * Find the name of the package of a preset from the object `$preset_name`
-     *
-     * @return string|null
+     * @param array $data
+     * @return self
      */
-    protected function _findPresetPackageName()
+    public function setData(array $data)
     {
-        foreach ($this->assets_loader->getAssetsDb() as $package=>$config) {
-            if (!empty($config['assets_presets']) && array_key_exists($this->preset_name, $config['assets_presets'])) {
-                return $package;
+        $this->data = $data;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param object $package AssetsManager\Package\AssetsPackage
+     * @return self
+     */
+    public function setPackage(AssetsPackage $package)
+    {
+        $this->package = $package;
+        return $this;
+    }
+
+    /**
+     * @return object AssetsManager\Package\AssetsPackage
+     */
+    public function getPackage()
+    {
+        return $this->package;
+    }
+
+    public function getStatements()
+    {
+        $this->load();
+        return $this->_statements;
+    }
+
+    public function getStatement($name)
+    {
+        $this->load();
+        return isset($this->_statements[$name]) ? $this->_statements[$name] : null;
+    }
+
+// -------------------------
+// Statements management
+// -------------------------
+
+    public function getOrganizedStatements()
+    {
+        $organized_statements = array();
+	    if (empty($this->_statements)) $this->load();
+        $statements = $this->_statements;
+
+        if (!empty($statements['require'])) {
+            foreach ($statements['require'] as $statement) {
+                $data = $statement->getData();
+                foreach ($statement->getData() as $type=>$stack) {
+                    if (!isset($statements[$type])) {
+                        $statements[$type] = array();
+                    }
+                    $statements[$type] = array_merge($statements[$type], $stack);
+                }
+            }
+            unset($statements['require']);
+        }
+        
+        foreach ($statements as $type=>$statement_stack) {
+            if (!isset($organized_statements[$type])) {
+                $organized_statements[$type] = array();
+            }
+            foreach ($statement_stack as $statement) {
+                $organized_statements[$type][] = $statement;
             }
         }
-        return null;
+
+        foreach ($organized_statements as $type=>$stacks) {
+            $organized_statements[$type] = $this->getOrderedStatements($stacks);
+        }
+
+        return $organized_statements;
+    }
+
+    public static function getOrderedStatements(array $statements)
+    {
+        $ordered = array();
+        foreach ($statements as $index=>$statement) {
+            $data = $statement->getData();
+            $ordered[$index] = $data['position'];
+        }
+        array_multisort($ordered, SORT_DESC, SORT_NUMERIC, $statements);
+        return $statements;
     }
 
 }

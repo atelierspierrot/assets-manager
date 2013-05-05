@@ -14,18 +14,14 @@ use InvalidArgumentException;
 use Library\Helper\Directory as DirectoryHelper;
 
 use AssetsManager\Loader as AssetsLoader,
+    AssetsManager\Package\AssetsPackageInterface,
     AssetsManager\Package\AbstractAssetsPackage,
     AssetsManager\Package\Preset;
 
 /**
- * Cluster
- *
- * This class handles dependencies packages assets from a global root directory.
- *
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class AssetsInstaller
-    extends AbstractAssetsPackage
+class AssetsPackage extends AbstractAssetsPackage implements AssetsPackageInterface
 {
 
     /**
@@ -59,7 +55,7 @@ class AssetsInstaller
     protected $assets_presets;
 
     /**
-     * Cluster contruction
+     * Contruction
      *
      * @param string $_root_dir The global package root directory (must exist)
      * @param string $_assets_dir The global package assets directory (must exist in `$_root_dir`)
@@ -67,27 +63,25 @@ class AssetsInstaller
      * @param string $_assets_vendor_dir The global package assets vendor directory (must exist in `$_assets_dir`)
      */
     public function __construct(
-        $_root_dir,
-        $_assets_dir = AbstractAssetsPackage::DEFAULT_ASSETS_DIR,
-        $_vendor_dir = AbstractAssetsPackage::DEFAULT_VENDOR_DIR,
-        $_assets_vendor_dir = AbstractAssetsPackage::DEFAULT_VENDOR_DIR
+        $_root_dir, $_assets_dir = null, $_vendor_dir = null, $_assets_vendor_dir = null
     ) {
         $this
             ->setRootDirectory($_root_dir)
-            ->setAssetsDirectory($_assets_dir)
-            ->setVendorDirectory($_vendor_dir)
-            ->setAssetsVendorDirectory($_assets_vendor_dir)
+            ->setAssetsDirectory(!is_null($_assets_dir) ? $_assets_dir : Config::get('assets-dir'))
+            ->setVendorDirectory(!is_null($_vendor_dir) ? $_vendor_dir : Config::get('vendor-dir'))
+            ->setAssetsVendorDirectory(!is_null($_assets_vendor_dir) ? $_assets_vendor_dir : Config::get('assets-vendor-dir'))
             ->reset()
             ;
     }
 
     /**
-     * Create a new Cluster object from an `Assets\Loader` instance
+     * Create a new instance from an `AssetsManager\Loader` instance
      * @return object
      */
-    public static function newAssetsPackageFromAssetsLoader(AssetsLoader $loader)
+    public static function createFromAssetsLoader(AssetsLoader $loader)
     {
-        return new AssetsPackage(
+        $_class = get_called_class();
+        return new $_class(
             $loader->getRootDirectory(),
             $loader->getAssetsDirectory(),
             $loader->getVendorDirectory(),
@@ -96,7 +90,7 @@ class AssetsInstaller
     }
 
     /**
-     * Reset the cluster to empty values (except for global package)
+     * Reset the package to empty values (except for global package)
      *
      * @return void
      */
@@ -110,7 +104,7 @@ class AssetsInstaller
     }
 
     /**
-     * Reset the cluster when clone
+     * Reset the package when clone
      *
      * @return void
      */
@@ -194,7 +188,7 @@ class AssetsInstaller
                 $this->assets_path = $relative_path;
             } else {
                 throw new InvalidArgumentException(
-                    sprintf('Assets directory "%s" for cluster "%s" not found !', $path, $this->getName())
+                    sprintf('Assets directory "%s" for package "%s" not found !', $path, $this->getName())
                 );
             }
         }
@@ -267,7 +261,7 @@ class AssetsInstaller
 // -------------------------
 
     /**
-     * Get all necessary arranged cluster infos as an array
+     * Get all necessary arranged package infos as an array
      *
      * This is the data stored in the `Loader\Assets::ASSETS_DB_FILENAME`.
      *
@@ -275,18 +269,18 @@ class AssetsInstaller
      */    
     public function getArray()
     {
-        $cluster = array(
+        $package = array(
             'name'=>$this->getName(),
             'version'=>$this->getVersion(),
             'relative_path'=>$this->getRelativePath(),
             'assets_path'=>$this->getAssetsPath(),
             'assets_presets'=>$this->getAssetsPresets(),
         );
-        return $cluster;
+        return $package;
     }
 
     /**
-     * Load a new cluster from the `Loader\Assets::ASSETS_DB_FILENAME` entry
+     * Load a new package from the `ASSETS_DB_FILENAME` entry
      *
      * @param array
      * @return self
@@ -298,7 +292,9 @@ class AssetsInstaller
                 case 'name': $this->setName($val); break;
                 case 'version': $this->setVersion($val); break;
                 case 'relative_path': $this->setRelativePath($val); break;
-                case 'assets_path': $this->setAssetsPath($val); break;
+                case 'assets_path':
+                case 'path':
+                    $this->setAssetsPath($val); break;
                 case 'assets_presets': $this->setAssetsPresets($val); break;
             }
         }
@@ -306,64 +302,16 @@ class AssetsInstaller
      }
 
     /**
-     * Parse the `composer.json` "extra" block of a package and return its transformed data
+     * Find an asset file in the filesystem of a specific package
      *
-     * @param array $package The package, Composer\Package\PackageInterface
-     * @param object $installer Assets\ComposerInstaller
-     * @param bool $main_package Is this the global package
-     * @return void
+     * @param string $filename The asset filename to find
+     * @return string|null The web path of the asset if found, `null` otherwise
      */
-    public function parseComposerExtra(\Composer\Package\PackageInterface $package, \Assets\ComposerInstaller $installer, $main_package = false)
+    public function findInPackage($filename)
     {
-        $this->reset();
-        $extra = $package->getExtra();
-        if (!empty($extra) && isset($extra['assets'])) {
-            $this->setVersion($package->getVersion());
-            $this->setName($package->getPrettyName());
-            $package_dir = $main_package ? '' : 
-                str_replace(
-                    DirectoryHelper::slashDirname($this->getRootDirectory()) .
-                    DirectoryHelper::slashDirname($this->getAssetsDirectory()) .
-                    DirectoryHelper::slashDirname($this->getAssetsVendorDirectory()),
-                    '',
-                    $installer->getInstallPath($package)
-                );
-            $this->setRelativePath($package_dir);
-            $this->setAssetsPath($main_package ? '' : $extra['assets']);
-            if (isset($extra['views'])) {
-                $this->setViewsPaths(
-                    is_array($extra['views']) ? $extra['views'] : array($extra['views']),
-                    $main_package ? null : 'vendor'
-                );
-            }
-            if (isset($extra['views_functions'])) {
-                $this->setViewsFunctionsPaths(
-                    is_array($extra['views_functions']) ? $extra['views_functions'] : array($extra['views_functions']),
-                    $main_package ? null : 'vendor'
-                );
-            }
-            if (isset($extra['assets_presets'])) {
-                foreach ($extra['assets_presets'] as $index=>$item) {
-                    $use_item = array();
-                    foreach (Preset::$use_statements as $statement) {
-                        if (isset($item[$statement])) {
-                            $item_statement = is_array($item[$statement]) ?
-                                $item[$statement] : array($item[$statement]);
-                            $use_item[$statement] = array();
-                            foreach ($item_statement as $path) {
-                                $use_item[$statement][] = $path;
-                            }
-                        }
-                        if (!empty($use_item)) {
-                            $this->addAssetsPreset($index, $use_item);
-                        }
-                    }
-                }
-            }
-        }
-        return $this->getArray();
+        return AssetsLoader::findInPackage($filename, $this->getName());
     }
-    
+
 }
 
 // Endfile

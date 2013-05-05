@@ -13,8 +13,6 @@ use InvalidArgumentException;
 
 use Library\Helper\Directory as DirectoryHelper;
 
-@define('_SERVER_DOCROOT', $_SERVER['DOCUMENT_ROOT']);
-
 /**
  * Class to manage assets paths
  *
@@ -41,36 +39,6 @@ use Library\Helper\Directory as DirectoryHelper;
  */
 abstract class AbstractAssetsPackage
 {
-
-    /**
-     * The default package type handles by the installer
-     */
-    const DEFAULT_PACKAGE_TYPE = 'library-assets';
-
-    /**
-     * The default package vendor directory name (related to package root dir)
-     */
-    const DEFAULT_VENDOR_DIR = 'vendor';
-
-    /**
-     * The default package assets directory name (related to package root dir)
-     */
-    const DEFAULT_ASSETS_DIR = 'www';
-
-    /**
-     * The default third-party packages'assets directory name (related to package assets dir)
-     */
-    const DEFAULT_ASSETS_VENDOR_DIR = 'vendor';
-
-    /**
-     * The default package root directory is set on `$_SERVER['DOCUMENT_ROOT']`
-     */
-    const DEFAULT_DOCUMENT_ROOT = _SERVER_DOCROOT;
-
-    /**
-     * The assets database file created on install
-     */
-    const ASSETS_DB_FILENAME = 'assets.json';
 
     /**
      * Project root directory (absolute - no trailing slash)
@@ -105,9 +73,11 @@ abstract class AbstractAssetsPackage
      * @param string $assets_dir
      * @param string $vendor_dir
      * @param string $assets_vendor_dir
+     * @param string $config_class
      */
-    public function __construct($root_dir = null, $assets_dir = null, $vendor_dir = null, $assets_vendor_dir = null)
-    {
+    public function __construct(
+        $root_dir = null, $assets_dir = null, $vendor_dir = null, $assets_vendor_dir = null
+    ) {
         if (!empty($root_dir)) {
             $this->setRootDirectory($root_dir);
             if (!empty($assets_dir)) $this->setAssetsDirectory($assets_dir);
@@ -253,6 +223,10 @@ abstract class AbstractAssetsPackage
      */
     public function getFullPath($path, $type = null, $out = false)
     {
+        if (@file_exists($path)) {
+            return realpath($path);
+        }
+        
         $base = DirectoryHelper::slashDirname($this->getRootDirectory());
         if (in_array($type, array('asset', 'assets'))) {
             $base .= DirectoryHelper::slashDirname($this->getAssetsDirectory());
