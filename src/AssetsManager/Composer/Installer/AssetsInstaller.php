@@ -234,8 +234,7 @@ class AssetsInstaller
 
     protected function getPackageAssetsDir(PackageInterface $package)
     {
-        $extra = $package->getExtra();
-        return isset($extra['assets-dir']) ? $extra['assets-dir'] : Config::get('assets-dir');
+        return $this->guessAssetsDir($package);
     }
 
     protected function getPackageAssetsBasePath(PackageInterface $package)
