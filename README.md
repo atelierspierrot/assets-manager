@@ -6,11 +6,11 @@ A custom Composer installer to manage "library-assets" package type.
 
 ## How it works?
 
-The goal of this extension is to manage some packages of assets (*javascript libraries, CSS
-frameworks or views*) just like Composer standardly manages PHP packages. Assets packages
+The goal of this extension is to manage some packages of assets (javascript libraries, CSS
+frameworks or views) just like Composer standardly manages PHP packages. Assets packages
 are downloaded and stored in a specific `vendor` directory and an internal system allows
-you to retrieve and load the assets packages files just as you do with PHP classes (*a kind
-of assets autoloader*).
+you to retrieve and load the assets packages files just as you do with PHP classes (a kind
+of assets autoloader).
 
 Just like any standard Composer feature, all names or configuration variables are configurable.
 
@@ -62,16 +62,16 @@ The namespace will be automatically added to the project Composer autoloader.
 ### Schema of usage during a project lifecycle
 
     installation by Composer :
-        => the AssetsInstaller install the "library-assets" packages
-            - move the assets in `www/vendor/`
-            - add an entry to the `assets_db`
-            - write the `assets_db` in `vendor/assets.json`
+        => the AssetsInstaller installs the "library-assets" packages
+            - it moves the assets in a specific `www/vendor/` directory
+            - it adds an entry to the internal `assets_db` table
+            - finally, it writes the internal `assets_db` table in file `vendor/assets.json`
 
     life of the project :
         => the AssetsLoader reads the assets db and manages assets packages and presets
-            - read the `assets.json`
-            - find some assets packages files (realpath and web URL)
-            - manage the assets presets
+            - it reads the `assets.json` db file
+            - it finds some assets packages files (realpath and web URL)
+            - it manages the assets presets
 
 
 ### Assets `vendor`
@@ -92,7 +92,7 @@ PHP autoloader:
     | ------- autoload.php
     | www/
 
-The Composer extension will copy the assets of your dependencies in a `www/vendor/` directory
+The AssetsManager Composer extension will copy the assets of your dependencies in a `www/vendor/` directory
 and build a JSON map in the original `vendor/`:
 
     | composer.json
@@ -106,8 +106,8 @@ and build a JSON map in the original `vendor/`:
 ### How to inform the extension about your package assets
 
 The extension handles any package of type `library-assets`, which will be considered as a
-standard library if you don't use the extension (and will be installed as any other classic
-library package).
+standard library by Composer if you don't use the extension (and will be installed as any
+other classic library package).
 
 
 ## Configuration
@@ -143,30 +143,36 @@ installation directory.
 ### `assets-dir`: string
 
 This defines the relative path of your assets in the package. This directory must exist
-and must be unique (*its value must be a string*).
+and must be unique (its value must be a string).
 
 ### `assets-vendor-dir`: string
 
-This defines the relative path of your packages'assets in the `assets` directory above.
-This directory will be created if it doesn't exist and must be unique (*its value must be a string*).
+This defines the relative path of your packages' assets from the `assets` directory above.
+This directory will be created if it doesn't exist and must be unique (its value must be a string).
+This value is finally concatenated to the `assets-dir` to build the relative final directory
+path of your dependencies assets.
 
-### `document-root`: string - only for **root** package
+*For instance, if your `assets-dir` is set to "www" and your `assets-vendor-dir` is set to
+"assets_vendor", the final place of your dependencies assets will be "www/assets_vendor/"
+related to your project root directory.*
+
+### `document-root`: string - only for root package
 
 This defines the relative path used to build the URLs to include your package's assets ; 
 this must be the base directory of your HTTP root.
-This directory must exist and is unique (*its value must be a string*). It is only considered
+This directory must exist and is unique (its value must be a string). It is only considered
 for the root package.
 
 ### `assets-presets`: array of arrays
 
 An assets preset is a predefined set of CSS or Javascript files to include to use a specific
-tool (*such as a jQuery plugin for instance*). Each preset can be used in a view file writing:
+tool (such as a jQuery plugin for instance). Each preset can be used in a view file writing:
 
-    _use( preset name );
+    TemplateEngine::getInstance()->useAssetsPreset ( preset name );
 
-A preset is defined as a `key => array` pair where the `key` is the preset name (*the name
-you will call using the `_use()` method*) and the corresponding array defines the required
-assets files to be included in the whole template.
+A preset is defined as a set of `key => array` pairs where the `key` is the preset name 
+(the name you will call using the `useAssetsPreset()` method) and the corresponding array
+defines the required assets files to be included in the whole template.
 
 #### `css`: string|array
 
@@ -182,7 +188,7 @@ package `assets` directory.
 #### `require`: string|array
 
 If your preset requires another one, use this entry to define one or more of the required
-other presets. These presets must exist in your packages.
+other presets. These presets must exist in your package or its dependencies.
 
 #### Specific rules
 
@@ -191,27 +197,27 @@ prefix the file path with `min:` or `pack:`. For instance:
 
     "jsfiles_footer": [ "vendor/jquery.metadata.js", "min:vendor/jquery.tablesorter.min.js" ]
 
-This way, your can separate already minified files from others.
+This way, the library can separate already minified files from others.
 
 You can also define a position for your asset file in the global assets files stack. This
 can be useful for instance if your preset defines two jQuery plugins, A & B, and if B requires
 A to work. In this case, you may define a higher position for A than for B and be sure that
 the A files will be loaded before the B ones.
 
-Position is an integer in range `[ -1 ; 100 ]` where `100` are the top files of the stack 
-and `-1` the lasts. You can simply write `top` or `bottom` if you don't really mind, which 
+Position is an integer in range `[ -1 ; 100 ]` where `100` is the top file of the stack 
+and `-1` the last one. You can simply write `top` or `bottom` if you don't really mind, which 
 are respectively considered as `100` and `-1`. For instance:
 
     "jsfiles_footer": [ "top:vendor/jquery.metadata.js", "bottom:min:vendor/jquery.tablesorter.min.js" ]
 
-### `assets-config-class`: string - only for **root** package
+### `assets-config-class`: string - only for root package
 
 This defines the class used as the default configuration values of your root package. The
 class must exist and implement the `AssetsManager\Config\ConfiguratorInterface` interface.
 
 It defaults to `AssetsManager\Config\DefaultConfig`.
 
-### `assets-package-class`: string - only for **root** package
+### `assets-package-class`: string - only for root package
 
 This defines the class used to handle each assets package during installation and assets
 loading. The class must exist and implement the `AssetsManager\Package\AssetsPackageInterface`
@@ -219,21 +225,21 @@ interface.
 
 It defaults to `AssetsManager\Package\AssetsPackage`.
 
-### `assets-preset-class`: string - only for **root** package
+### `assets-preset-class`: string - only for root package
 
 This defines the class used to handle each assets preset. The class must exist and implement
 the `AssetsManager\Package\AssetsPresetInterface` interface.
 
 It defaults to `AssetsManager\Package\Preset`.
 
-### `assets-package-installer-class`: string - only for **root** package
+### `assets-package-installer-class`: string - only for root package
 
 This defines the class used for packages installation by Composer. The class must exist and
 implement the `AssetsManager\Composer\Installer\AssetsInstallerInterface` interface.
 
 It defaults to `AssetsManager\Composer\Installer\AssetsInstaller`.
 
-### `assets-autoload-generator-class`: string - only for **root** package
+### `assets-autoload-generator-class`: string - only for root package
 
 This defines the class used for the assets database JSON file generator. The class must exist
 and extend the abstract class `AssetsManager\Composer\Autoload\AbstractAutoloadGenerator`.
