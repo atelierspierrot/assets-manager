@@ -3,7 +3,7 @@
     "type": "composer-installer",
     "description": "A custom Composer installer to manage \"library-assets\" package type",
     "keywords": [ "composer", "package", "assets", "extension" ],
-    "homepage": "https://github.com/atelierspierrot/assets-manager",
+    "homepage": "http://github.com/atelierspierrot/assets-manager",
     "version": "0.0.3-dev",
     "license": "GPL-3.0",
     "authors": [
