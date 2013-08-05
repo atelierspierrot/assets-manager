@@ -90,9 +90,9 @@ class AssetsInstaller
      */
     public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
     {
-        $this->removeAssets($package);
-        parent::update($repo, $package);
-        $this->installAssets($package);
+        $this->removeAssets($initial);
+        parent::update($repo, $initial, $target);
+        $this->installAssets($target);
     }
 
     /**
