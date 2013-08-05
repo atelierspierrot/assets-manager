@@ -90,9 +90,9 @@ class AssetsInstaller
      */
     public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
     {
-        $this->removeAssets($package);
-        parent::update($repo, $package);
-        $this->installAssets($package);
+        $this->removeAssets($initial);
+        parent::update($repo, $initial, $target);
+        $this->installAssets($target);
     }
 
     /**
@@ -234,8 +234,7 @@ class AssetsInstaller
 
     protected function getPackageAssetsDir(PackageInterface $package)
     {
-        $extra = $package->getExtra();
-        return isset($extra['assets-dir']) ? $extra['assets-dir'] : Config::get('assets-dir');
+        return $this->guessAssetsDir($package);
     }
 
     protected function getPackageAssetsBasePath(PackageInterface $package)
