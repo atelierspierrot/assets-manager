@@ -172,7 +172,7 @@ abstract class AbstractAutoloadGenerator
     public static function unregisterPackage(PackageInterface $package, AssetsInstallerInterface $installer = null)
     {
         $_this = self::getInstance($installer);
-        $this->removePackage($package);
+        $_this->removePackage($package);
     }
 
 // --------------------------
