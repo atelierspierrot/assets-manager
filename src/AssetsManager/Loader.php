@@ -249,7 +249,7 @@ class Loader extends AbstractAssetsPackage
     public function setAssetsDb(array $db)
     {
         foreach ($db as $package_name=>$package) {
-            if (empty($package['path'])) {
+            if (empty($package['path']) && isset($package['relative_path'])) {
                 $db[$package_name]['path'] = DirectoryHelper::slashDirname(
                     DirectoryHelper::slashDirname($this->getRootDirectory()) .
                     DirectoryHelper::slashDirname($this->getAssetsDirectory()) .
