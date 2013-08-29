@@ -158,7 +158,8 @@ for the root package.
 An assets preset is a predefined set of CSS or Javascript files to include to use a specific
 tool (such as a jQuery plugin for instance). Each preset can be used in a view file writing:
 
-    TemplateEngine::getInstance()->useAssetsPreset ( preset name );
+        $preset = $assets_loader->getPreset( preset name );
+	    $preset->load();
 
 A preset is defined as a set of `key => array` pairs where the `key` is the preset name 
 (the name you will call using the `useAssetsPreset()` method) and the corresponding array
