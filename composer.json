@@ -4,19 +4,17 @@
     "description": "A custom Composer installer to manage \"library-assets\" package type",
     "keywords": [ "composer", "package", "assets", "extension" ],
     "homepage": "http://github.com/atelierspierrot/assets-manager",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "license": "GPL-3.0",
-    "authors": [
-        {
-            "name": "Les Ateliers Pierrot & contributors",
-            "email": "contact@ateliers-pierrot.fr",
-            "homepage": "http://www.ateliers-pierrot.fr/"
-        },{
-            "name": "Pierre Cassat",
-            "email": "piero.wbmstr@gmail.com",
-            "homepage": "https://github.com/PieroWbmstr"
-        }
-    ],
+    "authors": [{
+        "name": "Les Ateliers Pierrot & contributors",
+        "email": "contact@ateliers-pierrot.fr",
+        "homepage": "http://www.ateliers-pierrot.fr/"
+    },{
+        "name": "Pierre Cassat",
+        "email": "piero.wbmstr@gmail.com",
+        "homepage": "https://github.com/PieroWbmstr"
+    }],
     "require": {
         "php": ">=5.3.0",
         "atelierspierrot/patterns": "dev-master",

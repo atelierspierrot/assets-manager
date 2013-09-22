@@ -1,7 +1,18 @@
-# Hack to allow keeping an empty directory
+########################################################################################
+#
+# Common ".gitignore" of Les Ateliers Pierrot's packages
+#
+# Copyleft (c) 2013 Pierre Cassat and contributors
+# <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+# License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
+# Sources <http://github.com/atelierspierrot/atelierspierrot/common/gitignore.txt>
+#
+########################################################################################
+
+### Hack to allow keeping an empty directory
 !.gitkeep
 
-# OS & software files
+### OS & software files
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -15,35 +26,36 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 
-# Les Ateliers specifics:
+# IDE files
+# to be commented to include them in a project
+.project
+.buildpath
+.idea/*
+
+### Les Ateliers specifics
 
 # the composer lock file
 composer.lock
 
+# any "tmp*" file or dir anywhere
+*tmp*
+
 # user defined files
 user/*
+*/user/*
 
 # the external packages installed by Composer, Template Engine or others
 vendor/*
-bin/vendor/*
-data/vendor/*
-src/vendor/*
-www/vendor/*
+*/vendor/*
+
+### Les Ateliers branches
 
 # the documentation, that is NOT under version-control by default
 # this may be commented on the "dev" branch
 #phpdoc/*
 
-# for development ...
+# for developments ...
 # this may be commented on the "wip" branch
 dev/*
 build/*
-
-# any "tmp*" file or dir
-tmp*
-bin/tmp*
-demo/tmp*
-data/tmp*
-user/tmp*
-src/tmp*
-www/tmp*
+src.*/*

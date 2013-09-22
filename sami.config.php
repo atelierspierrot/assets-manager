@@ -2,7 +2,7 @@
 /**
  * Application documentation builder
  *
- * See https://github.com/fabpot/Sami
+ * See http://github.com/fabpot/Sami
  *
  * To build doc, run:
  *     $ php vendor/sami/sami/sami.php render sami.config.php
@@ -18,6 +18,7 @@ use Symfony\Component\Finder\Finder;
 $iterator = Finder::create()
     ->files()
     ->name('*.php')
+    ->notName('SplClassLoader.php')
     ->in(__DIR__.'/src')
 ;
 
