@@ -62,6 +62,7 @@ class AssetsInstaller
     public function supports($packageType)
     {
         $types = Config::get('package-type');
+var_export($types);
         $types = is_array($types) ? $types : array($types);
         return in_array($packageType, $types);
     }
