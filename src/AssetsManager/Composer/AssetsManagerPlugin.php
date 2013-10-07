@@ -19,7 +19,7 @@ use Composer\Composer,
 use AssetsManager\Composer\Dispatch;
 
 class AssetsManagerPlugin
-    implements PluginInterface, EventSubscriberInterface
+    implements PluginInterface
 {
 
     public function activate(Composer $composer, IOInterface $io)
