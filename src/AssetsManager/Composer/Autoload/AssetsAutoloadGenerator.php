@@ -27,9 +27,12 @@ class AssetsAutoloadGenerator
      */
     public function generate()
     {
-        if (empty($this->assets_db)) {
-            $assets_db = $this->readJsonDatabase();
-            $this->assets_db = $assets_db['packages'];
+        $assets_db = $this->readJsonDatabase();
+        if (!empty($assets_db) && isset($assets_db['packages'])) {
+            if (empty($this->assets_db)) {
+                $this->assets_db = array();
+            }
+            $this->assets_db = array_merge($this->assets_db, $assets_db['packages']);
         }    
         $app_base_path = $this->assets_installer->getAppBasePath();
         $assets_dir = str_replace($app_base_path . '/', '', $this->assets_installer->getAssetsDir());

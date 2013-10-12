@@ -81,6 +81,65 @@ standard library by Composer if you don't use the extension (and will be install
 other classic library package).
 
 
+## Usage of the assets manager
+
+### The assets loader object
+
+The `\AssetsManager\Loader` class is designed to manage a set of assets based on a table of 
+installed packages.
+
+The class is based on three paths:
+
+- `base_dir`: the package root directory (must be the directory containing the `composer.json` file)
+- `assets_dir`: the package asssets directory related to `base_dir`
+- `document_root`: the path in the filesystem of the web assets root directory ; this is used
+to build all related assets paths to use in HTTP.
+
+For these three paths, their defaults values are defined on a default package structure:
+
+    package_name/
+    |----------- src/
+    |----------- www/
+
+    $loader->base_dir = realpath(package_name)
+    $loader->assets_dir = www
+    $loader->document_root = www or the server DOCUMENT_ROOT
+
+NOTE - These paths are stored in the object without the trailing slash.
+
+### Usage example
+
+Once the install process is done, you can access any assets package or load a package's preset
+using the `\AssetsManager\Loader` object:
+
+    $loader = \AssetsManager\Loader::getInstance(
+        __DIR__.'/..',      // this is the project root directory
+        'www',              // this is your assets root directory
+        __DIR__             // this is your web document roots
+    );
+
+    // to get a package
+    $package = $loader->getPackage( package name );
+
+    // to get a preset
+    $preset = $loader->getPreset( preset name );
+    // to write preset dependencies
+    echo $preset->__toHtml();
+
+As described in the "configuration" section below, calling a preset will automatically load
+its internal files requirements (some Javascript files for instance) and its dependencies to
+other presets or files. The result of the `__toHtml()` method will then be a string to include
+the files and scripts definitions, fully functional and ready to be written in your HTML.
+
+For instance, if you installed the [Gentleface sprites](https://github.com/atelierspierrot/gentleface-sprites)
+package in its `assets-installer` version you will have:
+
+    // calling ...
+    echo $loader->getPreset('gentleface-sprites')->__toHtml();
+    // will render something like:
+    <link src="vendor/atelierspierrot/gentleface-sprites/gentleface-sprites.min.css" type="text/css" rel="stylesheet" media="all" />
+
+
 ## Configuration
 
 Below is the example of the package default configuration values:
@@ -217,27 +276,6 @@ This defines the class used for the assets database JSON file generator. The cla
 and extend the abstract class `AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator`.
 
 It defaults to `AssetsManager\Composer\Autoload\AssetsAutoloadGenerator`.
-
-
-## Usage of the assets
-
-Once the install process is done, you can access any assets package or load a package's preset
-using the `\AssetsManager\Loader` object:
-
-    $loader = \AssetsManager\Loader::getInstance(
-        __DIR__.'/..',      // this is the project root directory
-        'www',              // this is your assets root directory
-        __DIR__             // this is your web document roots
-    );
-
-    // to get a package
-    $package = $loader->getPackage( package name );
-
-    // to get a preset
-    $preset = $loader->getPreset( preset name );
-    // to write preset dependencies
-    echo $preset->__toHtml();
-
 
 
 ## Development
