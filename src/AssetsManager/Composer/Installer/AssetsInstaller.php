@@ -86,7 +86,15 @@ class AssetsInstaller
     {
         $types = Config::get('package-type');
         $types = is_array($types) ? $types : array($types);
-        return in_array($packageType, $types);
+        if (in_array($packageType, $types)) {
+            return true;
+        }
+        foreach ($types as $mask) {
+            if (false!==preg_match('/'.$mask.'/', $packageType)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

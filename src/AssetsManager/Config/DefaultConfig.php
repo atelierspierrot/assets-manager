@@ -26,7 +26,7 @@ class DefaultConfig
     {
         return array(
             // The default package type handles by the installer
-            'package-type' => array( 'library-assets' ),
+            'package-type' => '^(.*)-assets$',
             // The default package vendor directory name (related to package root dir)
             'vendor-dir' => 'vendor',
             // The default package assets directory name (related to package root dir)
