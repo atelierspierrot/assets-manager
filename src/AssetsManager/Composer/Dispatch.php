@@ -272,12 +272,11 @@ class Dispatch
      * Set the current assets database
      * @param array
      * @param object $installer \AssetsManager\Composer\Installer\AssetsInstallerInterface
-     * @return self
+     * @return void
      */
     public static function setRegistry(array $assets_db, AssetsInstallerInterface $installer = null)
     {
         self::$__autoloader->setRegistry($assets_db, $installer);
-        return $this;
     }
 
     /**
@@ -293,12 +292,11 @@ class Dispatch
     /**
      * Set the generator called at object destruction
      * @param callable $callable
-     * @return self
+     * @return void
      */
     public static function setGenerator($callable)
     {
         self::$__autoloader->setGenerator($callable);
-        return $this;
     }
 
     /**
@@ -316,12 +314,11 @@ class Dispatch
      * @param object $package \Composer\Package\PackageInterface
      * @param string $target
      * @param object $installer \AssetsManager\Composer\Installer\AssetsInstallerInterface
-     * @return self
+     * @return void
      */
     public static function registerPackage(PackageInterface $package, $target, AssetsInstallerInterface $installer = null)
     {
         self::$__autoloader->registerPackage($package, $target, $installer);
-        return $this;
     }
 
     /**
@@ -329,12 +326,11 @@ class Dispatch
      *
      * @param object $package \Composer\Package\PackageInterface
      * @param object $installer \AssetsManager\Composer\Installer\AssetsInstallerInterface
-     * @return self
+     * @return void
      */
     public static function unregisterPackage(PackageInterface $package, AssetsInstallerInterface $installer = null)
     {
         self::$__autoloader->unregisterPackage($package, $installer);
-        return $this;
     }
 
 }
