@@ -1,24 +1,25 @@
 <?php
 /**
- * Template Engine - PHP framework package
+ * AssetsManager - Composer plugin
  * Copyleft (c) 2013 Pierre Cassat and contributors
  * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
  * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
- * Sources <https://github.com/atelierspierrot/templatengine>
+ * Sources <https://github.com/atelierspierrot/assets-manager>
  */
 
 namespace AssetsManager\Composer\Autoload;
 
-use AssetsManager\Composer\Autoload\AbstractAutoloadGenerator,
-    AssetsManager\Composer\Installer\AssetsInstaller;
+use \AssetsManager\Composer\Autoload\AbstractAutoloadGenerator,
+    \AssetsManager\Composer\Installer\AssetsInstaller;
 
-use Composer\Package\PackageInterface,
-    Composer\Json\JsonFile;
+use \Composer\Package\PackageInterface,
+    \Composer\Json\JsonFile;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class AssetsAutoloadGenerator extends AbstractAutoloadGenerator
+class AssetsAutoloadGenerator
+    extends AbstractAutoloadGenerator
 {
 
     /**
@@ -26,6 +27,10 @@ class AssetsAutoloadGenerator extends AbstractAutoloadGenerator
      */
     public function generate()
     {
+        if (empty($this->assets_db)) {
+            $assets_db = $this->readJsonDatabase();
+            $this->assets_db = $assets_db['packages'];
+        }    
         $app_base_path = $this->assets_installer->getAppBasePath();
         $assets_dir = str_replace($app_base_path . '/', '', $this->assets_installer->getAssetsDir());
         $assets_vendor_dir = str_replace($app_base_path . '/' . $assets_dir . '/', '', $this->assets_installer->getAssetsVendorDir());

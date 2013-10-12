@@ -1,40 +1,59 @@
 <?php
 /**
- * CarteBlanche - PHP framework package - Installers package
+ * AssetsManager - Composer plugin
  * Copyleft (c) 2013 Pierre Cassat and contributors
  * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
  * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
- * Sources <https://github.com/atelierspierrot/carte-blanche>
+ * Sources <https://github.com/atelierspierrot/assets-manager>
  */
 
 namespace AssetsManager\Composer;
 
-use Composer\Composer,
-    Composer\IO\IOInterface,
-    Composer\Package\PackageInterface,
-    Composer\Repository\InstalledRepositoryInterface,
-    Composer\Installer\LibraryInstaller,
-    Composer\Installer\InstallerInterface;
+use \Composer\Composer,
+    \Composer\IO\IOInterface,
+    \Composer\Package\PackageInterface,
+    \Composer\Repository\InstalledRepositoryInterface,
+    \Composer\Installer\LibraryInstaller,
+    \Composer\Installer\InstallerInterface;
 
-use AssetsManager\Config,
-    AssetsManager\Error,
-    AssetsManager\Composer\Installer\AssetsInstallerInterface;
+use \AssetsManager\Config,
+    \AssetsManager\Error,
+    \AssetsManager\Composer\Installer\AssetsInstallerInterface;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class Dispatch implements InstallerInterface
+class Dispatch
+    implements InstallerInterface
 {
 
+    /**
+     * @var object \Composer\IO\IOInterface
+     */
     private static $__io;
+
+    /**
+     * @var object \Composer\Composer
+     */
     private static $__composer;
+
+    /**
+     * @var string
+     */
     private static $__type;
 
+    /**
+     * @var object \AssetsManager\Composer\Installer\AssetsInstallerInterface
+     */
     private static $__installer;
+
+    /**
+     * @var object \AssetsManager\Composer\Autoload\AbstractAutoloadGenerator
+     */
     private static $__autoloader;
 
     /**
-     * Initializes installer: creation of "assets-dir" directory if so.
+     * Initializes installer: creation of all required objects and validating them
      *
      * {@inheritDoc}
      */
@@ -104,7 +123,7 @@ class Dispatch implements InstallerInterface
                     sprintf('<warning>AssetsManager Notice: skipping autoload generator class "%s": class not found!</warning>',
                         $autoload_class)
                 );
-                $autoload_class = Config::getInernal('assets-autoload-generator-class');
+                $autoload_class = Config::getInternal('assets-autoload-generator-class');
             }
             if (class_exists($autoload_class)) {
                 $parents = class_parents($autoload_class);
@@ -137,7 +156,9 @@ class Dispatch implements InstallerInterface
 // ---------------------------------------
 
     /**
-     * @param string AssetsManager\Config\ConfiguratorInterface
+     * Validating the configuration class to use
+     *
+     * @param string $config_class
      * @return bool
      */
     public static function validateConfig($config_class)
@@ -146,7 +167,9 @@ class Dispatch implements InstallerInterface
     }
 
     /**
-     * @param string AssetsManager\Composer\Installer\AssetsInstallerInterface
+     * Validating the installer class to use
+     *
+     * @param string $installer_class
      * @return bool
      */
     public static function validateInstaller($installer_class)
@@ -160,7 +183,9 @@ class Dispatch implements InstallerInterface
     }
 
     /**
-     * @param string AssetsManager\Composer\Autoload\AutoloadGeneratorInterface
+     * Validating the autoload generator class to use
+     *
+     * @param string $generator_class
      * @return bool
      */
     public static function validateAutoloadGenerator($generator_class)
@@ -226,62 +251,78 @@ class Dispatch implements InstallerInterface
     }
     
 // --------------------------------------------
-// Composer\Autoload\AbstractAutoloadGenerator
+// AssetsManager\Composer\Autoload\AbstractAutoloadGenerator
 // --------------------------------------------
 
     /**
      * Set the current assets database
      * @param array
-     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
-     * @return void
+     * @param object $installer \AssetsManager\Composer\Installer\AssetsInstallerInterface
+     * @return self
      */
     public static function setRegistry(array $assets_db, AssetsInstallerInterface $installer = null)
     {
         self::$__autoloader->setRegistry($assets_db, $installer);
+        return $this;
     }
 
     /**
      * Get the current assets database
-     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
+     * @param object $installer \AssetsManager\Composer\Installer\AssetsInstallerInterface
      * @return array
      */
     public static function getRegistry(AssetsInstallerInterface $installer = null)
     {
-        self::$__autoloader->getRegistry($installer);
+        return self::$__autoloader->getRegistry($installer);
     }
 
     /**
      * Set the generator called at object destruction
      * @param callable $callable
-     * @return array
+     * @return self
      */
     public static function setGenerator($callable)
     {
         self::$__autoloader->setGenerator($callable);
+        return $this;
+    }
+
+    /**
+     * Get the generator called at object destruction
+     * @return object
+     */
+    public static function getGenerator()
+    {
+        return self::$__autoloader;
     }
 
     /**
      * Add a new installed package in the Assets database
-     * @param object $package Composer\Package\PackageInterface
+     *
+     * @param object $package \Composer\Package\PackageInterface
      * @param string $target
-     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
-     * @return void
+     * @param object $installer \AssetsManager\Composer\Installer\AssetsInstallerInterface
+     * @return self
      */
     public static function registerPackage(PackageInterface $package, $target, AssetsInstallerInterface $installer = null)
     {
         self::$__autoloader->registerPackage($package, $target, $installer);
+        return $this;
     }
 
     /**
      * Remove an uninstalled package from the Assets database
-     * @param object $package Composer\Package\PackageInterface
-     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
-     * @return void
+     *
+     * @param object $package \Composer\Package\PackageInterface
+     * @param object $installer \AssetsManager\Composer\Installer\AssetsInstallerInterface
+     * @return self
      */
     public static function unregisterPackage(PackageInterface $package, AssetsInstallerInterface $installer = null)
     {
         self::$__autoloader->unregisterPackage($package, $installer);
+        return $this;
     }
+
 }
 
 // Endfile

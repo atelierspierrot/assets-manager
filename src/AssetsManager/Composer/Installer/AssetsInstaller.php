@@ -1,27 +1,27 @@
 <?php
 /**
- * CarteBlanche - PHP framework package - Installers package
+ * AssetsManager - Composer plugin
  * Copyleft (c) 2013 Pierre Cassat and contributors
  * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
  * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
- * Sources <https://github.com/atelierspierrot/carte-blanche>
+ * Sources <https://github.com/atelierspierrot/assets-manager>
  */
 
 namespace AssetsManager\Composer\Installer;
 
-use Library\Helper\Directory as DirectoryHelper;
+use \Library\Helper\Directory as DirectoryHelper;
 
-use Composer\Composer,
-    Composer\IO\IOInterface,
-    Composer\Package\PackageInterface,
-    Composer\Repository\InstalledRepositoryInterface,
-    Composer\Installer\LibraryInstaller;
+use \Composer\Composer,
+    \Composer\IO\IOInterface,
+    \Composer\Package\PackageInterface,
+    \Composer\Repository\InstalledRepositoryInterface,
+    \Composer\Installer\LibraryInstaller;
 
-use AssetsManager\Config,
-    AssetsManager\Error,
-    AssetsManager\Composer\Dispatch,
-    AssetsManager\Composer\Installer\AssetsInstallerInterface,
-    AssetsManager\Composer\Util\Filesystem as AssetsFilesystem;
+use \AssetsManager\Config,
+    \AssetsManager\Error,
+    \AssetsManager\Composer\Dispatch,
+    \AssetsManager\Composer\Installer\AssetsInstallerInterface,
+    \AssetsManager\Composer\Util\Filesystem as AssetsFilesystem;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
@@ -31,14 +31,33 @@ class AssetsInstaller
     implements AssetsInstallerInterface
 {
 
+    /**
+     * @var string
+     */
     protected $assets_dir;
+
+    /**
+     * @var string
+     */
     protected $assets_vendor_dir;
+
+    /**
+     * @var string
+     */
     protected $assets_db_filename;
+
+    /**
+     * @var string
+     */
     protected $document_root;
+
+    /**
+     * @var string
+     */
     protected $app_base_path;
 
     /**
-     * Initializes installer: creation of "assets-dir" directory if so.
+     * Initializes installer: creation of `assets-dir` directory if so
      *
      * {@inheritDoc}
      */
@@ -55,6 +74,10 @@ class AssetsInstaller
         $this->document_root = $this->guessDocumentRoot($composer->getPackage());
         $this->assets_db_filename = $this->guessAssetsDbFilename($composer->getPackage());
     }
+
+// ----------------------------
+// Extending \Composer\Installer\LibraryInstaller
+// ----------------------------
 
     /**
      * {@inheritDoc}
@@ -104,10 +127,14 @@ class AssetsInstaller
         parent::uninstall($repo, $package);
     }
 
+// ----------------------------
+// Assets management
+// ----------------------------
+
     /**
      * Move the assets of a package
      *
-     * @param object $package Composer\Package\PackageInterface
+     * @param object $package \Composer\Package\PackageInterface
      * @return bool
      */
     protected function installAssets(PackageInterface $package)
@@ -137,6 +164,12 @@ class AssetsInstaller
         }
     }
 
+    /**
+     * Remove the assets of a package
+     *
+     * @param object $package \Composer\Package\PackageInterface
+     * @return bool
+     */
     protected function removeAssets(PackageInterface $package)
     {
         $assets = $this->getPackageAssetsDir($package);
@@ -163,6 +196,16 @@ class AssetsInstaller
         }
     }
 
+// ----------------------------
+// Parse configuration
+// ----------------------------
+
+    /**
+     * Create defined configuration object
+     *
+     * @param object $package \Composer\Package\PackageInterface
+     * @return self
+     */
     protected function guessConfigurator(PackageInterface $package)
     {
         $extra = $package->getExtra();
@@ -170,96 +213,167 @@ class AssetsInstaller
             Config::load($extra['assets-config-class'], true);
         }
 //        Config::overload($extra);
+        return $this;
     }
 
+    /**
+     * Guess and get the `assets-dir` configuration package entry
+     *
+     * @param object $package \Composer\Package\PackageInterface
+     * @return string
+     */
     protected function guessAssetsDir(PackageInterface $package)
     {
-        $extra = $package->getExtra();
-        return isset($extra['assets-dir']) ? $extra['assets-dir'] : Config::get('assets-dir');
+        return self::guessConfigurationEntry($package, 'assets-dir');
     }
 
+    /**
+     * Guess and get the `assets-vendor-dir` configuration package entry
+     *
+     * @param object $package \Composer\Package\PackageInterface
+     * @return string
+     */
     protected function guessAssetsVendorDir(PackageInterface $package)
     {
-        $extra = $package->getExtra();
-        return isset($extra['assets-vendor-dir']) ? $extra['assets-vendor-dir'] : Config::get('assets-vendor-dir');
+        return self::guessConfigurationEntry($package, 'assets-vendor-dir');
     }
 
+    /**
+     * Guess and get the `document-root` configuration package entry
+     *
+     * @param object $package \Composer\Package\PackageInterface
+     * @return string
+     */
     protected function guessDocumentRoot(PackageInterface $package)
     {
-        $extra = $package->getExtra();
-        return isset($extra['document-root']) ? $extra['document-root'] : Config::get('document-root');
+        return self::guessConfigurationEntry($package, 'document-root');
     }
 
+    /**
+     * Guess and get the `assets-db-filename` configuration package entry
+     *
+     * @param object $package \Composer\Package\PackageInterface
+     * @return string
+     */
     protected function guessAssetsDbFilename(PackageInterface $package)
     {
-        $extra = $package->getExtra();
-        return isset($extra['assets-db-filename']) ? $extra['assets-db-filename'] : Config::get('assets-db-filename');
+        return self::guessConfigurationEntry($package, 'assets-db-filename');
     }
 
+// ----------------------------
+// Setters / Getters
+// ----------------------------
+
+    /**
+     * @return \Composer\IO\IOInterface
+     */
     public function getIo()
     {
         return $this->io;
     }
 
+    /**
+     * @return string
+     */
     public function getAppBasePath()
     {
         return $this->app_base_path;
     }
 
+    /**
+     * @return string
+     */
     public function getVendorDir()
     {
         $this->initializeVendorDir();
         return $this->vendorDir;
     }
 
+    /**
+     * @return string
+     */
     public function getAssetsDir()
     {
         return $this->assets_dir;
     }
 
+    /**
+     * @return string
+     */
     public function getAssetsVendorDir()
     {
         return $this->assets_vendor_dir;
     }
 
+    /**
+     * @return string
+     */
     public function getDocumentRoot()
     {
         return $this->document_root;
     }
 
+    /**
+     * @return string
+     */
     public function getAssetsDbFilename()
     {
         return $this->assets_db_filename;
     }
 
+    /**
+     * @param object $package \Composer\Package\PackageInterface
+     * @return string
+     */
     protected function getPackageAssetsDir(PackageInterface $package)
     {
         return $this->guessAssetsDir($package);
     }
 
+    /**
+     * @param object $package \Composer\Package\PackageInterface
+     * @return string
+     */
     protected function getPackageAssetsBasePath(PackageInterface $package)
     {
         return DirectoryHelper::slashDirname($this->getRootPackageAssetsVendorPath()) . $package->getPrettyName();
     }
 
+    /**
+     * @return string
+     */
     protected function getRootPackageAssetsPath()
     {
         $this->initializeAssetsDir();
         return $this->assets_dir ? $this->assets_dir : '';
     }
 
+    /**
+     * @return string
+     */
     protected function getRootPackageAssetsVendorPath()
     {
         $this->initializeAssetsVendorDir();
         return $this->assets_vendor_dir ? $this->assets_vendor_dir : '';
     }
 
+    /**
+     * Create the `assets_dir` if needed
+     *
+     * @return self
+     */
     protected function initializeAssetsDir()
     {
         $this->filesystem->ensureDirectoryExists($this->assets_dir);
         $this->assets_dir = realpath($this->assets_dir);
+        return $this;
     }
 
+    /**
+     * Create the `assets_vendor_dir` if needed
+     *
+     * @return self
+     */
     protected function initializeAssetsVendorDir()
     {
         $path = $this->getRootPackageAssetsPath() . '/' . (
@@ -267,8 +381,12 @@ class AssetsInstaller
         );
         $this->filesystem->ensureDirectoryExists($path);
         $this->assets_vendor_dir = realpath($path);
+        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getAssetsInstallPath(PackageInterface $package)
     {
         return $this->getRootPackageAssetsVendorPath() . '/' . $package->getPrettyName();
@@ -277,8 +395,8 @@ class AssetsInstaller
     /**
      * Parse the `composer.json` "extra" block of a package and return its transformed data
      *
-     * @param array $package The package, Composer\Package\PackageInterface
-     * @return void
+     * @param array $package \Composer\Package\PackageInterface
+     * @return array|null
      */
     public function parseComposerExtra(PackageInterface $package, $package_dir)
     {
@@ -318,6 +436,46 @@ class AssetsInstaller
             );
         }
         return null;
+    }
+
+// ---------------------------
+// Utilities
+// ---------------------------
+
+    /**
+     * Search a configuration value in a package's config or the global config if so
+     *
+     * @param array $package \Composer\Package\PackageInterface
+     * @param string $config_entry
+     * @return string
+     */
+    public static function guessConfigurationEntry(PackageInterface $package, $config_entry)
+    {
+        if (empty($config_entry)) return array();
+        $extra = $package->getExtra();
+        return isset($extra[$config_entry]) ? $extra[$config_entry] : Config::get($config_entry);
+    }
+
+    /**
+     * Check if a package seems to contain some `$type` files
+     *
+     * If `$package_extra` is defined, this will test if concerned entry is defined in "extra"
+     * configuration of the package.
+     *
+     * @param array $package \Composer\Package\PackageInterface
+     * @param string $type
+     * @param string $package_extra
+     * @return bool
+     */
+    public static function isPackageContains(PackageInterface $package, $type, $package_extra = null)
+    {
+        $extra = $package->getExtra();
+        if (!is_null($package_extra)) {
+            $files = self::guessConfigurationEntry($package, $package_extra);
+            return (!empty($extra) && array_key_exists($type, $extra)) || (!empty($files));
+        } else {
+            return !empty($extra) && array_key_exists($type, $extra);
+        }
     }
 
 }
