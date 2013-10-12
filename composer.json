@@ -23,6 +23,9 @@
     "require-dev": { "sami/sami": "dev-master" },
     "autoload": { "psr-0": { "AssetsManager": "src" } },
     "extra": {
-        "class": "\\AssetsManager\\Composer\\AssetsManagerPlugin"
+        "class": "\\AssetsManager\\Composer\\AssetsManagerPlugin",
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
     }
 }

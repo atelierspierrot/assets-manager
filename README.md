@@ -1,60 +1,31 @@
-Assets Manager - A Composer extension to manage assets packages
-===============================================================
+Assets Manager - A Composer plugin to manage assets packages
+============================================================
 
-A custom Composer installer to manage "library-assets" package type.
+A custom Composer installer to manage `***-assets` package type.
 
 
 ## How it works?
 
-The goal of this extension is to manage some packages of assets (javascript libraries, CSS
-frameworks or views) just like Composer standardly manages PHP packages. Assets packages
-are downloaded and stored in a specific `vendor` directory and an internal system allows
-you to retrieve and load the assets packages files just as you do with PHP classes (a kind
-of assets autoloader).
+The goal of this [Composer](http://getcomposer.org/) plugin is to manage some packages of
+assets (javascript libraries, CSS frameworks or views) just like Composer standardly manages
+PHP packages. Assets packages are downloaded and stored in a specific `vendor` directory
+and an internal system allows you to retrieve and load the assets packages files just
+as you do with PHP classes (a kind of assets autoloader).
 
 Just like any standard Composer feature, all names or configuration variables are configurable.
-
-## How-to
-
-As for all our work, we try to follow the coding standards and naming rules most commonly in use:
-
--   the [PEAR coding standards](http://pear.php.net/manual/en/standards.php)
--   the [PHP Framework Interoperability Group standards](https://github.com/php-fig/fig-standards).
-
-Knowing that, all classes are named and organized in an architecture to allow the use of the
-[standard SplClassLoader](https://gist.github.com/jwage/221634).
-
-The whole package is embedded in the `AssetsManager` namespace.
 
 
 ## Installation
 
-You can use this package in your work in many ways.
-
-First, you can clone the [GitHub](https://github.com/atelierspierrot/assets-manager) repository
-and include it "as is" in your poject:
-
-    https://github.com/atelierspierrot/assets-manager
-
-You can also download an [archive](https://github.com/atelierspierrot/assets-manager/downloads)
-from Github.
-
-Then, to use the package classes, you just need to register the `AssetsManager` namespace directory
-using the [SplClassLoader](https://gist.github.com/jwage/221634) or any other custom autoloader:
-
-    require_once '.../src/SplClassLoader.php'; // if required, a copy is proposed in the package
-    $classLoader = new SplClassLoader('AssetsManager', '/path/to/package/src');
-    $classLoader->register();
-
-If you are a [Composer](http://getcomposer.org/) user, just add the package to your requirements
-in your `composer.json`:
+Just add the package to your requirements in your `composer.json`:
 
     "require": {
         ...
-        "atelierspierrot/assets-manager": "dev-master"
+        "atelierspierrot/assets-manager": "~1.0"
     }
 
-The namespace will be automatically added to the project Composer autoloader.
+The namespace will be automatically added to the project Composer autoloader and once it will
+be installed, the plugin will handle assets packages isntallation.
 
 
 ## Usage
@@ -105,7 +76,7 @@ and build a JSON map in the original `vendor/`:
 
 ### How to inform the extension about your package assets
 
-The extension handles any package of type `library-assets`, which will be considered as a
+The extension handles any package of type `***-assets`, which will be considered as a
 standard library by Composer if you don't use the extension (and will be installed as any
 other classic library package).
 
@@ -246,6 +217,27 @@ This defines the class used for the assets database JSON file generator. The cla
 and extend the abstract class `AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator`.
 
 It defaults to `AssetsManager\Composer\Autoload\AssetsAutoloadGenerator`.
+
+
+## Usage of the assets
+
+Once the install process is done, you can access any assets package or load a package's preset
+using the `\AssetsManager\Loader` object:
+
+    $loader = \AssetsManager\Loader::getInstance(
+        __DIR__.'/..',      // this is the project root directory
+        'www',              // this is your assets root directory
+        __DIR__             // this is your web document roots
+    );
+
+    // to get a package
+    $package = $loader->getPackage( package name );
+
+    // to get a preset
+    $preset = $loader->getPreset( preset name );
+    // to write preset dependencies
+    echo $preset->__toHtml();
+
 
 
 ## Development
