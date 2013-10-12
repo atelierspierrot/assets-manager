@@ -90,7 +90,7 @@ class AssetsInstaller
             return true;
         }
         foreach ($types as $mask) {
-            if (false!==preg_match('/'.$mask.'/', $packageType)) {
+            if (0!==preg_match('/'.$mask.'/', $packageType)) {
                 return true;
             }
         }
