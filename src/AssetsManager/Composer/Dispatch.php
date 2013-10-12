@@ -70,7 +70,7 @@ class Dispatch implements InstallerInterface
                     sprintf('<warning>AssetsManager Notice: skipping assets installer class "%s": class not found!</warning>',
                         $installer_class)
                 );
-                $installer_class = Config::getInernal('assets-package-installer-class');
+                $installer_class = Config::getInternal('assets-package-installer-class');
             }
             if (class_exists($installer_class)) {
                 $interfaces = class_implements($installer_class);
