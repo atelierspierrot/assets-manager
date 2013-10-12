@@ -19,7 +19,8 @@ use \Composer\Composer,
     \Composer\Plugin\PreFileDownloadEvent;
 
 use \AssetsManager\Composer\Dispatch,
-    \AssetsManager\Composer\Autoload\AssetsAutoloadGenerator;
+    \AssetsManager\Composer\Autoload\AssetsAutoloadGenerator,
+    \AssetsManager\Composer\Autoload\DumpAutoloadEventHandler;
 
 class AssetsManagerPlugin
     implements PluginInterface, EventSubscriberInterface
@@ -73,6 +74,12 @@ var_export(func_get_args());
     public function onCommand(CommandEvent $event)
     {
         switch ($event->getCommandName()) {
+            case 'dump-autoload':
+                $_this = new DumpAutoloadEventHandler(
+                    $this->__installer->getComposer()->getPackage(),
+                    $this->__installer->getComposer()
+                );
+                break;
             default: break;
         }
     }

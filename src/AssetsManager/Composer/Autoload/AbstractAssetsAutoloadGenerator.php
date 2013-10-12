@@ -17,7 +17,7 @@ use \Composer\Package\PackageInterface,
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-abstract class AbstractAutoloadGenerator
+abstract class AbstractAssetsAutoloadGenerator
 {
 
     /**

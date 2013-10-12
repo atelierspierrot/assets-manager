@@ -9,7 +9,7 @@
 
 namespace AssetsManager\Composer\Autoload;
 
-use \AssetsManager\Composer\Autoload\AbstractAutoloadGenerator,
+use \AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator,
     \AssetsManager\Composer\Installer\AssetsInstaller;
 
 use \Composer\Package\PackageInterface,
@@ -19,7 +19,7 @@ use \Composer\Package\PackageInterface,
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
 class AssetsAutoloadGenerator
-    extends AbstractAutoloadGenerator
+    extends AbstractAssetsAutoloadGenerator
 {
 
     /**

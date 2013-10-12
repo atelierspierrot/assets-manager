@@ -58,7 +58,7 @@ class Config
         'assets-preset-interface' => 'AssetsManager\\Package\\AssetsPresetInterface',
         'assets-preset-adapter-interface' => 'AssetsManager\\Package\\PresetAdapterInterface',
         'assets-package-installer-interface' => 'AssetsManager\\Composer\\Installer\\AssetsInstallerInterface',
-        'assets-autoload-generator-abstract' => 'AssetsManager\\Composer\\Autoload\\AbstractAutoloadGenerator',
+        'assets-autoload-generator-abstract' => 'AssetsManager\\Composer\\Autoload\\AbstractAssetsAutoloadGenerator',
     );
 
     /**

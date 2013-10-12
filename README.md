@@ -243,7 +243,7 @@ It defaults to `AssetsManager\Composer\Installer\AssetsInstaller`.
 ### `assets-autoload-generator-class`: string - only for root package
 
 This defines the class used for the assets database JSON file generator. The class must exist
-and extend the abstract class `AssetsManager\Composer\Autoload\AbstractAutoloadGenerator`.
+and extend the abstract class `AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator`.
 
 It defaults to `AssetsManager\Composer\Autoload\AssetsAutoloadGenerator`.
 

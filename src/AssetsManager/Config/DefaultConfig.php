@@ -59,7 +59,7 @@ class DefaultConfig
             // must implements AssetsManager\Composer\Installer\AssetsInstallerInterface
             'assets-package-installer-class' => 'AssetsManager\Composer\Installer\AssetsInstaller',
             // the AssetsAutoloadGenerator class
-            // must extends AssetsManager\Composer\Autoload\AbstractAutoloadGenerator
+            // must extends AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator
             'assets-autoload-generator-class' => 'AssetsManager\Composer\Autoload\AssetsAutoloadGenerator',
         );
     }

@@ -48,7 +48,7 @@ class Dispatch
     private static $__installer;
 
     /**
-     * @var object \AssetsManager\Composer\Autoload\AbstractAutoloadGenerator
+     * @var object \AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator
      */
     private static $__autoloader;
 
@@ -152,6 +152,20 @@ class Dispatch
     }
 
 // ---------------------------------------
+// Getters / Setters
+// ---------------------------------------
+
+    public function getComposer()
+    {
+        return self::$__composer;
+    }
+
+    public function getIo()
+    {
+        return self::$__io;
+    }
+
+// ---------------------------------------
 // Config validators
 // ---------------------------------------
 
@@ -251,7 +265,7 @@ class Dispatch
     }
     
 // --------------------------------------------
-// AssetsManager\Composer\Autoload\AbstractAutoloadGenerator
+// AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator
 // --------------------------------------------
 
     /**
