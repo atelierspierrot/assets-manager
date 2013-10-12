@@ -62,8 +62,10 @@ class AssetsManagerPlugin
      */
     public function onPreFileDownload(PreFileDownloadEvent $event)
     {
+/*
 echo 'PRE FILE DOWNLOAD';
 var_export(func_get_args());
+*/
     }
 
     /**
