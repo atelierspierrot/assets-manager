@@ -1,18 +1,18 @@
 <?php
 /**
- * Template Engine - PHP framework package
+ * AssetsManager - Composer plugin
  * Copyleft (c) 2013 Pierre Cassat and contributors
  * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
  * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
- * Sources <https://github.com/atelierspierrot/templatengine>
+ * Sources <https://github.com/atelierspierrot/assets-manager>
  */
 
 namespace AssetsManager\Composer\Util;
 
-use Composer\Util\Filesystem as OriginalFilesystem;
+use \Composer\Util\Filesystem as OriginalFilesystem;
 
-use RecursiveDirectoryIterator,
-    RecursiveIteratorIterator;
+use \RecursiveDirectoryIterator,
+    \RecursiveIteratorIterator;
 
 /**
  * This class just completes the default `Composer\Util\Filesystem` with a `copy` method
