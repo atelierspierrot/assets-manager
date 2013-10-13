@@ -18,7 +18,6 @@ use Symfony\Component\Finder\Finder;
 $iterator = Finder::create()
     ->files()
     ->name('*.php')
-    ->notName('SplClassLoader.php')
     ->in(__DIR__.'/src')
 ;
 

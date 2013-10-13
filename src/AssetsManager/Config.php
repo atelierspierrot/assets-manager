@@ -1,10 +1,10 @@
 <?php
 /**
- * Template Engine - PHP framework package
+ * AssetsManager - Composer plugin
  * Copyleft (c) 2013 Pierre Cassat and contributors
  * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
  * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
- * Sources <https://github.com/atelierspierrot/templatengine>
+ * Sources <https://github.com/atelierspierrot/assets-manager>
  */
 
 namespace AssetsManager;
@@ -52,13 +52,13 @@ class Config
      */
     private static $__internals = array(
         'composer-db' => 'composer.json',
-        'assets-config-class' => 'AssetsManager\Config\DefaultConfig',
-        'assets-config-interface' => 'AssetsManager\Config\ConfiguratorInterface',
-        'assets-package-interface' => 'AssetsManager\Package\AssetsPackageInterface',
-        'assets-preset-interface' => 'AssetsManager\Package\AssetsPresetInterface',
-        'assets-preset-adapter-interface' => 'AssetsManager\Package\PresetAdapterInterface',
-        'assets-package-installer-interface' => 'AssetsManager\Composer\Installer\AssetsInstallerInterface',
-        'assets-autoload-generator-abstract' => 'AssetsManager\Composer\Autoload\AbstractAutoloadGenerator',
+        'assets-config-class' => 'AssetsManager\\Config\\DefaultConfig',
+        'assets-config-interface' => 'AssetsManager\\Config\\ConfiguratorInterface',
+        'assets-package-interface' => 'AssetsManager\\Package\\AssetsPackageInterface',
+        'assets-preset-interface' => 'AssetsManager\\Package\\AssetsPresetInterface',
+        'assets-preset-adapter-interface' => 'AssetsManager\\Package\\PresetAdapterInterface',
+        'assets-package-installer-interface' => 'AssetsManager\\Composer\\Installer\\AssetsInstallerInterface',
+        'assets-autoload-generator-abstract' => 'AssetsManager\\Composer\\Autoload\\AbstractAssetsAutoloadGenerator',
     );
 
     /**

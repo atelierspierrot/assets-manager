@@ -1,50 +1,30 @@
-Assets Manager - A Composer extension to manage assets packages
-===============================================================
+Assets Manager - A Composer plugin to manage assets packages
+============================================================
 
-A custom [Composer](http://getcomposer.org/) installer to manage "library-assets" package type.
+A [Composer](http://getcomposer.org/) plugin to manage `***-assets` package type.
 
 
 ## How it works?
 
-The goal of this extension is to manage some packages of assets (javascript libraries, CSS
-frameworks or views) just like Composer standardly manages PHP packages. Assets packages
-are downloaded and stored in a specific `vendor` directory and an internal system allows
-you to retrieve and load the assets packages files just as you do with PHP classes (a kind
-of assets autoloader).
+The goal of this [Composer](http://getcomposer.org/) plugin is to manage some packages of
+assets (javascript libraries, CSS frameworks or views) just like Composer standardly manages
+PHP packages. Assets packages are downloaded and stored in a specific `vendor` directory
+and an internal system allows you to retrieve and load the assets packages files just
+as you do with PHP classes (a kind of assets autoloader).
 
 Just like any standard Composer feature, all names or configuration variables are configurable.
 
 ## Installation
 
-You can use this package in your work in many ways but the best practice is to use it as a
-Composer package as it manages other packages installation.
-
-First, you can clone the [GitHub](https://github.com/atelierspierrot/assets-manager) repository
-and include it "as is" in your poject:
-
-    https://github.com/atelierspierrot/assets-manager
-
-You can also download an [archive](https://github.com/atelierspierrot/assets-manager/downloads)
-from Github.
-
-Then, to use the package classes, you just need to register the `AssetsManager` namespace directory
-using the [SplClassLoader](https://gist.github.com/jwage/221634) or any other custom autoloader:
-
-    require_once '.../src/SplClassLoader.php'; // if required, a copy is proposed in the package
-    $classLoader = new SplClassLoader('AssetsManager', '/path/to/package/src');
-    $classLoader->register();
-
-Finally, the best practice, just add the package to your requirements in your `composer.json`:
+Just add the package to your requirements in your `composer.json`:
 
     "require": {
         ...
-        "atelierspierrot/assets-manager": "dev-master",
-        ...
+        "atelierspierrot/assets-manager": "1.*"
     }
 
-The namespace will be automatically added to the project Composer autoloader and any package
-of type `library-assets` will be installed by the extension. Be careful here to place the
-package BEFORE assets packages as it needs to be already installed to handle other installations.
+The namespace will be automatically added to the project Composer autoloader and once it will
+be installed, the plugin will handle assets packages isntallation.
 
 
 ## Usage
@@ -95,9 +75,68 @@ and build a JSON map in the original `vendor/`:
 
 ### How to inform the extension about your package assets
 
-The extension handles any package of type `library-assets`, which will be considered as a
+The extension handles any package of type `***-assets`, which will be considered as a
 standard library by Composer if you don't use the extension (and will be installed as any
 other classic library package).
+
+
+## Usage of the assets manager
+
+### The assets loader object
+
+The `\AssetsManager\Loader` class is designed to manage a set of assets based on a table of 
+installed packages.
+
+The class is based on three paths:
+
+- `base_dir`: the package root directory (must be the directory containing the `composer.json` file)
+- `assets_dir`: the package asssets directory related to `base_dir`
+- `document_root`: the path in the filesystem of the web assets root directory ; this is used
+to build all related assets paths to use in HTTP.
+
+For these three paths, their defaults values are defined on a default package structure:
+
+    package_name/
+    |----------- src/
+    |----------- www/
+
+    $loader->base_dir = realpath(package_name)
+    $loader->assets_dir = www
+    $loader->document_root = www or the server DOCUMENT_ROOT
+
+NOTE - These paths are stored in the object without the trailing slash.
+
+### Usage example
+
+Once the install process is done, you can access any assets package or load a package's preset
+using the `\AssetsManager\Loader` object:
+
+    $loader = \AssetsManager\Loader::getInstance(
+        __DIR__.'/..',      // this is the project root directory
+        'www',              // this is your assets root directory
+        __DIR__             // this is your web document roots
+    );
+
+    // to get a package
+    $package = $loader->getPackage( package name );
+
+    // to get a preset
+    $preset = $loader->getPreset( preset name );
+    // to write preset dependencies
+    echo $preset->__toHtml();
+
+As described in the "configuration" section below, calling a preset will automatically load
+its internal files requirements (some Javascript files for instance) and its dependencies to
+other presets or files. The result of the `__toHtml()` method will then be a string to include
+the files and scripts definitions, fully functional and ready to be written in your HTML.
+
+For instance, if you installed the [Gentleface sprites](https://github.com/atelierspierrot/gentleface-sprites)
+package in its `assets-installer` version you will have:
+
+    // calling ...
+    echo $loader->getPreset('gentleface-sprites')->__toHtml();
+    // will render something like:
+    <link src="vendor/atelierspierrot/gentleface-sprites/gentleface-sprites.min.css" type="text/css" rel="stylesheet" media="all" />
 
 
 ## Configuration
@@ -233,7 +272,7 @@ It defaults to `AssetsManager\Composer\Installer\AssetsInstaller`.
 ### `assets-autoload-generator-class`: string - only for root package
 
 This defines the class used for the assets database JSON file generator. The class must exist
-and extend the abstract class `AssetsManager\Composer\Autoload\AbstractAutoloadGenerator`.
+and extend the abstract class `AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator`.
 
 It defaults to `AssetsManager\Composer\Autoload\AssetsAutoloadGenerator`.
 

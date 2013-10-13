@@ -1,20 +1,21 @@
 <?php
 /**
- * Template Engine - PHP framework package
+ * AssetsManager - Composer plugin
  * Copyleft (c) 2013 Pierre Cassat and contributors
  * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
  * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
- * Sources <https://github.com/atelierspierrot/templatengine>
+ * Sources <https://github.com/atelierspierrot/assets-manager>
  */
 
 namespace AssetsManager\Config;
 
-use AssetsManager\Config\ConfiguratorInterface;
+use \AssetsManager\Config\ConfiguratorInterface;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-class DefaultConfig implements ConfiguratorInterface
+class DefaultConfig
+    implements ConfiguratorInterface
 {
 
     /**
@@ -25,7 +26,7 @@ class DefaultConfig implements ConfiguratorInterface
     {
         return array(
             // The default package type handles by the installer
-            'package-type' => array( 'library-assets' ),
+            'package-type' => '^(.*)-assets$',
             // The default package vendor directory name (related to package root dir)
             'vendor-dir' => 'vendor',
             // The default package assets directory name (related to package root dir)
@@ -58,7 +59,7 @@ class DefaultConfig implements ConfiguratorInterface
             // must implements AssetsManager\Composer\Installer\AssetsInstallerInterface
             'assets-package-installer-class' => 'AssetsManager\Composer\Installer\AssetsInstaller',
             // the AssetsAutoloadGenerator class
-            // must extends AssetsManager\Composer\Autoload\AbstractAutoloadGenerator
+            // must extends AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator
             'assets-autoload-generator-class' => 'AssetsManager\Composer\Autoload\AssetsAutoloadGenerator',
         );
     }
