@@ -12,6 +12,7 @@
             <li><a href="../../../classes.html">Classes</a></li>
                             <li><a href="../../../namespaces.html">Namespaces</a></li>
                         <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
             <li><a href="../../../doc-index.html">Index</a></li>
             
         </ul>
@@ -22,7 +23,8 @@
     <h1><a href="../../../AssetsManager/Composer/Installer.html">AssetsManager\Composer\Installer</a>\AssetsInstallerInterface</h1>
     </div>
         <div class="content">
-                <p>interface    <strong>AssetsInstallerInterface</strong>        implements
+                <p>    interface
+    <strong>AssetsInstallerInterface</strong>        implements
         <abbr title="Composer\Installer\InstallerInterface">InstallerInterface</abbr></p>
 
     
@@ -33,10 +35,10 @@
             <table>
                     <tr>
                 <td class="type">
-                    void
+                    
                 </td>
                 <td class="last">
-                    <a href="#method_parseComposerExtra">parseComposerExtra</a>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, $package_dir)
+                    <a href="#method_parseComposerExtra">parseComposerExtra</a>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, string $package_dir)
                     <p>Parse the <code>composer.json</code> "extra" block of a package and return its transformed data</p>
                 </td>
                 <td></td>
@@ -47,9 +49,9 @@
         <h2>Details</h2>
 
                         <h3 id="method_parseComposerExtra">
-        <div class="location">at line 31</div>
-        <code>            public            void
-    <strong>parseComposerExtra</strong>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, $package_dir)</code>
+        <div class="location">at line 32</div>
+        <code>            public            
+    <strong>parseComposerExtra</strong>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, string $package_dir)</code>
     </h3>
     <div class="details">
         <p>Parse the <code>composer.json</code> "extra" block of a package and return its transformed data</p>
@@ -62,28 +64,16 @@
                     <tr>
                 <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
                 <td>$package</td>
-                <td>
-</td>
+                <td>\Composer\Package\PackageInterface</td>
             </tr>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$package_dir</td>
-                <td>
-</td>
+                <td>The install directory of the package</td>
             </tr>
             </table>
 
             
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>void</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
             
             
                     </div>

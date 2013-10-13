@@ -12,6 +12,7 @@
             <li><a href="../../../classes.html">Classes</a></li>
                             <li><a href="../../../namespaces.html">Namespaces</a></li>
                         <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../traits.html">Traits</a></li>
             <li><a href="../../../doc-index.html">Index</a></li>
             
         </ul>
@@ -22,7 +23,8 @@
     <h1><a href="../../../AssetsManager/Composer/Autoload.html">AssetsManager\Composer\Autoload</a>\AssetsAutoloadGenerator</h1>
     </div>
         <div class="content">
-                <p>class    <strong>AssetsAutoloadGenerator</strong>        extends <a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a></p>
+                <p>    class
+    <strong>AssetsAutoloadGenerator</strong>        extends <a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a></p>
 
     
     
@@ -38,7 +40,7 @@
                     <a href="#method_getInstance">getInstance</a>(<a href="../../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)
                     <p>Get a singleton instance</p>
                 </td>
-                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_getInstance"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_getInstance"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -48,7 +50,7 @@
                     <a href="#method___destruct">__destruct</a>()
                     <p>Load the assets database file generation</p>
                 </td>
-                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method___destruct"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method___destruct"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -59,7 +61,17 @@
                     <p>
 </p>
                 </td>
-                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_getAssetsInstaller"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_getAssetsInstaller"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <abbr title="AssetsManager\Composer\Autoload\false">false</abbr>|string
+                </td>
+                <td class="last">
+                    <a href="#method_readJsonDatabase">readJsonDatabase</a>()
+                    <p>Reads the assets database from JSON file</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_readJsonDatabase"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -69,7 +81,7 @@
                     <a href="#method_writeJsonDatabase">writeJsonDatabase</a>(array $full_db)
                     <p>Writes the assets database in a JSON file</p>
                 </td>
-                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_writeJsonDatabase"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_writeJsonDatabase"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -79,7 +91,7 @@
                     <a href="#method_setRegistry">setRegistry</a>(array $assets_db, <a href="../../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)
                     <p>Set the current assets database</p>
                 </td>
-                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_setRegistry"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_setRegistry"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -89,7 +101,7 @@
                     <a href="#method_getRegistry">getRegistry</a>(<a href="../../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)
                     <p>Get the current assets database</p>
                 </td>
-                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_getRegistry"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_getRegistry"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -99,7 +111,7 @@
                     <a href="#method_setGenerator">setGenerator</a>(callable $callable)
                     <p>Set the generator called at object destruction</p>
                 </td>
-                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_setGenerator"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_setGenerator"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -109,7 +121,7 @@
                     <a href="#method_registerPackage">registerPackage</a>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, string $target, <a href="../../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)
                     <p>Add a new installed package in the Assets database</p>
                 </td>
-                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_registerPackage"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_registerPackage"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -119,7 +131,7 @@
                     <a href="#method_unregisterPackage">unregisterPackage</a>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, <a href="../../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)
                     <p>Remove an uninstalled package from the Assets database</p>
                 </td>
-                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_unregisterPackage"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a></small></td>
+                <td><small>from&nbsp;<a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_unregisterPackage"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -137,7 +149,7 @@
         <h2>Details</h2>
 
                         <h3 id="method_getInstance">
-        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_getInstance"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a> at line 48</div>
+        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_getInstance"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a> at line 48</div>
         <code>        static    public            object
     <strong>getInstance</strong>(<a href="../../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)</code>
     </h3>
@@ -173,7 +185,7 @@
     </div>
 
                 <h3 id="method___destruct">
-        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method___destruct"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a> at line 80</div>
+        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method___destruct"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a> at line 80</div>
         <code>            public            void
     <strong>__destruct</strong>()</code>
     </h3>
@@ -199,7 +211,7 @@
     </div>
 
                 <h3 id="method_getAssetsInstaller">
-        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_getAssetsInstaller"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a> at line 88</div>
+        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_getAssetsInstaller"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a> at line 88</div>
         <code>            public            object
     <strong>getAssetsInstaller</strong>()</code>
     </h3>
@@ -224,8 +236,34 @@
                     </div>
     </div>
 
+                <h3 id="method_readJsonDatabase">
+        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_readJsonDatabase"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a> at line 97</div>
+        <code>            public            <abbr title="AssetsManager\Composer\Autoload\false">false</abbr>|string
+    <strong>readJsonDatabase</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Reads the assets database from JSON file</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="AssetsManager\Composer\Autoload\false">false</abbr>|string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_writeJsonDatabase">
-        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_writeJsonDatabase"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a> at line 98</div>
+        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_writeJsonDatabase"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a> at line 113</div>
         <code>            public            <abbr title="AssetsManager\Composer\Autoload\false">false</abbr>|string
     <strong>writeJsonDatabase</strong>(array $full_db)</code>
     </h3>
@@ -262,7 +300,7 @@
     </div>
 
                 <h3 id="method_setRegistry">
-        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_setRegistry"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a> at line 124</div>
+        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_setRegistry"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a> at line 139</div>
         <code>        static    public            void
     <strong>setRegistry</strong>(array $assets_db, <a href="../../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)</code>
     </h3>
@@ -304,7 +342,7 @@
     </div>
 
                 <h3 id="method_getRegistry">
-        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_getRegistry"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a> at line 135</div>
+        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_getRegistry"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a> at line 150</div>
         <code>        static    public            array
     <strong>getRegistry</strong>(<a href="../../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)</code>
     </h3>
@@ -340,7 +378,7 @@
     </div>
 
                 <h3 id="method_setGenerator">
-        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_setGenerator"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a> at line 146</div>
+        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_setGenerator"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a> at line 161</div>
         <code>        static    public            array
     <strong>setGenerator</strong>(callable $callable)</code>
     </h3>
@@ -377,7 +415,7 @@
     </div>
 
                 <h3 id="method_registerPackage">
-        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_registerPackage"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a> at line 160</div>
+        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_registerPackage"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a> at line 175</div>
         <code>        static    public            void
     <strong>registerPackage</strong>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, string $target, <a href="../../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)</code>
     </h3>
@@ -424,7 +462,7 @@
     </div>
 
                 <h3 id="method_unregisterPackage">
-        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAutoloadGenerator.html#method_unregisterPackage"><abbr title="AssetsManager\Composer\Autoload\AbstractAutoloadGenerator">AbstractAutoloadGenerator</abbr></a> at line 172</div>
+        <div class="location">in <a href="../../../AssetsManager/Composer/Autoload/AbstractAssetsAutoloadGenerator.html#method_unregisterPackage"><abbr title="AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator">AbstractAssetsAutoloadGenerator</abbr></a> at line 187</div>
         <code>        static    public            void
     <strong>unregisterPackage</strong>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, <a href="../../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a> $installer = null)</code>
     </h3>
@@ -465,7 +503,7 @@
     </div>
 
                 <h3 id="method_generate">
-        <div class="location">at line 27</div>
+        <div class="location">at line 28</div>
         <code>            public            
     <strong>generate</strong>()</code>
     </h3>
