@@ -1,5 +1,5 @@
-Assets Manager - A Composer plugin to manage assets packages
-============================================================
+Assets Manager
+==============
 
 A [Composer](http://getcomposer.org/) plugin to manage `***-assets` package type.
 
