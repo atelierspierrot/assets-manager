@@ -300,6 +300,16 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
             </tr>
                     <tr>
                 <td class="type">
+                    bool
+                </td>
+                <td class="last">
+                    <a href="#method_hasPackage">hasPackage</a>(string $package_name)
+                    <p>Test if a package exists</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     object
                 </td>
                 <td class="last">
@@ -315,6 +325,16 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                 <td class="last">
                     <a href="#method_validatePresets">validatePresets</a>()
                     <p>Load and validate all packages presets in one table</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    bool
+                </td>
+                <td class="last">
+                    <a href="#method_hasPreset">hasPreset</a>(string $preset_name)
+                    <p>Test if a preset exists</p>
                 </td>
                 <td></td>
             </tr>
@@ -1211,8 +1231,45 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     </div>
     </div>
 
-                <h3 id="method_getPackage">
+                <h3 id="method_hasPackage">
         <div class="location">at line 325</div>
+        <code>            public            bool
+    <strong>hasPackage</strong>(string $package_name)</code>
+    </h3>
+    <div class="details">
+        <p>Test if a package exists</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$package_name</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>bool</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getPackage">
+        <div class="location">at line 341</div>
         <code>            public            object
     <strong>getPackage</strong>(string $package_name)</code>
     </h3>
@@ -1248,7 +1305,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_validatePresets">
-        <div class="location">at line 379</div>
+        <div class="location">at line 395</div>
         <code>            public            void
     <strong>validatePresets</strong>()</code>
     </h3>
@@ -1282,8 +1339,45 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     </div>
     </div>
 
+                <h3 id="method_hasPreset">
+        <div class="location">at line 424</div>
+        <code>            public            bool
+    <strong>hasPreset</strong>(string $preset_name)</code>
+    </h3>
+    <div class="details">
+        <p>Test if a preset exists</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$preset_name</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>bool</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_getPreset">
-        <div class="location">at line 408</div>
+        <div class="location">at line 435</div>
         <code>            public            object
     <strong>getPreset</strong>(string $preset_name)</code>
     </h3>
@@ -1319,7 +1413,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getAssets">
-        <div class="location">at line 470</div>
+        <div class="location">at line 497</div>
         <code>        static    public            array
     <strong>getAssets</strong>()</code>
     </h3>
@@ -1345,7 +1439,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_findPreset">
-        <div class="location">at line 482</div>
+        <div class="location">at line 509</div>
         <code>        static    public            object
     <strong>findPreset</strong>(string $preset_name)</code>
     </h3>
@@ -1381,7 +1475,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_findPackage">
-        <div class="location">at line 494</div>
+        <div class="location">at line 521</div>
         <code>        static    public            object
     <strong>findPackage</strong>(string $package_name)</code>
     </h3>
@@ -1417,7 +1511,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_buildWebPath">
-        <div class="location">at line 512</div>
+        <div class="location">at line 539</div>
         <code>        static    public            string
     <strong>buildWebPath</strong>(string $path)</code>
     </h3>
@@ -1464,7 +1558,7 @@ filesystem.</p>
     </div>
 
                 <h3 id="method_find">
-        <div class="location">at line 525</div>
+        <div class="location">at line 552</div>
         <code>        static    public            string|null
     <strong>find</strong>(string $filename, string $package = null)</code>
     </h3>
@@ -1504,7 +1598,7 @@ filesystem.</p>
     </div>
 
                 <h3 id="method_findInPackage">
-        <div class="location">at line 542</div>
+        <div class="location">at line 569</div>
         <code>        static    public            string|null
     <strong>findInPackage</strong>(string $filename, string $package)</code>
     </h3>
@@ -1544,7 +1638,7 @@ filesystem.</p>
     </div>
 
                 <h3 id="method_findInPath">
-        <div class="location">at line 562</div>
+        <div class="location">at line 589</div>
         <code>        static    public            string|null
     <strong>findInPath</strong>(string $filename, string $path)</code>
     </h3>
