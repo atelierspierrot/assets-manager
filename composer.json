@@ -1,10 +1,9 @@
 {
     "name": "atelierspierrot/assets-manager",
-    "type": "composer-installer",
-    "description": "A custom Composer installer to manage \"library-assets\" package type",
-    "keywords": [ "composer", "package", "assets", "extension" ],
+    "type": "composer-plugin",
+    "description": "A Composer plugin to manage \"***-assets\" package type",
+    "keywords": [ "composer plugin", "package", "assets" ],
     "homepage": "http://github.com/atelierspierrot/assets-manager",
-    "version": "0.0.5",
     "license": "GPL-3.0",
     "authors": [{
         "name": "Les Ateliers Pierrot & contributors",
@@ -17,10 +16,19 @@
     }],
     "require": {
         "php": ">=5.3.0",
-        "atelierspierrot/patterns": "dev-master",
-        "atelierspierrot/library": "dev-master"
+        "atelierspierrot/patterns": "1.*",
+        "atelierspierrot/library": "1.*",
+        "composer-plugin-api": "1.0.0"
     },
-    "require-dev": { "sami/sami": "dev-master" },
+    "require-dev": {
+        "sami/sami": "dev-master",
+        "composer/composer": "1.*@dev"
+    },
     "autoload": { "psr-0": { "AssetsManager": "src" } },
-    "extra": { "class": "\\AssetsManager\\Composer\\Dispatch" }
+    "extra": {
+        "class": "\\AssetsManager\\Composer\\AssetsManagerPlugin",
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
 }

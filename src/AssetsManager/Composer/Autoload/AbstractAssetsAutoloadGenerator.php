@@ -1,23 +1,23 @@
 <?php
 /**
- * Template Engine - PHP framework package
+ * AssetsManager - Composer plugin
  * Copyleft (c) 2013 Pierre Cassat and contributors
  * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
  * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
- * Sources <https://github.com/atelierspierrot/templatengine>
+ * Sources <https://github.com/atelierspierrot/assets-manager>
  */
 
 namespace AssetsManager\Composer\Autoload;
 
-use AssetsManager\Composer\Installer\AssetsInstallerInterface;
+use \AssetsManager\Composer\Installer\AssetsInstallerInterface;
 
-use Composer\Package\PackageInterface,
-    Composer\Json\JsonFile;
+use \Composer\Package\PackageInterface,
+    \Composer\Json\JsonFile;
 
 /**
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
-abstract class AbstractAutoloadGenerator
+abstract class AbstractAssetsAutoloadGenerator
 {
 
     /**
@@ -50,7 +50,7 @@ abstract class AbstractAutoloadGenerator
         if (empty(self::$_instance)) {
             if (empty($installer)) {
                 throw new \InvalidArgumentException(
-                    sprintf('Can not instanciate autoloader generator singelton object "%s"' .
+                    sprintf('Can not instanciate autoloader generator singleton object "%s"' .
                         ' without an "AssetsInstallerInterface" object argument!',
                         get_called_class())
                 );
@@ -88,6 +88,21 @@ abstract class AbstractAutoloadGenerator
     public function getAssetsInstaller()
     {
         return $this->assets_installer;
+    }
+
+    /**
+     * Reads the assets database from JSON file
+     * @return false|string
+     */
+    public function readJsonDatabase()
+    {
+        $assets_file = $this->assets_installer->getVendorDir() . '/' . $this->assets_installer->getAssetsDbFilename();
+        if (file_exists($assets_file)) {
+            $json = new JsonFile($assets_file);
+            $assets = $json->read();
+            return $assets;
+        }        
+        return false;
     }
 
     /**
