@@ -1,7 +1,7 @@
 Assets Manager - A Composer extension to manage assets packages
 ===============================================================
 
-A custom Composer installer to manage "library-assets" package type.
+A custom [Composer](http://getcomposer.org/) installer to manage "library-assets" package type.
 
 
 ## How it works?
@@ -14,22 +14,10 @@ of assets autoloader).
 
 Just like any standard Composer feature, all names or configuration variables are configurable.
 
-## How-to
-
-As for all our work, we try to follow the coding standards and naming rules most commonly in use:
-
--   the [PEAR coding standards](http://pear.php.net/manual/en/standards.php)
--   the [PHP Framework Interoperability Group standards](https://github.com/php-fig/fig-standards).
-
-Knowing that, all classes are named and organized in an architecture to allow the use of the
-[standard SplClassLoader](https://gist.github.com/jwage/221634).
-
-The whole package is embedded in the `AssetsManager` namespace.
-
-
 ## Installation
 
-You can use this package in your work in many ways.
+You can use this package in your work in many ways but the best practice is to use it as a
+Composer package as it manages other packages installation.
 
 First, you can clone the [GitHub](https://github.com/atelierspierrot/assets-manager) repository
 and include it "as is" in your poject:
@@ -46,15 +34,17 @@ using the [SplClassLoader](https://gist.github.com/jwage/221634) or any other cu
     $classLoader = new SplClassLoader('AssetsManager', '/path/to/package/src');
     $classLoader->register();
 
-If you are a [Composer](http://getcomposer.org/) user, just add the package to your requirements
-in your `composer.json`:
+Finally, the best practice, just add the package to your requirements in your `composer.json`:
 
     "require": {
         ...
-        "atelierspierrot/assets-manager": "dev-master"
+        "atelierspierrot/assets-manager": "dev-master",
+        ...
     }
 
-The namespace will be automatically added to the project Composer autoloader.
+The namespace will be automatically added to the project Composer autoloader and any package
+of type `library-assets` will be installed by the extension. Be careful here to place the
+package BEFORE assets packages as it needs to be already installed to handle other installations.
 
 
 ## Usage
@@ -249,6 +239,16 @@ It defaults to `AssetsManager\Composer\Autoload\AssetsAutoloadGenerator`.
 
 
 ## Development
+
+As for all our work, we try to follow the coding standards and naming rules most commonly in use:
+
+-   the [PEAR coding standards](http://pear.php.net/manual/en/standards.php)
+-   the [PHP Framework Interoperability Group standards](https://github.com/php-fig/fig-standards).
+
+Knowing that, all classes are named and organized in an architecture to allow the use of the
+[standard SplClassLoader](https://gist.github.com/jwage/221634).
+
+The whole package is embedded in the `AssetsManager` namespace.
 
 To install all PHP packages for development, just run:
 
