@@ -56,6 +56,6 @@ phpdoc/*
 
 # for developments ...
 # this may be commented on the "wip" branch
-dev/*
-build/*
-src.*/*
+#dev/*
+#build/*
+#src.*/*
