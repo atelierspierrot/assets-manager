@@ -317,6 +317,22 @@ class Loader extends AbstractAssetsPackage
 // ---------------------
 
     /**
+     * Test if a package exists
+     *
+     * @param string $package_name
+     * @return bool
+     */
+    public function hasPackage($package_name)
+    {
+        if (!isset($this->packages_instances[$package_name])) {
+            try {
+                $this->packages_instances[$package_name] = $this->_buildNewPackage($package_name);
+            } catch (\Exception $e) {}
+        }
+        return isset($this->packages_instances[$package_name]);
+    }
+    
+    /**
      * Get a package instance
      *
      * @param string $package_name
@@ -399,6 +415,17 @@ class Loader extends AbstractAssetsPackage
         }
     }
 
+    /**
+     * Test if a preset exists
+     *
+     * @param string $preset_name
+     * @return bool
+     */
+    public function hasPreset($preset_name)
+    {
+        return isset($this->presets_data[$preset_name]);
+    }
+    
     /**
      * Get a preset instance
      *
