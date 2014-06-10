@@ -11,8 +11,8 @@
         "homepage": "http://www.ateliers-pierrot.fr/"
     },{
         "name": "Pierre Cassat",
-        "email": "piwi@ateliers-pierrot.fr",
-        "homepage": "http://github.com/pierowbmstr"
+        "email": "me@e-piwi.fr",
+        "homepage": "http://github.com/piwi"
     }],
     "require": {
         "php": ">=5.3.0",
