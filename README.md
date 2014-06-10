@@ -4,7 +4,7 @@ Assets Manager
 A [Composer](http://getcomposer.org/) plugin to manage `***-assets` package type.
 
 
-## How it works?
+## How does it work?
 
 The goal of this [Composer](http://getcomposer.org/) plugin is to manage some packages of
 assets (javascript libraries, CSS frameworks or views) just like Composer standardly manages
