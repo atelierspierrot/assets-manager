@@ -604,6 +604,20 @@ class Loader
         return null;
     }
 
+    /**
+     * Test if a string is a classic url or an url like `//domain.ext/asset`
+     *
+     * @param   string $str
+     * @return  bool
+     */
+    public static function isUrl($str)
+    {
+        return (bool) (
+            \Library\Helper\Url::isUrl($str) ||
+            \Library\Helper\Url::isUrl('http'.$str)
+        );
+    }
+
 }
 
 // Endfile
