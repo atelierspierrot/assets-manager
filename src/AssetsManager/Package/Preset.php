@@ -248,7 +248,7 @@ class Preset
         $ordered = array();
         foreach ($statements as $index=>$statement) {
             $data = $statement->getData();
-            $ordered[$index] = $data['position'];
+            $ordered[$index] = isset($data['position']) ? $data['position'] : count($ordered)+1;
         }
         array_multisort($ordered, SORT_DESC, SORT_NUMERIC, $statements);
         return $statements;

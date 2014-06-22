@@ -9,10 +9,11 @@
 
 namespace AssetsManager\Package\PresetAdapter;
 
-use AssetsManager\Package\PresetAdapterInterface;
+use \AssetsManager\Package\PresetAdapterInterface;
+use \AssetsManager\Package\AssetsPresetInterface;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class Javascript implements PresetAdapterInterface
 {
@@ -31,16 +32,16 @@ class Javascript implements PresetAdapterInterface
 
     /**
      * @param array|string $data The preset data
-     * @param object $preset AssetsManager\Package\AssetsPresetInterface
+     * @param \AssetsManager\Package\AssetsPresetInterface $preset
      */
-    public function __construct(array $data, \AssetsManager\Package\AssetsPresetInterface $preset)
+    public function __construct(array $data, AssetsPresetInterface $preset)
     {
         $this->data = $data;
         $this->preset = $preset;
     }
 
     /**
-     * Return the parsed and tranformed statement array
+     * Return the parsed and transformed statement array
      * @return array
      */
     public function getData()
@@ -92,6 +93,8 @@ class Javascript implements PresetAdapterInterface
                         case 'bottom': $data['position'] = -1; break;
                         case 'min': $data['minified'] = true; $data['packed'] = false; break;
                         case 'pack': $data['minified'] = false; $data['packed'] = true; break;
+                        case 'first': $data['position'] = 0; break;
+                        case 'last': $data['position'] = 1000; break;
                         default:
                             if (is_numeric($substr)) {
                                 if (!((-1 <= $substr) && (100 >= $substr))) {
@@ -122,8 +125,8 @@ class Javascript implements PresetAdapterInterface
         }
 
         $this->transformed_data = $data;
-        if (!\Library\Helper\Url::isUrl($this->transformed_data['src'])) {
-            $this->transformed_data['src'] = $this->preset->findInPackage($this->transformed_data['src']);        
+        if ( ! \AssetsManager\Loader::isUrl($this->transformed_data['src'])) {
+            $this->transformed_data['src'] = $this->preset->findInPackage($this->transformed_data['src']);
         }
     }
 
