@@ -24,7 +24,7 @@ Just add the package to your requirements in your `composer.json`:
     }
 
 The namespace will be automatically added to the project Composer autoloader and once it will
-be installed, the plugin will handle assets packages isntallation.
+be installed, the plugin will handle assets packages installation.
 
 
 ## Usage
@@ -198,7 +198,7 @@ An assets preset is a predefined set of CSS or Javascript files to include to us
 tool (such as a jQuery plugin for instance). Each preset can be used in a view file writing:
 
         $preset = $assets_loader->getPreset( preset name );
-	    $preset->load();
+        $preset->load();
 
 A preset is defined as a set of `key => array` pairs where the `key` is the preset name 
 (the name you will call using the `useAssetsPreset()` method) and the corresponding array
@@ -304,9 +304,9 @@ The latest version of this documentation is available online at <http://docs.ate
 
 >    Assets Manager
 
->    https://github.com/atelierspierrot/assets-manager
+>    http://github.com/atelierspierrot/assets-manager
 
->    Copyleft 2013, Pierre Cassat and contributors
+>    Copyleft 2013-2014, Pierre Cassat and contributors
 
 >    Licensed under the GPL Version 3 license.
 
