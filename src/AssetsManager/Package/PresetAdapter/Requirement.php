@@ -9,11 +9,12 @@
 
 namespace AssetsManager\Package\PresetAdapter;
 
-use AssetsManager\Package\PresetAdapterInterface,
-    AssetsManager\Loader;
+use \AssetsManager\Package\PresetAdapterInterface;
+use \AssetsManager\Package\AssetsPresetInterface;
+use \AssetsManager\Loader;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class Requirement implements PresetAdapterInterface
 {
@@ -24,16 +25,16 @@ class Requirement implements PresetAdapterInterface
 
     /**
      * @param array|string $data The preset data
-     * @param object $preset AssetsManager\Package\AssetsPresetInterface
+     * @param \AssetsManager\Package\AssetsPresetInterface $preset
      */
-    public function __construct(array $data, \AssetsManager\Package\AssetsPresetInterface $preset)
+    public function __construct(array $data, AssetsPresetInterface $preset)
     {
         $this->data = $data;
         $this->preset = $preset;
     }
 
     /**
-     * Return the parsed and tranformed statement array
+     * Return the parsed and transformed statement array
      * @return array
      */
     public function getData()
