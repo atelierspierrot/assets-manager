@@ -10,20 +10,20 @@
 namespace AssetsManager\Composer\Util;
 
 use \Composer\Util\Filesystem as OriginalFilesystem;
-
-use \RecursiveDirectoryIterator,
-    \RecursiveIteratorIterator;
+use \RecursiveDirectoryIterator;
+use \RecursiveIteratorIterator;
 
 /**
  * This class just completes the default `Composer\Util\Filesystem` with a `copy` method
  */
-class Filesystem extends OriginalFilesystem
+class Filesystem
+    extends OriginalFilesystem
 {
 
     /**
      * Exact same code as `copyThenRemove()` method but without removing
      *
-     * @see Composer\Util\Filesystem::copyThenRemove()
+     * @see \Composer\Util\Filesystem::copyThenRemove()
      */
     public function copy($source, $target)
     {

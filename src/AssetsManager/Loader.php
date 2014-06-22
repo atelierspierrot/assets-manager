@@ -9,13 +9,12 @@
 
 namespace AssetsManager;
 
-use \AssetsManager\Package\AbstractAssetsPackage,
-    \AssetsManager\Config,
-    \AssetsManager\Package\AssetsPackage,
-    \AssetsManager\Package\Preset;
-
-use \Library\Helper\Directory as DirectoryHelper,
-    \Library\Helper\Filesystem as FilesystemHelper;
+use \AssetsManager\Package\AbstractAssetsPackage;
+use \AssetsManager\Config;
+use \AssetsManager\Package\AssetsPackage;
+use \AssetsManager\Package\Preset;
+use \Library\Helper\Directory as DirectoryHelper;
+use \Library\Helper\Filesystem as FilesystemHelper;
 
 /**
  * Class to manage assets paths
@@ -39,9 +38,10 @@ use \Library\Helper\Directory as DirectoryHelper,
  *
  * NOTE - These paths are stored in the object without the trailing slash.
  *
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
-class Loader extends AbstractAssetsPackage
+class Loader
+    extends AbstractAssetsPackage
 {
 
     /**
@@ -63,7 +63,7 @@ class Loader extends AbstractAssetsPackage
     /**
      * Project assets DB array
      *
-     * This is retrieved parsing the package's `ASSETS_DB_FILENAME`.
+     * This is populated parsing the package's `ASSETS_DB_FILENAME`.
      * @var array
      */
     protected $assets_db;
@@ -108,13 +108,15 @@ class Loader extends AbstractAssetsPackage
     /**
      * Loader static instance constructor
      *
-     * @param string $root_dir The project package root directory
-     * @param string $assets_dir The project package assets directory, related from `$root_dir`
-     * @param string $document_root The project assets root directory to build web accessible assets paths
-     * @param int $conflict_gfalg Define if the class must throw excpetions in case of presets conflicts
+     * @param   string  $root_dir       The project package root directory
+     * @param   string  $assets_dir     The project package assets directory, related from `$root_dir`
+     * @param   string  $document_root  The project assets root directory to build web accessible assets paths
+     * @param   int     $conflict_flag  Define if the class must throw excpetions in case of presets conflicts
+     * @return  self
      */
-    public static function getInstance($root_dir = null, $assets_dir = null, $document_root = null, $conflict_flag = self::PRESETS_CONFLICT)
-    {
+    public static function getInstance(
+        $root_dir = null, $assets_dir = null, $document_root = null, $conflict_flag = self::PRESETS_CONFLICT
+    ) {
         if (empty(self::$__instance)) {
             $cls = get_called_class();
             self::$__isStaticInstance = true;
@@ -126,15 +128,15 @@ class Loader extends AbstractAssetsPackage
     /**
      * Loader protected constructor, use the class as a Singleton 
      *
-     * @param string $root_dir The project package root directory
-     * @param string $assets_dir The project package assets directory, related from `$root_dir`
-     * @param string $document_root The project assets root directory to build web accessible assets paths
-     * @param int $conflict_gfalg Define if the class must throw excpetions in case of presets conflicts
-     * @throws Throws an Excpetion if the package's `ASSETS_DB_FILENAME` was not found
-     * @throws Throws an Excpetion if the object is not called as a singleton
+     * @param   string  $root_dir       The project package root directory
+     * @param   string  $assets_dir     The project package assets directory, related from `$root_dir`
+     * @param   string  $document_root  The project assets root directory to build web accessible assets paths
+     * @param   int     $conflict_flag  Define if the class must throw excpetions in case of presets conflicts
+     * @throws  \Exception if the object is not called as a singleton
      */
-    public function __construct($root_dir = null, $assets_dir = null, $document_root = null, $conflict_flag = self::PRESETS_CONFLICT)
-    {
+    public function __construct(
+        $root_dir = null, $assets_dir = null, $document_root = null, $conflict_flag = self::PRESETS_CONFLICT
+    ) {
         if (false===self::$__isStaticInstance) {
             throw new \Exception(
                 sprintf('Object of class "%s" must be used as a singleton!', __CLASS__)
@@ -146,10 +148,11 @@ class Loader extends AbstractAssetsPackage
     }
 
     /**
-     * @param string $root_dir The project package root directory
-     * @param string $assets_dir The project package assets directory, related from `$root_dir`
-     * @param string $document_root The project assets root directory to build web accessible assets paths
-     * @throws Throws an Excpetion if the package's `ASSETS_DB_FILENAME` was not found
+     * @param   string  $root_dir       The project package root directory
+     * @param   string  $assets_dir     The project package assets directory, related from `$root_dir`
+     * @param   string  $document_root  The project assets root directory to build web accessible assets paths
+     * @return  void
+     * @throws  \Exception if the package's `ASSETS_DB_FILENAME` was not found
      */
     public function init($root_dir = null, $assets_dir = null, $document_root = null)
     {
@@ -212,9 +215,9 @@ class Loader extends AbstractAssetsPackage
     /**
      * Set the document root directory
      *
-     * @param string $path The path of the document root directory
-     * @return self Returns `$this` for chainability
-     * @throws Throws an InvalidArgumentException if the directory was not found
+     * @param   string  $path   The path of the document root directory
+     * @return  self
+     * @throws  \InvalidArgumentException if the directory was not found
      */
     public function setDocumentRoot($path)
     {
@@ -233,7 +236,7 @@ class Loader extends AbstractAssetsPackage
     /**
      * Get the document root directory
      *
-     * @return string
+     * @return  string
      */
     public function getDocumentRoot()
     {
@@ -243,8 +246,8 @@ class Loader extends AbstractAssetsPackage
     /**
      * Set the package's assets database
      *
-     * @param array $db The array of package's assets as written in package's `ASSETS_DB_FILENAME`
-     * @return self Returns `$this` for chainability
+     * @param   array   $db     The array of package's assets as written in package's `ASSETS_DB_FILENAME`
+     * @return  self
      */
     public function setAssetsDb(array $db)
     {
@@ -265,7 +268,7 @@ class Loader extends AbstractAssetsPackage
     /**
      * Get the package's assets database
      *
-     * @return array
+     * @return  array
      */
     public function getAssetsDb()
     {
@@ -279,8 +282,8 @@ class Loader extends AbstractAssetsPackage
     /**
      * Get the web path for assets
      *
-     * @return string
-     * @see AssetsManager\Package\Loader::buildWebPath()
+     * @return  string
+     * @see     \AssetsManager\Package\Loader::buildWebPath()
      */
     public function getAssetsWebPath()
     {
@@ -290,8 +293,8 @@ class Loader extends AbstractAssetsPackage
     /**
      * Get the assets full path for a specific package
      *
-     * @param string $package_name The name of the package to get assets path from
-     * @return string
+     * @param   string  $package_name   The name of the package to get assets path from
+     * @return  string
      */
     public function getPackageAssetsPath($package_name)
     {
@@ -302,9 +305,9 @@ class Loader extends AbstractAssetsPackage
     /**
      * Get the web path for assets of a specific package
      *
-     * @param string $package_name The name of the package to get assets path from
-     * @return string
-     * @see AssetsManager\Package\Loader::buildWebPath()
+     * @param   string  $package_name   The name of the package to get assets path from
+     * @return  string
+     * @see     \AssetsManager\Package\Loader::buildWebPath()
      */
     public function getPackageAssetsWebPath($package_name)
     {
@@ -319,8 +322,8 @@ class Loader extends AbstractAssetsPackage
     /**
      * Test if a package exists
      *
-     * @param string $package_name
-     * @return bool
+     * @param   string $package_name
+     * @return  bool
      */
     public function hasPackage($package_name)
     {
@@ -335,8 +338,8 @@ class Loader extends AbstractAssetsPackage
     /**
      * Get a package instance
      *
-     * @param string $package_name
-     * @return object AssetsManager\Package\AssetsPackage
+     * @param   string $package_name
+     * @return  \AssetsManager\Package\AssetsPackage
      */
     public function getPackage($package_name)
     {
@@ -349,8 +352,10 @@ class Loader extends AbstractAssetsPackage
     /**
      * Build a new package instance
      *
-     * @param string $package_name
-     * @return object AssetsManager\Package\AssetsPackage
+     * @param   string $package_name
+     * @return  \AssetsManager\Package\AssetsPackage
+     * @throws  \DomainException if the package class can't be found or doesn't implement required interface
+     * @throws  \InvalidArgumentException if the package can't be found
      */
     protected function _buildNewPackage($package_name)
     {
@@ -389,8 +394,9 @@ class Loader extends AbstractAssetsPackage
 
     /**
      * Load and validate all packages presets in one table
-     * @return void
-     * @throws An `Excpetion` is thrown if the `$conflict_flag` is set on `self::PRESETS_CONFLICT` in case of duplicate preset name
+     *
+     * @return  void
+     * @throws  \Exception if the `$conflict_flag` is set on `self::PRESETS_CONFLICT` in case of duplicate preset name
      */
     public function validatePresets()
     {
@@ -418,8 +424,8 @@ class Loader extends AbstractAssetsPackage
     /**
      * Test if a preset exists
      *
-     * @param string $preset_name
-     * @return bool
+     * @param   string  $preset_name
+     * @return  bool
      */
     public function hasPreset($preset_name)
     {
@@ -429,8 +435,9 @@ class Loader extends AbstractAssetsPackage
     /**
      * Get a preset instance
      *
-     * @param string $preset_name
-     * @return object AssetsManager\Package\Preset
+     * @param   string $preset_name
+     * @return  \AssetsManager\Package\Preset
+     * @throws  \InvalidArgumentException if the preset can't be found
      */
     public function getPreset($preset_name)
     {
@@ -449,8 +456,10 @@ class Loader extends AbstractAssetsPackage
     /**
      * Build a new preset instance
      *
-     * @param string $preset_name
-     * @return object AssetsManager\Package\Preset
+     * @param   string $preset_name
+     * @return  \AssetsManager\Package\Preset
+     * @throws  \DomainException if the preset class can't be found or doesn't implement required interface
+     * @throws  \InvalidArgumentException if the preset can't be found
      */
     protected function _buildNewPreset($preset_name)
     {
@@ -492,7 +501,7 @@ class Loader extends AbstractAssetsPackage
     /**
      * Get the package's assets database
      *
-     * @return array
+     * @return  array
      */
     public static function getAssets()
     {
@@ -503,8 +512,8 @@ class Loader extends AbstractAssetsPackage
     /**
      * Get a preset instance from static loader
      *
-     * @param string $preset_name
-     * @return object AssetsManager\Package\Preset
+     * @param   string  $preset_name
+     * @return  \AssetsManager\Package\Preset
      */
     public static function findPreset($preset_name)
     {
@@ -515,8 +524,8 @@ class Loader extends AbstractAssetsPackage
     /**
      * Get a package instance from static loader
      *
-     * @param string $package_name
-     * @return object AssetsManager\Package\AssetsPackage
+     * @param   string  $package_name
+     * @return  \AssetsManager\Package\AssetsPackage
      */
     public static function findPackage($package_name)
     {
@@ -532,9 +541,9 @@ class Loader extends AbstractAssetsPackage
      * class: path is returned relative to `$document_root` even if it is not in it in the
      * filesystem.
      *
-     * @param string $path The path to transform
-     * @return string
-     * @see Library\Helper\Filesystem::resolveRelatedPath()
+     * @param   string  $path   The path to transform
+     * @return  string
+     * @see     \Library\Helper\Filesystem::resolveRelatedPath()
      */
     public static function buildWebPath($path)
     {
@@ -545,9 +554,9 @@ class Loader extends AbstractAssetsPackage
     /**
      * Find an asset file in the filesystem
      *
-     * @param string $filename The asset filename to find
-     * @param string $package The name of a package to search in (optional)
-     * @return string|null The web path of the asset if found, `null` otherwise
+     * @param   string  $filename   The asset filename to find
+     * @param   string  $package    The name of a package to search in (optional)
+     * @return  string|null         The web path of the asset if found, `null` otherwise
      */
     public static function find($filename, $package = null)
     {
@@ -562,9 +571,9 @@ class Loader extends AbstractAssetsPackage
     /**
      * Find an asset file in the filesystem of a specific package
      *
-     * @param string $filename The asset filename to find
-     * @param string $package The name of a package to search in
-     * @return string|null The web path of the asset if found, `null` otherwise
+     * @param   string  $filename   The asset filename to find
+     * @param   string  $package    The name of a package to search in
+     * @return  string|null         The web path of the asset if found, `null` otherwise
      */
     public static function findInPackage($filename, $package)
     {
@@ -582,9 +591,9 @@ class Loader extends AbstractAssetsPackage
     /**
      * Find an asset file in a package's path
      *
-     * @param string $filename The asset filename to find
-     * @param string $path The path to search from
-     * @return string|null The web path of the asset if found, `null` otherwise
+     * @param   string  $filename   The asset filename to find
+     * @param   string  $path       The path to search from
+     * @return  string|null         The web path of the asset if found, `null` otherwise
      */
     public static function findInPath($filename, $path)
     {

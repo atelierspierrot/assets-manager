@@ -9,18 +9,17 @@
 
 namespace AssetsManager\Composer;
 
-use \Composer\Composer,
-    \Composer\IO\IOInterface,
-    \Composer\Script\Event,
-    \Composer\Plugin\PluginInterface,
-    \Composer\Plugin\PluginEvents,
-    \Composer\EventDispatcher\EventSubscriberInterface,
-    \Composer\Plugin\CommandEvent,
-    \Composer\Plugin\PreFileDownloadEvent;
-
-use \AssetsManager\Composer\Dispatch,
-    \AssetsManager\Composer\Autoload\AssetsAutoloadGenerator,
-    \AssetsManager\Composer\Autoload\DumpAutoloadEventHandler;
+use \Composer\Composer;
+use \Composer\IO\IOInterface;
+use \Composer\Script\Event;
+use \Composer\Plugin\PluginInterface;
+use \Composer\Plugin\PluginEvents;
+use \Composer\EventDispatcher\EventSubscriberInterface;
+use \Composer\Plugin\CommandEvent;
+use \Composer\Plugin\PreFileDownloadEvent;
+use \AssetsManager\Composer\Dispatch;
+use \AssetsManager\Composer\Autoload\AssetsAutoloadGenerator;
+use \AssetsManager\Composer\Autoload\DumpAutoloadEventHandler;
 
 class AssetsManagerPlugin
     implements PluginInterface, EventSubscriberInterface
@@ -33,6 +32,9 @@ class AssetsManagerPlugin
 
     /**
      * Add the `\AssetsManager\Composer\Dispatch` installer
+     *
+     * @param \Composer\Composer $composer
+     * @param \Composer\IO\IOInterface $io
      */
     public function activate(Composer $composer, IOInterface $io)
     {
@@ -42,6 +44,8 @@ class AssetsManagerPlugin
 
     /**
      * Composer events plugin's subscription
+     *
+     * @return array
      */
     public static function getSubscribedEvents()
     {
@@ -58,7 +62,7 @@ class AssetsManagerPlugin
     /**
      * Pre file download event dispatcher
      *
-     * @param object \Composer\Plugin\PreFileDownloadEvent
+     * @param \Composer\Plugin\PreFileDownloadEvent $event
      */
     public function onPreFileDownload(PreFileDownloadEvent $event)
     {
@@ -71,7 +75,7 @@ var_export(func_get_args());
     /**
      * Command event dispatcher
      *
-     * @param object \Composer\Plugin\CommandEvent
+     * @param \Composer\Plugin\CommandEvent $event
      */
     public function onCommand(CommandEvent $event)
     {

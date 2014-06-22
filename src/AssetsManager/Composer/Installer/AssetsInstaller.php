@@ -10,21 +10,19 @@
 namespace AssetsManager\Composer\Installer;
 
 use \Library\Helper\Directory as DirectoryHelper;
-
-use \Composer\Composer,
-    \Composer\IO\IOInterface,
-    \Composer\Package\PackageInterface,
-    \Composer\Repository\InstalledRepositoryInterface,
-    \Composer\Installer\LibraryInstaller;
-
-use \AssetsManager\Config,
-    \AssetsManager\Error,
-    \AssetsManager\Composer\Dispatch,
-    \AssetsManager\Composer\Installer\AssetsInstallerInterface,
-    \AssetsManager\Composer\Util\Filesystem as AssetsFilesystem;
+use \Composer\Composer;
+use \Composer\IO\IOInterface;
+use \Composer\Package\PackageInterface;
+use \Composer\Repository\InstalledRepositoryInterface;
+use \Composer\Installer\LibraryInstaller;
+use \AssetsManager\Config;
+use \AssetsManager\Error;
+use \AssetsManager\Composer\Dispatch;
+use \AssetsManager\Composer\Installer\AssetsInstallerInterface;
+use \AssetsManager\Composer\Util\Filesystem as AssetsFilesystem;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class AssetsInstaller
     extends LibraryInstaller
@@ -142,7 +140,7 @@ class AssetsInstaller
     /**
      * Move the assets of a package
      *
-     * @param object $package \Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @return bool
      */
     protected function installAssets(PackageInterface $package)
@@ -175,7 +173,7 @@ class AssetsInstaller
     /**
      * Remove the assets of a package
      *
-     * @param object $package \Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @return bool
      */
     protected function removeAssets(PackageInterface $package)
@@ -211,7 +209,7 @@ class AssetsInstaller
     /**
      * Create defined configuration object
      *
-     * @param object $package \Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @return self
      */
     protected function guessConfigurator(PackageInterface $package)
@@ -227,7 +225,7 @@ class AssetsInstaller
     /**
      * Guess and get the `assets-dir` configuration package entry
      *
-     * @param object $package \Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @return string
      */
     protected function guessAssetsDir(PackageInterface $package)
@@ -238,7 +236,7 @@ class AssetsInstaller
     /**
      * Guess and get the `assets-vendor-dir` configuration package entry
      *
-     * @param object $package \Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @return string
      */
     protected function guessAssetsVendorDir(PackageInterface $package)
@@ -249,7 +247,7 @@ class AssetsInstaller
     /**
      * Guess and get the `document-root` configuration package entry
      *
-     * @param object $package \Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @return string
      */
     protected function guessDocumentRoot(PackageInterface $package)
@@ -260,7 +258,7 @@ class AssetsInstaller
     /**
      * Guess and get the `assets-db-filename` configuration package entry
      *
-     * @param object $package \Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @return string
      */
     protected function guessAssetsDbFilename(PackageInterface $package)
@@ -330,7 +328,7 @@ class AssetsInstaller
     }
 
     /**
-     * @param object $package \Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @return string
      */
     protected function getPackageAssetsDir(PackageInterface $package)
@@ -339,7 +337,7 @@ class AssetsInstaller
     }
 
     /**
-     * @param object $package \Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @return string
      */
     protected function getPackageAssetsBasePath(PackageInterface $package)
@@ -393,6 +391,7 @@ class AssetsInstaller
     }
 
     /**
+     * @param \Composer\Package\PackageInterface $package
      * @return string
      */
     public function getAssetsInstallPath(PackageInterface $package)
@@ -403,7 +402,7 @@ class AssetsInstaller
     /**
      * Parse the `composer.json` "extra" block of a package and return its transformed data
      *
-     * @param array $package \Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @return array|null
      */
     public function parseComposerExtra(PackageInterface $package, $package_dir)
@@ -453,7 +452,7 @@ class AssetsInstaller
     /**
      * Search a configuration value in a package's config or the global config if so
      *
-     * @param array $package \Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @param string $config_entry
      * @return string
      */
@@ -470,7 +469,7 @@ class AssetsInstaller
      * If `$package_extra` is defined, this will test if concerned entry is defined in "extra"
      * configuration of the package.
      *
-     * @param array $package \Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @param string $type
      * @param string $package_extra
      * @return bool

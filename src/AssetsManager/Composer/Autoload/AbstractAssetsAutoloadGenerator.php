@@ -10,18 +10,17 @@
 namespace AssetsManager\Composer\Autoload;
 
 use \AssetsManager\Composer\Installer\AssetsInstallerInterface;
-
-use \Composer\Package\PackageInterface,
-    \Composer\Json\JsonFile;
+use \Composer\Package\PackageInterface;
+use \Composer\Json\JsonFile;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 abstract class AbstractAssetsAutoloadGenerator
 {
 
     /**
-     * @var AssetsManager\Composer\Installer\AssetsInstallerInterface
+     * @var \AssetsManager\Composer\Installer\AssetsInstallerInterface
      */
     protected $assets_installer;
 
@@ -42,7 +41,8 @@ abstract class AbstractAssetsAutoloadGenerator
 
     /**
      * Get a singleton instance
-     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
+     *
+     * @param \AssetsManager\Composer\Installer\AssetsInstallerInterface $installer
      * @return object
      */
     public static function getInstance(AssetsInstallerInterface $installer = null)
@@ -63,7 +63,8 @@ abstract class AbstractAssetsAutoloadGenerator
 
     /**
      * Construct instance
-     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
+     *
+     * @param \AssetsManager\Composer\Installer\AssetsInstallerInterface $installer
      * @return void
      */
     protected function __construct(AssetsInstallerInterface $installer)
@@ -75,6 +76,7 @@ abstract class AbstractAssetsAutoloadGenerator
 
     /**
      * Load the assets database file generation
+     *
      * @return void
      */
     public function __destruct()
@@ -83,7 +85,7 @@ abstract class AbstractAssetsAutoloadGenerator
     }
 
     /**
-     * @return object AssetsManager\Composer\Installer\AssetsInstallerInterface
+     * @return \AssetsManager\Composer\Installer\AssetsInstallerInterface
      */
     public function getAssetsInstaller()
     {
@@ -92,6 +94,7 @@ abstract class AbstractAssetsAutoloadGenerator
 
     /**
      * Reads the assets database from JSON file
+     *
      * @return false|string
      */
     public function readJsonDatabase()
@@ -107,6 +110,7 @@ abstract class AbstractAssetsAutoloadGenerator
 
     /**
      * Writes the assets database in a JSON file
+     *
      * @param array $full_db
      * @return false|string
      */
@@ -132,8 +136,9 @@ abstract class AbstractAssetsAutoloadGenerator
 
     /**
      * Set the current assets database
+     *
      * @param array
-     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
+     * @param \AssetsManager\Composer\Installer\AssetsInstallerInterface $installer
      * @return void
      */
     public static function setRegistry(array $assets_db, AssetsInstallerInterface $installer = null)
@@ -144,7 +149,8 @@ abstract class AbstractAssetsAutoloadGenerator
 
     /**
      * Get the current assets database
-     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
+     *
+     * @param \AssetsManager\Composer\Installer\AssetsInstallerInterface $installer
      * @return array
      */
     public static function getRegistry(AssetsInstallerInterface $installer = null)
@@ -155,6 +161,7 @@ abstract class AbstractAssetsAutoloadGenerator
 
     /**
      * Set the generator called at object destruction
+     *
      * @param callable $callable
      * @return array
      */
@@ -167,9 +174,10 @@ abstract class AbstractAssetsAutoloadGenerator
 
     /**
      * Add a new installed package in the Assets database
-     * @param object $package Composer\Package\PackageInterface
+     *
+     * @param \Composer\Package\PackageInterface $package
      * @param string $target
-     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
+     * @param \AssetsManager\Composer\Installer\AssetsInstallerInterface $installer
      * @return void
      */
     public static function registerPackage(PackageInterface $package, $target, AssetsInstallerInterface $installer = null)
@@ -180,8 +188,9 @@ abstract class AbstractAssetsAutoloadGenerator
 
     /**
      * Remove an uninstalled package from the Assets database
-     * @param object $package Composer\Package\PackageInterface
-     * @param object $installer AssetsManager\Composer\Installer\AssetsInstallerInterface
+     *
+     * @param \Composer\Package\PackageInterface $package
+     * @param \AssetsManager\Composer\Installer\AssetsInstallerInterface $installer
      * @return void
      */
     public static function unregisterPackage(PackageInterface $package, AssetsInstallerInterface $installer = null)
@@ -201,7 +210,8 @@ abstract class AbstractAssetsAutoloadGenerator
     
     /**
      * Add a new installed package in the Assets database
-     * @param object $package Composer\Package\PackageInterface
+     *
+     * @param \Composer\Package\PackageInterface $package
      * @param string $target
      * @return void
      */
@@ -209,7 +219,8 @@ abstract class AbstractAssetsAutoloadGenerator
 
     /**
      * Remove an uninstalled package from the Assets database
-     * @param object $package Composer\Package\PackageInterface
+     *
+     * @param \Composer\Package\PackageInterface $package
      * @return void
      */
     abstract protected function removePackage(PackageInterface $package);

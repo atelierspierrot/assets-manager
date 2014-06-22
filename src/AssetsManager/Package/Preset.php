@@ -9,12 +9,11 @@
 
 namespace AssetsManager\Package;
 
-use InvalidArgumentException;
-
-use AssetsManager\Config,
-    AssetsManager\Package\AssetsPackage,
-    AssetsManager\Package\AssetsPackageInterface,
-    AssetsManager\Package\AssetsPresetInterface;
+use \InvalidArgumentException;
+use \AssetsManager\Config;
+use \AssetsManager\Package\AssetsPackage;
+use \AssetsManager\Package\AssetsPackageInterface;
+use \AssetsManager\Package\AssetsPresetInterface;
 
 /**
  * Preset
@@ -22,9 +21,10 @@ use AssetsManager\Config,
  * This class is the "presets" manager for predefined assets plugins to use in views with
  * the `_use()` method.
  *
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
-class Preset implements AssetsPresetInterface
+class Preset
+    implements AssetsPresetInterface
 {
 
     /**
@@ -38,7 +38,7 @@ class Preset implements AssetsPresetInterface
     protected $data;
 
     /**
-     * @var AssetsManager\Package\AssetsPackage
+     * @var \AssetsManager\Package\AssetsPackage
      */
     protected $package;
 
@@ -48,9 +48,9 @@ class Preset implements AssetsPresetInterface
     protected $_statements;
 
     /**
-     * @param string $package_name
-     * @param array $package_data
-     * @param object $package AssetsManager\Package\AssetsPackage
+     * @param string $preset_name
+     * @param array $preset_data
+     * @param \AssetsManager\Package\AssetsPackageInterface $package
      */
     public function __construct($preset_name, array $preset_data, AssetsPackageInterface $package)
     {
@@ -71,22 +71,23 @@ class Preset implements AssetsPresetInterface
         return $this->getPackage()->findInPackage($path);
     }
 
-	/**
-	 * Automatic assets loading from an Assets package declare in a `composer.json`
-	 *
-	 * @param string $package_name The name of the package to use
-	 * @return void
-	 */
-	public function load()
-	{
-	    if (!empty($this->_statements)) return;
+    /**
+     * Automatic assets loading from an Assets package declare in a `composer.json`
+     *
+     * @return void
+     * @throws \DomainException if the preset doesn't exist or doesn't implement required interface
+     * @throws \LogicException if the statement doesn't exist
+     */
+    public function load()
+    {
+        if (!empty($this->_statements)) return;
 
-	    foreach ($this->data as $type=>$item) {
-	        if (!is_array($item)) $item = array( $item );
-	        $use_statements = Config::get('use-statements');
-	        $adapter_name = isset($use_statements[$type]) ? $use_statements[$type] : null;
-	        if (!empty($adapter_name)) {
-	            $cls_name = 'AssetsManager\Package\PresetAdapter\\'.$adapter_name;
+        foreach ($this->data as $type=>$item) {
+            if (!is_array($item)) $item = array( $item );
+            $use_statements = Config::get('use-statements');
+            $adapter_name = isset($use_statements[$type]) ? $use_statements[$type] : null;
+            if (!empty($adapter_name)) {
+                $cls_name = 'AssetsManager\Package\PresetAdapter\\'.$adapter_name;
                 if (@class_exists($cls_name)) {
                     $interfaces = class_implements($cls_name);
                     $config_interface = Config::getInternal('assets-preset-adapter-interface');
@@ -111,13 +112,13 @@ class Preset implements AssetsPresetInterface
                         sprintf('Preset statement class "%s" not found!', $cls_name)
                     );
                 }
-	        } else {
-	            throw new \LogicException(
-	                sprintf('Unknown preset statement type "%s" in preset "%s"!', $type, $this->getName())
-	            );
-	        }
-	    }
-	}
+            } else {
+                throw new \LogicException(
+                    sprintf('Unknown preset statement type "%s" in preset "%s"!', $type, $this->getName())
+                );
+            }
+        }
+    }
 
     /**
      * @return string
@@ -174,7 +175,7 @@ class Preset implements AssetsPresetInterface
     }
 
     /**
-     * @param object $package AssetsManager\Package\AssetsPackage
+     * @param \AssetsManager\Package\AssetsPackage $package
      * @return self
      */
     public function setPackage(AssetsPackage $package)
@@ -184,7 +185,7 @@ class Preset implements AssetsPresetInterface
     }
 
     /**
-     * @return object AssetsManager\Package\AssetsPackage
+     * @return \AssetsManager\Package\AssetsPackage
      */
     public function getPackage()
     {
@@ -210,7 +211,7 @@ class Preset implements AssetsPresetInterface
     public function getOrganizedStatements()
     {
         $organized_statements = array();
-	    if (empty($this->_statements)) $this->load();
+       if (empty($this->_statements)) $this->load();
         $statements = $this->_statements;
 
         if (!empty($statements['require'])) {

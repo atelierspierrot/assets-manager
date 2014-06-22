@@ -12,7 +12,7 @@ namespace AssetsManager\Config;
 use \AssetsManager\Config\ConfiguratorInterface;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class DefaultConfig
     implements ConfiguratorInterface

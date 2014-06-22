@@ -10,14 +10,20 @@
 namespace AssetsManager;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class Error
 {
 
     /**
-     * @throws $throw standard exception class
-     * @return void
+     * @param   string  $str    error message
+     * @param   string  $throw  exception class name
+     * @param   string  $class
+     * @param   string  $method
+     * @param   int     $ine
+     * @param   string  $file
+     * @return  void
+     * @throws  mixed   $throw standard exception class
      */
     public static function thrower($str, $throw = '\Exception', $class = null, $method = null, $line = null, $file = null)
     {

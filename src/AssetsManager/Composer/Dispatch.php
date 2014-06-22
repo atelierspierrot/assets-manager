@@ -9,19 +9,18 @@
 
 namespace AssetsManager\Composer;
 
-use \Composer\Composer,
-    \Composer\IO\IOInterface,
-    \Composer\Package\PackageInterface,
-    \Composer\Repository\InstalledRepositoryInterface,
-    \Composer\Installer\LibraryInstaller,
-    \Composer\Installer\InstallerInterface;
-
-use \AssetsManager\Config,
-    \AssetsManager\Error,
-    \AssetsManager\Composer\Installer\AssetsInstallerInterface;
+use \Composer\Composer;
+use \Composer\IO\IOInterface;
+use \Composer\Package\PackageInterface;
+use \Composer\Repository\InstalledRepositoryInterface;
+use \Composer\Installer\LibraryInstaller;
+use \Composer\Installer\InstallerInterface;
+use \AssetsManager\Config;
+use \AssetsManager\Error;
+use \AssetsManager\Composer\Installer\AssetsInstallerInterface;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class Dispatch
     implements InstallerInterface
@@ -270,9 +269,10 @@ class Dispatch
 
     /**
      * Set the current assets database
-     * @param array
-     * @param object $installer \AssetsManager\Composer\Installer\AssetsInstallerInterface
-     * @return void
+     *
+     * @param   array $assets_db
+     * @param   \AssetsManager\Composer\Installer\AssetsInstallerInterface $installer
+     * @return  void
      */
     public static function setRegistry(array $assets_db, AssetsInstallerInterface $installer = null)
     {
@@ -281,7 +281,8 @@ class Dispatch
 
     /**
      * Get the current assets database
-     * @param object $installer \AssetsManager\Composer\Installer\AssetsInstallerInterface
+     *
+     * @param \AssetsManager\Composer\Installer\AssetsInstallerInterface $installer
      * @return array
      */
     public static function getRegistry(AssetsInstallerInterface $installer = null)
@@ -291,6 +292,7 @@ class Dispatch
 
     /**
      * Set the generator called at object destruction
+     *
      * @param callable $callable
      * @return void
      */
@@ -301,6 +303,7 @@ class Dispatch
 
     /**
      * Get the generator called at object destruction
+     *
      * @return object
      */
     public static function getGenerator()
@@ -311,9 +314,9 @@ class Dispatch
     /**
      * Add a new installed package in the Assets database
      *
-     * @param object $package \Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @param string $target
-     * @param object $installer \AssetsManager\Composer\Installer\AssetsInstallerInterface
+     * @param \AssetsManager\Composer\Installer\AssetsInstallerInterface $installer
      * @return void
      */
     public static function registerPackage(PackageInterface $package, $target, AssetsInstallerInterface $installer = null)
@@ -324,8 +327,8 @@ class Dispatch
     /**
      * Remove an uninstalled package from the Assets database
      *
-     * @param object $package \Composer\Package\PackageInterface
-     * @param object $installer \AssetsManager\Composer\Installer\AssetsInstallerInterface
+     * @param \Composer\Package\PackageInterface $package
+     * @param \AssetsManager\Composer\Installer\AssetsInstallerInterface $installer
      * @return void
      */
     public static function unregisterPackage(PackageInterface $package, AssetsInstallerInterface $installer = null)
