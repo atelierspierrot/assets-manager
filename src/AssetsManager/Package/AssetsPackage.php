@@ -9,53 +9,48 @@
 
 namespace AssetsManager\Package;
 
-use InvalidArgumentException;
-
-use Library\Helper\Directory as DirectoryHelper;
-
-use AssetsManager\Loader as AssetsLoader,
-    AssetsManager\Package\AssetsPackageInterface,
-    AssetsManager\Package\AbstractAssetsPackage,
-    AssetsManager\Package\Preset;
+use \InvalidArgumentException;
+use \Library\Helper\Directory as DirectoryHelper;
+use \AssetsManager\Loader as AssetsLoader;
+use \AssetsManager\Package\AssetsPackageInterface;
+use \AssetsManager\Package\AbstractAssetsPackage;
+use \AssetsManager\Package\Preset;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
-class AssetsPackage extends AbstractAssetsPackage implements AssetsPackageInterface
+class AssetsPackage
+    extends AbstractAssetsPackage
+    implements AssetsPackageInterface
 {
 
     /**
-     * Current package name
-     * @var string
+     * @var string Current package name
      */
     protected $name;
 
     /**
-     * Current package version number
-     * @var string
+     * @var string Current package version number
      */
     protected $version;
 
     /**
-     * Current package relative path (relative to `$_root_dir`)
-     * @var string
+     * @var string Current package relative path (relative to `$_root_dir`)
      */
     protected $relative_path;
 
     /**
-     * Current package assets paths (relative to `$relative_path`)
-     * @var string
+     * @var string Current package assets paths (relative to `$relative_path`)
      */
     protected $assets_path;
 
     /**
-     * Current package presets
-     * @var array
+     * @var array Current package presets
      */
     protected $assets_presets;
 
     /**
-     * Contruction
+     * Construction
      *
      * @param string $_root_dir The global package root directory (must exist)
      * @param string $_assets_dir The global package assets directory (must exist in `$_root_dir`)
@@ -76,6 +71,8 @@ class AssetsPackage extends AbstractAssetsPackage implements AssetsPackageInterf
 
     /**
      * Create a new instance from an `AssetsManager\Loader` instance
+     *
+     * @param \AssetsManager\Loader $loader
      * @return object
      */
     public static function createFromAssetsLoader(AssetsLoader $loader)
@@ -174,7 +171,7 @@ class AssetsPackage extends AbstractAssetsPackage implements AssetsPackageInterf
     /**
      * @param string $path
      * @return self
-     * @throws `InvalidArgumentException` if the path doesn't exist
+     * @throws \InvalidArgumentException if the path doesn't exist
      */
     public function setAssetsPath($path)
     {
@@ -282,7 +279,7 @@ class AssetsPackage extends AbstractAssetsPackage implements AssetsPackageInterf
     /**
      * Load a new package from the `ASSETS_DB_FILENAME` entry
      *
-     * @param array
+     * @param array $entries
      * @return self
      */
      public function loadFromArray(array $entries)

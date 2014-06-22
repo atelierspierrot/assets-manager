@@ -14,7 +14,7 @@ namespace AssetsManager\Package;
  *
  * Any Assets Package class must implement this interface methods.
  *
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 interface AssetsPackageInterface
 {
@@ -29,14 +29,13 @@ interface AssetsPackageInterface
 
     /**
      * Create a new instance from an `AssetsManager\Loader` instance
-     * @param object AssetsManager\Loader
+     * @param \AssetsManager\Loader $loader
      * @return object
      */
     public static function createFromAssetsLoader(\AssetsManager\Loader $loader);
 
     /**
      * Load a new package from the `ASSETS_DB_FILENAME` entry
-     *
      * @param array
      * @return self
      */

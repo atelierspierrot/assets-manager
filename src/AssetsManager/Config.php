@@ -10,26 +10,23 @@
 namespace AssetsManager;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class Config
 {
 
     /**
-     * The global package configuration manager (default is AssetsManager\DefaultConfig)
-     * @var object
+     * @var object The global package configuration manager (default is \AssetsManager\DefaultConfig)
      */
     private static $__configurator;
 
     /**
-     * The configuration entries registry
-     * @var array
+     * @var array The configuration entries registry
      */
     private static $__registry;
 
     /**
-     * The real configuration entries
-     * @var array
+     * @var array The real configuration entries
      */
     protected static $_requires = array(
         'package-type',
@@ -47,8 +44,7 @@ class Config
     );
 
     /**
-     * The internal configuration entries
-     * @var array
+     * @var array The internal configuration entries
      */
     private static $__internals = array(
         'composer-db' => 'composer.json',
@@ -63,6 +59,7 @@ class Config
 
     /**
      * Check if the configurator is not yet loaded
+     *
      * @return bool
      */
     public static function mustLoad()
@@ -72,8 +69,10 @@ class Config
     
     /**
      * Load a config object
-     * @param bool $safe
-     * @return void
+     *
+     * @param   string  $class_name
+     * @param   bool    $safe
+     * @return  void
      */
     public static function load($class_name = null, $safe = false)
     {
@@ -125,8 +124,9 @@ class Config
 
     /**
      * Check if a custom Config class defines all required values
-     * @param array $entries
-     * @return bool
+     *
+     * @param   array   $entries
+     * @return  bool
      */
     protected static function _validateConfig(array $entries)
     {
@@ -141,7 +141,9 @@ class Config
 
     /**
      * Overload a config registry
-     * @return void
+     *
+     * @param   array   $settings
+     * @return  void
      */
     public static function overload(array $settings)
     {
@@ -152,9 +154,9 @@ class Config
     }
     
     /**
-     * @param string $name
-     * @param misc $value
-     * @return void
+     * @param   string  $name
+     * @param   mixed   $value
+     * @return  void
      */
     public static function set($name, $value)
     {
@@ -165,9 +167,9 @@ class Config
     }
 
     /**
-     * @param string $name
-     * @param misc $default
-     * @return misc
+     * @param   string  $name
+     * @param   mixed   $default
+     * @return  mixed
      */
     public static function get($name, $default = null)
     {
@@ -179,8 +181,8 @@ class Config
     }
 
     /**
-     * @param string $name
-     * @return misc
+     * @param   string  $name
+     * @return  mixed
      */
     public static function getDefault($name)
     {
@@ -193,8 +195,8 @@ class Config
     }
 
     /**
-     * @param string $name
-     * @return string
+     * @param   string  $name
+     * @return  string
      */
     public static function getInternal($name)
     {
@@ -205,7 +207,7 @@ class Config
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public static function getRegistry()
     {

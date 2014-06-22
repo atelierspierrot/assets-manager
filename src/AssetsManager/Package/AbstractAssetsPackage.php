@@ -9,9 +9,8 @@
 
 namespace AssetsManager\Package;
 
-use InvalidArgumentException;
-
-use Library\Helper\Directory as DirectoryHelper;
+use \InvalidArgumentException;
+use \Library\Helper\Directory as DirectoryHelper;
 
 /**
  * Class to manage assets paths
@@ -35,7 +34,7 @@ use Library\Helper\Directory as DirectoryHelper;
  *
  * NOTE - These paths are stored in the object without the trailing slash.
  *
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 abstract class AbstractAssetsPackage
 {
@@ -73,7 +72,6 @@ abstract class AbstractAssetsPackage
      * @param string $assets_dir
      * @param string $vendor_dir
      * @param string $assets_vendor_dir
-     * @param string $config_class
      */
     public function __construct(
         $root_dir = null, $assets_dir = null, $vendor_dir = null, $assets_vendor_dir = null
@@ -95,7 +93,7 @@ abstract class AbstractAssetsPackage
      *
      * @param string $path
      * @return self
-     * @throws `InvalidArgumentException` if the path doesn't exist
+     * @throws \InvalidArgumentException if the path doesn't exist
      */
     public function setRootDirectory($path)
     {
@@ -122,9 +120,9 @@ abstract class AbstractAssetsPackage
     /**
      * Set the project's assets directory, relative to `$this->_root_dir`
      *
-     * @param string $path
-     * @return self
-     * @throws `InvalidArgumentException` if the path doesn't exist
+     * @param   string $path
+     * @return  self
+     * @throws  \InvalidArgumentException if the path doesn't exist
      */
     public function setAssetsDirectory($path)
     {
@@ -152,9 +150,9 @@ abstract class AbstractAssetsPackage
     /**
      * Set the project's vendor directory, relative to `$this->_root_dir`
      *
-     * @param string $path
-     * @return self
-     * @throws `InvalidArgumentException` if the path doesn't exist
+     * @param   string $path
+     * @return  self
+     * @throws  \InvalidArgumentException if the path doesn't exist
      */
     public function setVendorDirectory($path)
     {
@@ -182,9 +180,9 @@ abstract class AbstractAssetsPackage
     /**
      * Set the project's assets vendor directory, relative to `$this->_assets_dir`
      *
-     * @param string $path
-     * @return self
-     * @throws `InvalidArgumentException` if the path doesn't exist
+     * @param   string $path
+     * @return  self
+     * @throws  \InvalidArgumentException if the path doesn't exist
      */
     public function setAssetsVendorDirectory($path)
     {
