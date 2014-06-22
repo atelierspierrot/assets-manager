@@ -61,7 +61,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>($root_dir = null, $assets_dir = null, $vendor_dir = null, $assets_vendor_dir = null)
+                    <a href="#method___construct">__construct</a>(string $root_dir = null, string $assets_dir = null, string $vendor_dir = null, string $assets_vendor_dir = null)
                     <p>
 </p>
                 </td>
@@ -193,9 +193,9 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 78</div>
+        <div class="location">at line 76</div>
         <code>            public            
-    <strong>__construct</strong>($root_dir = null, $assets_dir = null, $vendor_dir = null, $assets_vendor_dir = null)</code>
+    <strong>__construct</strong>(string $root_dir = null, string $assets_dir = null, string $vendor_dir = null, string $assets_vendor_dir = null)</code>
     </h3>
     <div class="details">
         <p>
@@ -207,25 +207,25 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$root_dir</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$assets_dir</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$vendor_dir</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$assets_vendor_dir</td>
                 <td>
 </td>
@@ -239,7 +239,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_setRootDirectory">
-        <div class="location">at line 100</div>
+        <div class="location">at line 98</div>
         <code>            public            <a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
     <strong>setRootDirectory</strong>(string $path)</code>
     </h3>
@@ -275,7 +275,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
 
                     <table>
                     <tr>
-                <td><abbr title="`InvalidArgumentException`">`InvalidArgumentException`</abbr></td>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
                 <td>if the path doesn't exist</td>
             </tr>
             </table>
@@ -285,7 +285,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getRootDirectory">
-        <div class="location">at line 117</div>
+        <div class="location">at line 115</div>
         <code>            public            string
     <strong>getRootDirectory</strong>()</code>
     </h3>
@@ -311,7 +311,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_setAssetsDirectory">
-        <div class="location">at line 129</div>
+        <div class="location">at line 127</div>
         <code>            public            <a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
     <strong>setAssetsDirectory</strong>(string $path)</code>
     </h3>
@@ -347,7 +347,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
 
                     <table>
                     <tr>
-                <td><abbr title="`InvalidArgumentException`">`InvalidArgumentException`</abbr></td>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
                 <td>if the path doesn't exist</td>
             </tr>
             </table>
@@ -357,7 +357,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getAssetsDirectory">
-        <div class="location">at line 147</div>
+        <div class="location">at line 145</div>
         <code>            public            string
     <strong>getAssetsDirectory</strong>()</code>
     </h3>
@@ -383,7 +383,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_setVendorDirectory">
-        <div class="location">at line 159</div>
+        <div class="location">at line 157</div>
         <code>            public            <a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
     <strong>setVendorDirectory</strong>(string $path)</code>
     </h3>
@@ -419,7 +419,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
 
                     <table>
                     <tr>
-                <td><abbr title="`InvalidArgumentException`">`InvalidArgumentException`</abbr></td>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
                 <td>if the path doesn't exist</td>
             </tr>
             </table>
@@ -429,7 +429,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getVendorDirectory">
-        <div class="location">at line 177</div>
+        <div class="location">at line 175</div>
         <code>            public            string
     <strong>getVendorDirectory</strong>()</code>
     </h3>
@@ -455,7 +455,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_setAssetsVendorDirectory">
-        <div class="location">at line 189</div>
+        <div class="location">at line 187</div>
         <code>            public            <a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
     <strong>setAssetsVendorDirectory</strong>(string $path)</code>
     </h3>
@@ -491,7 +491,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
 
                     <table>
                     <tr>
-                <td><abbr title="`InvalidArgumentException`">`InvalidArgumentException`</abbr></td>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
                 <td>if the path doesn't exist</td>
             </tr>
             </table>
@@ -501,7 +501,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getAssetsVendorDirectory">
-        <div class="location">at line 207</div>
+        <div class="location">at line 205</div>
         <code>            public            string
     <strong>getAssetsVendorDirectory</strong>()</code>
     </h3>
@@ -527,7 +527,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getFullPath">
-        <div class="location">at line 224</div>
+        <div class="location">at line 222</div>
         <code>            public            string
     <strong>getFullPath</strong>(string $path, string $type = null, bool $out = false)</code>
     </h3>
@@ -573,7 +573,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getAssetsRealPath">
-        <div class="location">at line 265</div>
+        <div class="location">at line 263</div>
         <code>            public            string
     <strong>getAssetsRealPath</strong>()</code>
     </h3>
@@ -599,7 +599,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getVendorRealPath">
-        <div class="location">at line 275</div>
+        <div class="location">at line 273</div>
         <code>            public            string
     <strong>getVendorRealPath</strong>()</code>
     </h3>
@@ -625,7 +625,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getAssetsVendorRealPath">
-        <div class="location">at line 285</div>
+        <div class="location">at line 283</div>
         <code>            public            string
     <strong>getAssetsVendorRealPath</strong>()</code>
     </h3>
