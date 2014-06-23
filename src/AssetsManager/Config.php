@@ -108,7 +108,7 @@ class Config
                     }
                 } else {
                     Error::thrower(
-                        sprintf('Configuration class "%s" must implements interface "%s"!',
+                        sprintf('Configuration class "%s" must implement interface "%s"!',
                             $class_name, $config_interface),
                         '\DomainException', __CLASS__, __METHOD__, __LINE__
                     );

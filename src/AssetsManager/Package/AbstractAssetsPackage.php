@@ -40,26 +40,22 @@ abstract class AbstractAssetsPackage
 {
 
     /**
-     * Project root directory (absolute - no trailing slash)
-     * @var string
+     * @var string Project root directory (absolute - no trailing slash)
      */
     protected $_root_dir;
 
     /**
-     * Project assets directory (relative to `$_root_dir` - no trailing slash)
-     * @var string
+     * @var string Project assets directory (relative to `$_root_dir` - no trailing slash)
      */
     protected $_assets_dir;
 
     /**
-     * Project vendor directory (relative to `$_root_dir` - no trailing slash)
-     * @var string
+     * @var string Project vendor directory (relative to `$_root_dir` - no trailing slash)
      */
     protected $_vendor_dir;
 
     /**
-     * Project third-party packages'assets directory (relative to `$_assets_dir`)
-     * @var string
+     * @var string Project third-party packages'assets directory (relative to `$_assets_dir`)
      */
     protected $_assets_vendor_dir;
 

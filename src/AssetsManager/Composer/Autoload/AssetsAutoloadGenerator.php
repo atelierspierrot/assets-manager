@@ -9,14 +9,13 @@
 
 namespace AssetsManager\Composer\Autoload;
 
-use \AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator,
-    \AssetsManager\Composer\Installer\AssetsInstaller;
-
-use \Composer\Package\PackageInterface,
-    \Composer\Json\JsonFile;
+use \AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator;
+use \AssetsManager\Composer\Installer\AssetsInstaller;
+use \Composer\Package\PackageInterface;
+use \Composer\Json\JsonFile;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class AssetsAutoloadGenerator
     extends AbstractAssetsAutoloadGenerator

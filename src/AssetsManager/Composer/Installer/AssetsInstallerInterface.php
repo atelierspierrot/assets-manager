@@ -9,15 +9,15 @@
 
 namespace AssetsManager\Composer\Installer;
 
-use \Composer\Composer,
-    \Composer\IO\IOInterface,
-    \Composer\Package\PackageInterface,
-    \Composer\Repository\InstalledRepositoryInterface,
-    \Composer\Installer\LibraryInstaller,
-    \Composer\Installer\InstallerInterface;
+use \Composer\Composer;
+use \Composer\IO\IOInterface;
+use \Composer\Package\PackageInterface;
+use \Composer\Repository\InstalledRepositoryInterface;
+use \Composer\Installer\LibraryInstaller;
+use \Composer\Installer\InstallerInterface;
 
 /**
- * @author 		Piero Wbmstr <me@e-piwi.fr>
+ * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 interface AssetsInstallerInterface
     extends InstallerInterface
@@ -26,7 +26,7 @@ interface AssetsInstallerInterface
     /**
      * Parse the `composer.json` "extra" block of a package and return its transformed data
      *
-     * @param array $package \Composer\Package\PackageInterface
+     * @param \Composer\Package\PackageInterface $package
      * @param string $package_dir The install directory of the package
      */
     public function parseComposerExtra(PackageInterface $package, $package_dir);

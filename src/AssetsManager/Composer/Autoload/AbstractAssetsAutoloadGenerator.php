@@ -25,7 +25,7 @@ abstract class AbstractAssetsAutoloadGenerator
     protected $assets_installer;
 
     /**
-     * @var Array
+     * @var array
      */
     protected $assets_db;
 
@@ -44,13 +44,14 @@ abstract class AbstractAssetsAutoloadGenerator
      *
      * @param \AssetsManager\Composer\Installer\AssetsInstallerInterface $installer
      * @return object
+     * @throws \InvalidArgumentException if no argument received while it was required
      */
     public static function getInstance(AssetsInstallerInterface $installer = null)
     {
         if (empty(self::$_instance)) {
             if (empty($installer)) {
                 throw new \InvalidArgumentException(
-                    sprintf('Can not instanciate autoloader generator singleton object "%s"' .
+                    sprintf('Can not instantiate autoloader generator singleton object "%s"' .
                         ' without an "AssetsInstallerInterface" object argument!',
                         get_called_class())
                 );
@@ -65,7 +66,6 @@ abstract class AbstractAssetsAutoloadGenerator
      * Construct instance
      *
      * @param \AssetsManager\Composer\Installer\AssetsInstallerInterface $installer
-     * @return void
      */
     protected function __construct(AssetsInstallerInterface $installer)
     {
