@@ -186,7 +186,7 @@ class AssetsInstaller
         $target = $this->getAssetsInstallPath($package);
         if (file_exists($target)) {
             $this->io->write( 
-                sprintf('  - Removing <info>%s</info> assets to <info>%s</info>', 
+                sprintf('  - Removing <info>%s</info> assets from <info>%s</info>',
                     $package->getPrettyName(),
                     str_replace(dirname($this->assets_dir) . '/', '', $target)
                 )
@@ -402,8 +402,9 @@ class AssetsInstaller
     /**
      * Parse the `composer.json` "extra" block of a package and return its transformed data
      *
-     * @param \Composer\Package\PackageInterface $package
-     * @return array|null
+     * @param   \Composer\Package\PackageInterface $package
+     * @param   string $package_dir
+     * @return  array|null
      */
     public function parseComposerExtra(PackageInterface $package, $package_dir)
     {
