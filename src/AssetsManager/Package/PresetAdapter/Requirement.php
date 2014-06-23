@@ -20,8 +20,19 @@ class Requirement
     implements PresetAdapterInterface
 {
 
+    /**
+     * @var array|string
+     */
     protected $data;
+
+    /**
+     * @var \AssetsManager\Package\AssetsPresetInterface
+     */
     protected $preset;
+
+    /**
+     * @var array
+     */
     protected $dependencies;
 
     /**
@@ -36,6 +47,7 @@ class Requirement
 
     /**
      * Return the parsed and transformed statement array
+     *
      * @return array
      */
     public function getData()
@@ -60,6 +72,7 @@ class Requirement
 
     /**
      * @return void
+     * @throws \Exception caught calling required preset
      */
     public function parse()
     {
@@ -82,6 +95,7 @@ class Requirement
 
     /**
      * Returns the src path of the preset statement
+     *
      * @return string
      */
     public function __toString()
@@ -97,6 +111,7 @@ class Requirement
 
     /**
      * Returns the full HTML `script`
+     *
      * @return string
      */
     public function __toHtml()

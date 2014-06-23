@@ -20,7 +20,7 @@ class Error
      * @param   string  $throw  exception class name
      * @param   string  $class
      * @param   string  $method
-     * @param   int     $ine
+     * @param   int     $line
      * @param   string  $file
      * @return  void
      * @throws  mixed   $throw standard exception class

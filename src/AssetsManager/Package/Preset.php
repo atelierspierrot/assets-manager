@@ -113,7 +113,7 @@ class Preset
                         }
                     } else {
                         throw new \DomainException(
-                            sprintf('Preset statement class "%s" must implements interface "%s"!',
+                            sprintf('Preset statement class "%s" must implement interface "%s"!',
                                 $cls_name, $config_interface)
                         );
                     }

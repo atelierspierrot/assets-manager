@@ -20,6 +20,9 @@ class Css
     implements PresetAdapterInterface
 {
 
+    /**
+     * @var array
+     */
     public static $defaults = array(
         'src'=>null,
         'type'=>'text/css',
@@ -29,8 +32,19 @@ class Css
         'minified'=>false
     );
 
+    /**
+     * @var array|string
+     */
     protected $data;
+
+    /**
+     * @var \AssetsManager\Package\AssetsPresetInterface
+     */
     protected $preset;
+
+    /**
+     * @var array
+     */
     protected $transformed_data;
 
     /**
@@ -45,6 +59,7 @@ class Css
 
     /**
      * Return the parsed and transformed statement array
+     *
      * @return array
      */
     public function getData()
@@ -54,7 +69,7 @@ class Css
     }
 
     /**
-     * Parse and tranform the preset statement to a ready-to-use information
+     * Parse and transform the preset statement to a ready-to-use information
      *
      * The statement string can be constructed as (without spaces):
      *
@@ -130,6 +145,7 @@ class Css
 
     /**
      * Returns the src path of the preset statement
+     *
      * @return string
      */
     public function __toString()
@@ -140,6 +156,7 @@ class Css
 
     /**
      * Returns the full HTML `script`
+     *
      * @return string
      */
     public function __toHtml()

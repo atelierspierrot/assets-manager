@@ -26,7 +26,7 @@ class AssetsManagerPlugin
 {
 
     /**
-     * @var object \AssetsManager\Composer\Dispatch
+     * @var \AssetsManager\Composer\Dispatch
      */
     protected $__installer;
 

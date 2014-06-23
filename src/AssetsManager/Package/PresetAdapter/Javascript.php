@@ -20,6 +20,9 @@ class Javascript
     implements PresetAdapterInterface
 {
 
+    /**
+     * @var array
+     */
     public static $defaults = array(
         'src'=>null,
         'type'=>'text/javascript',
@@ -28,8 +31,19 @@ class Javascript
         'packed'=>false,
     );
 
+    /**
+     * @var array|string
+     */
     protected $data;
+
+    /**
+     * @var \AssetsManager\Package\AssetsPresetInterface
+     */
     protected $preset;
+
+    /**
+     * @var array
+     */
     protected $transformed_data;
 
     /**
@@ -44,6 +58,7 @@ class Javascript
 
     /**
      * Return the parsed and transformed statement array
+     *
      * @return array
      */
     public function getData()
@@ -53,7 +68,7 @@ class Javascript
     }
 
     /**
-     * Parse and tranform the preset statement to a ready-to-use information
+     * Parse and transform the preset statement to a ready-to-use information
      *
      * The statement string can be constructed as (without spaces):
      *
@@ -133,6 +148,7 @@ class Javascript
 
     /**
      * Returns the src path of the preset statement
+     *
      * @return string
      */
     public function __toString()
@@ -143,6 +159,7 @@ class Javascript
 
     /**
      * Returns the full HTML `script`
+     *
      * @return string
      */
     public function __toHtml()
