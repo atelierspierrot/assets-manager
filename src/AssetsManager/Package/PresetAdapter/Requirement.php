@@ -41,31 +41,37 @@ class Requirement
      */
     public function __construct(array $data, AssetsPresetInterface $preset)
     {
-        $this->data = $data;
-        $this->preset = $preset;
+        $this->data     = $data;
+        $this->preset   = $preset;
     }
 
     /**
      * Return the parsed and transformed statement array
      *
-     * @return array
+     * @return  array
+     * @throws  \Exception : any caught exception thrown by `self::parse()`
+     * @see     self::parse()
      */
     public function getData()
     {
-        $this->parse();
-        $organized_statements = array();
-        foreach ($this->dependencies as $name=>$preset) {
-            foreach ($preset->getStatements() as $type=>$statements) {
-                if (!isset($organized_statements[$type])) {
-                    $organized_statements[$type] = array();
-                }
-                foreach ($statements as $statement) {
-                    $organized_statements[$type][] = $statement;
+        try {
+            $this->parse();
+            $organized_statements = array();
+            foreach ($this->dependencies as $name=>$preset) {
+                foreach ($preset->getStatements() as $type=>$statements) {
+                    if (!isset($organized_statements[$type])) {
+                        $organized_statements[$type] = array();
+                    }
+                    foreach ($statements as $statement) {
+                        $organized_statements[$type][] = $statement;
+                    }
                 }
             }
-        }
-        foreach ($organized_statements as $type=>$stacks) {
-            $organized_statements[$type] = $preset->getOrderedStatements($stacks);
+            foreach ($organized_statements as $type=>$stacks) {
+                $organized_statements[$type] = $preset->getOrderedStatements($stacks);
+            }
+        } catch (\Exception $e) {
+            throw $e;
         }
         return $organized_statements;
     }
@@ -96,15 +102,19 @@ class Requirement
     /**
      * Returns the src path of the preset statement
      *
-     * @return string
+     * @return  string
      */
     public function __toString()
     {
-        $str = '';
-        foreach ($this->getData() as $type=>$statements) {
-            foreach ($statements as $statement) {
-                $str .= $statement->__toString().' ';
+        try {
+            $str = '';
+            foreach ($this->getData() as $type=>$statements) {
+                foreach ($statements as $statement) {
+                    $str .= $statement->__toString().' ';
+                }
             }
+        } catch (\Exception $e) {
+            $str = $e->getMessage();
         }
         return $str;
     }
@@ -116,15 +126,18 @@ class Requirement
      */
     public function __toHtml()
     {
-        $str = '';
-        foreach ($this->getData() as $type=>$statements) {
-            foreach ($statements as $statement) {
-                $str .= $statement->__toHtml();
+        try {
+            $str = '';
+            foreach ($this->getData() as $type=>$statements) {
+                foreach ($statements as $statement) {
+                    $str .= $statement->__toHtml();
+                }
             }
+        } catch (\Exception $e) {
+            $str = $e->getMessage();
         }
         return $str;
     }
-
 }
 
 // Endfile

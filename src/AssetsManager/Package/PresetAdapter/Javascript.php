@@ -24,11 +24,11 @@ class Javascript
      * @var array
      */
     public static $defaults = array(
-        'src'=>null,
-        'type'=>'text/javascript',
-        'position'=>0,
-        'minified'=>false,
-        'packed'=>false,
+        'src'       => null,
+        'type'      => 'text/javascript',
+        'position'  => 0,
+        'minified'  => false,
+        'packed'    => false,
     );
 
     /**
@@ -52,18 +52,24 @@ class Javascript
      */
     public function __construct(array $data, AssetsPresetInterface $preset)
     {
-        $this->data = $data;
-        $this->preset = $preset;
+        $this->data     = $data;
+        $this->preset   = $preset;
     }
 
     /**
      * Return the parsed and transformed statement array
      *
-     * @return array
+     * @return  array
+     * @throws  \Exception : any caught exception thrown by `self::parse()`
+     * @see     self::parse()
      */
     public function getData()
     {
-        $this->parse();
+        try {
+            $this->parse();
+        } catch (\Exception $e) {
+            throw $e;
+        }
         return $this->transformed_data;
     }
 
@@ -149,12 +155,17 @@ class Javascript
     /**
      * Returns the src path of the preset statement
      *
-     * @return string
+     * @return  string
      */
     public function __toString()
     {
-        $this->parse();
-        return $this->transformed_data['src'];
+        try {
+            $this->parse();
+            $str = $this->transformed_data['src'];
+        } catch (\Exception $e) {
+            $str = $e->getMessage();
+        }
+        return $str;
     }
 
     /**
@@ -164,13 +175,18 @@ class Javascript
      */
     public function __toHtml()
     {
-        $this->parse();
-        return \Library\Helper\Html::writeHtmlTag(
-            'script', null, array(
-                'src'=>$this->transformed_data['src'],
-                'type'=>$this->transformed_data['type']
-            ), true
-        );
+        try {
+            $this->parse();
+            $str = \Library\Helper\Html::writeHtmlTag(
+                'script', null, array(
+                    'src'=>$this->transformed_data['src'],
+                    'type'=>$this->transformed_data['type']
+                ), true
+            );
+        } catch (\Exception $e) {
+            $str = $e->getMessage();
+        }
+        return $str;
     }
 
 }

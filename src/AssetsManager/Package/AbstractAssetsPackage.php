@@ -9,7 +9,6 @@
 
 namespace AssetsManager\Package;
 
-use \InvalidArgumentException;
 use \Library\Helper\Directory as DirectoryHelper;
 
 /**
@@ -68,15 +67,20 @@ abstract class AbstractAssetsPackage
      * @param string $assets_dir
      * @param string $vendor_dir
      * @param string $assets_vendor_dir
+     * @throws \Exception : any caught exception
      */
     public function __construct(
         $root_dir = null, $assets_dir = null, $vendor_dir = null, $assets_vendor_dir = null
     ) {
         if (!empty($root_dir)) {
-            $this->setRootDirectory($root_dir);
-            if (!empty($assets_dir)) $this->setAssetsDirectory($assets_dir);
-            if (!empty($vendor_dir)) $this->setVendorDirectory($vendor_dir);
-            if (!empty($assets_vendor_dir)) $this->setAssetsVendorDirectory($assets_vendor_dir);
+            try {
+                $this->setRootDirectory($root_dir);
+                if (!empty($assets_dir)) $this->setAssetsDirectory($assets_dir);
+                if (!empty($vendor_dir)) $this->setVendorDirectory($vendor_dir);
+                if (!empty($assets_vendor_dir)) $this->setAssetsVendorDirectory($assets_vendor_dir);
+            } catch (\Exception $e) {
+                throw $e;
+            }
         }
     }
 
@@ -96,7 +100,7 @@ abstract class AbstractAssetsPackage
         if (@file_exists($path) && is_dir($path)) {
             $this->_root_dir = $path;
         } else {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 sprintf('Root package directory "%s" not found !', $path)
             );
         }
@@ -126,7 +130,7 @@ abstract class AbstractAssetsPackage
         if (@file_exists($realpath) && is_dir($realpath)) {
             $this->_assets_dir = $path;
         } else {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 sprintf('Assets directory "%s" not found !', $path)
             );
         }
@@ -156,7 +160,7 @@ abstract class AbstractAssetsPackage
         if (@file_exists($realpath) && is_dir($realpath)) {
             $this->_vendor_dir = $path;
         } else {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 sprintf('Vendor directory "%s" not found !', $path)
             );
         }
@@ -186,7 +190,7 @@ abstract class AbstractAssetsPackage
         if (@file_exists($realpath) && is_dir($realpath)) {
             $this->_assets_vendor_dir = $path;
         } else {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 sprintf('Assets vendor directory "%s" not found !', $path)
             );
         }

@@ -131,15 +131,21 @@ class Preset
     }
 
     /**
-     * @return string
+     * @return  string
+     * @throws  \Exception : any caught exception during `self::load()`
+     * @see     self::load()
      */
     public function __toHtml()
     {
-        $str = '';
-        foreach ($this->getOrganizedStatements() as $type=>$statements) {
-            foreach ($statements as $statement) {
-                $str .= $statement->__toHtml();
+        try {
+            $str = '';
+            foreach ($this->getOrganizedStatements() as $type=>$statements) {
+                foreach ($statements as $statement) {
+                    $str .= $statement->__toHtml().PHP_EOL;
+                }
             }
+        } catch (\Exception $e) {
+            $str = $e->getMessage();
         }
         return $str;
     }
@@ -202,15 +208,38 @@ class Preset
         return $this->package;
     }
 
+    /**
+     * Get the preset's statements array
+     *
+     * @return array
+     * @throws  \Exception : any caught exception during `self::load()`
+     * @see     self::load()
+     */
     public function getStatements()
     {
-        $this->load();
+        try {
+            $this->load();
+        } catch (\Exception $e) {
+            throw $e;
+        }
         return $this->_statements;
     }
 
+    /**
+     * Get one preset's statement entry
+     *
+     * @param   string  $name   The statement name
+     * @return  array|null
+     * @throws  \Exception : any caught exception during `self::load()`
+     * @see     self::load()
+     */
     public function getStatement($name)
     {
-        $this->load();
+        try {
+            $this->load();
+        } catch (\Exception $e) {
+            throw $e;
+        }
         return isset($this->_statements[$name]) ? $this->_statements[$name] : null;
     }
 
@@ -218,10 +247,24 @@ class Preset
 // Statements management
 // -------------------------
 
+    /**
+     * Organize each statements item by position & requirements
+     *
+     * @return  array
+     * @throws  \Exception : any caught exception during `self::load()`
+     * @see     self::load()
+     */
     public function getOrganizedStatements()
     {
         $organized_statements = array();
-       if (empty($this->_statements)) $this->load();
+        if (empty($this->_statements)) {
+           $this->load();
+           try {
+               $this->load();
+           } catch (\Exception $e) {
+               throw $e;
+           }
+        }
         $statements = $this->_statements;
 
         if (!empty($statements['require'])) {
@@ -253,6 +296,12 @@ class Preset
         return $organized_statements;
     }
 
+    /**
+     * Internal function to order a statements stack
+     *
+     * @param array $statements
+     * @return array
+     */
     public static function getOrderedStatements(array $statements)
     {
         $ordered = array();

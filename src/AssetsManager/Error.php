@@ -18,10 +18,10 @@ class Error
     /**
      * @param   string  $str    error message
      * @param   string  $throw  exception class name
-     * @param   string  $class
-     * @param   string  $method
-     * @param   int     $line
-     * @param   string  $file
+     * @param   string  $class  class name which throws the error
+     * @param   string  $method method of the class which throws the error
+     * @param   int     $line   line where the error were thrown
+     * @param   string  $file   file where the error were thrown
      * @return  void
      * @throws  mixed   $throw standard exception class
      */

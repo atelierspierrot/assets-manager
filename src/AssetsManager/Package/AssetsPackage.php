@@ -56,17 +56,22 @@ class AssetsPackage
      * @param string $_assets_dir The global package assets directory (must exist in `$_root_dir`)
      * @param string $_vendor_dir The global package vendor directory (must exist in `$_root_dir`)
      * @param string $_assets_vendor_dir The global package assets vendor directory (must exist in `$_assets_dir`)
+     * @throws \Exception : any caught exception
      */
     public function __construct(
         $_root_dir, $_assets_dir = null, $_vendor_dir = null, $_assets_vendor_dir = null
     ) {
-        $this
-            ->setRootDirectory($_root_dir)
-            ->setAssetsDirectory(!is_null($_assets_dir) ? $_assets_dir : Config::get('assets-dir'))
-            ->setVendorDirectory(!is_null($_vendor_dir) ? $_vendor_dir : Config::get('vendor-dir'))
-            ->setAssetsVendorDirectory(!is_null($_assets_vendor_dir) ? $_assets_vendor_dir : Config::get('assets-vendor-dir'))
-            ->reset()
+        try {
+            $this
+                ->setRootDirectory($_root_dir)
+                ->setAssetsDirectory(!is_null($_assets_dir) ? $_assets_dir : Config::get('assets-dir'))
+                ->setVendorDirectory(!is_null($_vendor_dir) ? $_vendor_dir : Config::get('vendor-dir'))
+                ->setAssetsVendorDirectory(!is_null($_assets_vendor_dir) ? $_assets_vendor_dir : Config::get('assets-vendor-dir'))
+                ->reset()
             ;
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**

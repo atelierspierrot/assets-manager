@@ -24,12 +24,12 @@ class Css
      * @var array
      */
     public static $defaults = array(
-        'src'=>null,
-        'type'=>'text/css',
-        'rel'=>'stylesheet',
-        'media'=>'all',
-        'position'=>0,
-        'minified'=>false
+        'src'       => null,
+        'type'      => 'text/css',
+        'rel'       => 'stylesheet',
+        'media'     => 'all',
+        'position'  => 0,
+        'minified'  => false
     );
 
     /**
@@ -53,18 +53,24 @@ class Css
      */
     public function __construct(array $data, AssetsPresetInterface $preset)
     {
-        $this->data = $data;
-        $this->preset = $preset;
+        $this->data     = $data;
+        $this->preset   = $preset;
     }
 
     /**
      * Return the parsed and transformed statement array
      *
-     * @return array
+     * @return  array
+     * @throws  \Exception : any caught exception thrown by `self::parse()`
+     * @see     self::parse()
      */
     public function getData()
     {
-        $this->parse();
+        try {
+            $this->parse();
+        } catch (\Exception $e) {
+            throw $e;
+        }
         return $this->transformed_data;
     }
 
@@ -146,12 +152,17 @@ class Css
     /**
      * Returns the src path of the preset statement
      *
-     * @return string
+     * @return  string
      */
     public function __toString()
     {
-        $this->parse();
-        return $this->transformed_data['src'];
+        try {
+            $this->parse();
+            $str = $this->transformed_data['src'];
+        } catch (\Exception $e) {
+            $str = $e->getMessage();
+        }
+        return $str;
     }
 
     /**
@@ -161,15 +172,20 @@ class Css
      */
     public function __toHtml()
     {
-        $this->parse();
-        return \Library\Helper\Html::writeHtmlTag(
-            'link', null, array(
-                'src'=>$this->transformed_data['src'],
-                'type'=>$this->transformed_data['type'],
-                'rel'=>$this->transformed_data['rel'],
-                'media'=>$this->transformed_data['media']
-            ), true
-        );
+        try {
+            $this->parse();
+            $str = \Library\Helper\Html::writeHtmlTag(
+                'link', null, array(
+                    'src'=>$this->transformed_data['src'],
+                    'type'=>$this->transformed_data['type'],
+                    'rel'=>$this->transformed_data['rel'],
+                    'media'=>$this->transformed_data['media']
+                ), true
+            );
+        } catch (\Exception $e) {
+            $str = $e->getMessage();
+        }
+        return $str;
     }
 
 }
