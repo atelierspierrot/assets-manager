@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="robots" content="index, follow, all" />
-        <title>AssetsManager\Loader | </title>
+        <title>AssetsManager\Loader | Assets Manager</title>
                     <link rel="stylesheet" type="text/css" href="../stylesheet.css">
                             </head>
         <body id="class">
@@ -12,43 +12,38 @@
             <li><a href="../classes.html">Classes</a></li>
                             <li><a href="../namespaces.html">Namespaces</a></li>
                         <li><a href="../interfaces.html">Interfaces</a></li>
-            <li><a href="../traits.html">Traits</a></li>
             <li><a href="../doc-index.html">Index</a></li>
             
         </ul>
 
-        <div id="title"></div>
+        <div id="title">Assets Manager</div>
 
             <div class="type">Class</div>
     <h1><a href="../AssetsManager.html">AssetsManager</a>\Loader</h1>
     </div>
         <div class="content">
-                <p>    class
-    <strong>Loader</strong>        extends <a href="../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></p>
+                <p>class    <strong>Loader</strong>        extends <a href="../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></p>
 
             <div class="description">
             <p>Class to manage assets paths</p>
-            <p>The class is based on three paths:</p>
-
-<ul>
-<li><code>root_dir</code>: the package root directory (must be the directory containing the <code>composer.json</code> file)</li>
-<li><code>assets_dir</code>: the package asssets directory related to <code>root_dir</code></li>
-<li><code>document_root</code>: the path in the filesystem of the web assets root directory ; this is used
-to build all related assets paths to use in HTTP.</li>
-</ul>
-
-<p>For these three paths, their defaults values are defined on a default package structure:</p>
-
-<pre><code>package_name/
-|----------- src/
-|----------- www/
-
-$loader-&gt;root_dir = realpath(package_name)
-$loader-&gt;assets_dir = www
-$loader-&gt;document_root = www or the server DOCUMENT_ROOT
-</code></pre>
-
-<p>NOTE - These paths are stored in the object without the trailing slash.</p>
+            <p>The class is based on three paths:<br />
+ <br />
+ - `root_dir`: the package root directory (must be the directory containing the `composer.json` file)<br />
+ - `assets_dir`: the package asssets directory related to `root_dir`<br />
+ - `document_root`: the path in the filesystem of the web assets root directory ; this is used<br />
+ to build all related assets paths to use in HTTP.<br />
+<br />
+ For these three paths, their defaults values are defined on a default package structure:<br />
+<br />
+     package_name/<br />
+     |----------- src/<br />
+     |----------- www/<br />
+<br />
+     $loader-&gt;root_dir = realpath(package_name)<br />
+     $loader-&gt;assets_dir = www<br />
+     $loader-&gt;document_root = www or the server DOCUMENT_ROOT<br />
+<br />
+ NOTE - These paths are stored in the object without the trailing slash.</p>
         </div>
     
             <h2>Constants</h2>
@@ -58,16 +53,14 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                 <td>PRESETS_NO_CONFLICT</td>
                 <td class="last">
                     <p><em>Flag to use to avoid throwing an exception in case of presets conflicts</em></p>
-                    <p>
-</p>
+                    <p></p>
                 </td>
             </tr>
                     <tr>
                 <td>PRESETS_CONFLICT</td>
                 <td class="last">
                     <p><em>Flag to use to throw exception in case of presets conflicts (default)</em></p>
-                    <p>
-</p>
+                    <p></p>
                 </td>
             </tr>
             </table>
@@ -113,7 +106,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                 </td>
                 <td class="last">
                     <a href="#method_setAssetsDirectory">setAssetsDirectory</a>(string $path)
-                    <p>Set the project's assets directory, relative to <code>$this-&gt;_root_dir</code></p>
+                    <p>Set the project&#039;s assets directory, relative to `$this-&gt;_root_dir`</p>
                 </td>
                 <td><small>from&nbsp;<a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_setAssetsDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></small></td>
             </tr>
@@ -123,7 +116,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                 </td>
                 <td class="last">
                     <a href="#method_getAssetsDirectory">getAssetsDirectory</a>()
-                    <p>Get the project's assets directory, relative to <code>$this-&gt;_root_dir</code></p>
+                    <p>Get the project&#039;s assets directory, relative to `$this-&gt;_root_dir`</p>
                 </td>
                 <td><small>from&nbsp;<a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getAssetsDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></small></td>
             </tr>
@@ -133,7 +126,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                 </td>
                 <td class="last">
                     <a href="#method_setVendorDirectory">setVendorDirectory</a>(string $path)
-                    <p>Set the project's vendor directory, relative to <code>$this-&gt;_root_dir</code></p>
+                    <p>Set the project&#039;s vendor directory, relative to `$this-&gt;_root_dir`</p>
                 </td>
                 <td><small>from&nbsp;<a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_setVendorDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></small></td>
             </tr>
@@ -143,7 +136,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                 </td>
                 <td class="last">
                     <a href="#method_getVendorDirectory">getVendorDirectory</a>()
-                    <p>Get the project's vendor directory, relative to <code>$this-&gt;_root_dir</code></p>
+                    <p>Get the project&#039;s vendor directory, relative to `$this-&gt;_root_dir`</p>
                 </td>
                 <td><small>from&nbsp;<a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getVendorDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></small></td>
             </tr>
@@ -153,7 +146,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                 </td>
                 <td class="last">
                     <a href="#method_setAssetsVendorDirectory">setAssetsVendorDirectory</a>(string $path)
-                    <p>Set the project's assets vendor directory, relative to <code>$this-&gt;_assets_dir</code></p>
+                    <p>Set the project&#039;s assets vendor directory, relative to `$this-&gt;_assets_dir`</p>
                 </td>
                 <td><small>from&nbsp;<a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_setAssetsVendorDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></small></td>
             </tr>
@@ -163,7 +156,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                 </td>
                 <td class="last">
                     <a href="#method_getAssetsVendorDirectory">getAssetsVendorDirectory</a>()
-                    <p>Get the project's vendor directory, relative to <code>$this-&gt;_root_dir</code></p>
+                    <p>Get the project&#039;s vendor directory, relative to `$this-&gt;_root_dir`</p>
                 </td>
                 <td><small>from&nbsp;<a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getAssetsVendorDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></small></td>
             </tr>
@@ -223,8 +216,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                 </td>
                 <td class="last">
                     <a href="#method_init">init</a>(string $root_dir = null, string $assets_dir = null, string $document_root = null)
-                    <p>
-</p>
+                    <p></p>
                 </td>
                 <td></td>
             </tr>
@@ -254,7 +246,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                 </td>
                 <td class="last">
                     <a href="#method_setAssetsDb">setAssetsDb</a>(array $db)
-                    <p>Set the package's assets database</p>
+                    <p>Set the package&#039;s assets database</p>
                 </td>
                 <td></td>
             </tr>
@@ -264,7 +256,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                 </td>
                 <td class="last">
                     <a href="#method_getAssetsDb">getAssetsDb</a>()
-                    <p>Get the package's assets database</p>
+                    <p>Get the package&#039;s assets database</p>
                 </td>
                 <td></td>
             </tr>
@@ -354,7 +346,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                 </td>
                 <td class="last">
                     <a href="#method_getAssets">getAssets</a>()
-                    <p>Get the package's assets database</p>
+                    <p>Get the package&#039;s assets database</p>
                 </td>
                 <td></td>
             </tr>
@@ -414,7 +406,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                 </td>
                 <td class="last">
                     <a href="#method_findInPath">findInPath</a>(string $filename, string $path)
-                    <p>Find an asset file in a package's path</p>
+                    <p>Find an asset file in a package&#039;s path</p>
                 </td>
                 <td></td>
             </tr>
@@ -424,7 +416,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                 </td>
                 <td class="last">
                     <a href="#method_isUrl">isUrl</a>(string $str)
-                    <p>Test if a string is a classic url or an url like <code>//domain.ext/asset</code></p>
+                    <p>Test if a string is a classic url or an url like `//domain.ext/asset`</p>
                 </td>
                 <td></td>
             </tr>
@@ -434,14 +426,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 137</div>
+        <div class="location">at line 135</div>
         <code>            public            
     <strong>__construct</strong>(string $root_dir = null, string $assets_dir = null, string $document_root = null, int $conflict_flag = self::PRESETS_CONFLICT)</code>
     </h3>
     <div class="details">
         <p>Loader protected constructor, use the class as a Singleton</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -454,7 +445,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>string</td>
                 <td>$assets_dir</td>
-                <td>The project package assets directory, related from <code>$root_dir</code></td>
+                <td>The project package assets directory, related from `$root_dir`</td>
             </tr>
                     <tr>
                 <td>string</td>
@@ -464,7 +455,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>int</td>
                 <td>$conflict_flag</td>
-                <td>Define if the class must throw excpetions in case of presets conflicts</td>
+                <td>Define if the class must throw exceptions in case of presets conflicts</td>
             </tr>
             </table>
 
@@ -484,14 +475,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_setRootDirectory">
-        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_setRootDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 98</div>
+        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_setRootDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 94</div>
         <code>            public            <a href="../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
     <strong>setRootDirectory</strong>(string $path)</code>
     </h3>
     <div class="details">
         <p>Set the project root directory absolute path</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -499,8 +489,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>string</td>
                 <td>$path</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -510,8 +499,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td><a href="../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -521,7 +509,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
                     <tr>
                 <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td>if the path doesn't exist</td>
+                <td>if the path doesn&#039;t exist</td>
             </tr>
             </table>
 
@@ -530,14 +518,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getRootDirectory">
-        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getRootDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 115</div>
+        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getRootDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 111</div>
         <code>            public            string
     <strong>getRootDirectory</strong>()</code>
     </h3>
     <div class="details">
         <p>Get the project root directory absolute path</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -545,8 +532,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -556,14 +542,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_setAssetsDirectory">
-        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_setAssetsDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 127</div>
+        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_setAssetsDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 123</div>
         <code>            public            <a href="../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
     <strong>setAssetsDirectory</strong>(string $path)</code>
     </h3>
     <div class="details">
-        <p>Set the project's assets directory, relative to <code>$this-&gt;_root_dir</code></p>
-        <p>
-</p>
+        <p>Set the project&#039;s assets directory, relative to `$this-&gt;_root_dir`</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -571,8 +556,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>string</td>
                 <td>$path</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -582,8 +566,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td><a href="../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -593,7 +576,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
                     <tr>
                 <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td>if the path doesn't exist</td>
+                <td>if the path doesn&#039;t exist</td>
             </tr>
             </table>
 
@@ -602,14 +585,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getAssetsDirectory">
-        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getAssetsDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 145</div>
+        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getAssetsDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 141</div>
         <code>            public            string
     <strong>getAssetsDirectory</strong>()</code>
     </h3>
     <div class="details">
-        <p>Get the project's assets directory, relative to <code>$this-&gt;_root_dir</code></p>
-        <p>
-</p>
+        <p>Get the project&#039;s assets directory, relative to `$this-&gt;_root_dir`</p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -617,8 +599,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -628,14 +609,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_setVendorDirectory">
-        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_setVendorDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 157</div>
+        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_setVendorDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 153</div>
         <code>            public            <a href="../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
     <strong>setVendorDirectory</strong>(string $path)</code>
     </h3>
     <div class="details">
-        <p>Set the project's vendor directory, relative to <code>$this-&gt;_root_dir</code></p>
-        <p>
-</p>
+        <p>Set the project&#039;s vendor directory, relative to `$this-&gt;_root_dir`</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -643,8 +623,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>string</td>
                 <td>$path</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -654,8 +633,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td><a href="../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -665,7 +643,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
                     <tr>
                 <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td>if the path doesn't exist</td>
+                <td>if the path doesn&#039;t exist</td>
             </tr>
             </table>
 
@@ -674,14 +652,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getVendorDirectory">
-        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getVendorDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 175</div>
+        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getVendorDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 171</div>
         <code>            public            string
     <strong>getVendorDirectory</strong>()</code>
     </h3>
     <div class="details">
-        <p>Get the project's vendor directory, relative to <code>$this-&gt;_root_dir</code></p>
-        <p>
-</p>
+        <p>Get the project&#039;s vendor directory, relative to `$this-&gt;_root_dir`</p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -689,8 +666,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -700,14 +676,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_setAssetsVendorDirectory">
-        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_setAssetsVendorDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 187</div>
+        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_setAssetsVendorDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 183</div>
         <code>            public            <a href="../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
     <strong>setAssetsVendorDirectory</strong>(string $path)</code>
     </h3>
     <div class="details">
-        <p>Set the project's assets vendor directory, relative to <code>$this-&gt;_assets_dir</code></p>
-        <p>
-</p>
+        <p>Set the project&#039;s assets vendor directory, relative to `$this-&gt;_assets_dir`</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -715,8 +690,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>string</td>
                 <td>$path</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -726,8 +700,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td><a href="../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -737,7 +710,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
                     <tr>
                 <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td>if the path doesn't exist</td>
+                <td>if the path doesn&#039;t exist</td>
             </tr>
             </table>
 
@@ -746,14 +719,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getAssetsVendorDirectory">
-        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getAssetsVendorDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 205</div>
+        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getAssetsVendorDirectory"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 201</div>
         <code>            public            string
     <strong>getAssetsVendorDirectory</strong>()</code>
     </h3>
     <div class="details">
-        <p>Get the project's vendor directory, relative to <code>$this-&gt;_root_dir</code></p>
-        <p>
-</p>
+        <p>Get the project&#039;s vendor directory, relative to `$this-&gt;_root_dir`</p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -761,8 +733,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -772,14 +743,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getFullPath">
-        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getFullPath"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 222</div>
+        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getFullPath"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 218</div>
         <code>            public            string
     <strong>getFullPath</strong>(string $path, string $type = null, bool $out = false)</code>
     </h3>
     <div class="details">
         <p>Get the absolute path in the package</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -792,12 +762,12 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>string</td>
                 <td>$type</td>
-                <td>Type of the original relative path (can be <code>asset</code>, <code>vendor</code> or <code>assets_vendor</code> - default is <code>null</code>)</td>
+                <td>Type of the original relative path (can be `asset`, `vendor` or `assets_vendor` - default is `null`)</td>
             </tr>
                     <tr>
                 <td>bool</td>
                 <td>$out</td>
-                <td>Must we search in <code>assets</code> and <code>vendor</code> (if <code>false</code>) or not (if <code>true</code>)</td>
+                <td>Must we search in `assets` and `vendor` (if `false`) or not (if `true`)</td>
             </tr>
             </table>
 
@@ -807,8 +777,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -818,14 +787,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getAssetsRealPath">
-        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getAssetsRealPath"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 263</div>
+        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getAssetsRealPath"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 259</div>
         <code>            public            string
     <strong>getAssetsRealPath</strong>()</code>
     </h3>
     <div class="details">
         <p>Get the assets full path</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -833,8 +801,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -844,14 +811,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getVendorRealPath">
-        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getVendorRealPath"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 273</div>
+        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getVendorRealPath"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 269</div>
         <code>            public            string
     <strong>getVendorRealPath</strong>()</code>
     </h3>
     <div class="details">
         <p>Get the assets full path</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -859,8 +825,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -870,14 +835,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getAssetsVendorRealPath">
-        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getAssetsVendorRealPath"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 283</div>
+        <div class="location">in <a href="../AssetsManager/Package/AbstractAssetsPackage.html#method_getAssetsVendorRealPath"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a> at line 279</div>
         <code>            public            string
     <strong>getAssetsVendorRealPath</strong>()</code>
     </h3>
     <div class="details">
         <p>Get the assets vendor full path</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -885,8 +849,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -896,14 +859,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getInstance">
-        <div class="location">at line 117</div>
+        <div class="location">at line 115</div>
         <code>        static    public            <a href="../AssetsManager/Loader.html"><abbr title="AssetsManager\Loader">Loader</abbr></a>
     <strong>getInstance</strong>(string $root_dir = null, string $assets_dir = null, string $document_root = null, int $conflict_flag = self::PRESETS_CONFLICT)</code>
     </h3>
     <div class="details">
         <p>Loader static instance constructor</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -916,7 +878,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>string</td>
                 <td>$assets_dir</td>
-                <td>The project package assets directory, related from <code>$root_dir</code></td>
+                <td>The project package assets directory, related from `$root_dir`</td>
             </tr>
                     <tr>
                 <td>string</td>
@@ -926,7 +888,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>int</td>
                 <td>$conflict_flag</td>
-                <td>Define if the class must throw excpetions in case of presets conflicts</td>
+                <td>Define if the class must throw exceptions in case of presets conflicts</td>
             </tr>
             </table>
 
@@ -936,8 +898,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td><a href="../AssetsManager/Loader.html"><abbr title="AssetsManager\Loader">Loader</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -947,15 +908,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_init">
-        <div class="location">at line 157</div>
+        <div class="location">at line 155</div>
         <code>            public            void
     <strong>init</strong>(string $root_dir = null, string $assets_dir = null, string $document_root = null)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+        <p></p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -968,7 +927,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>string</td>
                 <td>$assets_dir</td>
-                <td>The project package assets directory, related from <code>$root_dir</code></td>
+                <td>The project package assets directory, related from `$root_dir`</td>
             </tr>
                     <tr>
                 <td>string</td>
@@ -983,8 +942,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>void</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -994,7 +952,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
                     <tr>
                 <td><a href="http://php.net/Exception"><abbr title="Exception">Exception</abbr></a></td>
-                <td>if the package's <code>ASSETS_DB_FILENAME</code> was not found</td>
+                <td>if the package&#039;s `ASSETS_DB_FILENAME` was not found</td>
             </tr>
             </table>
 
@@ -1003,14 +961,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_setDocumentRoot">
-        <div class="location">at line 222</div>
+        <div class="location">at line 220</div>
         <code>            public            <a href="../AssetsManager/Loader.html"><abbr title="AssetsManager\Loader">Loader</abbr></a>
     <strong>setDocumentRoot</strong>(string $path)</code>
     </h3>
     <div class="details">
         <p>Set the document root directory</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1028,8 +985,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td><a href="../AssetsManager/Loader.html"><abbr title="AssetsManager\Loader">Loader</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1048,14 +1004,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getDocumentRoot">
-        <div class="location">at line 241</div>
+        <div class="location">at line 239</div>
         <code>            public            string
     <strong>getDocumentRoot</strong>()</code>
     </h3>
     <div class="details">
         <p>Get the document root directory</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1063,8 +1018,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1074,14 +1028,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_setAssetsDb">
-        <div class="location">at line 252</div>
+        <div class="location">at line 250</div>
         <code>            public            <a href="../AssetsManager/Loader.html"><abbr title="AssetsManager\Loader">Loader</abbr></a>
     <strong>setAssetsDb</strong>(array $db)</code>
     </h3>
     <div class="details">
-        <p>Set the package's assets database</p>
-        <p>
-</p>
+        <p>Set the package&#039;s assets database</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1089,7 +1042,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>array</td>
                 <td>$db</td>
-                <td>The array of package's assets as written in package's <code>ASSETS_DB_FILENAME</code></td>
+                <td>The array of package&#039;s assets as written in package&#039;s `ASSETS_DB_FILENAME`</td>
             </tr>
             </table>
 
@@ -1099,8 +1052,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td><a href="../AssetsManager/Loader.html"><abbr title="AssetsManager\Loader">Loader</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1110,14 +1062,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getAssetsDb">
-        <div class="location">at line 273</div>
+        <div class="location">at line 271</div>
         <code>            public            array
     <strong>getAssetsDb</strong>()</code>
     </h3>
     <div class="details">
-        <p>Get the package's assets database</p>
-        <p>
-</p>
+        <p>Get the package&#039;s assets database</p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1125,8 +1076,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>array</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1136,14 +1086,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getAssetsWebPath">
-        <div class="location">at line 288</div>
+        <div class="location">at line 286</div>
         <code>            public            string
     <strong>getAssetsWebPath</strong>()</code>
     </h3>
     <div class="details">
         <p>Get the web path for assets</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1151,8 +1100,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1171,14 +1119,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getPackageAssetsPath">
-        <div class="location">at line 299</div>
+        <div class="location">at line 297</div>
         <code>            public            string
     <strong>getPackageAssetsPath</strong>(string $package_name)</code>
     </h3>
     <div class="details">
         <p>Get the assets full path for a specific package</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1196,8 +1143,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1207,14 +1153,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getPackageAssetsWebPath">
-        <div class="location">at line 312</div>
+        <div class="location">at line 310</div>
         <code>            public            string
     <strong>getPackageAssetsWebPath</strong>(string $package_name)</code>
     </h3>
     <div class="details">
         <p>Get the web path for assets of a specific package</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1232,8 +1177,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1252,14 +1196,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_hasPackage">
-        <div class="location">at line 328</div>
+        <div class="location">at line 326</div>
         <code>            public            bool
     <strong>hasPackage</strong>(string $package_name)</code>
     </h3>
     <div class="details">
         <p>Test if a package exists</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1267,8 +1210,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>string</td>
                 <td>$package_name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1278,8 +1220,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>bool</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1289,14 +1230,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getPackage">
-        <div class="location">at line 344</div>
+        <div class="location">at line 342</div>
         <code>            public            <a href="../AssetsManager/Package/AssetsPackage.html"><abbr title="AssetsManager\Package\AssetsPackage">AssetsPackage</abbr></a>
     <strong>getPackage</strong>(string $package_name)</code>
     </h3>
     <div class="details">
         <p>Get a package instance</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1304,8 +1244,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>string</td>
                 <td>$package_name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1315,8 +1254,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td><a href="../AssetsManager/Package/AssetsPackage.html"><abbr title="AssetsManager\Package\AssetsPackage">AssetsPackage</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1326,14 +1264,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_validatePresets">
-        <div class="location">at line 401</div>
+        <div class="location">at line 399</div>
         <code>            public            void
     <strong>validatePresets</strong>()</code>
     </h3>
     <div class="details">
         <p>Load and validate all packages presets in one table</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1341,8 +1278,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>void</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1352,7 +1288,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
                     <tr>
                 <td><a href="http://php.net/Exception"><abbr title="Exception">Exception</abbr></a></td>
-                <td>if the <code>$conflict_flag</code> is set on <code>self::PRESETS_CONFLICT</code> in case of duplicate preset name</td>
+                <td>if the `$conflict_flag` is set on `self::PRESETS_CONFLICT` in case of duplicate preset name</td>
             </tr>
             </table>
 
@@ -1361,14 +1297,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_hasPreset">
-        <div class="location">at line 430</div>
+        <div class="location">at line 428</div>
         <code>            public            bool
     <strong>hasPreset</strong>(string $preset_name)</code>
     </h3>
     <div class="details">
         <p>Test if a preset exists</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1376,8 +1311,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>string</td>
                 <td>$preset_name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1387,8 +1321,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>bool</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1398,14 +1331,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getPreset">
-        <div class="location">at line 442</div>
+        <div class="location">at line 440</div>
         <code>            public            <a href="../AssetsManager/Package/Preset.html"><abbr title="AssetsManager\Package\Preset">Preset</abbr></a>
     <strong>getPreset</strong>(string $preset_name)</code>
     </h3>
     <div class="details">
         <p>Get a preset instance</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1413,8 +1345,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>string</td>
                 <td>$preset_name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1424,8 +1355,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td><a href="../AssetsManager/Package/Preset.html"><abbr title="AssetsManager\Package\Preset">Preset</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1435,7 +1365,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
                     <tr>
                 <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td>if the preset can't be found</td>
+                <td>if the preset can&#039;t be found</td>
             </tr>
             </table>
 
@@ -1444,14 +1374,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_getAssets">
-        <div class="location">at line 506</div>
+        <div class="location">at line 504</div>
         <code>        static    public            array
     <strong>getAssets</strong>()</code>
     </h3>
     <div class="details">
-        <p>Get the package's assets database</p>
-        <p>
-</p>
+        <p>Get the package&#039;s assets database</p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -1459,8 +1388,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td>array</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1470,14 +1398,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_findPreset">
-        <div class="location">at line 518</div>
+        <div class="location">at line 516</div>
         <code>        static    public            <a href="../AssetsManager/Package/Preset.html"><abbr title="AssetsManager\Package\Preset">Preset</abbr></a>
     <strong>findPreset</strong>(string $preset_name)</code>
     </h3>
     <div class="details">
         <p>Get a preset instance from static loader</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1485,8 +1412,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>string</td>
                 <td>$preset_name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1496,8 +1422,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td><a href="../AssetsManager/Package/Preset.html"><abbr title="AssetsManager\Package\Preset">Preset</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1507,14 +1432,13 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_findPackage">
-        <div class="location">at line 530</div>
+        <div class="location">at line 528</div>
         <code>        static    public            <a href="../AssetsManager/Package/AssetsPackage.html"><abbr title="AssetsManager\Package\AssetsPackage">AssetsPackage</abbr></a>
     <strong>findPackage</strong>(string $package_name)</code>
     </h3>
     <div class="details">
         <p>Get a package instance from static loader</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1522,8 +1446,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <tr>
                 <td>string</td>
                 <td>$package_name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1533,8 +1456,7 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
                     <table>
         <tr>
             <td><a href="../AssetsManager/Package/AssetsPackage.html"><abbr title="AssetsManager\Package\AssetsPackage">AssetsPackage</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1544,16 +1466,16 @@ $loader-&gt;document_root = www or the server DOCUMENT_ROOT
     </div>
 
                 <h3 id="method_buildWebPath">
-        <div class="location">at line 548</div>
+        <div class="location">at line 546</div>
         <code>        static    public            string
     <strong>buildWebPath</strong>(string $path)</code>
     </h3>
     <div class="details">
         <p>Build a web path ready to use in HTML</p>
-        <p>This will build a relative path related to the object <code>$document_root</code> and ready-to-use
-in HTML attributes. It uses the "smart resolving" feature of the <code>Library\Helper\Filesystem</code>
-class: path is returned relative to <code>$document_root</code> even if it is not in it in the
-filesystem.</p>
+        <p>This will build a relative path related to the object `$document_root` and ready-to-use<br />
+ in HTML attributes. It uses the &quot;smart resolving&quot; feature of the `Library\Helper\Filesystem`<br />
+ class: path is returned relative to `$document_root` even if it is not in it in the<br />
+ filesystem.</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1571,8 +1493,7 @@ filesystem.</p>
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1591,14 +1512,13 @@ filesystem.</p>
     </div>
 
                 <h3 id="method_find">
-        <div class="location">at line 561</div>
+        <div class="location">at line 559</div>
         <code>        static    public            string|null
     <strong>find</strong>(string $filename, string $package = null)</code>
     </h3>
     <div class="details">
         <p>Find an asset file in the filesystem</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1621,7 +1541,7 @@ filesystem.</p>
                     <table>
         <tr>
             <td>string|null</td>
-            <td>The web path of the asset if found, <code>null</code> otherwise</td>
+            <td>The web path of the asset if found, `null` otherwise</td>
         </tr>
     </table>
 
@@ -1631,14 +1551,13 @@ filesystem.</p>
     </div>
 
                 <h3 id="method_findInPackage">
-        <div class="location">at line 578</div>
+        <div class="location">at line 576</div>
         <code>        static    public            string|null
     <strong>findInPackage</strong>(string $filename, string $package)</code>
     </h3>
     <div class="details">
         <p>Find an asset file in the filesystem of a specific package</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1661,7 +1580,7 @@ filesystem.</p>
                     <table>
         <tr>
             <td>string|null</td>
-            <td>The web path of the asset if found, <code>null</code> otherwise</td>
+            <td>The web path of the asset if found, `null` otherwise</td>
         </tr>
     </table>
 
@@ -1671,14 +1590,13 @@ filesystem.</p>
     </div>
 
                 <h3 id="method_findInPath">
-        <div class="location">at line 598</div>
+        <div class="location">at line 596</div>
         <code>        static    public            string|null
     <strong>findInPath</strong>(string $filename, string $path)</code>
     </h3>
     <div class="details">
-        <p>Find an asset file in a package's path</p>
-        <p>
-</p>
+        <p>Find an asset file in a package&#039;s path</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1701,7 +1619,7 @@ filesystem.</p>
                     <table>
         <tr>
             <td>string|null</td>
-            <td>The web path of the asset if found, <code>null</code> otherwise</td>
+            <td>The web path of the asset if found, `null` otherwise</td>
         </tr>
     </table>
 
@@ -1711,14 +1629,13 @@ filesystem.</p>
     </div>
 
                 <h3 id="method_isUrl">
-        <div class="location">at line 613</div>
+        <div class="location">at line 611</div>
         <code>        static    public            bool
     <strong>isUrl</strong>(string $str)</code>
     </h3>
     <div class="details">
-        <p>Test if a string is a classic url or an url like <code>//domain.ext/asset</code></p>
-        <p>
-</p>
+        <p>Test if a string is a classic url or an url like `//domain.ext/asset`</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -1726,8 +1643,7 @@ filesystem.</p>
                     <tr>
                 <td>string</td>
                 <td>$str</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -1737,8 +1653,7 @@ filesystem.</p>
                     <table>
         <tr>
             <td>bool</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 

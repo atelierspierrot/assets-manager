@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="robots" content="index, follow, all" />
-        <title>AssetsManager\Package\Preset | </title>
+        <title>AssetsManager\Package\Preset | Assets Manager</title>
                     <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
                             </head>
         <body id="class">
@@ -12,27 +12,44 @@
             <li><a href="../../classes.html">Classes</a></li>
                             <li><a href="../../namespaces.html">Namespaces</a></li>
                         <li><a href="../../interfaces.html">Interfaces</a></li>
-            <li><a href="../../traits.html">Traits</a></li>
             <li><a href="../../doc-index.html">Index</a></li>
             
         </ul>
 
-        <div id="title"></div>
+        <div id="title">Assets Manager</div>
 
             <div class="type">Class</div>
     <h1><a href="../../AssetsManager/Package.html">AssetsManager\Package</a>\Preset</h1>
     </div>
         <div class="content">
-                <p>    class
-    <strong>Preset</strong>        implements
+                <p>class    <strong>Preset</strong>        implements
         <a href="../../AssetsManager/Package/AssetsPresetInterface.html"><abbr title="AssetsManager\Package\AssetsPresetInterface">AssetsPresetInterface</abbr></a></p>
 
             <div class="description">
             <p>Preset</p>
-            <p>This class is the "presets" manager for predefined assets plugins to use in views with
-the <code>_use()</code> method.</p>
+            <p>This class is the &quot;presets&quot; manager for predefined assets plugins to use in views with<br />
+ the `_use()` method.</p>
         </div>
     
+            <h2>Constants</h2>
+
+            <table>
+                    <tr>
+                <td>FILES_STACK_FIRST</td>
+                <td class="last">
+                    <p><em>First positioned file in a file types stack</em></p>
+                    <p></p>
+                </td>
+            </tr>
+                    <tr>
+                <td>FILES_STACK_LAST</td>
+                <td class="last">
+                    <p><em>Last positioned file in a file types stack</em></p>
+                    <p></p>
+                </td>
+            </tr>
+            </table>
+
     
     
             <h2>Methods</h2>
@@ -44,8 +61,7 @@ the <code>_use()</code> method.</p>
                 </td>
                 <td class="last">
                     <a href="#method___construct">__construct</a>(string $preset_name, array $preset_data, <a href="../../AssetsManager/Package/AssetsPackageInterface.html"><abbr title="AssetsManager\Package\AssetsPackageInterface">AssetsPackageInterface</abbr></a> $package)
-                    <p>
-</p>
+                    <p></p>
                 </td>
                 <td></td>
             </tr>
@@ -65,7 +81,7 @@ the <code>_use()</code> method.</p>
                 </td>
                 <td class="last">
                     <a href="#method_load">load</a>()
-                    <p>Automatic assets loading from an Assets package declare in a <code>composer.json</code></p>
+                    <p>Automatic assets loading from an Assets package declare in a `composer.json`</p>
                 </td>
                 <td></td>
             </tr>
@@ -75,8 +91,7 @@ the <code>_use()</code> method.</p>
                 </td>
                 <td class="last">
                     <a href="#method___toHtml">__toHtml</a>()
-                    <p>
-</p>
+                    <p></p>
                 </td>
                 <td></td>
             </tr>
@@ -86,8 +101,7 @@ the <code>_use()</code> method.</p>
                 </td>
                 <td class="last">
                     <a href="#method_setName">setName</a>(string $name)
-                    <p>
-</p>
+                    <p></p>
                 </td>
                 <td></td>
             </tr>
@@ -97,8 +111,7 @@ the <code>_use()</code> method.</p>
                 </td>
                 <td class="last">
                     <a href="#method_getName">getName</a>()
-                    <p>
-</p>
+                    <p></p>
                 </td>
                 <td></td>
             </tr>
@@ -108,8 +121,7 @@ the <code>_use()</code> method.</p>
                 </td>
                 <td class="last">
                     <a href="#method_setData">setData</a>(array $data)
-                    <p>
-</p>
+                    <p></p>
                 </td>
                 <td></td>
             </tr>
@@ -119,8 +131,7 @@ the <code>_use()</code> method.</p>
                 </td>
                 <td class="last">
                     <a href="#method_getData">getData</a>()
-                    <p>
-</p>
+                    <p></p>
                 </td>
                 <td></td>
             </tr>
@@ -130,8 +141,7 @@ the <code>_use()</code> method.</p>
                 </td>
                 <td class="last">
                     <a href="#method_setPackage">setPackage</a>(<a href="../../AssetsManager/Package/AssetsPackage.html"><abbr title="AssetsManager\Package\AssetsPackage">AssetsPackage</abbr></a> $package)
-                    <p>
-</p>
+                    <p></p>
                 </td>
                 <td></td>
             </tr>
@@ -141,8 +151,7 @@ the <code>_use()</code> method.</p>
                 </td>
                 <td class="last">
                     <a href="#method_getPackage">getPackage</a>()
-                    <p>
-</p>
+                    <p></p>
                 </td>
                 <td></td>
             </tr>
@@ -152,8 +161,7 @@ the <code>_use()</code> method.</p>
                 </td>
                 <td class="last">
                     <a href="#method_getStatements">getStatements</a>()
-                    <p>
-</p>
+                    <p></p>
                 </td>
                 <td></td>
             </tr>
@@ -163,8 +171,7 @@ the <code>_use()</code> method.</p>
                 </td>
                 <td class="last">
                     <a href="#method_getStatement">getStatement</a>(string $name)
-                    <p>
-</p>
+                    <p></p>
                 </td>
                 <td></td>
             </tr>
@@ -174,8 +181,7 @@ the <code>_use()</code> method.</p>
                 </td>
                 <td class="last">
                     <a href="#method_getOrganizedStatements">getOrganizedStatements</a>()
-                    <p>
-</p>
+                    <p></p>
                 </td>
                 <td></td>
             </tr>
@@ -185,8 +191,7 @@ the <code>_use()</code> method.</p>
                 </td>
                 <td class="last">
                     <a href="#method_getOrderedStatements">getOrderedStatements</a>(array $statements)
-                    <p>
-</p>
+                    <p></p>
                 </td>
                 <td></td>
             </tr>
@@ -196,15 +201,13 @@ the <code>_use()</code> method.</p>
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 55</div>
+        <div class="location">at line 65</div>
         <code>            public            
     <strong>__construct</strong>(string $preset_name, array $preset_data, <a href="../../AssetsManager/Package/AssetsPackageInterface.html"><abbr title="AssetsManager\Package\AssetsPackageInterface">AssetsPackageInterface</abbr></a> $package)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+        <p></p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -212,20 +215,17 @@ the <code>_use()</code> method.</p>
                     <tr>
                 <td>string</td>
                 <td>$preset_name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td>array</td>
                 <td>$preset_data</td>
-                <td>
-</td>
+                <td></td>
             </tr>
                     <tr>
                 <td><a href="../../AssetsManager/Package/AssetsPackageInterface.html"><abbr title="AssetsManager\Package\AssetsPackageInterface">AssetsPackageInterface</abbr></a></td>
                 <td>$package</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -236,14 +236,13 @@ the <code>_use()</code> method.</p>
     </div>
 
                 <h3 id="method_findInPackage">
-        <div class="location">at line 69</div>
+        <div class="location">at line 79</div>
         <code>            public            void
     <strong>findInPackage</strong>(string $path)</code>
     </h3>
     <div class="details">
         <p>Parse and load an assets file in a template object</p>
-        <p>
-</p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -251,8 +250,7 @@ the <code>_use()</code> method.</p>
                     <tr>
                 <td>string</td>
                 <td>$path</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -262,8 +260,7 @@ the <code>_use()</code> method.</p>
                     <table>
         <tr>
             <td>void</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -273,14 +270,13 @@ the <code>_use()</code> method.</p>
     </div>
 
                 <h3 id="method_load">
-        <div class="location">at line 81</div>
+        <div class="location">at line 91</div>
         <code>            public            void
     <strong>load</strong>()</code>
     </h3>
     <div class="details">
-        <p>Automatic assets loading from an Assets package declare in a <code>composer.json</code></p>
-        <p>
-</p>
+        <p>Automatic assets loading from an Assets package declare in a `composer.json`</p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -288,8 +284,7 @@ the <code>_use()</code> method.</p>
                     <table>
         <tr>
             <td>void</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -299,11 +294,11 @@ the <code>_use()</code> method.</p>
                     <table>
                     <tr>
                 <td><a href="http://php.net/DomainException"><abbr title="DomainException">DomainException</abbr></a></td>
-                <td>if the preset doesn't exist or doesn't implement required interface</td>
+                <td>if the preset doesn&#039;t exist or doesn&#039;t implement required interface</td>
             </tr>
                     <tr>
                 <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
-                <td>if the statement doesn't exist</td>
+                <td>if the statement doesn&#039;t exist</td>
             </tr>
             </table>
 
@@ -312,15 +307,13 @@ the <code>_use()</code> method.</p>
     </div>
 
                 <h3 id="method___toHtml">
-        <div class="location">at line 126</div>
+        <div class="location">at line 136</div>
         <code>            public            string
     <strong>__toHtml</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+        <p></p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -328,8 +321,7 @@ the <code>_use()</code> method.</p>
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -339,15 +331,13 @@ the <code>_use()</code> method.</p>
     </div>
 
                 <h3 id="method_setName">
-        <div class="location">at line 145</div>
+        <div class="location">at line 155</div>
         <code>            public            <a href="../../AssetsManager/Package/Preset.html"><abbr title="AssetsManager\Package\Preset">Preset</abbr></a>
     <strong>setName</strong>(string $name)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+        <p></p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -355,8 +345,7 @@ the <code>_use()</code> method.</p>
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -366,8 +355,7 @@ the <code>_use()</code> method.</p>
                     <table>
         <tr>
             <td><a href="../../AssetsManager/Package/Preset.html"><abbr title="AssetsManager\Package\Preset">Preset</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -377,15 +365,13 @@ the <code>_use()</code> method.</p>
     </div>
 
                 <h3 id="method_getName">
-        <div class="location">at line 154</div>
+        <div class="location">at line 164</div>
         <code>            public            string
     <strong>getName</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+        <p></p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -393,8 +379,7 @@ the <code>_use()</code> method.</p>
                     <table>
         <tr>
             <td>string</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -404,15 +389,13 @@ the <code>_use()</code> method.</p>
     </div>
 
                 <h3 id="method_setData">
-        <div class="location">at line 163</div>
+        <div class="location">at line 173</div>
         <code>            public            <a href="../../AssetsManager/Package/Preset.html"><abbr title="AssetsManager\Package\Preset">Preset</abbr></a>
     <strong>setData</strong>(array $data)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+        <p></p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -420,8 +403,7 @@ the <code>_use()</code> method.</p>
                     <tr>
                 <td>array</td>
                 <td>$data</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -431,8 +413,7 @@ the <code>_use()</code> method.</p>
                     <table>
         <tr>
             <td><a href="../../AssetsManager/Package/Preset.html"><abbr title="AssetsManager\Package\Preset">Preset</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -442,15 +423,13 @@ the <code>_use()</code> method.</p>
     </div>
 
                 <h3 id="method_getData">
-        <div class="location">at line 172</div>
+        <div class="location">at line 182</div>
         <code>            public            array
     <strong>getData</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+        <p></p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -458,8 +437,7 @@ the <code>_use()</code> method.</p>
                     <table>
         <tr>
             <td>array</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -469,15 +447,13 @@ the <code>_use()</code> method.</p>
     </div>
 
                 <h3 id="method_setPackage">
-        <div class="location">at line 181</div>
+        <div class="location">at line 191</div>
         <code>            public            <a href="../../AssetsManager/Package/Preset.html"><abbr title="AssetsManager\Package\Preset">Preset</abbr></a>
     <strong>setPackage</strong>(<a href="../../AssetsManager/Package/AssetsPackage.html"><abbr title="AssetsManager\Package\AssetsPackage">AssetsPackage</abbr></a> $package)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+        <p></p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -485,8 +461,7 @@ the <code>_use()</code> method.</p>
                     <tr>
                 <td><a href="../../AssetsManager/Package/AssetsPackage.html"><abbr title="AssetsManager\Package\AssetsPackage">AssetsPackage</abbr></a></td>
                 <td>$package</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -496,8 +471,7 @@ the <code>_use()</code> method.</p>
                     <table>
         <tr>
             <td><a href="../../AssetsManager/Package/Preset.html"><abbr title="AssetsManager\Package\Preset">Preset</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -507,15 +481,13 @@ the <code>_use()</code> method.</p>
     </div>
 
                 <h3 id="method_getPackage">
-        <div class="location">at line 190</div>
+        <div class="location">at line 200</div>
         <code>            public            <a href="../../AssetsManager/Package/AssetsPackage.html"><abbr title="AssetsManager\Package\AssetsPackage">AssetsPackage</abbr></a>
     <strong>getPackage</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+        <p></p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -523,8 +495,7 @@ the <code>_use()</code> method.</p>
                     <table>
         <tr>
             <td><a href="../../AssetsManager/Package/AssetsPackage.html"><abbr title="AssetsManager\Package\AssetsPackage">AssetsPackage</abbr></a></td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -534,15 +505,13 @@ the <code>_use()</code> method.</p>
     </div>
 
                 <h3 id="method_getStatements">
-        <div class="location">at line 195</div>
+        <div class="location">at line 205</div>
         <code>            public            array
     <strong>getStatements</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+        <p></p>
+        <p></p>
         <div class="tags">
             
                             <h4>Return Value</h4>
@@ -550,8 +519,7 @@ the <code>_use()</code> method.</p>
                     <table>
         <tr>
             <td>array</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -561,15 +529,13 @@ the <code>_use()</code> method.</p>
     </div>
 
                 <h3 id="method_getStatement">
-        <div class="location">at line 201</div>
+        <div class="location">at line 211</div>
         <code>            public            array
     <strong>getStatement</strong>(string $name)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+        <p></p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -577,8 +543,7 @@ the <code>_use()</code> method.</p>
                     <tr>
                 <td>string</td>
                 <td>$name</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
@@ -588,8 +553,7 @@ the <code>_use()</code> method.</p>
                     <table>
         <tr>
             <td>array</td>
-            <td>
-</td>
+            <td></td>
         </tr>
     </table>
 
@@ -599,15 +563,13 @@ the <code>_use()</code> method.</p>
     </div>
 
                 <h3 id="method_getOrganizedStatements">
-        <div class="location">at line 211</div>
+        <div class="location">at line 221</div>
         <code>            public            
     <strong>getOrganizedStatements</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+        <p></p>
+        <p></p>
         <div class="tags">
             
             
@@ -616,15 +578,13 @@ the <code>_use()</code> method.</p>
     </div>
 
                 <h3 id="method_getOrderedStatements">
-        <div class="location">at line 246</div>
+        <div class="location">at line 256</div>
         <code>        static    public            
     <strong>getOrderedStatements</strong>(array $statements)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
+        <p></p>
+        <p></p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -632,8 +592,7 @@ the <code>_use()</code> method.</p>
                     <tr>
                 <td>array</td>
                 <td>$statements</td>
-                <td>
-</td>
+                <td></td>
             </tr>
             </table>
 
