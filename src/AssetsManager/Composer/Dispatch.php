@@ -27,12 +27,12 @@ class Dispatch
 {
 
     /**
-     * @var object \Composer\IO\IOInterface
+     * @var \Composer\IO\IOInterface
      */
     private static $__io;
 
     /**
-     * @var object \Composer\Composer
+     * @var \Composer\Composer
      */
     private static $__composer;
 
@@ -42,12 +42,12 @@ class Dispatch
     private static $__type;
 
     /**
-     * @var object \AssetsManager\Composer\Installer\AssetsInstallerInterface
+     * @var \AssetsManager\Composer\Installer\AssetsInstallerInterface
      */
     private static $__installer;
 
     /**
-     * @var object \AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator
+     * @var \AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator
      */
     private static $__autoloader;
 
@@ -97,7 +97,7 @@ class Dispatch
                     self::$__installer = new $installer_class(self::$__io, self::$__composer, self::$__type);
                 } else {
                     Error::thrower(
-                        sprintf('Assets package installer class "%s" must implements interface "%s"!',
+                        sprintf('Assets package installer class "%s" must implement interface "%s"!',
                             $installer_class, $installer_interface),
                         '\DomainException', __CLASS__, __METHOD__, __LINE__
                     );

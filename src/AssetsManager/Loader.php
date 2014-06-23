@@ -15,6 +15,7 @@ use \AssetsManager\Package\AssetsPackage;
 use \AssetsManager\Package\Preset;
 use \Library\Helper\Directory as DirectoryHelper;
 use \Library\Helper\Filesystem as FilesystemHelper;
+use \Library\Helper\Url as UrlHelper;
 
 /**
  * Class to manage assets paths
@@ -47,24 +48,21 @@ class Loader
     /**
      * Flag to use to avoid throwing an exception in case of presets conflicts
      */
-    const PRESETS_NO_CONFLICT = 1;
+    const PRESETS_NO_CONFLICT   = 1;
     
     /**
      * Flag to use to throw exception in case of presets conflicts (default)
      */
-    const PRESETS_CONFLICT = 2;
+    const PRESETS_CONFLICT      = 2;
     
     /**
-     * The document root path (absolute - used to build assets web path - no trailing slash)
-     * @var string
+     * @var string The document root path (absolute - used to build assets web path - no trailing slash)
      */
     protected $document_root;
 
     /**
-     * Project assets DB array
-     *
+     * @var array Project assets DB array
      * This is populated parsing the package's `ASSETS_DB_FILENAME`.
-     * @var array
      */
     protected $assets_db;
 
@@ -111,7 +109,7 @@ class Loader
      * @param   string  $root_dir       The project package root directory
      * @param   string  $assets_dir     The project package assets directory, related from `$root_dir`
      * @param   string  $document_root  The project assets root directory to build web accessible assets paths
-     * @param   int     $conflict_flag  Define if the class must throw excpetions in case of presets conflicts
+     * @param   int     $conflict_flag  Define if the class must throw exceptions in case of presets conflicts
      * @return  self
      */
     public static function getInstance(
@@ -131,7 +129,7 @@ class Loader
      * @param   string  $root_dir       The project package root directory
      * @param   string  $assets_dir     The project package assets directory, related from `$root_dir`
      * @param   string  $document_root  The project assets root directory to build web accessible assets paths
-     * @param   int     $conflict_flag  Define if the class must throw excpetions in case of presets conflicts
+     * @param   int     $conflict_flag  Define if the class must throw exceptions in case of presets conflicts
      * @throws  \Exception if the object is not called as a singleton
      */
     public function __construct(
@@ -371,7 +369,7 @@ class Loader
                     return $package_object;
                 } else {
                     throw new \DomainException(
-                        sprintf('Package class "%s" must implements interface "%s"!',
+                        sprintf('Package class "%s" must implement interface "%s"!',
                             $cls_name, $config_interface)
                     );
                 }
@@ -477,7 +475,7 @@ class Loader
                     return $preset_object;
                 } else {
                     throw new \DomainException(
-                        sprintf('Preset class "%s" must implements interface "%s"!',
+                        sprintf('Preset class "%s" must implement interface "%s"!',
                             $cls_name, $config_interface)
                     );
                 }
@@ -612,10 +610,7 @@ class Loader
      */
     public static function isUrl($str)
     {
-        return (bool) (
-            \Library\Helper\Url::isUrl($str) ||
-            \Library\Helper\Url::isUrl('http'.$str)
-        );
+        return (bool) (UrlHelper::isUrl($str) || UrlHelper::isUrl('http'.$str));
     }
 
 }

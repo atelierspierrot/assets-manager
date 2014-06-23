@@ -47,19 +47,19 @@ class DefaultConfig
                 'require' => 'Requirement'
             ),
             // the configuration class (this class, can be null but must be present)
-            // must impelements AssetsManager\Config\ConfiguratorInterface
+            // must implements \AssetsManager\Config\ConfiguratorInterface
             'assets-config-class' => null,
             // the AssetsPackage class
-            // must implements AssetsManager\Package\AssetsPackageInterface
+            // must implements \AssetsManager\Package\AssetsPackageInterface
             'assets-package-class' => 'AssetsManager\Package\AssetsPackage',
             // the AssetsPreset class
-            // must implements AssetsManager\Package\AssetsPresetInterface
+            // must implements \AssetsManager\Package\AssetsPresetInterface
             'assets-preset-class' => 'AssetsManager\Package\Preset',
             // the AssetsInstaller class
-            // must implements AssetsManager\Composer\Installer\AssetsInstallerInterface
+            // must implements \AssetsManager\Composer\Installer\AssetsInstallerInterface
             'assets-package-installer-class' => 'AssetsManager\Composer\Installer\AssetsInstaller',
             // the AssetsAutoloadGenerator class
-            // must extends AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator
+            // must extends \AssetsManager\Composer\Autoload\AbstractAssetsAutoloadGenerator
             'assets-autoload-generator-class' => 'AssetsManager\Composer\Autoload\AssetsAutoloadGenerator',
         );
     }
