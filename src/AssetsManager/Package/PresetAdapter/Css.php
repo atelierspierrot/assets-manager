@@ -11,6 +11,7 @@ namespace AssetsManager\Package\PresetAdapter;
 
 use \AssetsManager\Package\PresetAdapterInterface;
 use \AssetsManager\Package\AssetsPresetInterface;
+use \AssetsManager\Package\Preset;
 
 /**
  * @author  Piero Wbmstr <me@e-piwi.fr>
@@ -68,6 +69,7 @@ class Css
      * not minified neither as packed.
      *
      * @return void
+     * @throws \Exception if one of the statements is malformed
      */
     public function parse()
     {
@@ -91,11 +93,9 @@ class Css
                 }
                 foreach ($substrs as $substr) {
                     switch ($substr) {
-                        case 'top': $data['position'] = 100; break;
-                        case 'bottom': $data['position'] = -1; break;
                         case 'min': $data['minified'] = true; break;
-                        case 'first': $data['position'] = 0; break;
-                        case 'last': $data['position'] = 1000; break;
+                        case 'first': $data['position'] = Preset::FILES_STACK_FIRST; break;
+                        case 'last': $data['position'] = Preset::FILES_STACK_LAST; break;
                         default:
                             if (is_numeric($substr)) {
                                 if (!((-1 <= $substr) && (100 >= $substr))) {
