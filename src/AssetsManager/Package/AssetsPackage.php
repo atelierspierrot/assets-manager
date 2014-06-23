@@ -309,6 +309,14 @@ class AssetsPackage
         return AssetsLoader::findInPackage($filename, $this->getName());
     }
 
+    /**
+     * @alias self::findInPackage()
+     */
+    public function find($filename)
+    {
+        return $this->findInPackage($filename);
+    }
+
 }
 
 // Endfile
