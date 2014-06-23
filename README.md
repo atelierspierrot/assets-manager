@@ -17,24 +17,27 @@ Just like any standard Composer feature, all names or configuration variables ar
 
 ## Installation
 
-To install the plugin, just add the package to your requirements in your `composer.json`:
+To install the plugin, add the package to your requirements in your `composer.json`:
 
     "require": {
         ...
         "atelierspierrot/assets-manager": "1.*"
     }
 
-The namespace will be automatically added to the project's Composer *autoloader* and once it will
-be installed, the plugin will handle assets packages installation.
-
 
 ## Usage
 
+### How to inform the extension about your package assets?
+
+The extension handles any package with a type `***-assets`, which will be considered as a
+standard library by Composer if you don't use the extension (and will be installed as any
+other classic library package).
+
 ### Schema of usage during a project lifecycle
 
-**Installation/Update by Composer**
+**Installation/Update/Removal by Composer**
 
-The `\AssetsManager\Composer\Installer` installs the "library-assets" packages:
+The `\AssetsManager\Composer\Installer` installs the "\*\*\*-assets" packages:
 
 - it moves the assets in a specific `www/vendor/` directory
 - it adds an entry to the internal `assets_db` table
@@ -78,19 +81,15 @@ build a JSON map in the original `vendor/`:
     | www/
     | ---- vendor/
 
-### How to inform the extension about your package assets?
-
-The extension handles any package of type `***-assets`, which will be considered as a
-standard library by Composer if you don't use the extension (and will be installed as any
-other classic library package).
-
 
 ## Usage of the assets manager
+
+This part will try to explain how to use the assets manager in your scripts.
 
 ### The assets loader object
 
 The `\AssetsManager\Loader` class is designed to manage a set of assets based on a table of 
-installed packages.
+installed packages (the json file generated during installation/update/removal processes).
 
 The class is based on three paths:
 
@@ -99,7 +98,7 @@ The class is based on three paths:
 - `document_root`: the path in the filesystem of the web assets root directory ; this is used
 to build all related assets HTTP URLs.
 
-For these three paths, their defaults values are defined on a default package structure:
+For these three paths, the default values are defined on a default package structure:
 
     package_name/
     |----------- src/
@@ -124,15 +123,17 @@ using the `\AssetsManager\Loader` object:
 
     // to get a package
     $package = $loader->getPackage( package name );
+    // to retrieve a package asset file URL
+    echo $package->find( file name );
 
     // to get a preset
     $preset = $loader->getPreset( preset name );
-    // to write preset dependencies
+    // to write a preset dependencies
     echo $preset->__toHtml();
 
 As described in the "configuration" section below, calling a preset will automatically load
-its internal files requirements (some Javascript files for instance) and its dependencies to
-other presets or files. The result of the `__toHtml()` method will then be a string to include
+its internal files (some Javascript files for instance) and its dependencies to other presets
+or files. The result of the `__toHtml()` method will then be a string to include
 the files and scripts definitions, fully functional and ready to be written in your HTML.
 
 Example:
@@ -148,9 +149,11 @@ package in its `assets-installer` version you will have:
 
 ## Configuration
 
-Below is the example of the package default configuration values:
+Below is an example of the package configuration using default values:
 
     "extra": {
+        ...
+
         "assets-dir": "www",
         "assets-vendor-dir": "vendor",
         "document-root": "www",
@@ -176,9 +179,6 @@ Below is the example of the package default configuration values:
         }
     }
 
-All the paths are relative to the package `vendor` installation directory or the `assets`
-installation directory.
-
 ### `assets-dir`: string
 
 This defines the relative path of your assets in the package. This directory must exist
@@ -190,12 +190,6 @@ This defines the relative path of your packages' assets from the `assets-dir` di
 This directory will be created if it doesn't exist and must be unique (its value must be a string).
 This value is finally concatenated to the `assets-dir` to build the relative final directory
 path of your dependencies assets.
-
-Example:
-
-For instance, if your `assets-dir` is set to "www" and your `assets-vendor-dir` is set to
-"assets_vendor", the final place of your dependencies assets will be "www/assets_vendor/"
-related to your project root directory.
 
 ### `document-root`: string (root only)
 
@@ -213,11 +207,10 @@ and your `document-root` is define to `/home/www/project/www/`, the stylesheet t
 
 ### `assets-presets`: array of arrays
 
-An assets preset is a predefined set of CSS or Javascript files to include to use a specific
+An assets preset is a predefined set of CSS or Javascript files required to use a specific
 tool (such as a jQuery plugin for instance). Each preset can be used in a view file writing:
 
-        $preset = $assets_loader->getPreset( preset name );
-        echo $preset->load()->__toHtml();
+        echo $assets_loader->getPreset( preset name )->__toHtml();
 
 A preset is defined as a set of `key => array` pairs where the `key` is the preset name 
 (the name you will call using the `getPreset()` method) and the corresponding array
@@ -270,8 +263,17 @@ Example:
         "first:vendor/jquery.metadata.js",
         "last:min:vendor/jquery.tablesorter.min.js"
     ]
+    // or
+    "jsfiles_footer": [
+        "10:vendor/jquery.metadata.js",
+        "11:min:vendor/jquery.tablesorter.min.js"
+    ]
+
 
 ### PHP classes (root only)
+
+You can also overwrite the default classes used to manage the configuration, the package and
+preset and the installation of the assets.
 
 #### `assets-config-class`: string
 
@@ -310,7 +312,7 @@ and extend the abstract class `\AssetsManager\Composer\Autoload\AbstractAssetsAu
 It defaults to `\AssetsManager\Composer\Autoload\AssetsAutoloadGenerator`.
 
 
-## Development
+## Development & Documentation
 
 As for all our work, we try to follow the coding standards and naming rules most commonly in use:
 
