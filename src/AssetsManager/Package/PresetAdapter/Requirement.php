@@ -16,7 +16,8 @@ use \AssetsManager\Loader;
 /**
  * @author  Piero Wbmstr <me@e-piwi.fr>
  */
-class Requirement implements PresetAdapterInterface
+class Requirement
+    implements PresetAdapterInterface
 {
 
     protected $data;

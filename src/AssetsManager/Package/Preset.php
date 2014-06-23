@@ -28,6 +28,16 @@ class Preset
 {
 
     /**
+     * First positioned file in a file types stack
+     */
+    const FILES_STACK_FIRST = 100;
+
+    /**
+     * Last positioned file in a file types stack
+     */
+    const FILES_STACK_LAST  = -1;
+
+    /**
      * @var string
      */
     protected $name;
