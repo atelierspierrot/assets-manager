@@ -70,7 +70,8 @@ abstract class AbstractAssetsAutoloadGenerator
     protected function __construct(AssetsInstallerInterface $installer)
     {
         $this->assets_installer = $installer;
-        $this->assets_db = array();
+        $assets_db = $this->readJsonDatabase();
+        $this->assets_db = isset($assets_db['packages']) ? $assets_db['packages'] : array();
         self::setGenerator(array($this, 'generate'));
     }
 
@@ -124,6 +125,9 @@ abstract class AbstractAssetsAutoloadGenerator
         );
         try {
             $json = new JsonFile($assets_file);
+            if ($json->exists()) {
+                unlink($assets_file);
+            }
             $json->write($full_db);
             return $assets_file;
         } catch(\Exception $e) {
