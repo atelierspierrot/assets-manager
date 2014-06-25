@@ -403,14 +403,14 @@ class Loader
             foreach ($this->assets_db as $package_name=>$package_data) {
                 if (!empty($package_data['assets_presets'])) {
                     foreach ($package_data['assets_presets'] as $preset_name=>$preset_data) {
-                        if (!array_key_exists($preset_name, $this->presets_data)) {
+                        if (array_key_exists($preset_name, $this->presets_data) && ($this->conflict_flag & self::PRESETS_CONFLICT)) {
+                            throw new \Exception(
+                                sprintf('Presets conflict: duplicate entry named "%s"!', $preset_name)
+                            );
+                        } else {
                             $this->presets_data[$preset_name] = array(
                                 'data'=>$preset_data,
                                 'package'=>$package_name
-                            );
-                        } elseif ($this->conflict_flag & self::PRESETS_CONFLICT) {
-                            throw new \Exception(
-                                sprintf('Presets conflict: duplicate entry named "%s"!', $preset_name)
                             );
                         }
                     }
