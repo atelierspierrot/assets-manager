@@ -258,7 +258,6 @@ class Preset
     {
         $organized_statements = array();
         if (empty($this->_statements)) {
-           $this->load();
            try {
                $this->load();
            } catch (\Exception $e) {
@@ -270,7 +269,7 @@ class Preset
         if (!empty($statements['require'])) {
             foreach ($statements['require'] as $statement) {
                 $data = $statement->getData();
-                foreach ($statement->getData() as $type=>$stack) {
+                foreach ($data as $type=>$stack) {
                     if (!isset($statements[$type])) {
                         $statements[$type] = array();
                     }
