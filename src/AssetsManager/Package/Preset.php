@@ -11,9 +11,9 @@ namespace AssetsManager\Package;
 
 use \InvalidArgumentException;
 use \AssetsManager\Config;
-use \AssetsManager\Package\AssetsPackage;
-use \AssetsManager\Package\AssetsPackageInterface;
-use \AssetsManager\Package\AssetsPresetInterface;
+use \AssetsManager\Package\Package;
+use \AssetsManager\Package\PackageInterface;
+use \AssetsManager\Package\PresetInterface;
 
 /**
  * Preset
@@ -24,7 +24,7 @@ use \AssetsManager\Package\AssetsPresetInterface;
  * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class Preset
-    implements AssetsPresetInterface
+    implements PresetInterface
 {
 
     /**
@@ -48,7 +48,7 @@ class Preset
     protected $data;
 
     /**
-     * @var \AssetsManager\Package\AssetsPackage
+     * @var \AssetsManager\Package\Package
      */
     protected $package;
 
@@ -60,9 +60,9 @@ class Preset
     /**
      * @param string $preset_name
      * @param array $preset_data
-     * @param \AssetsManager\Package\AssetsPackageInterface $package
+     * @param \AssetsManager\Package\PackageInterface $package
      */
-    public function __construct($preset_name, array $preset_data, AssetsPackageInterface $package)
+    public function __construct($preset_name, array $preset_data, PackageInterface $package)
     {
         $this
             ->setName($preset_name)
@@ -191,17 +191,17 @@ class Preset
     }
 
     /**
-     * @param \AssetsManager\Package\AssetsPackage $package
+     * @param \AssetsManager\Package\Package $package
      * @return self
      */
-    public function setPackage(AssetsPackage $package)
+    public function setPackage(Package $package)
     {
         $this->package = $package;
         return $this;
     }
 
     /**
-     * @return \AssetsManager\Package\AssetsPackage
+     * @return \AssetsManager\Package\Package
      */
     public function getPackage()
     {

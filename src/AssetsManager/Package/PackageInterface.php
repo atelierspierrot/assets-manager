@@ -10,13 +10,13 @@
 namespace AssetsManager\Package;
 
 /**
- * AssetsPackageInterface
+ * PackageInterface
  *
  * Any Assets Package class must implement this interface methods.
  *
  * @author  Piero Wbmstr <me@e-piwi.fr>
  */
-interface AssetsPackageInterface
+interface PackageInterface
 {
 
     /**

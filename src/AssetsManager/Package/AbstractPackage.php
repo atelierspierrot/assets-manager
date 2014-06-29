@@ -35,7 +35,7 @@ use \Library\Helper\Directory as DirectoryHelper;
  *
  * @author  Piero Wbmstr <me@e-piwi.fr>
  */
-abstract class AbstractAssetsPackage
+abstract class AbstractPackage
 {
 
     /**

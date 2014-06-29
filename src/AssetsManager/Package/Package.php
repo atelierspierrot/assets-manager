@@ -12,16 +12,16 @@ namespace AssetsManager\Package;
 use \InvalidArgumentException;
 use \Library\Helper\Directory as DirectoryHelper;
 use \AssetsManager\Loader as AssetsLoader;
-use \AssetsManager\Package\AssetsPackageInterface;
-use \AssetsManager\Package\AbstractAssetsPackage;
+use \AssetsManager\Package\PackageInterface;
+use \AssetsManager\Package\AbstractPackage;
 use \AssetsManager\Package\Preset;
 
 /**
  * @author  Piero Wbmstr <me@e-piwi.fr>
  */
-class AssetsPackage
-    extends AbstractAssetsPackage
-    implements AssetsPackageInterface
+class Package
+    extends AbstractPackage
+    implements PackageInterface
 {
 
     /**

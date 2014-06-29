@@ -49,11 +49,11 @@ class DefaultConfig
             // the configuration class (this class, can be null but must be present)
             // must implements \AssetsManager\Config\ConfiguratorInterface
             'assets-config-class' => null,
-            // the AssetsPackage class
-            // must implements \AssetsManager\Package\AssetsPackageInterface
-            'assets-package-class' => 'AssetsManager\Package\AssetsPackage',
+            // the Package class
+            // must implements \AssetsManager\Package\PackageInterface
+            'assets-package-class' => 'AssetsManager\Package\Package',
             // the AssetsPreset class
-            // must implements \AssetsManager\Package\AssetsPresetInterface
+            // must implements \AssetsManager\Package\PresetInterface
             'assets-preset-class' => 'AssetsManager\Package\Preset',
             // the AssetsInstaller class
             // must implements \AssetsManager\Composer\Installer\AssetsInstallerInterface

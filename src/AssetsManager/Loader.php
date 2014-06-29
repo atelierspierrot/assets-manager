@@ -9,9 +9,9 @@
 
 namespace AssetsManager;
 
-use \AssetsManager\Package\AbstractAssetsPackage;
+use \AssetsManager\Package\AbstractPackage;
 use \AssetsManager\Config;
-use \AssetsManager\Package\AssetsPackage;
+use \AssetsManager\Package\Package;
 use \AssetsManager\Package\Preset;
 use \Library\Helper\Directory as DirectoryHelper;
 use \Library\Helper\Filesystem as FilesystemHelper;
@@ -42,7 +42,7 @@ use \Library\Helper\Url as UrlHelper;
  * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 class Loader
-    extends AbstractAssetsPackage
+    extends AbstractPackage
 {
 
     /**
@@ -344,7 +344,7 @@ class Loader
      * Get a package instance
      *
      * @param   string $package_name
-     * @return  \AssetsManager\Package\AssetsPackage
+     * @return  \AssetsManager\Package\Package
      * @throws  \Exception : any caught exception
      * @see     self::_buildNewPackage()
      */
@@ -364,7 +364,7 @@ class Loader
      * Build a new package instance
      *
      * @param   string $package_name
-     * @return  \AssetsManager\Package\AssetsPackage
+     * @return  \AssetsManager\Package\Package
      * @throws  \DomainException if the package class can't be found or doesn't implement required interface
      * @throws  \InvalidArgumentException if the package can't be found
      */
@@ -542,7 +542,7 @@ class Loader
      * Get a package instance from static loader
      *
      * @param   string  $package_name
-     * @return  \AssetsManager\Package\AssetsPackage
+     * @return  \AssetsManager\Package\Package
      */
     public static function findPackage($package_name)
     {

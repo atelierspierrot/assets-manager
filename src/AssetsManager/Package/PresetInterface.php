@@ -16,15 +16,15 @@ namespace AssetsManager\Package;
  *
  * @author  Piero Wbmstr <me@e-piwi.fr>
  */
-interface AssetsPresetInterface
+interface PresetInterface
 {
 
     /**
      * @param string $preset_name
      * @param array $preset_data
-     * @param \AssetsManager\Package\AssetsPackageInterface $package
+     * @param \AssetsManager\Package\PackageInterface $package
      */
-    public function __construct($preset_name, array $preset_data, \AssetsManager\Package\AssetsPackageInterface $package);
+    public function __construct($preset_name, array $preset_data, \AssetsManager\Package\PackageInterface $package);
 
     /**
      * @return array

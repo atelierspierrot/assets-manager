@@ -80,13 +80,15 @@ class Javascript
      *
      *     position : info : src
      *
-     * where `position` can be an integer or a string like `top` or `bottom`, `info` can be
+     * where `position` can be an integer or a string like `first` or `last`, `info` can be
      * a string like `pack` for packed javascript or `min` for already minified scripts and
      * `src` is the relative path of the file in the original package. Position is a [-1;100]
      * integer range where 100 is the top of the stack (first files to include).
      *
      * By default, position is 0 (the file is added to the stack), and the script is considered
      * not minified neither as packed.
+     *
+     * You can use distant URLs as `src` (with or without protocol).
      *
      * @return void
      * @throws \Exception if one of the statements is malformed
