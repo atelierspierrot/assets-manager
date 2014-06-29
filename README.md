@@ -108,6 +108,9 @@ For these three paths, the default values are defined on a default package struc
     $loader->assets_dir = www
     $loader->document_root = www or the server DOCUMENT_ROOT
 
+Additionally, a `cache_dir` variable is defined to store assets cache files (if necessary) and
+defaults to `www/tmp/`.
+
 NOTE - These paths are stored in the object without the trailing slash.
 
 ### Usage example
@@ -157,6 +160,7 @@ Below is an example of the package configuration using default values:
         "assets-dir": "www",
         "assets-vendor-dir": "vendor",
         "document-root": "www",
+        "cache-dir": "tmp",
         "assets-config-class": "AssetsManager\\Config\\DefaultConfig",
         "assets-package-class": "AssetsManager\\Package\\Package",
         "assets-preset-class": "AssetsManager\\Package\\Preset",
@@ -204,6 +208,13 @@ For instance, if the absolute path of a CSS stylesheet is `/home/www/project/www
 and your `document-root` is define to `/home/www/project/www/`, the stylesheet tag will be rendered as:
 
     <link src="www/assets/package/styles.css" type="text/css" rel="stylesheet" />
+
+### `cache-dir`: string (root only)
+
+This defines the relative path of the temporary assets files directory.
+This directory will be created if it doesn't exist and must be unique (its value must be a string).
+This value is finally concatenated to the `assets-dir` to build the relative final directory
+path of your assets cache. It is only considered for the root package.
 
 ### `assets-presets`: array of arrays
 

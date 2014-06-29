@@ -26,6 +26,7 @@
     },
     "autoload": { "psr-0": { "AssetsManager": "src" } },
     "extra": {
+        "views-functions": "src/AssetsManager/view_functions.php",
         "class": "\\AssetsManager\\Composer\\AssetsManagerPlugin",
         "branch-alias": {
             "dev-master": "1.0-dev"

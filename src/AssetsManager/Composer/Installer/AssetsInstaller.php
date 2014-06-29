@@ -52,6 +52,11 @@ class AssetsInstaller
     /**
      * @var string
      */
+    protected $cache_dir;
+
+    /**
+     * @var string
+     */
     protected $app_base_path;
 
     /**
@@ -64,13 +69,14 @@ class AssetsInstaller
         parent::__construct($io, $composer, $type);
 
         $this->guessConfigurator($composer->getPackage());
-        $config = $composer->getConfig();
-        $this->app_base_path = rtrim(str_replace($config->get('vendor-dir'), '', $this->getVendorDir()), '/');
-        $this->filesystem = new AssetsFilesystem();
-        $this->assets_dir = $this->guessAssetsDir($composer->getPackage());
+        $config                 = $composer->getConfig();
+        $this->app_base_path    = rtrim(str_replace($config->get('vendor-dir'), '', $this->getVendorDir()), '/');
+        $this->filesystem       = new AssetsFilesystem();
+        $this->assets_dir       = $this->guessAssetsDir($composer->getPackage());
         $this->assets_vendor_dir = $this->guessAssetsVendorDir($composer->getPackage());
-        $this->document_root = $this->guessDocumentRoot($composer->getPackage());
+        $this->document_root    = $this->guessDocumentRoot($composer->getPackage());
         $this->assets_db_filename = $this->guessAssetsDbFilename($composer->getPackage());
+        $this->cache_dir        = $this->guessCacheDir($composer->getPackage());
     }
 
 // ----------------------------
@@ -256,6 +262,17 @@ class AssetsInstaller
     }
 
     /**
+     * Guess and get the `cache-dir` configuration package entry
+     *
+     * @param \Composer\Package\PackageInterface $package
+     * @return string
+     */
+    protected function guessCacheDir(PackageInterface $package)
+    {
+        return self::guessConfigurationEntry($package, 'cache-dir');
+    }
+
+    /**
      * Guess and get the `assets-db-filename` configuration package entry
      *
      * @param \Composer\Package\PackageInterface $package
@@ -317,6 +334,14 @@ class AssetsInstaller
     public function getDocumentRoot()
     {
         return $this->document_root;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCacheDir()
+    {
+        return $this->cache_dir;
     }
 
     /**

@@ -61,6 +61,11 @@ class Loader
     protected $document_root;
 
     /**
+     * @var string
+     */
+    protected $cache_path;
+
+    /**
      * @var array Project assets DB array
      * This is populated parsing the package's `ASSETS_DB_FILENAME`.
      */
@@ -200,6 +205,9 @@ class Loader
                         isset($json_assets['document_root']) ? $json_assets['document_root'] : Config::get('document-root')
                         )
                     )
+                    ->setCachePath(
+                        isset($json_assets['cache_dir']) ? $json_assets['cache_dir'] : Config::get('cache-dir')
+                    )
                     ->setAssetsDb(!empty($json_assets['packages']) ? $json_assets['packages'] : array());
             } else {
                 throw new \Exception(
@@ -246,6 +254,37 @@ class Loader
     public function getDocumentRoot()
     {
         return $this->document_root;
+    }
+
+    /**
+     * Set the cache path (absolute or relative form the WebRootPath)
+     *
+     * @param   string $path The path to the web cache directory
+     * @return  self
+     * @throws  \InvalidArgumentException if the path doesn't exist
+     */
+    public function setCachePath( $path )
+    {
+        if (@file_exists($path) && is_dir($path)) {
+            $this->cache_path = realpath($path).'/';
+        } elseif (null!==$path_rp = $this->findRealPath($path)) {
+            $this->cache_path = rtrim($path_rp, '/').'/';
+        } else {
+            throw new \InvalidArgumentException(
+                sprintf('Cache path "%s" was not found or is not a directory!', $path)
+            );
+        }
+        return $this;
+    }
+
+    /**
+     * Get the web cache path
+     *
+     * @return string The object web cache path
+     */
+    public function getCachePath()
+    {
+        return $this->cache_path;
     }
 
     /**
@@ -402,6 +441,18 @@ class Loader
 // ---------------------
 // Presets manager
 // ---------------------
+
+    /**
+     * Automatic assets loading from an Assets preset declare in a `composer.json`
+     *
+     * @param   string $preset_name The name of the preset to use
+     * @return  void
+     */
+    public function useAssetsPreset($preset_name = null)
+    {
+        $preset = $this->getPreset($preset_name);
+        $preset->load();
+    }
 
     /**
      * Load and validate all packages presets in one table
@@ -580,9 +631,12 @@ class Loader
         $_this = self::getInstance();
         if (!is_null($package)) {
             return self::findInPackage($filename, $package);
-        } else {
-            return self::findInPath($filename, $_this->getAssetsRealPath());
+        } elseif (!is_null($f = self::findInPath($filename, $_this->getAssetsRealPath()))) {
+            return $f;
+        } elseif (!is_null($f = self::findInPath($filename, $_this->getDocumentRoot()))) {
+            return $f;
         }
+        return null;
     }
 
     /**

@@ -1,10 +1,10 @@
 <?php
 /**
- * Template Engine - PHP framework package
+ * AssetsManager - Composer plugin
  * Copyleft (c) 2013-2014 Pierre Cassat and contributors
  * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
  * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
- * Sources <https://github.com/atelierspierrot/templatengine>
+ * Sources <https://github.com/atelierspierrot/assets-manager>
  */
 
 namespace AssetsManager\Composer\Autoload;
@@ -62,27 +62,28 @@ class DumpAutoloadEventHandler
      */
     public function getFullDb()
     {
-        $filesystem = new Filesystem();
-        $config = $this->_composer->getConfig();
-        $assets_db = $this->_autoloader->getRegistry();
-        $vendor_dir = $this->_autoloader->getAssetsInstaller()->getVendorDir();
-        $app_base_path = $this->_autoloader->getAssetsInstaller()->getAppBasePath();
-        $assets_dir = str_replace($app_base_path . '/', '', $this->_autoloader->getAssetsInstaller()->getAssetsDir());
-        $assets_vendor_dir = str_replace($app_base_path . '/' . $assets_dir . '/', '', $this->_autoloader->getAssetsInstaller()->getAssetsVendorDir());
-        $document_root = $this->_autoloader->getAssetsInstaller()->getDocumentRoot();
-        $extra = $this->_package->getExtra();
+        $filesystem         = new Filesystem();
+        $config             = $this->_composer->getConfig();
+        $assets_db          = $this->_autoloader->getRegistry();
+        $vendor_dir         = $this->_autoloader->getAssetsInstaller()->getVendorDir();
+        $app_base_path      = $this->_autoloader->getAssetsInstaller()->getAppBasePath();
+        $assets_dir         = str_replace($app_base_path . '/', '', $this->_autoloader->getAssetsInstaller()->getAssetsDir());
+        $assets_vendor_dir  = str_replace($app_base_path . '/' . $assets_dir . '/', '', $this->_autoloader->getAssetsInstaller()->getAssetsVendorDir());
+        $document_root      = $this->_autoloader->getAssetsInstaller()->getDocumentRoot();
+        $cahe_dir           = $this->_autoloader->getAssetsInstaller()->getCacheDir();
+        $extra              = $this->_package->getExtra();
 
-        $root_data = $this->_autoloader->getAssetsInstaller()->parseComposerExtra($this->_package, $app_base_path, '');
+        $root_data          = $this->_autoloader->getAssetsInstaller()->parseComposerExtra($this->_package, $app_base_path, '');
         if (!empty($root_data)) {
             $root_data['relative_path'] = '../';
             $assets_db[$this->_package->getPrettyName()] = $root_data;
         }
 
-        $vendor_path = strtr(realpath($vendor_dir), '\\', '/');
-        $rel_vendor_path = $filesystem->findShortestPath(getcwd(), $vendor_path, true);
+        $vendor_path        = strtr(realpath($vendor_dir), '\\', '/');
+        $rel_vendor_path    = $filesystem->findShortestPath(getcwd(), $vendor_path, true);
 
-        $local_repo = $this->_composer->getRepositoryManager()->getLocalRepository();
-        $package_map = $this->buildPackageMap($this->_composer->getInstallationManager(), $this->_package, $local_repo->getPackages());
+        $local_repo         = $this->_composer->getRepositoryManager()->getLocalRepository();
+        $package_map        = $this->buildPackageMap($this->_composer->getInstallationManager(), $this->_package, $local_repo->getPackages());
 
         foreach ($package_map as $i=>$package) {
             if ($i===0) { continue; }
@@ -106,6 +107,7 @@ class DumpAutoloadEventHandler
             'assets-dir' => $assets_dir,
             'assets-vendor-dir' => $assets_vendor_dir,
             'document-root' => $document_root,
+            'cache-dir' => $cahe_dir,
             'packages' => $assets_db
         );
         return $full_db;

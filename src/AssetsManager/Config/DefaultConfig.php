@@ -35,6 +35,8 @@ class DefaultConfig
             'assets-vendor-dir' => 'vendor',
             // The default package root directory is set on `$_SERVER['DOCUMENT_ROOT']`
             'document-root' => $_SERVER['DOCUMENT_ROOT'],
+            // The cache directory web accessible (related to assets dir)
+            'cache-dir' => 'tmp',
             // The assets database file created on install
             'assets-db-filename' => 'assets.json',
             // Composition of an `assets-presets` statement in `composer.json`
