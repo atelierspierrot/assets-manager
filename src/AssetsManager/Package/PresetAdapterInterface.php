@@ -21,9 +21,9 @@ interface PresetAdapterInterface
 
     /**
      * @param array|string $data The preset data
-     * @param \AssetsManager\Package\AssetsPresetInterface $preset
+     * @param \AssetsManager\Package\PresetInterface $preset
      */
-    public function __construct(array $data, \AssetsManager\Package\AssetsPresetInterface $preset);
+    public function __construct(array $data, \AssetsManager\Package\PresetInterface $preset);
 
     /**
      * Return the parsed and transformed statement array

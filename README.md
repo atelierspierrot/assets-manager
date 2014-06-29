@@ -158,7 +158,7 @@ Below is an example of the package configuration using default values:
         "assets-vendor-dir": "vendor",
         "document-root": "www",
         "assets-config-class": "AssetsManager\\Config\\DefaultConfig",
-        "assets-package-class": "AssetsManager\\Package\\AssetsPackage",
+        "assets-package-class": "AssetsManager\\Package\\Package",
         "assets-preset-class": "AssetsManager\\Package\\Preset",
         "assets-package-installer-class": "AssetsManager\\Composer\\Installer\\AssetsInstaller",
         "assets-autoload-generator-class": "AssetsManager\\Composer\\Autoload\\AssetsAutoloadGenerator",
@@ -285,15 +285,15 @@ It defaults to `\AssetsManager\Config\DefaultConfig`.
 #### `assets-package-class`: string
 
 This defines the class used to handle each assets package during installation and assets
-loading. The class must exist and implement the `\AssetsManager\Package\AssetsPackageInterface`
+loading. The class must exist and implement the `\AssetsManager\Package\PackageInterface`
 interface.
 
-It defaults to `\AssetsManager\Package\AssetsPackage`.
+It defaults to `\AssetsManager\Package\Package`.
 
 #### `assets-preset-class`: string
 
 This defines the class used to handle each assets preset. The class must exist and implement
-the `\AssetsManager\Package\AssetsPresetInterface` interface.
+the `\AssetsManager\Package\PresetInterface` interface.
 
 It defaults to `\AssetsManager\Package\Preset`.
 

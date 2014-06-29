@@ -10,7 +10,7 @@
 namespace AssetsManager\Package;
 
 /**
- * AssetsPresetInterface
+ * PresetInterface
  *
  * Any Assets Preset class must implement this interface methods.
  *

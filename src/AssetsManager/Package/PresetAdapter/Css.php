@@ -10,7 +10,7 @@
 namespace AssetsManager\Package\PresetAdapter;
 
 use \AssetsManager\Package\PresetAdapterInterface;
-use \AssetsManager\Package\AssetsPresetInterface;
+use \AssetsManager\Package\PresetInterface;
 use \AssetsManager\Package\Preset;
 
 /**
@@ -38,7 +38,7 @@ class Css
     protected $data;
 
     /**
-     * @var \AssetsManager\Package\AssetsPresetInterface
+     * @var \AssetsManager\Package\PresetInterface
      */
     protected $preset;
 
@@ -49,9 +49,9 @@ class Css
 
     /**
      * @param array|string $data The preset data
-     * @param \AssetsManager\Package\AssetsPresetInterface $preset
+     * @param \AssetsManager\Package\PresetInterface $preset
      */
-    public function __construct(array $data, AssetsPresetInterface $preset)
+    public function __construct(array $data, PresetInterface $preset)
     {
         $this->data     = $data;
         $this->preset   = $preset;
