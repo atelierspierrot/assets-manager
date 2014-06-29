@@ -206,7 +206,7 @@ class Loader
                         )
                     )
                     ->setCachePath(
-                        isset($json_assets['cache_dir']) ? $json_assets['cache_dir'] : Config::get('cache-dir')
+                        isset($json_assets['cache-dir']) ? $json_assets['cache-dir'] : Config::get('cache-dir')
                     )
                     ->setAssetsDb(!empty($json_assets['packages']) ? $json_assets['packages'] : array());
             } else {
@@ -261,18 +261,21 @@ class Loader
      *
      * @param   string $path The path to the web cache directory
      * @return  self
-     * @throws  \InvalidArgumentException if the path doesn't exist
+     * @throws  \Exception if the path doesn't exist and can't be created
      */
     public function setCachePath( $path )
     {
-        if (@file_exists($path) && is_dir($path)) {
-            $this->cache_path = realpath($path).'/';
-        } elseif (null!==$path_rp = $this->findRealPath($path)) {
-            $this->cache_path = rtrim($path_rp, '/').'/';
+        $realpath = $this->getFullPath($path, 'assets', true);
+        if (@file_exists($realpath) && is_dir($realpath)) {
+            $this->cache_path = $path;
         } else {
-            throw new \InvalidArgumentException(
-                sprintf('Cache path "%s" was not found or is not a directory!', $path)
-            );
+            if (DirectoryHelper::ensureExists(DirectoryHelper::slashDirname($this->getAssetsDirectory()).$path)) {
+                $this->cache_path = $path;
+            } else {
+                throw new \Exception(
+                    sprintf("Can not create required temporary directory '%s'!", $path)
+                );
+            }
         }
         return $this;
     }
@@ -635,6 +638,10 @@ class Loader
             return $f;
         } elseif (!is_null($f = self::findInPath($filename, $_this->getDocumentRoot()))) {
             return $f;
+        } elseif (!is_null($f = self::findInPath($filename, $_this->getCachePath()))) {
+            return $f;
+        } elseif (!is_null($f = self::findRealPath($filename))) {
+            return $f;
         }
         return null;
     }
@@ -671,6 +678,24 @@ class Loader
         $asset_path = DirectoryHelper::slashDirname($path) . $filename;
         if (file_exists($asset_path)) {
             return self::buildWebPath($asset_path);
+        }
+        return null;
+    }
+
+    /**
+     * Find a file absolute path in application
+     *
+     * @param   string $file_path The file path to search
+     * @return  string The absolute path for this file, null otherwise
+     */
+    public static function findRealPath( $file_path )
+    {
+        $_this = self::getInstance();
+        if (@file_exists($file_path)) {
+            return realpath($file_path);
+        }
+        if (@file_exists($_this->getDocumentRoot().$file_path)) {
+            return $_this->getDocumentRoot().$file_path;
         }
         return null;
     }
