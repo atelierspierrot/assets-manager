@@ -16,6 +16,7 @@ use \AssetsManager\Package\Preset;
 use \Library\Helper\Directory as DirectoryHelper;
 use \Library\Helper\Filesystem as FilesystemHelper;
 use \Library\Helper\Url as UrlHelper;
+use \Patterns\Commons\Registry;
 
 /**
  * Class to manage assets paths
@@ -104,6 +105,11 @@ class Loader
      */
     private $conflict_flag;
 
+    /**
+     * @var \Patterns\Commons\Registry
+     */
+    private $__assets_objects;
+
 // ---------------------
 // Construction
 // ---------------------
@@ -163,6 +169,8 @@ class Loader
     public function init($root_dir = null, $assets_dir = null, $document_root = null)
     {
         try {
+            $this->__assets_objects = new Registry;
+
             $this->setRootDirectory(!is_null($root_dir) ? $root_dir : __DIR__.'/../../../../../');
 
             $composer = $this->getRootDirectory() . '/' . Config::getInternal('composer-db');
@@ -564,7 +572,80 @@ class Loader
         }
         return null;
     }
-    
+
+// ------------------------------
+// AssetObjects manager
+// ------------------------------
+
+    /**
+     * Get a template object and create it if so
+     *
+     * @param   string $_type The template object type
+     * @param   string $_ref
+     * @return  object The template object if found
+     */
+    public function getAssetObject($_type, $_ref = null)
+    {
+        $stack_name = !is_null($_ref) ? $_ref : $this->getAssetObjectClassName( $_type );
+
+        if (!$this->__assets_objects->isEntry($stack_name)) {
+            $this->createNewAssetObject( $_type, $_ref );
+        }
+
+        return $this->__assets_objects->getEntry($stack_name);
+    }
+
+    /**
+     * Create a new template object and reference it in the registry
+     *
+     * @param   string $_type The template object type
+     * @param   string $_ref
+     * @return  void
+     * @throws  \RuntimeException if the template object doesn't exist
+     * @throws  \DomainException if the template object doesn't implement required interface
+     */
+    public function createNewAssetObject($_type, $_ref = null)
+    {
+        $_cls = $this->getAssetObjectClassName( $_type );
+        $stack_name = !is_null($_ref) ? $_ref : $_cls;
+
+        if (class_exists($_cls)) {
+            try {
+                $_tpl_object = new $_cls( \AssetsManager\Loader::getInstance() );
+            } catch ( \Exception $e ) {
+                throw new \RuntimeException(
+                    sprintf('An error occurred while trying to create Template Object "%s"!', $_cls)
+                );
+            }
+            if (!($_tpl_object instanceof \AssetsManager\AssetObject\AbstractAssetObject)) {
+                throw new \DomainException(
+                    sprintf('A Template Object must extend the "\AssetsManager\AssetObject\AbstractAssetObject" class (got "%s")!', $_cls)
+                );
+            } else {
+                $this->__assets_objects->setEntry($stack_name, $_tpl_object);
+            }
+        } else {
+            throw new \RuntimeException(
+                sprintf('Template Object for type "%s" doesn\'t exist!', $_type)
+            );
+        }
+    }
+
+    /**
+     * Get a template object class name
+     *
+     * @param   string $_type The template object type
+     * @return  string The template object class name
+     */
+    public function getAssetObjectClassName( $_type )
+    {
+        $parent = '\AssetsManager\AssetObject\\'.ucfirst($_type);
+        if (@class_exists($parent)) {
+            return $parent;
+        }
+        return '\Assets\AssetObject\\'.ucfirst($_type);
+    }
+
 // ---------------------
 // Static usage
 // ---------------------

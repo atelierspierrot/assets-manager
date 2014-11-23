@@ -41,6 +41,14 @@ abstract class AbstractAssetObject
     }
 
     /**
+     * @return \Patterns\Commons\Registry
+     */
+    public function getRegistry()
+    {
+        return $this->__registry;
+    }
+
+    /**
      * Write the Asset Object strings ready for view display
      */
     public function __toString()
