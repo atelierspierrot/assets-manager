@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>AssetsManager\Composer\AssetsManagerPlugin | </title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../AssetsManager/Composer.html">AssetsManager\Composer</a>\AssetsManagerPlugin</h1>
+    </div>
+        <div class="content">
+                <p>    class
+    <strong>AssetsManagerPlugin</strong>        implements
+        <abbr title="Composer\Plugin\PluginInterface">PluginInterface</abbr>, <abbr title="Composer\EventDispatcher\EventSubscriberInterface">EventSubscriberInterface</abbr></p>
+
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_activate">activate</a>(<abbr title="Composer\Composer">Composer</abbr> $composer, <abbr title="Composer\IO\IOInterface">IOInterface</abbr> $io)
+                    <p>Add the <code>\AssetsManager\Composer\Dispatch</code> installer</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;array
+                </td>
+                <td class="last">
+                    <a href="#method_getSubscribedEvents">getSubscribedEvents</a>()
+                    <p>Composer events plugin's subscription</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_onPreFileDownload">onPreFileDownload</a>(<abbr title="Composer\Plugin\PreFileDownloadEvent">PreFileDownloadEvent</abbr> $event)
+                    <p>Pre file download event dispatcher</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_onCommand">onCommand</a>(<abbr title="Composer\Plugin\CommandEvent">CommandEvent</abbr> $event)
+                    <p>Command event dispatcher</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method_activate">
+        <div class="location">at line 39</div>
+        <code>            public            
+    <strong>activate</strong>(<abbr title="Composer\Composer">Composer</abbr> $composer, <abbr title="Composer\IO\IOInterface">IOInterface</abbr> $io)</code>
+    </h3>
+    <div class="details">
+        <p>Add the <code>\AssetsManager\Composer\Dispatch</code> installer</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Composer">Composer</abbr></td>
+                <td>$composer</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Composer\IO\IOInterface">IOInterface</abbr></td>
+                <td>$io</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getSubscribedEvents">
+        <div class="location">at line 50</div>
+        <code>        static    public            array
+    <strong>getSubscribedEvents</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Composer events plugin's subscription</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_onPreFileDownload">
+        <div class="location">at line 67</div>
+        <code>            public            
+    <strong>onPreFileDownload</strong>(<abbr title="Composer\Plugin\PreFileDownloadEvent">PreFileDownloadEvent</abbr> $event)</code>
+    </h3>
+    <div class="details">
+        <p>Pre file download event dispatcher</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Plugin\PreFileDownloadEvent">PreFileDownloadEvent</abbr></td>
+                <td>$event</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_onCommand">
+        <div class="location">at line 80</div>
+        <code>            public            
+    <strong>onCommand</strong>(<abbr title="Composer\Plugin\CommandEvent">CommandEvent</abbr> $event)</code>
+    </h3>
+    <div class="details">
+        <p>Command event dispatcher</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Composer\Plugin\CommandEvent">CommandEvent</abbr></td>
+                <td>$event</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>

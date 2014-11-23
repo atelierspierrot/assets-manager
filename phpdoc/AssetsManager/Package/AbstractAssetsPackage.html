@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>AssetsManager\Package\AbstractAssetsPackage | </title>
+                    <link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../traits.html">Traits</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../AssetsManager/Package.html">AssetsManager\Package</a>\AbstractAssetsPackage</h1>
+    </div>
+        <div class="content">
+                <p>abstract     class
+    <strong>AbstractAssetsPackage</strong></p>
+
+            <div class="description">
+            <p>Class to manage assets paths</p>
+            <p>The class is based on three paths:</p>
+
+<ul>
+<li><code>base_dir</code>: the package root directory (must be the directory containing the <code>composer.json</code> file)</li>
+<li><code>assets_dir</code>: the package asssets directory related to <code>base_dir</code></li>
+<li><code>document_root</code>: the path in the filesystem of the web assets root directory ; this is used
+to build all related assets paths to use in HTTP.</li>
+</ul>
+
+<p>For these three paths, their defaults values are defined on a default package structure:</p>
+
+<pre><code>package_name/
+|----------- src/
+|----------- www/
+
+$loader-&gt;base_dir = realpath(package_name)
+$loader-&gt;assets_dir = www
+$loader-&gt;document_root = www or the server DOCUMENT_ROOT
+</code></pre>
+
+<p>NOTE - These paths are stored in the object without the trailing slash.</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(string $root_dir = null, string $assets_dir = null, string $vendor_dir = null, string $assets_vendor_dir = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setRootDirectory">setRootDirectory</a>(string $path)
+                    <p>Set the project root directory absolute path</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getRootDirectory">getRootDirectory</a>()
+                    <p>Get the project root directory absolute path</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setAssetsDirectory">setAssetsDirectory</a>(string $path)
+                    <p>Set the project's assets directory, relative to <code>$this-&gt;_root_dir</code></p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getAssetsDirectory">getAssetsDirectory</a>()
+                    <p>Get the project's assets directory, relative to <code>$this-&gt;_root_dir</code></p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setVendorDirectory">setVendorDirectory</a>(string $path)
+                    <p>Set the project's vendor directory, relative to <code>$this-&gt;_root_dir</code></p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getVendorDirectory">getVendorDirectory</a>()
+                    <p>Get the project's vendor directory, relative to <code>$this-&gt;_root_dir</code></p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_setAssetsVendorDirectory">setAssetsVendorDirectory</a>(string $path)
+                    <p>Set the project's assets vendor directory, relative to <code>$this-&gt;_assets_dir</code></p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getAssetsVendorDirectory">getAssetsVendorDirectory</a>()
+                    <p>Get the project's vendor directory, relative to <code>$this-&gt;_root_dir</code></p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getFullPath">getFullPath</a>(string $path, string $type = null, bool $out = false)
+                    <p>Get the absolute path in the package</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getAssetsRealPath">getAssetsRealPath</a>()
+                    <p>Get the assets full path</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getVendorRealPath">getVendorRealPath</a>()
+                    <p>Get the assets full path</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getAssetsVendorRealPath">getAssetsVendorRealPath</a>()
+                    <p>Get the assets vendor full path</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 72</div>
+        <code>            public            
+    <strong>__construct</strong>(string $root_dir = null, string $assets_dir = null, string $vendor_dir = null, string $assets_vendor_dir = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$root_dir</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$assets_dir</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$vendor_dir</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$assets_vendor_dir</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setRootDirectory">
+        <div class="location">at line 94</div>
+        <code>            public            <a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
+    <strong>setRootDirectory</strong>(string $path)</code>
+    </h3>
+    <div class="details">
+        <p>Set the project root directory absolute path</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>if the path doesn't exist</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getRootDirectory">
+        <div class="location">at line 111</div>
+        <code>            public            string
+    <strong>getRootDirectory</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the project root directory absolute path</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setAssetsDirectory">
+        <div class="location">at line 123</div>
+        <code>            public            <a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
+    <strong>setAssetsDirectory</strong>(string $path)</code>
+    </h3>
+    <div class="details">
+        <p>Set the project's assets directory, relative to <code>$this-&gt;_root_dir</code></p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>if the path doesn't exist</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAssetsDirectory">
+        <div class="location">at line 141</div>
+        <code>            public            string
+    <strong>getAssetsDirectory</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the project's assets directory, relative to <code>$this-&gt;_root_dir</code></p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setVendorDirectory">
+        <div class="location">at line 153</div>
+        <code>            public            <a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
+    <strong>setVendorDirectory</strong>(string $path)</code>
+    </h3>
+    <div class="details">
+        <p>Set the project's vendor directory, relative to <code>$this-&gt;_root_dir</code></p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>if the path doesn't exist</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getVendorDirectory">
+        <div class="location">at line 171</div>
+        <code>            public            string
+    <strong>getVendorDirectory</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the project's vendor directory, relative to <code>$this-&gt;_root_dir</code></p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setAssetsVendorDirectory">
+        <div class="location">at line 183</div>
+        <code>            public            <a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a>
+    <strong>setAssetsVendorDirectory</strong>(string $path)</code>
+    </h3>
+    <div class="details">
+        <p>Set the project's assets vendor directory, relative to <code>$this-&gt;_assets_dir</code></p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../AssetsManager/Package/AbstractAssetsPackage.html"><abbr title="AssetsManager\Package\AbstractAssetsPackage">AbstractAssetsPackage</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>if the path doesn't exist</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAssetsVendorDirectory">
+        <div class="location">at line 201</div>
+        <code>            public            string
+    <strong>getAssetsVendorDirectory</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the project's vendor directory, relative to <code>$this-&gt;_root_dir</code></p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getFullPath">
+        <div class="location">at line 218</div>
+        <code>            public            string
+    <strong>getFullPath</strong>(string $path, string $type = null, bool $out = false)</code>
+    </h3>
+    <div class="details">
+        <p>Get the absolute path in the package</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$path</td>
+                <td>The relative path to complete</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td>Type of the original relative path (can be <code>asset</code>, <code>vendor</code> or <code>assets_vendor</code> - default is <code>null</code>)</td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$out</td>
+                <td>Must we search in <code>assets</code> and <code>vendor</code> (if <code>false</code>) or not (if <code>true</code>)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAssetsRealPath">
+        <div class="location">at line 259</div>
+        <code>            public            string
+    <strong>getAssetsRealPath</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the assets full path</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getVendorRealPath">
+        <div class="location">at line 269</div>
+        <code>            public            string
+    <strong>getVendorRealPath</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the assets full path</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAssetsVendorRealPath">
+        <div class="location">at line 279</div>
+        <code>            public            string
+    <strong>getAssetsVendorRealPath</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the assets vendor full path</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>
