@@ -23,7 +23,7 @@ As we try to let the `master` branch in a stable status (only tested features ar
 can use (quite safely) a version number like `"dev-master"` to use the last "master" branch
 of the plugin.
 
-For information about the configurations expected by the plugin, see [the Usage page]({% post_url 2014-11-23-usage %}).
+For information about the configurations expected by the plugin, see [the Usage page]({{ site.baseurl }}{% post_url 2014-11-23-usage %}).
 
 ## Development version
 

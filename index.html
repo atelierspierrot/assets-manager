@@ -13,7 +13,7 @@ cover: false
             {% endif %}
         <a class="sources-button icon-link" href="{{ site.homepage }}">Source code</a>
         <a class="issues-button icon-stats" href="{{ site.tracker }}">Bug tracker</a>
-        <a class="subscribe-button icon-feed" href="{{ site.baseurl }}rss.xml">Subscribe</a>
+        <a class="subscribe-button icon-feed" href="{{ site.baseurl }}/rss.xml">Subscribe</a>
     </nav>
     <div class="vertical">
         <div class="main-header-content inner">
@@ -21,11 +21,11 @@ cover: false
             <h2 class="page-description">
                 {% if site.description %} {{ site.description }}. {% endif %}
                 <br /><br />
-                <a href='{{ site.baseurl }}about.html'>About</a>
+                <a href='{{ site.baseurl }}/about.html'>About</a>
                 &nbsp;//&nbsp;
-                <a href='{{ site.baseurl }}license.html'>License</a>
+                <a href='{{ site.baseurl }}/license.html'>License</a>
                 &nbsp;//&nbsp;
-                <a href='{{ site.baseurl }}phpdoc/' title="PHP documentation">PHP doc</a>
+                <a href='{{ site.baseurl }}/phpdoc/' title="PHP documentation">PHP doc</a>
             </h2>
         </div>
     </div>
@@ -45,10 +45,10 @@ cover: false
 
     <article class="post">
         <header class="post-header">
-            <h2 class="post-title"><a href="{{ post.url }}">{{ post.title }}&nbsp;&raquo;</a></h2>
+            <h2 class="post-title"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
         </header>
         <section class="post-excerpt">
-            {{ post.excerpt }} <a class="read-more" href="{{ post.url }}">&raquo;</a>
+            {{ post.excerpt }} <a class="read-more" href="{{ site.baseurl }}{{ post.url }}">&raquo;</a>
         </section>
         <footer class="post-meta">
 <!--

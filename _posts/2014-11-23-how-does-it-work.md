@@ -59,4 +59,4 @@ build a JSON map in the original `vendor/`:
     | ---- vendor/
 
 Then, you just have to use the internal PHP handlers designed to let you access, merge or
-minify any required asset. See the [Usage page]({% post_url 2014-11-23-usage %}) for more information.
+minify any required asset. See the [Usage page]({{ site.baseurl }}{% post_url 2014-11-23-usage %}) for more information.
