@@ -3,7 +3,7 @@ description: A Composer plugin to manage "***-assets" package type
 meta_description: "Assets Manager - A Composer plugin to manage assets files"
 homepage: http://github.com/atelierspierrot/assets-manager
 tracker: http://github.com/atelierspierrot/assets-manager/issues
-documentation: http://atelierspierrot.github.com/assets-manager/phpdoc/
+documentation: http://atelierspierrot.github.io/assets-manager/phpdoc/
 license: GPL-3.0
 
 markdown: redcarpet
@@ -12,9 +12,10 @@ permalink: /:categories/:title.html
 logo: false
 paginate: 10
 baseurl: /assets-manager
-domain_name: 'http://atelierspierrot.github.com'
+github_baseurl: /assets-manager
+domain_name: 'http://atelierspierrot.github.io'
 
 # Details for the RSS feed generator
-url:            'http://atelierspierrot.github.com/assets-manager'
+url:            'http://atelierspierrot.github.io/assets-manager'
 author:         'Les Ateliers Pierrot'
 author_url:     'http://www.ateliers-pierrot.fr/'
