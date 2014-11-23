@@ -17,6 +17,7 @@ namespace AssetsManager\Compressor;
  * @author  Piero Wbmstr <me@e-piwi.fr>
  */
 abstract class AbstractCompressorAdapter
+    implements CompressorAdapterInterface
 {
 
     /**
@@ -24,27 +25,6 @@ abstract class AbstractCompressorAdapter
      * @var string
      */
     public $file_extension;
-
-    /**
-     * Process of combination of a content (a merge)
-     * @param string $input The string to merge
-     * @return string Must return the input string merged
-     */
-    abstract public static function merge( $input );
-
-    /**
-     * Process of minification of a content
-     * @param string $input The string to minify
-     * @return string Must return the input string minified
-     */
-    abstract public static function minify( $input );
-
-    /**
-     * Build a comment string to insert in final content
-     * @param string $str The comment string to add
-     * @return string Must return the comment string according to adapter type
-     */
-    abstract public static function buildComment( $str );
 
 }
 
