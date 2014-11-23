@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>{{ site.name }} - {{ site.description }}</title>
+    <meta name="description" content="{{ site.meta_description}}" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <!-- Customisation  -->
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/main.css" />
+
+</head>
+<body class="{% if page.post_class %}{{page.post_class}}{% else %}home-template{% endif %}">
+
+    {{ content }}
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="{{ site.baseurl }}">{{ site.name }}</a> &copy; 
+              {{site.time | date:"%Y"}} <a href="{{ site.author_url }}">{{ site.author }}</a> &bull; All rights reserved.
+      </section>
+      <section class="poweredby">Made with Jekyll using 
+        <a href="http://github.com/rosario/kasper">Kasper theme</a>
+      </section>
+    </footer>
+    
+    <script type="text/javascript" src="{{ site.baseurl }}/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="{{ site.baseurl }}/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="{{ site.baseurl }}/assets/js/index.js"></script>
+
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stats.ateliers-pierrot.fr/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 16]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//stats.ateliers-pierrot.fr/piwik.php?idsite=16" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+</body>
+</html>
