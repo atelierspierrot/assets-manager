@@ -1,9 +1,7 @@
 name:             Assets Manager
 description:      A Composer plugin to manage "***-assets" package type
 meta_description: "Assets Manager - A Composer plugin to manage assets files"
-baseurl:          /assets-manager
-github_baseurl:   /assets-manager
-domain_name:      "http://atelierspierrot.github.io"
+domain_name:      "http://assetsmanager.ateliers-pierrot.fr"
 github:
   user:           atelierspierrot
   project:        assets-manager
@@ -14,17 +12,19 @@ permalink:    /:categories/:title.html
 logo:         false
 paginate:     10
 
-url:            'http://atelierspierrot.github.io/assets-manager'
+url:            'http://assetsmanager.ateliers-pierrot.fr'
 author:         'Les Ateliers Pierrot'
 author_url:     'http://www.ateliers-pierrot.fr/'
 homepage:       http://github.com/atelierspierrot/assets-manager
 tracker:        http://github.com/atelierspierrot/assets-manager/issues
-documentation:  http://atelierspierrot.github.io/assets-manager/phpdoc/
+documentation:  http://assetsmanager.ateliers-pierrot.fr/phpdoc/
 license:        GPL-3.0
 
 exclude:
   - bin
   - .git
+  - README.md
+  - README-kasper.md
 include:
   - .htaccess
   - phpdoc
