@@ -3,6 +3,15 @@
 This is a port of Ghost's default theme [Casper](https://github.com/tryghost/casper) for Jekyll. 
 Feel free to fork, change, modify and re-use it.
 
+----
+
+**This actually is a fork of the original repository to get the theme ready for GitHub pages.**
+
+-   **for more info about the original repository, see <https://github.com/rosario/kasper>**
+-   **for more info about GitHub pages with Jekyll, see <https://help.github.com/articles/using-jekyll-with-pages/>**
+
+----
+
 ## How to use it
 
 Simply clone this repository, and then run `jekyll serve` inside the directory.

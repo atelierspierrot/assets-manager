@@ -28,7 +28,7 @@ post_class: post-template
         <h5>Archive</h5>
         <ul>
             {% for post in site.posts %}
-                <li><span>{{ post.date | date_to_string }}</span>  <a href="{{ post.url }}">{{ post.title }}</a></li>
+                <li><span>{{ post.date | date_to_string }}</span>  <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
             {% endfor %}
         </ul>
     </section>
@@ -45,13 +45,8 @@ post_class: post-template
                 <!-- Author Name -->
                 <h4> {{ site.author }} </h4>
                 <!-- Author Bio -->
-                <p>
-                    <a href="http://www.ateliers-pierrot.fr/"><strong>Les Ateliers Pierrot</strong></a> is a small house-made workshop for web developments from Paris, France.
-                    We build &amp; manage open source packages to help making the world a sexy place ... Our favorite programing language is PHP, we only work under *NIX systems and we usually integrate other great open source projects.
-                </p>
-                <p>
-                    <em>Les Ateliers Pierrot</em> are founded by <em>Pierre Cassat</em> (aka. <a href="http://e-piwi.fr/">@piwi</a>).
-                </p>
+                {% capture presentation %}{% include les-ateliers.md %}{% endcapture %}
+                {{ presentation | markdownify }}
             </section>
         {% endif %}
 
