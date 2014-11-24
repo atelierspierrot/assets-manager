@@ -1,0 +1,14 @@
+---
+layout: page_layout
+post_class: category-template
+---
+
+<article class="post">
+    <h1 class="post-title">Articles on category <em>#{{ page.page_category_name }}</em></h1>
+
+    {% for post in site.posts %}
+        {% if post.categories.first == page.page_category %}
+            {% include article-list-item.html post=post %}
+        {% endif %}
+    {% endfor %}
+</article>

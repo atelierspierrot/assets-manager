@@ -44,6 +44,6 @@ The latest version of this development documentation is available online at <htt
 ## Author & License
 
 *AssetsManager* is authored and maintained by **Pierre Cassat** (aka. [@piwi](http://e-piwi.fr/)) and contributors for
-**Les Ateliers Pierrot**. It is an open source software proposed under a [GNU GPL v3.0 license](http://opensource.org/licenses/GPL-3.0).
+**Les Ateliers Pierrot**. It is an open source software proposed under a [GNU GPL v3.0 license]({{ site.baseurl }}/license.html).
 
 Les Ateliers Pierrot - Paris, France <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>

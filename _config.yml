@@ -1,21 +1,36 @@
-name: Assets Manager
-description: A Composer plugin to manage "***-assets" package type
+name:             Assets Manager
+description:      A Composer plugin to manage "***-assets" package type
 meta_description: "Assets Manager - A Composer plugin to manage assets files"
-homepage: http://github.com/atelierspierrot/assets-manager
-tracker: http://github.com/atelierspierrot/assets-manager/issues
-documentation: http://atelierspierrot.github.io/assets-manager/phpdoc/
-license: GPL-3.0
+baseurl:          /assets-manager
+github_baseurl:   /assets-manager
+domain_name:      "http://atelierspierrot.github.io"
+github:
+  user:           atelierspierrot
+  project:        assets-manager
 
-markdown: redcarpet
-highlighter: pygments
-permalink: /:categories/:title.html
-logo: false
-paginate: 10
-baseurl: /assets-manager
-github_baseurl: /assets-manager
-domain_name: 'http://atelierspierrot.github.io'
+markdown:     redcarpet
+highlighter:  pygments
+permalink:    /:categories/:title.html
+logo:         false
+paginate:     10
 
-# Details for the RSS feed generator
 url:            'http://atelierspierrot.github.io/assets-manager'
 author:         'Les Ateliers Pierrot'
 author_url:     'http://www.ateliers-pierrot.fr/'
+homepage:       http://github.com/atelierspierrot/assets-manager
+tracker:        http://github.com/atelierspierrot/assets-manager/issues
+documentation:  http://atelierspierrot.github.io/assets-manager/phpdoc/
+license:        GPL-3.0
+
+exclude:
+  - bin
+  - .git
+include:
+  - .htaccess
+  - phpdoc
+
+highlight:
+  - defaults:
+    - lineanchors
+    - linenos
+    - startinline

@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-jekyll serve --baseurl '' $* ;
+jekyll serve --drafts --baseurl '' $* ;
 

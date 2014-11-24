@@ -729,7 +729,7 @@ margin on the iframe, cause it breaks stuff. */
     font-size: 1.1em;
     letter-spacing: .11em;
 }
-
+.dsq-brlink,
 .highlight {
     font-size: .86em;
 }
@@ -1568,6 +1568,7 @@ body:not(.post-template) .post-title {
         margin: 2rem auto;
     }
 
+    .lead,
     .post {
         width: auto;
         margin-top: 2rem;
