@@ -13,9 +13,9 @@ _BRANCH=$1
 _PHPDOC=${2:true}
 
 # composer.json
-git mv _data/composer.json ./composer.json
+git mv _includes/composer.json ./composer.json
 git checkout $_BRANCH -- composer.json
-git mv ./composer.json _data/composer.json
+git mv ./composer.json _includes/composer.json
 
 # ChangeLog
 git checkout $_BRANCH -- CHANGELOG.md

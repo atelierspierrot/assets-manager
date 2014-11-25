@@ -1,1 +1,37 @@
-../_data/composer.json
+{
+    "name": "atelierspierrot/assets-manager",
+    "type": "composer-plugin",
+    "description": "A Composer plugin to manage \"***-assets\" package type",
+    "keywords": [ "composer plugin", "package", "assets" ],
+    "homepage": "http://assetsmanager.ateliers-pierrot.fr/",
+    "license": "GPL-3.0",
+    "authors": [{
+        "name": "Les Ateliers Pierrot & contributors",
+        "email": "contact@ateliers-pierrot.fr",
+        "homepage": "http://www.ateliers-pierrot.fr/"
+    },{
+        "name": "Pierre Cassat",
+        "homepage": "http://e-piwi.fr/"
+    }],
+    "support": {
+        "issues": "http://github.com/atelierspierrot/assets-manager/issues",
+        "sources": "http://github.com/atelierspierrot/assets-manager"
+    },
+    "require": {
+        "php": ">=5.3.0",
+        "atelierspierrot/patterns": "1.*",
+        "atelierspierrot/library": "1.*",
+        "composer-plugin-api": "1.0.0"
+    },
+    "require-dev": {
+        "sami/sami": "dev-master",
+        "composer/composer": "1.*@dev"
+    },
+    "autoload": { "psr-0": { "AssetsManager": "src" } },
+    "extra": {
+        "class": "\\AssetsManager\\Composer\\AssetsManagerPlugin",
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
