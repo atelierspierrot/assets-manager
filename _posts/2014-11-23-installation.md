@@ -3,6 +3,7 @@ layout: post
 title:  "Installation"
 date:   2014-11-23 15:57:42
 categories: howtos
+author: lesateliers
 position: 1
 ---
 
@@ -25,6 +26,9 @@ of the plugin.
 
 For information about the configurations expected by the plugin, see [the Usage page]({{ site.baseurl }}{% post_url 2014-11-23-usage %}).
 
+## Configure your own assets or presets
+
+
 ## Development version
 
 If you need to work *on* or *with* the plugin sources, you can also [download an archive](https://github.com/atelierspierrot/assets-manager/archive/master.zip)
@@ -34,3 +38,10 @@ remains on three dependencies you MAY install for it to work:
 -   our [PHP Patterns](https://github.com/atelierspierrot/patterns) package: `atelierspierrot/patterns`
 -   our [PHP Library](https://github.com/atelierspierrot/library) package: `atelierspierrot/library`
 -   the [Composer's plugin API](http://getcomposer.org/) package: `composer-plugin-api`
+
+To install these automagically with Composer, run:
+
+{% highlight bash lineanchors linenos startinline %}
+cd path/to/assets-manager-master/
+php path/to/composer.phar install --no-dev
+{% endhighlight %}

@@ -3,6 +3,7 @@ layout: post
 title:  "Configuration"
 date:   2014-11-23 15:57:42
 categories: howtos
+author: lesateliers
 position: 4
 ---
 

@@ -4,7 +4,11 @@ post_class: category-template
 ---
 
 <article class="post">
-    <h1 class="post-title">Articles on category <em>#{{ page.page_category_name }}</em></h1>
+    <h1 class="post-title">
+        Articles on category <em>#{{page.page_category}}</em>
+        <br />
+        "{{ page.page_category_name }}"
+    </h1>
 
     {% for post in site.posts %}
         {% if post.categories.first == page.page_category %}

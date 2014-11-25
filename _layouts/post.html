@@ -1,7 +1,6 @@
 ---
 layout: page_layout
 disqus: true
-archive: false
 post_class: post-template
 ---
 
@@ -23,31 +22,28 @@ post_class: post-template
         {{content}}
     </section>
 
-    {% if page.archive %}
-    <section class="archive">
-        <h5>Archive</h5>
-        <ul>
-            {% for post in site.posts %}
-                <li><span>{{ post.date | date_to_string }}</span>  <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
-            {% endfor %}
-        </ul>
-    </section>
-    {% endif %}
+    {% include github-fork-info.html %}
 
     <footer class="post-footer">
         <!-- If we want to display author's name and bio -->
-        {% if site.author %}
+        {% if page.author %}
+            {% for aut in site.data.authors %}
+                {% if aut.shortname == page.author %}
+                    {% assign author_info = aut %}
+                {% endif %}
+            {% endfor %}
+            {% if author_info %}
             <figure class="author-image">
-                <a class="img" href="{{ site.baseurl }}" style="background-image: url({{ site.baseurl }}/assets/images/profile.png)">
-                <span class="hidden">{{site.author}}'s Picture</span></a>
+                <a class="img" href="{{ site.baseurl }}" style="background-image: url({{ site.baseurl }}/assets/images/{{ author_info.profile-img }})">
+                <span class="hidden">{{author_info.name}}'s Picture</span></a>
             </figure>
             <section class="author">
                 <!-- Author Name -->
-                <h4> {{ site.author }} </h4>
+                <h4> {{ author_info.name }} </h4>
                 <!-- Author Bio -->
-                {% capture presentation %}{% include les-ateliers.md %}{% endcapture %}
-                {{ presentation | markdownify }}
+                {{ author_info.bio | markdownify }}
             </section>
+            {% endif %}
         {% endif %}
 
         <!-- Share links section -->
@@ -59,4 +55,5 @@ post_class: post-template
         {% endif %}
 
     </footer>
+
 </article>

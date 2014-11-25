@@ -3,6 +3,7 @@ layout: post
 title:  "How does it work?"
 date:   2014-11-23 15:57:42
 categories: howtos
+author: lesateliers
 position: 2
 ---
 
@@ -12,7 +13,7 @@ other classic library package).
 
 ### Schema of usage during a project lifecycle
 
-**Installation/Update/Removal by Composer**
+#### Installation/Update/Removal by Composer
 
 The `\AssetsManager\Composer\Installer` installs the "\*\*\*-assets" packages:
 
@@ -20,7 +21,7 @@ The `\AssetsManager\Composer\Installer` installs the "\*\*\*-assets" packages:
 - it adds an entry to the internal `assets_db` table
 - finally, it writes the internal `assets_db` table in file `vendor/assets.json`
 
-**Life of the project**
+#### Life of the project
 
 The `\AssetsManager\Loader` reads the internal `assets_db` and manages assets packages and presets:
 

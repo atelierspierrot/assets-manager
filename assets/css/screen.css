@@ -1806,6 +1806,18 @@ body:not(.post-template) .post-title {
 }
 
 
+/* messages box */
+
+.message-info {
+    color: #9eabb3;
+    display: block;
+    font-family: "Open Sans",sans-serif;
+    font-size: 1.5rem;
+    line-height: 2.2rem;
+    margin: 1.75rem 0 0;
+    text-align: center;
+}
+
 /* ==========================================================================
    End of file. Animations should be the last thing here. Do not add stuff
    below this point, or it will probably fuck everything up.
