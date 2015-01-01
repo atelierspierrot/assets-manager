@@ -1,10 +1,23 @@
 <?php
 /**
  * AssetsManager - Composer plugin
- * Copyleft (c) 2013-2014 Pierre Cassat and contributors
+ * Copyleft (ↄ) 2013-2015 Pierre Cassat and contributors
  * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
  * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
  * Sources <https://github.com/atelierspierrot/assets-manager>
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace AssetsManager;
@@ -146,64 +159,71 @@ class Loader
     }
 
     /**
+     * Initializing a new loader populating all paths & packages
+     *
      * @param   string  $root_dir       The project package root directory
      * @param   string  $assets_dir     The project package assets directory, related from `$root_dir`
      * @param   string  $document_root  The project assets root directory to build web accessible assets paths
      * @return  void
+     * @throws  \Exception : any caught exception
      * @throws  \Exception if the package's `ASSETS_DB_FILENAME` was not found
      */
     public function init($root_dir = null, $assets_dir = null, $document_root = null)
     {
-        $this->setRootDirectory(!is_null($root_dir) ? $root_dir : __DIR__.'/../../../../../');
+        try {
+            $this->setRootDirectory(!is_null($root_dir) ? $root_dir : __DIR__.'/../../../../../');
 
-        $composer = $this->getRootDirectory() . '/' . Config::getInternal('composer-db');
-        $vendor_dir = Config::get('vendor-dir');
-        if (file_exists($composer)) {
-            $json_package = json_decode(file_get_contents($composer), true);
-            if (isset($json_package['config']) && isset($json_package['config']['vendor-dir'])) {
-                $vendor_dir = $json_package['config']['vendor-dir'];
+            $composer = $this->getRootDirectory() . '/' . Config::getInternal('composer-db');
+            $vendor_dir = Config::get('vendor-dir');
+            if (file_exists($composer)) {
+                $json_package = json_decode(file_get_contents($composer), true);
+                if (isset($json_package['config']) && isset($json_package['config']['vendor-dir'])) {
+                    $vendor_dir = $json_package['config']['vendor-dir'];
+                }
+            } else {
+                throw new \Exception(
+                    sprintf('Composer json "%s" not found!', $composer)
+                );
             }
-        } else {
-            throw new \Exception(
-                sprintf('Composer json "%s" not found!', $composer)
-            );
-        }
-        $this->setVendorDirectory($vendor_dir);
+            $this->setVendorDirectory($vendor_dir);
 
-        $extra = isset($json_package['extra']) ? $json_package['extra'] : array();
-        if (isset($extra['assets-config-class'])) {
-            Config::load($extra['assets-config-class']);
-        }
-        if (!empty($extra)) {
-            Config::overload($extra);
-        }
+            $extra = isset($json_package['extra']) ? $json_package['extra'] : array();
+            if (isset($extra['assets-config-class'])) {
+                Config::load($extra['assets-config-class']);
+            }
+            if (!empty($extra)) {
+                Config::overload($extra);
+            }
 
-        $assets_db_filename = isset($extra['assets-db-filename']) ? $extra['assets-db-filename'] : Config::get('assets-db-filename');
-        $db_file = $this->getRootDirectory() . '/' . $this->getVendorDirectory() . '/' . $assets_db_filename;
-        if (file_exists($db_file)) {
-            $json_assets = json_decode(file_get_contents($db_file), true);
-            $this
-                ->setAssetsDirectory(
-                    !is_null($assets_dir) ? $assets_dir : (
+            $assets_db_filename = isset($extra['assets-db-filename']) ? $extra['assets-db-filename'] : Config::get('assets-db-filename');
+            $db_file = $this->getRootDirectory() . '/' . $this->getVendorDirectory() . '/' . $assets_db_filename;
+            if (file_exists($db_file)) {
+                $json_assets = json_decode(file_get_contents($db_file), true);
+                $this
+                    ->setAssetsDirectory(
+                        !is_null($assets_dir) ? $assets_dir : (
                         isset($json_assets['assets_dir']) ? $json_assets['assets_dir'] : Config::get('assets-dir')
+                        )
                     )
-                )
-                ->setAssetsVendorDirectory(
-                    isset($json_assets['assets_vendor_dir']) ? $json_assets['assets_vendor_dir'] : Config::get('assets-vendor-dir')
-                )
-                ->setDocumentRoot(
-                    !is_null($document_root) ? $document_root : (
+                    ->setAssetsVendorDirectory(
+                        isset($json_assets['assets_vendor_dir']) ? $json_assets['assets_vendor_dir'] : Config::get('assets-vendor-dir')
+                    )
+                    ->setDocumentRoot(
+                        !is_null($document_root) ? $document_root : (
                         isset($json_assets['document_root']) ? $json_assets['document_root'] : Config::get('document-root')
+                        )
                     )
-                )
-                ->setAssetsDb(!empty($json_assets['packages']) ? $json_assets['packages'] : array());
-        } else {
-            throw new \Exception(
-                sprintf('Assets json DB "%s" not found!', $db_file)
-            );
+                    ->setAssetsDb(!empty($json_assets['packages']) ? $json_assets['packages'] : array());
+            } else {
+                throw new \Exception(
+                    sprintf('Assets json DB "%s" not found!', $db_file)
+                );
+            }
+
+            $this->validatePresets();
+        } catch (\Exception $e) {
+            throw $e;
         }
-        
-        $this->validatePresets();
     }
 
 // ---------------------
@@ -338,11 +358,17 @@ class Loader
      *
      * @param   string $package_name
      * @return  \AssetsManager\Package\AssetsPackage
+     * @throws  \Exception : any caught exception
+     * @see     self::_buildNewPackage()
      */
     public function getPackage($package_name)
     {
         if (!isset($this->packages_instances[$package_name])) {
-            $this->packages_instances[$package_name] = $this->_buildNewPackage($package_name);
+            try {
+                $this->packages_instances[$package_name] = $this->_buildNewPackage($package_name);
+            } catch (\Exception $e) {
+                throw $e;
+            }
         }
         return $this->packages_instances[$package_name];
     }
@@ -436,12 +462,18 @@ class Loader
      * @param   string $preset_name
      * @return  \AssetsManager\Package\Preset
      * @throws  \InvalidArgumentException if the preset can't be found
+     * @throws  \Exception : any caught exception
+     * @see     self::_buildNewPreset()
      */
     public function getPreset($preset_name)
     {
         if (isset($this->presets_data[$preset_name])) {
             if (!isset($this->presets_data[$preset_name]['instance'])) {
-                $this->presets_data[$preset_name]['instance'] = $this->_buildNewPreset($preset_name);
+                try {
+                    $this->presets_data[$preset_name]['instance'] = $this->_buildNewPreset($preset_name);
+                } catch (\Exception $e) {
+                    throw $e;
+                }
             }
             return $this->presets_data[$preset_name]['instance'];
         } else {

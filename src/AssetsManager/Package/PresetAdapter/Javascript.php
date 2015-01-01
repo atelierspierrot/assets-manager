@@ -1,10 +1,23 @@
 <?php
 /**
  * AssetsManager - Composer plugin
- * Copyleft (c) 2013-2014 Pierre Cassat and contributors
+ * Copyleft (ↄ) 2013-2015 Pierre Cassat and contributors
  * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
  * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
  * Sources <https://github.com/atelierspierrot/assets-manager>
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace AssetsManager\Package\PresetAdapter;
@@ -24,11 +37,11 @@ class Javascript
      * @var array
      */
     public static $defaults = array(
-        'src'=>null,
-        'type'=>'text/javascript',
-        'position'=>0,
-        'minified'=>false,
-        'packed'=>false,
+        'src'       => null,
+        'type'      => 'text/javascript',
+        'position'  => 0,
+        'minified'  => false,
+        'packed'    => false,
     );
 
     /**
@@ -52,18 +65,24 @@ class Javascript
      */
     public function __construct(array $data, AssetsPresetInterface $preset)
     {
-        $this->data = $data;
-        $this->preset = $preset;
+        $this->data     = $data;
+        $this->preset   = $preset;
     }
 
     /**
      * Return the parsed and transformed statement array
      *
-     * @return array
+     * @return  array
+     * @throws  \Exception : any caught exception thrown by `self::parse()`
+     * @see     self::parse()
      */
     public function getData()
     {
-        $this->parse();
+        try {
+            $this->parse();
+        } catch (\Exception $e) {
+            throw $e;
+        }
         return $this->transformed_data;
     }
 
@@ -149,12 +168,17 @@ class Javascript
     /**
      * Returns the src path of the preset statement
      *
-     * @return string
+     * @return  string
      */
     public function __toString()
     {
-        $this->parse();
-        return $this->transformed_data['src'];
+        try {
+            $this->parse();
+            $str = $this->transformed_data['src'];
+        } catch (\Exception $e) {
+            $str = $e->getMessage();
+        }
+        return $str;
     }
 
     /**
@@ -164,13 +188,18 @@ class Javascript
      */
     public function __toHtml()
     {
-        $this->parse();
-        return \Library\Helper\Html::writeHtmlTag(
-            'script', null, array(
-                'src'=>$this->transformed_data['src'],
-                'type'=>$this->transformed_data['type']
-            ), true
-        );
+        try {
+            $this->parse();
+            $str = \Library\Helper\Html::writeHtmlTag(
+                'script', null, array(
+                    'src'=>$this->transformed_data['src'],
+                    'type'=>$this->transformed_data['type']
+                ), true
+            );
+        } catch (\Exception $e) {
+            $str = $e->getMessage();
+        }
+        return $str;
     }
 
 }

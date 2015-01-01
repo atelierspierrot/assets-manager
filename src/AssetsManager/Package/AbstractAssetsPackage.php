@@ -1,10 +1,23 @@
 <?php
 /**
  * AssetsManager - Composer plugin
- * Copyleft (c) 2013-2014 Pierre Cassat and contributors
+ * Copyleft (ↄ) 2013-2015 Pierre Cassat and contributors
  * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
  * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
  * Sources <https://github.com/atelierspierrot/assets-manager>
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace AssetsManager\Package;
@@ -68,15 +81,20 @@ abstract class AbstractAssetsPackage
      * @param string $assets_dir
      * @param string $vendor_dir
      * @param string $assets_vendor_dir
+     * @throws \Exception : any caught exception
      */
     public function __construct(
         $root_dir = null, $assets_dir = null, $vendor_dir = null, $assets_vendor_dir = null
     ) {
         if (!empty($root_dir)) {
-            $this->setRootDirectory($root_dir);
-            if (!empty($assets_dir)) $this->setAssetsDirectory($assets_dir);
-            if (!empty($vendor_dir)) $this->setVendorDirectory($vendor_dir);
-            if (!empty($assets_vendor_dir)) $this->setAssetsVendorDirectory($assets_vendor_dir);
+            try {
+                $this->setRootDirectory($root_dir);
+                if (!empty($assets_dir)) $this->setAssetsDirectory($assets_dir);
+                if (!empty($vendor_dir)) $this->setVendorDirectory($vendor_dir);
+                if (!empty($assets_vendor_dir)) $this->setAssetsVendorDirectory($assets_vendor_dir);
+            } catch (\Exception $e) {
+                throw $e;
+            }
         }
     }
 
@@ -186,7 +204,7 @@ abstract class AbstractAssetsPackage
         if (@file_exists($realpath) && is_dir($realpath)) {
             $this->_assets_vendor_dir = $path;
         } else {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 sprintf('Assets vendor directory "%s" not found !', $path)
             );
         }

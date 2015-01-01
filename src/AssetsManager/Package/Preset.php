@@ -1,10 +1,23 @@
 <?php
 /**
  * AssetsManager - Composer plugin
- * Copyleft (c) 2013-2014 Pierre Cassat and contributors
+ * Copyleft (ↄ) 2013-2015 Pierre Cassat and contributors
  * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
  * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
  * Sources <https://github.com/atelierspierrot/assets-manager>
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 namespace AssetsManager\Package;
@@ -131,15 +144,21 @@ class Preset
     }
 
     /**
-     * @return string
+     * @return  string
+     * @throws  \Exception : any caught exception during `self::load()`
+     * @see     self::load()
      */
     public function __toHtml()
     {
-        $str = '';
-        foreach ($this->getOrganizedStatements() as $type=>$statements) {
-            foreach ($statements as $statement) {
-                $str .= $statement->__toHtml();
+        try {
+            $str = '';
+            foreach ($this->getOrganizedStatements() as $type=>$statements) {
+                foreach ($statements as $statement) {
+                    $str .= $statement->__toHtml().PHP_EOL;
+                }
             }
+        } catch (\Exception $e) {
+            $str = $e->getMessage();
         }
         return $str;
     }
@@ -202,15 +221,38 @@ class Preset
         return $this->package;
     }
 
+    /**
+     * Get the preset's statements array
+     *
+     * @return array
+     * @throws  \Exception : any caught exception during `self::load()`
+     * @see     self::load()
+     */
     public function getStatements()
     {
-        $this->load();
+        try {
+            $this->load();
+        } catch (\Exception $e) {
+            throw $e;
+        }
         return $this->_statements;
     }
 
+    /**
+     * Get one preset's statement entry
+     *
+     * @param   string  $name   The statement name
+     * @return  array|null
+     * @throws  \Exception : any caught exception during `self::load()`
+     * @see     self::load()
+     */
     public function getStatement($name)
     {
-        $this->load();
+        try {
+            $this->load();
+        } catch (\Exception $e) {
+            throw $e;
+        }
         return isset($this->_statements[$name]) ? $this->_statements[$name] : null;
     }
 
@@ -218,10 +260,24 @@ class Preset
 // Statements management
 // -------------------------
 
+    /**
+     * Organize each statements item by position & requirements
+     *
+     * @return  array
+     * @throws  \Exception : any caught exception during `self::load()`
+     * @see     self::load()
+     */
     public function getOrganizedStatements()
     {
         $organized_statements = array();
-       if (empty($this->_statements)) $this->load();
+        if (empty($this->_statements)) {
+//           $this->load();
+           try {
+               $this->load();
+           } catch (\Exception $e) {
+               throw $e;
+           }
+        }
         $statements = $this->_statements;
 
         if (!empty($statements['require'])) {
@@ -253,6 +309,12 @@ class Preset
         return $organized_statements;
     }
 
+    /**
+     * Internal function to order a statements stack
+     *
+     * @param array $statements
+     * @return array
+     */
     public static function getOrderedStatements(array $statements)
     {
         $ordered = array();
