@@ -1,233 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="robots" content="index, follow, all" />
-        <title>AssetsManager\Composer\Installer\AssetsInstaller | </title>
-                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
-                            </head>
-        <body id="class">
-            <div class="header">
-        <ul>
-            <li><a href="../../../classes.html">Classes</a></li>
-                            <li><a href="../../../namespaces.html">Namespaces</a></li>
-                        <li><a href="../../../interfaces.html">Interfaces</a></li>
-            <li><a href="../../../traits.html">Traits</a></li>
-            <li><a href="../../../doc-index.html">Index</a></li>
-            
-        </ul>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>AssetsManager\Composer\Installer\AssetsInstaller | Assets Manager</title>
 
-        <div id="title"></div>
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/sami.css">
+        <script src="../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../js/bootstrap.min.js"></script>
+        <script src="../../../js/typeahead.min.js"></script>
+        <script src="../../../sami.js"></script>
+    
+    
+    </head>
 
-            <div class="type">Class</div>
-    <h1><a href="../../../AssetsManager/Composer/Installer.html">AssetsManager\Composer\Installer</a>\AssetsInstaller</h1>
+    <body id="class" data-name="class:AssetsManager_Composer_Installer_AssetsInstaller" data-root-path="../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
     </div>
-        <div class="content">
-                <p>    class
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">Assets Manager</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../../AssetsManager.html">AssetsManager</a></li>
+                                        <li><a href="../../../AssetsManager/Composer.html">Composer</a></li>
+                                        <li><a href="../../../AssetsManager/Composer/Installer.html">Installer</a></li>
+    
+                <li>AssetsInstaller</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>AssetsInstaller</h1>
+    </div>
+
+    <p>    class
     <strong>AssetsInstaller</strong>        extends <abbr title="Composer\Installer\LibraryInstaller">LibraryInstaller</abbr>        implements
         <a href="../../../AssetsManager/Composer/Installer/AssetsInstallerInterface.html"><abbr title="AssetsManager\Composer\Installer\AssetsInstallerInterface">AssetsInstallerInterface</abbr></a></p>
 
     
     
     
+    
             <h2>Methods</h2>
 
-            <table>
-                    <tr>
-                <td class="type">
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method___construct">__construct</a>(<abbr title="Composer\IO\IOInterface">IOInterface</abbr> $io, <abbr title="Composer\Composer">Composer</abbr> $composer, $type = &#039;library&#039;)
-                    <p>Initializes installer: creation of <code>assets-dir</code> directory if so</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p>Initializes installer: creation of <code>assets-dir</code> directory if so</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_supports">supports</a>($packageType)
-                    <p>{@inheritDoc}</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p>{@inheritDoc}</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_isInstalled">isInstalled</a>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)
-                    <p>{@inheritDoc}</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p>{@inheritDoc}</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_install">install</a>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)
-                    <p>{@inheritDoc}</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p>{@inheritDoc}</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_update">update</a>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $initial, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $target)
-                    <p>{@inheritDoc}</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p>{@inheritDoc}</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_uninstall">uninstall</a>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)
-                    <p>{@inheritDoc}</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p>{@inheritDoc}</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <abbr title="Composer\IO\IOInterface">IOInterface</abbr>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getIo">getIo</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     string
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getAppBasePath">getAppBasePath</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     string
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getVendorDir">getVendorDir</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     string
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getAssetsDir">getAssetsDir</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     string
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getAssetsVendorDir">getAssetsVendorDir</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     string
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getDocumentRoot">getDocumentRoot</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     string
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getAssetsDbFilename">getAssetsDbFilename</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     string
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getAssetsInstallPath">getAssetsInstallPath</a>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     array|null
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_parseComposerExtra">parseComposerExtra</a>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, string $package_dir)
-                    <p>Parse the <code>composer.json</code> "extra" block of a package and return its transformed data</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p>Parse the <code>composer.json</code> "extra" block of a package and return its transformed data</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     static&nbsp;string
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_guessConfigurationEntry">guessConfigurationEntry</a>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, string $config_entry)
-                    <p>Search a configuration value in a package's config or the global config if so</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p>Search a configuration value in a package's config or the global config if so</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     static&nbsp;bool
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_isPackageContains">isPackageContains</a>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, string $type, string $package_extra = null)
-                    <p>Check if a package seems to contain some <code>$type</code> files</p>
-                </td>
-                <td></td>
-            </tr>
-            </table>
+                                            <p>Check if a package seems to contain some <code>$type</code> files</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
 
 
         <h2>Details</h2>
 
-                        <h3 id="method___construct">
-        <div class="location">at line 62</div>
-        <code>            public            
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at line 75</div>
+        <code>                    
     <strong>__construct</strong>(<abbr title="Composer\IO\IOInterface">IOInterface</abbr> $io, <abbr title="Composer\Composer">Composer</abbr> $composer, $type = &#039;library&#039;)</code>
     </h3>
     <div class="details">
-        <p>Initializes installer: creation of <code>assets-dir</code> directory if so</p>
-        <p>{@inheritDoc}</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>Initializes installer: creation of <code>assets-dir</code> directory if so</p>                    <p>{@inheritDoc}</p>            </div>
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><abbr title="Composer\IO\IOInterface">IOInterface</abbr></td>
                 <td>$io</td>
@@ -254,19 +290,20 @@
                     </div>
     </div>
 
-                <h3 id="method_supports">
-        <div class="location">at line 83</div>
-        <code>            public            
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_supports">
+        <div class="location">at line 96</div>
+        <code>                    
     <strong>supports</strong>($packageType)</code>
     </h3>
     <div class="details">
-        <p>{@inheritDoc}</p>
-        <p>
-</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>{@inheritDoc}</p>                                </div>
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td></td>
                 <td>$packageType</td>
@@ -281,19 +318,20 @@
                     </div>
     </div>
 
-                <h3 id="method_isInstalled">
-        <div class="location">at line 101</div>
-        <code>            public            
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isInstalled">
+        <div class="location">at line 114</div>
+        <code>                    
     <strong>isInstalled</strong>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)</code>
     </h3>
     <div class="details">
-        <p>{@inheritDoc}</p>
-        <p>
-</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>{@inheritDoc}</p>                                </div>
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr></td>
                 <td>$repo</td>
@@ -314,19 +352,20 @@
                     </div>
     </div>
 
-                <h3 id="method_install">
-        <div class="location">at line 111</div>
-        <code>            public            
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_install">
+        <div class="location">at line 124</div>
+        <code>                    
     <strong>install</strong>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)</code>
     </h3>
     <div class="details">
-        <p>{@inheritDoc}</p>
-        <p>
-</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>{@inheritDoc}</p>                                </div>
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr></td>
                 <td>$repo</td>
@@ -347,19 +386,20 @@
                     </div>
     </div>
 
-                <h3 id="method_update">
-        <div class="location">at line 120</div>
-        <code>            public            
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_update">
+        <div class="location">at line 133</div>
+        <code>                    
     <strong>update</strong>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $initial, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $target)</code>
     </h3>
     <div class="details">
-        <p>{@inheritDoc}</p>
-        <p>
-</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>{@inheritDoc}</p>                                </div>
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr></td>
                 <td>$repo</td>
@@ -386,19 +426,20 @@
                     </div>
     </div>
 
-                <h3 id="method_uninstall">
-        <div class="location">at line 130</div>
-        <code>            public            
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_uninstall">
+        <div class="location">at line 143</div>
+        <code>                    
     <strong>uninstall</strong>(<abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr> $repo, <abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)</code>
     </h3>
     <div class="details">
-        <p>{@inheritDoc}</p>
-        <p>
-</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>{@inheritDoc}</p>                                </div>
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><abbr title="Composer\Repository\InstalledRepositoryInterface">InstalledRepositoryInterface</abbr></td>
                 <td>$repo</td>
@@ -419,21 +460,19 @@
                     </div>
     </div>
 
-                <h3 id="method_getIo">
-        <div class="location">at line 276</div>
-        <code>            public            <abbr title="Composer\IO\IOInterface">IOInterface</abbr>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getIo">
+        <div class="location">at line 289</div>
+        <code>                    <abbr title="Composer\IO\IOInterface">IOInterface</abbr>
     <strong>getIo</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><abbr title="Composer\IO\IOInterface">IOInterface</abbr></td>
             <td>
@@ -446,21 +485,19 @@
                     </div>
     </div>
 
-                <h3 id="method_getAppBasePath">
-        <div class="location">at line 284</div>
-        <code>            public            string
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getAppBasePath">
+        <div class="location">at line 297</div>
+        <code>                    string
     <strong>getAppBasePath</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>string</td>
             <td>
@@ -473,21 +510,19 @@
                     </div>
     </div>
 
-                <h3 id="method_getVendorDir">
-        <div class="location">at line 292</div>
-        <code>            public            string
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getVendorDir">
+        <div class="location">at line 305</div>
+        <code>                    string
     <strong>getVendorDir</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>string</td>
             <td>
@@ -500,21 +535,19 @@
                     </div>
     </div>
 
-                <h3 id="method_getAssetsDir">
-        <div class="location">at line 301</div>
-        <code>            public            string
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getAssetsDir">
+        <div class="location">at line 314</div>
+        <code>                    string
     <strong>getAssetsDir</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>string</td>
             <td>
@@ -527,21 +560,19 @@
                     </div>
     </div>
 
-                <h3 id="method_getAssetsVendorDir">
-        <div class="location">at line 309</div>
-        <code>            public            string
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getAssetsVendorDir">
+        <div class="location">at line 322</div>
+        <code>                    string
     <strong>getAssetsVendorDir</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>string</td>
             <td>
@@ -554,21 +585,19 @@
                     </div>
     </div>
 
-                <h3 id="method_getDocumentRoot">
-        <div class="location">at line 317</div>
-        <code>            public            string
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentRoot">
+        <div class="location">at line 330</div>
+        <code>                    string
     <strong>getDocumentRoot</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>string</td>
             <td>
@@ -581,21 +610,19 @@
                     </div>
     </div>
 
-                <h3 id="method_getAssetsDbFilename">
-        <div class="location">at line 325</div>
-        <code>            public            string
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getAssetsDbFilename">
+        <div class="location">at line 338</div>
+        <code>                    string
     <strong>getAssetsDbFilename</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>string</td>
             <td>
@@ -608,20 +635,18 @@
                     </div>
     </div>
 
-                <h3 id="method_getAssetsInstallPath">
-        <div class="location">at line 397</div>
-        <code>            public            string
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getAssetsInstallPath">
+        <div class="location">at line 410</div>
+        <code>                    string
     <strong>getAssetsInstallPath</strong>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
                 <td>$package</td>
@@ -633,7 +658,7 @@
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>string</td>
             <td>
@@ -646,19 +671,20 @@
                     </div>
     </div>
 
-                <h3 id="method_parseComposerExtra">
-        <div class="location">at line 409</div>
-        <code>            public            array|null
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_parseComposerExtra">
+        <div class="location">at line 422</div>
+        <code>                    array|null
     <strong>parseComposerExtra</strong>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, string $package_dir)</code>
     </h3>
     <div class="details">
-        <p>Parse the <code>composer.json</code> "extra" block of a package and return its transformed data</p>
-        <p>
-</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>Parse the <code>composer.json</code> "extra" block of a package and return its transformed data</p>                                </div>
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
                 <td>$package</td>
@@ -675,7 +701,7 @@
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>array|null</td>
             <td>
@@ -688,19 +714,20 @@
                     </div>
     </div>
 
-                <h3 id="method_guessConfigurationEntry">
-        <div class="location">at line 460</div>
-        <code>        static    public            string
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_guessConfigurationEntry">
+        <div class="location">at line 473</div>
+        <code>        static            string
     <strong>guessConfigurationEntry</strong>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, string $config_entry)</code>
     </h3>
     <div class="details">
-        <p>Search a configuration value in a package's config or the global config if so</p>
-        <p>
-</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>Search a configuration value in a package's config or the global config if so</p>                                </div>
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
                 <td>$package</td>
@@ -718,7 +745,7 @@
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>string</td>
             <td>
@@ -731,19 +758,21 @@
                     </div>
     </div>
 
-                <h3 id="method_isPackageContains">
-        <div class="location">at line 478</div>
-        <code>        static    public            bool
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isPackageContains">
+        <div class="location">at line 491</div>
+        <code>        static            bool
     <strong>isPackageContains</strong>(<abbr title="Composer\Package\PackageInterface">PackageInterface</abbr> $package, string $type, string $package_extra = null)</code>
     </h3>
     <div class="details">
-        <p>Check if a package seems to contain some <code>$type</code> files</p>
-        <p>If <code>$package_extra</code> is defined, this will test if concerned entry is defined in "extra"
-configuration of the package.</p>
-        <div class="tags">
+                    <div class="method-description">
+                                    <p>Check if a package seems to contain some <code>$type</code> files</p>                    <p>If <code>$package_extra</code> is defined, this will test if concerned entry is defined in "extra"
+configuration of the package.</p>            </div>
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><abbr title="Composer\Package\PackageInterface">PackageInterface</abbr></td>
                 <td>$package</td>
@@ -767,7 +796,7 @@ configuration of the package.</p>
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>bool</td>
             <td>
@@ -780,10 +809,17 @@ configuration of the package.</p>
                     </div>
     </div>
 
+            </div>
+            </div>
+
     
             </div>
-            <div id="footer">
-        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
     </div>
     </body>
+
 </html>
