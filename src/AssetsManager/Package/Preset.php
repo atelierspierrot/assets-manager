@@ -271,7 +271,7 @@ class Preset
     {
         $organized_statements = array();
         if (empty($this->_statements)) {
-           $this->load();
+//           $this->load();
            try {
                $this->load();
            } catch (\Exception $e) {

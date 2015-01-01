@@ -22,6 +22,7 @@
 
 namespace AssetsManager\Package;
 
+use \InvalidArgumentException;
 use \Library\Helper\Directory as DirectoryHelper;
 
 /**
@@ -113,7 +114,7 @@ abstract class AbstractAssetsPackage
         if (@file_exists($path) && is_dir($path)) {
             $this->_root_dir = $path;
         } else {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('Root package directory "%s" not found !', $path)
             );
         }
@@ -143,7 +144,7 @@ abstract class AbstractAssetsPackage
         if (@file_exists($realpath) && is_dir($realpath)) {
             $this->_assets_dir = $path;
         } else {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('Assets directory "%s" not found !', $path)
             );
         }
@@ -173,7 +174,7 @@ abstract class AbstractAssetsPackage
         if (@file_exists($realpath) && is_dir($realpath)) {
             $this->_vendor_dir = $path;
         } else {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('Vendor directory "%s" not found !', $path)
             );
         }
