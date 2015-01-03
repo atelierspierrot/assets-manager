@@ -105,7 +105,7 @@ class Requirement
                 $preset = Loader::findPreset($preset_requires);
             } catch(\Exception $e) {
                 throw new \Exception(
-                    sprintf('An error occured trying to load a dependency for preset "%s" : "%s"',
+                    sprintf('An error occurred trying to load a dependency for preset "%s" : "%s"',
                         $this->preset->getName(), $e->getMessage())
                 );
             }
