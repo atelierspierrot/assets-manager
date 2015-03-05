@@ -1,36 +1,3 @@
-########################################################################################
-#
-# Common ".gitignore" of Les Ateliers Pierrot's packages
-#
-# Copyleft (ↄ) 2013-2015 Pierre Cassat and contributors
-# <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
-# License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
-# Sources <http://github.com/atelierspierrot/atelierspierrot/common/gitignore.txt>
-#
-########################################################################################
-
-### OS & software files
-.DS_Store
-.AppleDouble
-.LSOverride
-.Spotlight-V100
-.Trashes
-Icon
-._*
-*~
-*~lock*
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# IDE files
-# to be commented to include them in a project
-.project
-.buildpath
-.idea/*
-
-### Les Ateliers specifics
-
 # the composer lock file
 composer.lock
 
@@ -45,8 +12,6 @@ user/*
 vendor/*
 */vendor/*
 
-### Les Ateliers branches
-
 # the documentation, that is NOT under version-control by default
 # this may be commented on the "dev" branch
 phpdoc/*
@@ -57,5 +22,5 @@ dev/*
 build/*
 src.*/*
 
-### Hack to allow keeping an empty directory
+# Hack to allow keeping an empty directory
 !.gitkeep
