@@ -3,7 +3,7 @@
     "type": "composer-plugin",
     "description": "A Composer plugin to manage \"***-assets\" package type",
     "keywords": [ "composer plugin", "package", "assets" ],
-    "homepage": "http://github.com/atelierspierrot/assets-manager",
+    "homepage": "http://assetsmanager.ateliers-pierrot.fr/",
     "license": "GPL-3.0",
     "authors": [{
         "name": "Les Ateliers Pierrot & contributors",
@@ -11,9 +11,12 @@
         "homepage": "http://www.ateliers-pierrot.fr/"
     },{
         "name": "Pierre Cassat",
-        "email": "me@e-piwi.fr",
-        "homepage": "http://github.com/piwi"
+        "homepage": "http://e-piwi.fr/"
     }],
+    "support": {
+        "issues": "http://github.com/atelierspierrot/assets-manager/issues",
+        "source": "http://github.com/atelierspierrot/assets-manager/tree/master"
+    },
     "require": {
         "php": ">=5.3.0",
         "atelierspierrot/patterns": "1.*",

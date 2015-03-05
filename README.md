@@ -19,11 +19,11 @@ Just like any standard Composer feature, all names or configuration variables ar
 
 To install the plugin, add the package to your requirements in your `composer.json`:
 
-    "require": {
-        ...
-        "atelierspierrot/assets-manager": "1.*"
-    }
-
+```json
+"require": {
+    "atelierspierrot/assets-manager": "1.*"
+}
+```
 
 ## Usage
 
@@ -108,9 +108,6 @@ For these three paths, the default values are defined on a default package struc
     $loader->assets_dir = www
     $loader->document_root = www or the server DOCUMENT_ROOT
 
-Additionally, a `cache_dir` variable is defined to store assets cache files (if necessary) and
-defaults to `www/tmp/`.
-
 NOTE - These paths are stored in the object without the trailing slash.
 
 ### Usage example
@@ -118,21 +115,23 @@ NOTE - These paths are stored in the object without the trailing slash.
 Once the install process is done, you can access any assets package or load a package's preset
 using the `\AssetsManager\Loader` object:
 
-    $loader = \AssetsManager\Loader::getInstance(
-        __DIR__.'/..',      // this is the project root directory
-        'www',              // this is your assets root directory
-        __DIR__             // this is your web document root
-    );
+```php
+$loader = \AssetsManager\Loader::getInstance(
+    __DIR__.'/..',      // this is the project root directory
+    'www',              // this is your assets root directory
+    __DIR__             // this is your web document root
+);
 
-    // to get a package
-    $package = $loader->getPackage( package name );
-    // to retrieve a package asset file URL
-    echo $package->find( file name );
+// to get a package
+$package = $loader->getPackage( package name );
+// to retrieve a package asset file URL
+echo $package->find( file name );
 
-    // to get a preset
-    $preset = $loader->getPreset( preset name );
-    // to write a preset dependencies
-    echo $preset->__toHtml();
+// to get a preset
+$preset = $loader->getPreset( preset name );
+// to write a preset dependencies
+echo $preset->__toHtml();
+```
 
 As described in the "configuration" section below, calling a preset will automatically load
 its internal files (some Javascript files for instance) and its dependencies to other presets
@@ -144,44 +143,46 @@ Example:
 For instance, if you installed the [Gentleface sprites](http://github.com/atelierspierrot/gentleface-sprites)
 package in its `assets-installer` version you will have:
 
-    // calling ...
-    echo $loader->getPreset('gentleface-sprites')->__toHtml();
-    // will render something like:
-    <link src="vendor/atelierspierrot/gentleface-sprites/gentleface-sprites.min.css" type="text/css" rel="stylesheet" media="all" />
-
+```php
+// calling ...
+echo $loader->getPreset('gentleface-sprites')->__toHtml();
+// will render something like:
+<link src="vendor/atelierspierrot/gentleface-sprites/gentleface-sprites.min.css" type="text/css" rel="stylesheet" media="all" />
+```
 
 ## Configuration
 
 Below is an example of the package configuration using default values:
 
-    "extra": {
-        ...
+```json
+"extra": {
+    ...
 
-        "assets-dir": "www",
-        "assets-vendor-dir": "vendor",
-        "document-root": "www",
-        "cache-dir": "tmp",
-        "assets-config-class": "AssetsManager\\Config\\DefaultConfig",
-        "assets-package-class": "AssetsManager\\Package\\Package",
-        "assets-preset-class": "AssetsManager\\Package\\Preset",
-        "assets-package-installer-class": "AssetsManager\\Composer\\Installer\\AssetsInstaller",
-        "assets-autoload-generator-class": "AssetsManager\\Composer\\Autoload\\AssetsAutoloadGenerator",
+    "assets-dir": "www",
+    "assets-vendor-dir": "vendor",
+    "document-root": "www",
+    "assets-config-class": "AssetsManager\\Config\\DefaultConfig",
+    "assets-package-class": "AssetsManager\\Package\\AssetsPackage",
+    "assets-preset-class": "AssetsManager\\Package\\Preset",
+    "assets-package-installer-class": "AssetsManager\\Composer\\Installer\\AssetsInstaller",
+    "assets-autoload-generator-class": "AssetsManager\\Composer\\Autoload\\AssetsAutoloadGenerator",
 
-        // this part is just for the example, no asset is embedded with the package
-        "assets-presets": {
-            "jquery.tablesorter": {
-                "css": "vendor_assets/blue/style.css",
-                "jsfiles_footer": [
-                    "vendor_assets/jquery.metadata.js",
-                    "min:vendor/jquery.tablesorter.min.js"
-                ]
-            },
-            "jquery.highlight": {
-                "css": "vendor_assets/jquery.highlight.css",
-                "jsfiles_footer": "vendor_assets/jquery.highlight.js"
-            }
+    // this part is just for the example, no asset is embedded with the package
+    "assets-presets": {
+        "jquery.tablesorter": {
+            "css": "vendor_assets/blue/style.css",
+            "jsfiles_footer": [
+                "vendor_assets/jquery.metadata.js",
+                "min:vendor/jquery.tablesorter.min.js"
+            ]
+        },
+        "jquery.highlight": {
+            "css": "vendor_assets/jquery.highlight.css",
+            "jsfiles_footer": "vendor_assets/jquery.highlight.js"
         }
     }
+}
+```
 
 ### `assets-dir`: string
 
@@ -207,21 +208,18 @@ Example:
 For instance, if the absolute path of a CSS stylesheet is `/home/www/project/www/assets/package/styles.css`
 and your `document-root` is define to `/home/www/project/www/`, the stylesheet tag will be rendered as:
 
-    <link src="www/assets/package/styles.css" type="text/css" rel="stylesheet" />
-
-### `cache-dir`: string (root only)
-
-This defines the relative path of the temporary assets files directory.
-This directory will be created if it doesn't exist and must be unique (its value must be a string).
-This value is finally concatenated to the `assets-dir` to build the relative final directory
-path of your assets cache. It is only considered for the root package.
+```html
+<link src="www/assets/package/styles.css" type="text/css" rel="stylesheet" />
+```
 
 ### `assets-presets`: array of arrays
 
 An assets preset is a predefined set of CSS or Javascript files required to use a specific
 tool (such as a jQuery plugin for instance). Each preset can be used in a view file writing:
 
-        echo $assets_loader->getPreset( preset name )->__toHtml();
+```php
+echo $assets_loader->getPreset( preset name )->__toHtml();
+```
 
 A preset is defined as a set of `key => array` pairs where the `key` is the preset name 
 (the name you will call using the `getPreset()` method) and the corresponding array
@@ -252,10 +250,12 @@ prefix the file path with `min:` or `pack:`.
 
 Example:
 
-    "jsfiles_footer": [
-        "vendor/jquery.metadata.js",
-        "min:vendor/jquery.tablesorter.min.js"
-    ]
+```json
+"jsfiles_footer": [
+    "vendor/jquery.metadata.js",
+    "min:vendor/jquery.tablesorter.min.js"
+]
+```
 
 This way, the library can separate already minified files from others.
 
@@ -270,16 +270,17 @@ are respectively considered as `100` and `-1`.
 
 Example:
 
-    "jsfiles_footer": [
-        "first:vendor/jquery.metadata.js",
-        "last:min:vendor/jquery.tablesorter.min.js"
-    ]
-    // or
-    "jsfiles_footer": [
-        "10:vendor/jquery.metadata.js",
-        "11:min:vendor/jquery.tablesorter.min.js"
-    ]
-
+```json
+"jsfiles_footer": [
+    "first:vendor/jquery.metadata.js",
+    "last:min:vendor/jquery.tablesorter.min.js"
+]
+// or
+"jsfiles_footer": [
+    "10:vendor/jquery.metadata.js",
+    "11:min:vendor/jquery.tablesorter.min.js"
+]
+```
 
 ### PHP classes (root only)
 
@@ -296,15 +297,15 @@ It defaults to `\AssetsManager\Config\DefaultConfig`.
 #### `assets-package-class`: string
 
 This defines the class used to handle each assets package during installation and assets
-loading. The class must exist and implement the `\AssetsManager\Package\PackageInterface`
+loading. The class must exist and implement the `\AssetsManager\Package\AssetsPackageInterface`
 interface.
 
-It defaults to `\AssetsManager\Package\Package`.
+It defaults to `\AssetsManager\Package\AssetsPackage`.
 
 #### `assets-preset-class`: string
 
 This defines the class used to handle each assets preset. The class must exist and implement
-the `\AssetsManager\Package\PresetInterface` interface.
+the `\AssetsManager\Package\AssetsPresetInterface` interface.
 
 It defaults to `\AssetsManager\Package\Preset`.
 
@@ -352,7 +353,7 @@ The latest version of this development documentation is available online at <htt
 
 >    http://github.com/atelierspierrot/assets-manager
 
->    Copyleft 2013-2014, Pierre Cassat and contributors
+>    Copyleft (ↄ) 2013-2015, Pierre Cassat and contributors
 
 >    Licensed under the GPL Version 3 license.
 
@@ -362,4 +363,4 @@ The latest version of this development documentation is available online at <htt
 
 >    Les Ateliers Pierrot - Paris, France
 
->    <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+>    <http://www.ateliers-pierrot.fr/> - <contact@ateliers-pierrot.fr>

@@ -1,10 +1,24 @@
 <?php
 /**
- * AssetsManager - Composer plugin
- * Copyleft (c) 2013-2014 Pierre Cassat and contributors
- * <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
- * License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
- * Sources <https://github.com/atelierspierrot/assets-manager>
+ * This file is part of the AssetsManager package.
+ *
+ * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * The source code of this package is available online at 
+ * <http://github.com/atelierspierrot/assets-manager>.
  */
 
 namespace AssetsManager;
@@ -202,7 +216,7 @@ class Loader
                 $this
                     ->setAssetsDirectory(
                         !is_null($assets_dir) ? $assets_dir : (
-                        isset($json_assets['assets_dir']) ? $json_assets['assets_dir'] : Config::get('assets-dir')
+                            isset($json_assets['assets_dir']) ? $json_assets['assets_dir'] : Config::get('assets-dir')
                         )
                     )
                     ->setAssetsVendorDirectory(
@@ -210,7 +224,7 @@ class Loader
                     )
                     ->setDocumentRoot(
                         !is_null($document_root) ? $document_root : (
-                        isset($json_assets['document_root']) ? $json_assets['document_root'] : Config::get('document-root')
+                            isset($json_assets['document_root']) ? $json_assets['document_root'] : Config::get('document-root')
                         )
                     )
                     ->setCachePath(
