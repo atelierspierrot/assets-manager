@@ -203,7 +203,7 @@ class Loader
                 $this
                     ->setAssetsDirectory(
                         !is_null($assets_dir) ? $assets_dir : (
-                        isset($json_assets['assets_dir']) ? $json_assets['assets_dir'] : Config::get('assets-dir')
+                            isset($json_assets['assets_dir']) ? $json_assets['assets_dir'] : Config::get('assets-dir')
                         )
                     )
                     ->setAssetsVendorDirectory(
@@ -211,7 +211,7 @@ class Loader
                     )
                     ->setDocumentRoot(
                         !is_null($document_root) ? $document_root : (
-                        isset($json_assets['document_root']) ? $json_assets['document_root'] : Config::get('document-root')
+                            isset($json_assets['document_root']) ? $json_assets['document_root'] : Config::get('document-root')
                         )
                     )
                     ->setAssetsDb(!empty($json_assets['packages']) ? $json_assets['packages'] : array());

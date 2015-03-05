@@ -80,6 +80,9 @@ class AssetsInstaller
         $this->guessConfigurator($composer->getPackage());
         $config = $composer->getConfig();
         $this->app_base_path = rtrim(str_replace($config->get('vendor-dir'), '', $this->getVendorDir()), '/');
+        if (empty($this->app_base_path) || $this->app_base_path=='/') {
+            $this->app_base_path = getcwd();
+        }
         $this->filesystem = new AssetsFilesystem();
         $this->assets_dir = $this->guessAssetsDir($composer->getPackage());
         $this->assets_vendor_dir = $this->guessAssetsVendorDir($composer->getPackage());
