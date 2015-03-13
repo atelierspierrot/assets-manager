@@ -2,8 +2,9 @@ Assets Manager
 ==============
 
 [![documentation](http://img.ateliers-pierrot-static.fr/read-the-doc.svg)](http://docs.ateliers-pierrot.fr/assets-manager/)
+
 A [Composer](http://getcomposer.org/) plugin to manage `***-assets` package type.
-For more info, see <http://assetsmanager.ateliers-pierrot.fr/>.
+To begin, have a look at <http://assetsmanager.ateliers-pierrot.fr/>.
 
 
 How does it work?
@@ -165,7 +166,7 @@ Below is an example of the package configuration using default values:
 
 ```json
 "extra": {
-    ...
+    # ...
 
     "assets-dir": "www",
     "assets-vendor-dir": "vendor",
@@ -176,7 +177,7 @@ Below is an example of the package configuration using default values:
     "assets-package-installer-class": "AssetsManager\\Composer\\Installer\\AssetsInstaller",
     "assets-autoload-generator-class": "AssetsManager\\Composer\\Autoload\\AssetsAutoloadGenerator",
 
-    // this part is just for the example, no asset is embedded with the package
+    # this part is just for the example, no asset is embedded with the package
     "assets-presets": {
         "jquery.tablesorter": {
             "css": "vendor_assets/blue/style.css",
