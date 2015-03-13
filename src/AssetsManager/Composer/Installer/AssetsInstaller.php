@@ -36,7 +36,7 @@ use \AssetsManager\Composer\Installer\AssetsInstallerInterface;
 use \AssetsManager\Composer\Util\Filesystem as AssetsFilesystem;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class AssetsInstaller
     extends LibraryInstaller

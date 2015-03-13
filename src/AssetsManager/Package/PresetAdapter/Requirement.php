@@ -28,7 +28,7 @@ use \AssetsManager\Package\PresetInterface;
 use \AssetsManager\Loader;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class Requirement
     implements PresetAdapterInterface

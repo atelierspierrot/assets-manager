@@ -1,10 +1,14 @@
 Assets Manager
 ==============
 
+[![documentation](http://img.ateliers-pierrot-static.fr/read-the-doc.svg)](http://docs.ateliers-pierrot.fr/assets-manager/)
+
 A [Composer](http://getcomposer.org/) plugin to manage `***-assets` package type.
+To begin, have a look at <http://assetsmanager.ateliers-pierrot.fr/>.
 
 
-## How does it work?
+How does it work?
+-----------------
 
 The goal of this [Composer](http://getcomposer.org/) plugin is to **manage the assets files of a package**
 (javascript libraries, CSS stylesheets or views) just like Composer manages PHP sources.
@@ -15,17 +19,19 @@ grouped by type, library or usage.
 
 Just like any standard Composer feature, all names or configuration variables are configurable.
 
-## Installation
+
+Installation
+------------
 
 To install the plugin, add the package to your requirements in your `composer.json`:
 
 ```json
-"require": {
-    "atelierspierrot/assets-manager": "1.*"
-}
+"atelierspierrot/assets-manager": "1.*"
 ```
 
-## Usage
+
+Usage
+-----
 
 ### How to inform the extension about your package assets?
 
@@ -82,7 +88,9 @@ build a JSON map in the original `vendor/`:
     | ---- vendor/
 
 
-## Usage of the assets manager
+
+Usage of the assets manager
+---------------------------
 
 This part will try to explain how to use the assets manager in your scripts.
 
@@ -150,13 +158,15 @@ echo $loader->getPreset('gentleface-sprites')->__toHtml();
 <link src="vendor/atelierspierrot/gentleface-sprites/gentleface-sprites.min.css" type="text/css" rel="stylesheet" media="all" />
 ```
 
-## Configuration
+
+Configuration
+-------------
 
 Below is an example of the package configuration using default values:
 
 ```json
 "extra": {
-    ...
+    # ...
 
     "assets-dir": "www",
     "assets-vendor-dir": "vendor",
@@ -167,7 +177,7 @@ Below is an example of the package configuration using default values:
     "assets-package-installer-class": "AssetsManager\\Composer\\Installer\\AssetsInstaller",
     "assets-autoload-generator-class": "AssetsManager\\Composer\\Autoload\\AssetsAutoloadGenerator",
 
-    // this part is just for the example, no asset is embedded with the package
+    # this part is just for the example, no asset is embedded with the package
     "assets-presets": {
         "jquery.tablesorter": {
             "css": "vendor_assets/blue/style.css",
@@ -324,15 +334,8 @@ and extend the abstract class `\AssetsManager\Composer\Autoload\AbstractAssetsAu
 It defaults to `\AssetsManager\Composer\Autoload\AssetsAutoloadGenerator`.
 
 
-## Development & Documentation
-
-As for all our work, we try to follow the coding standards and naming rules most commonly in use:
-
--   the [PEAR coding standards](http://pear.php.net/manual/en/standards.php)
--   the [PHP Framework Interoperability Group standards](http://github.com/php-fig/fig-standards).
-
-Knowing that, all classes are named and organized in an architecture to allow the use of the
-[standard SplClassLoader](http://gist.github.com/jwage/221634).
+Development & Documentation
+---------------------------
 
 The whole package is embedded in the `AssetsManager` namespace.
 
@@ -347,7 +350,8 @@ A development documentation can be generated with [Sami](http://github.com/fabpo
 The latest version of this development documentation is available online at <http://docs.ateliers-pierrot.fr/assets-manager/>.
 
 
-## Author & License
+Author & License
+----------------
 
 >    Assets Manager
 

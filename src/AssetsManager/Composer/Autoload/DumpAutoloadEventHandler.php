@@ -37,7 +37,7 @@ use \AssetsManager\Composer\Installer\AssetsInstaller;
 use \AssetsManager\Composer\Autoload\AssetsAutoloadGenerator;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class DumpAutoloadEventHandler
     extends AutoloadGenerator

@@ -28,7 +28,7 @@ use \AssetsManager\Package\PresetInterface;
 use \AssetsManager\Package\Preset;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class Css
     implements PresetAdapterInterface

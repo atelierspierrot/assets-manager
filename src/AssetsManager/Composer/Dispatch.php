@@ -34,7 +34,7 @@ use \AssetsManager\Error;
 use \AssetsManager\Composer\Installer\AssetsInstallerInterface;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class Dispatch
     implements InstallerInterface
