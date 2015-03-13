@@ -29,6 +29,8 @@ use \RecursiveIteratorIterator;
 
 /**
  * This class just completes the default `Composer\Util\Filesystem` with a `copy` method
+ *
+ * @author  piwi <me@e-piwi.fr>
  */
 class Filesystem
     extends OriginalFilesystem

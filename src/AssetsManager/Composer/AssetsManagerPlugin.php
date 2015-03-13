@@ -35,6 +35,9 @@ use \AssetsManager\Composer\Dispatch;
 use \AssetsManager\Composer\Autoload\AssetsAutoloadGenerator;
 use \AssetsManager\Composer\Autoload\DumpAutoloadEventHandler;
 
+/**
+ * @author  piwi <me@e-piwi.fr>
+ */
 class AssetsManagerPlugin
     implements PluginInterface, EventSubscriberInterface
 {

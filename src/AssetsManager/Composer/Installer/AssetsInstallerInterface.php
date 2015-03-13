@@ -31,7 +31,7 @@ use \Composer\Installer\LibraryInstaller;
 use \Composer\Installer\InstallerInterface;
 
 /**
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 interface AssetsInstallerInterface
     extends InstallerInterface
