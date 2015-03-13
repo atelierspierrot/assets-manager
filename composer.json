@@ -24,8 +24,10 @@
         "composer-plugin-api": "1.0.0"
     },
     "require-dev": {
-        "sami/sami": "dev-master",
-        "composer/composer": "1.*@dev"
+        "sami/sami": "@stable",
+        "composer/composer": "1.*@dev",
+        "phpunit/phpunit": "@stable",
+        "phpmd/phpmd" : "@stable"
     },
     "autoload": { "psr-0": { "AssetsManager": "src" } },
     "extra": {
