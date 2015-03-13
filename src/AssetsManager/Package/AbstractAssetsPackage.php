@@ -48,7 +48,7 @@ use \Library\Helper\Directory as DirectoryHelper;
  *
  * NOTE - These paths are stored in the object without the trailing slash.
  *
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 abstract class AbstractAssetsPackage
 {

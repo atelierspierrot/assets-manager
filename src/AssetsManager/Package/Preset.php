@@ -35,7 +35,7 @@ use \AssetsManager\Package\AssetsPresetInterface;
  * This class is the "presets" manager for predefined assets plugins to use in views with
  * the `_use()` method.
  *
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 class Preset
     implements AssetsPresetInterface

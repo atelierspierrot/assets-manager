@@ -28,7 +28,7 @@ namespace AssetsManager\Package;
  *
  * Any Preset adapter must implement this interface methods.
  *
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 interface PresetAdapterInterface
 {

@@ -28,7 +28,7 @@ namespace AssetsManager\Package;
  *
  * Any Assets Preset class must implement this interface methods.
  *
- * @author  Piero Wbmstr <me@e-piwi.fr>
+ * @author  piwi <me@e-piwi.fr>
  */
 interface AssetsPresetInterface
 {
