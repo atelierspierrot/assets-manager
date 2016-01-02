@@ -725,4 +725,3 @@ class Compressor
 
 }
 
-// Endfile

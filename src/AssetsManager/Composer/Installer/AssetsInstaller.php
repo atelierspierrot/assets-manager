@@ -2,7 +2,7 @@
 /**
  * This file is part of the AssetsManager package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyleft (ↄ) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -124,7 +124,9 @@ class AssetsInstaller
     public function isInstalled(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
         $parent = parent::isInstalled($repo, $package);
-        if (!$parent) return $parent;
+        if (!$parent) {
+            return $parent;
+        }
         return file_exists($this->getAssetsInstallPath($package)) && is_readable($this->getAssetsInstallPath($package));
     }
 
@@ -176,8 +178,8 @@ class AssetsInstaller
         $from = $this->getPackageBasePath($package) . '/' . $assets;
         $target = $this->getAssetsInstallPath($package);
         if (file_exists($from)) {
-            $this->io->write( 
-                sprintf('  - Installing <info>%s</info> assets to <info>%s</info>', 
+            $this->io->write(
+                sprintf('  - Installing <info>%s</info> assets to <info>%s</info>',
                     $package->getPrettyName(),
                     str_replace(dirname($this->assets_dir) . '/', '', $target)
                 )
@@ -208,7 +210,7 @@ class AssetsInstaller
 
         $target = $this->getAssetsInstallPath($package);
         if (file_exists($target)) {
-            $this->io->write( 
+            $this->io->write(
                 sprintf('  - Removing <info>%s</info> assets from <info>%s</info>',
                     $package->getPrettyName(),
                     str_replace(dirname($this->assets_dir) . '/', '', $target)
@@ -501,7 +503,9 @@ class AssetsInstaller
      */
     public static function guessConfigurationEntry(PackageInterface $package, $config_entry)
     {
-        if (empty($config_entry)) return array();
+        if (empty($config_entry)) {
+            return array();
+        }
         $extra = $package->getExtra();
         return isset($extra[$config_entry]) ? $extra[$config_entry] : Config::get($config_entry);
     }
@@ -527,7 +531,4 @@ class AssetsInstaller
             return !empty($extra) && array_key_exists($type, $extra);
         }
     }
-
 }
-
-// Endfile

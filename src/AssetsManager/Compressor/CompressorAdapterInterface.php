@@ -42,4 +42,3 @@ interface CompressorAdapterInterface
 
 }
 
-// Endfile

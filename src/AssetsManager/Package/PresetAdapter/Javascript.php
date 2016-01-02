@@ -2,7 +2,7 @@
 /**
  * This file is part of the AssetsManager package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyleft (ↄ) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -109,7 +109,9 @@ class Javascript
      */
     public function parse()
     {
-        if (!empty($this->transformed_data)) return;
+        if (!empty($this->transformed_data)) {
+            return;
+        }
 
         $data = $this->data;
         if (count($data)===1 && !isset($data['src']) && isset($data[0])) {
@@ -143,7 +145,7 @@ class Javascript
                                 }
                                 $data['position'] = $substr;
                             } else {
-                                if (empty($data['src'])) { 
+                                if (empty($data['src'])) {
                                     $data['src'] = $substr;
                                 } else {
                                     throw new \Exception(
@@ -163,7 +165,7 @@ class Javascript
         }
 
         $this->transformed_data = $data;
-        if ( ! \AssetsManager\Loader::isUrl($this->transformed_data['src'])) {
+        if (! \AssetsManager\Loader::isUrl($this->transformed_data['src'])) {
             $this->transformed_data['src'] = $this->preset->findInPackage($this->transformed_data['src']);
         }
     }
@@ -204,7 +206,4 @@ class Javascript
         }
         return $str;
     }
-
 }
-
-// Endfile

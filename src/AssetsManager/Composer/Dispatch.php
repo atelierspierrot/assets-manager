@@ -2,7 +2,7 @@
 /**
  * This file is part of the AssetsManager package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyleft (ↄ) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -161,7 +161,6 @@ class Dispatch
                 'Assets autoload generator is not defined!', '\Exception', __CLASS__, __METHOD__, __LINE__
             );
         }
-
     }
 
 // ---------------------------------------
@@ -349,7 +348,4 @@ class Dispatch
     {
         self::$__autoloader->unregisterPackage($package, $installer);
     }
-
 }
-
-// Endfile

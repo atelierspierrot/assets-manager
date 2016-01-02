@@ -100,4 +100,3 @@ abstract class AbstractFileAssetObject
 
 }
 
-// Endfile

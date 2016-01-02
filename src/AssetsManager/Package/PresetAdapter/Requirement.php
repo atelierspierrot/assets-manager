@@ -2,7 +2,7 @@
 /**
  * This file is part of the AssetsManager package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyleft (ↄ) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -96,14 +96,16 @@ class Requirement
      */
     public function parse()
     {
-        if (!empty($this->dependencies)) return;
+        if (!empty($this->dependencies)) {
+            return;
+        }
 
         $this->dependencies = array();
         $data = !is_array($this->data) ? array( $this->data ) : $this->data;
         foreach ($data as $preset_requires) {
             try {
                 $preset = Loader::findPreset($preset_requires);
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 throw new \Exception(
                     sprintf('An error occurred trying to load a dependency for preset "%s" : "%s"',
                         $this->preset->getName(), $e->getMessage())
@@ -153,5 +155,3 @@ class Requirement
         return $str;
     }
 }
-
-// Endfile

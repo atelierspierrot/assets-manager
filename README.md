@@ -357,7 +357,7 @@ Author & License
 
 >    http://github.com/atelierspierrot/assets-manager
 
->    Copyleft (ↄ) 2013-2015, Pierre Cassat and contributors
+>    Copyleft (ↄ) 2013-2016, Pierre Cassat and contributors
 
 >    Licensed under the GPL Version 3 license.
 

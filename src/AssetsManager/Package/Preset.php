@@ -2,22 +2,22 @@
 /**
  * This file is part of the AssetsManager package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
- * 
+ * Copyleft (ↄ) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * The source code of this package is available online at 
+ * The source code of this package is available online at
  * <http://github.com/atelierspierrot/assets-manager>.
  */
 
@@ -104,10 +104,14 @@ class Preset
      */
     public function load()
     {
-        if (!empty($this->_statements)) return;
+        if (!empty($this->_statements)) {
+            return;
+        }
 
         foreach ($this->data as $type=>$item) {
-            if (!is_array($item)) $item = array( $item );
+            if (!is_array($item)) {
+                $item = array( $item );
+            }
             $use_statements = Config::get('use-statements');
             $adapter_name = isset($use_statements[$type]) ? $use_statements[$type] : null;
             if (!empty($adapter_name)) {
@@ -120,7 +124,9 @@ class Preset
                             $this->_statements[$type] = array();
                         }
                         foreach ($item as $item_ctt) {
-                            if (!is_array($item_ctt)) $item_ctt = array( $item_ctt );
+                            if (!is_array($item_ctt)) {
+                                $item_ctt = array( $item_ctt );
+                            }
                             $statement = new $cls_name($item_ctt, $this);
                             $statement->parse();
                             $this->_statements[$type][] = $statement;
@@ -272,6 +278,7 @@ class Preset
     {
         $organized_statements = array();
         if (empty($this->_statements)) {
+            //           $this->load();
            try {
                $this->load();
            } catch (\Exception $e) {
@@ -292,7 +299,7 @@ class Preset
             }
             unset($statements['require']);
         }
-        
+
         foreach ($statements as $type=>$statement_stack) {
             if (!isset($organized_statements[$type])) {
                 $organized_statements[$type] = array();
@@ -325,7 +332,4 @@ class Preset
         array_multisort($ordered, SORT_DESC, SORT_NUMERIC, $statements);
         return $statements;
     }
-
 }
-
-// Endfile

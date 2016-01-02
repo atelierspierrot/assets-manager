@@ -54,4 +54,3 @@ interface AssetObjectInterface
 
 }
 
-// Endfile

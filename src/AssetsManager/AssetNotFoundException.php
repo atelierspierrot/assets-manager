@@ -18,4 +18,3 @@ class AssetNotFoundException extends Exception
 
 }
 
-// Endfile
