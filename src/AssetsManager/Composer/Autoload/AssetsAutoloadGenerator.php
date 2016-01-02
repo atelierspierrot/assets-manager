@@ -2,7 +2,7 @@
 /**
  * This file is part of the AssetsManager package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyleft (ↄ) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ class AssetsAutoloadGenerator
      */
     public function generate()
     {
-/*
+        /*
 // why this ever exists ??
         $assets_db = $this->readJsonDatabase();
         if (!empty($assets_db) && isset($assets_db['packages'])) {
@@ -77,7 +77,4 @@ class AssetsAutoloadGenerator
     {
         unset($this->assets_db[$package->getPrettyName()]);
     }
-
 }
-
-// Endfile

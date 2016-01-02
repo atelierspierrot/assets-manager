@@ -2,7 +2,7 @@
 /**
  * This file is part of the AssetsManager package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyleft (ↄ) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -104,10 +104,14 @@ class Preset
      */
     public function load()
     {
-        if (!empty($this->_statements)) return;
+        if (!empty($this->_statements)) {
+            return;
+        }
 
         foreach ($this->data as $type=>$item) {
-            if (!is_array($item)) $item = array( $item );
+            if (!is_array($item)) {
+                $item = array( $item );
+            }
             $use_statements = Config::get('use-statements');
             $adapter_name = isset($use_statements[$type]) ? $use_statements[$type] : null;
             if (!empty($adapter_name)) {
@@ -120,7 +124,9 @@ class Preset
                             $this->_statements[$type] = array();
                         }
                         foreach ($item as $item_ctt) {
-                            if (!is_array($item_ctt)) $item_ctt = array( $item_ctt );
+                            if (!is_array($item_ctt)) {
+                                $item_ctt = array( $item_ctt );
+                            }
                             $statement = new $cls_name($item_ctt, $this);
                             $statement->parse();
                             $this->_statements[$type][] = $statement;
@@ -272,7 +278,7 @@ class Preset
     {
         $organized_statements = array();
         if (empty($this->_statements)) {
-//           $this->load();
+            //           $this->load();
            try {
                $this->load();
            } catch (\Exception $e) {
@@ -326,7 +332,4 @@ class Preset
         array_multisort($ordered, SORT_DESC, SORT_NUMERIC, $statements);
         return $statements;
     }
-
 }
-
-// Endfile

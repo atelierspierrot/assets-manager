@@ -2,7 +2,7 @@
 /**
  * This file is part of the AssetsManager package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyleft (ↄ) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -90,7 +90,9 @@ class Config
      */
     public static function load($class_name = null, $safe = false)
     {
-        if (empty($class_name)) $class_name = self::getInternal('assets-config-class');
+        if (empty($class_name)) {
+            $class_name = self::getInternal('assets-config-class');
+        }
     
         // init the registry
         if (empty(self::$__registry)) {
@@ -100,7 +102,6 @@ class Config
 
         // init the configurator object
         if (empty(self::$__configurator) || $class_name!=get_class(self::$__configurator)) {
-
             if ($safe && !class_exists($class_name)) {
                 $class_name = self::getInternal('assets-config-class');
             }
@@ -115,7 +116,7 @@ class Config
                         self::$__registry = $defaults;
                     } else {
                         Error::thrower(
-                            sprintf('Configuration class "%s" do not define all required values!', 
+                            sprintf('Configuration class "%s" do not define all required values!',
                                 $class_name),
                             '\Exception', __CLASS__, __METHOD__, __LINE__
                         );
@@ -161,7 +162,9 @@ class Config
      */
     public static function overload(array $settings)
     {
-        if (self::mustLoad()) self::load();
+        if (self::mustLoad()) {
+            self::load();
+        }
         foreach ($settings as $var=>$val) {
             self::set($var, $val);
         }
@@ -174,7 +177,9 @@ class Config
      */
     public static function set($name, $value)
     {
-        if (self::mustLoad()) self::load();
+        if (self::mustLoad()) {
+            self::load();
+        }
         if (array_key_exists($name, self::$__registry)) {
             self::$__registry[$name] = $value;
         }
@@ -187,7 +192,9 @@ class Config
      */
     public static function get($name, $default = null)
     {
-        if (self::mustLoad()) self::load();
+        if (self::mustLoad()) {
+            self::load();
+        }
         return isset(self::$__registry[$name]) ? (
             is_string(self::$__registry[$name]) ?
                 trim(self::$__registry[$name]) : self::$__registry[$name]
@@ -200,7 +207,9 @@ class Config
      */
     public static function getDefault($name)
     {
-        if (self::mustLoad()) self::load();
+        if (self::mustLoad()) {
+            self::load();
+        }
         $cls = get_class(self::$__configurator);
         $configs = $cls::getDefaults();
         return isset($configs[$name]) ? (
@@ -225,10 +234,9 @@ class Config
      */
     public static function getRegistry()
     {
-        if (self::mustLoad()) self::load();
+        if (self::mustLoad()) {
+            self::load();
+        }
         return self::$__registry;
     }
-
 }
-
-// Endfile

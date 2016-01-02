@@ -2,7 +2,7 @@
 /**
  * This file is part of the AssetsManager package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyleft (ↄ) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -119,7 +119,7 @@ abstract class AbstractAssetsAutoloadGenerator
             $json = new JsonFile($assets_file);
             $assets = $json->read();
             return $assets;
-        }        
+        }
         return false;
     }
 
@@ -132,7 +132,7 @@ abstract class AbstractAssetsAutoloadGenerator
     public function writeJsonDatabase(array $full_db)
     {
         $assets_file = $this->assets_installer->getVendorDir() . '/' . $this->assets_installer->getAssetsDbFilename();
-        $this->assets_installer->getIo()->write( 
+        $this->assets_installer->getIo()->write(
             sprintf('Writing assets json DB to <info>%s</info>',
                 str_replace(dirname($this->assets_installer->getVendorDir()).'/', '', $assets_file)
             )
@@ -144,11 +144,11 @@ abstract class AbstractAssetsAutoloadGenerator
             }
             $json->write($full_db);
             return $assets_file;
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             if (file_put_contents($assets_file, json_encode($full_db, version_compare(PHP_VERSION, '5.4')>0 ? JSON_PRETTY_PRINT : 0))) {
                 return $assets_file;
             }
-        }        
+        }
         return false;
     }
 
@@ -242,7 +242,4 @@ abstract class AbstractAssetsAutoloadGenerator
      * @return void
      */
     abstract protected function removePackage(PackageInterface $package);
-
 }
-
-// Endfile

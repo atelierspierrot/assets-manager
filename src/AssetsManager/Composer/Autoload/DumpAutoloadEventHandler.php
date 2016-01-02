@@ -2,7 +2,7 @@
 /**
  * This file is part of the AssetsManager package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyleft (ↄ) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -99,7 +99,9 @@ class DumpAutoloadEventHandler
         $package_map = $this->buildPackageMap($this->_composer->getInstallationManager(), $this->_package, $local_repo->getPackages());
 
         foreach ($package_map as $i=>$package) {
-            if ($i===0) { continue; }
+            if ($i===0) {
+                continue;
+            }
             $package_object = $package[0];
             $package_install_path = $package[1];
             if (empty($package_install_path)) {
@@ -124,7 +126,4 @@ class DumpAutoloadEventHandler
         );
         return $full_db;
     }
-
 }
-
-// Endfile
