@@ -2,7 +2,7 @@
 /**
  * This file is part of the AssetsManager package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyleft (ↄ) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -282,7 +282,7 @@ class AssetsPackage
      * This is the data stored in the `Loader\Assets::ASSETS_DB_FILENAME`.
      *
      * @return array
-     */    
+     */
     public function getArray()
     {
         $package = array(
@@ -303,8 +303,8 @@ class AssetsPackage
      */
      public function loadFromArray(array $entries)
      {
-        foreach ($entries as $var=>$val) {
-            switch ($var) {
+         foreach ($entries as $var=>$val) {
+             switch ($var) {
                 case 'name': $this->setName($val); break;
                 case 'version': $this->setVersion($val); break;
                 case 'relative_path': $this->setRelativePath($val); break;
@@ -313,8 +313,8 @@ class AssetsPackage
                     $this->setAssetsPath($val); break;
                 case 'assets_presets': $this->setAssetsPresets($val); break;
             }
-        }
-        return $this;
+         }
+         return $this;
      }
 
     /**
@@ -335,7 +335,4 @@ class AssetsPackage
     {
         return $this->findInPackage($filename);
     }
-
 }
-
-// Endfile

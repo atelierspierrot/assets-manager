@@ -2,7 +2,7 @@
 /**
  * This file is part of the AssetsManager package.
  *
- * Copyleft (ↄ) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyleft (ↄ) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -90,9 +90,15 @@ abstract class AbstractAssetsPackage
         if (!empty($root_dir)) {
             try {
                 $this->setRootDirectory($root_dir);
-                if (!empty($assets_dir)) $this->setAssetsDirectory($assets_dir);
-                if (!empty($vendor_dir)) $this->setVendorDirectory($vendor_dir);
-                if (!empty($assets_vendor_dir)) $this->setAssetsVendorDirectory($assets_vendor_dir);
+                if (!empty($assets_dir)) {
+                    $this->setAssetsDirectory($assets_dir);
+                }
+                if (!empty($vendor_dir)) {
+                    $this->setVendorDirectory($vendor_dir);
+                }
+                if (!empty($assets_vendor_dir)) {
+                    $this->setAssetsVendorDirectory($assets_vendor_dir);
+                }
             } catch (\Exception $e) {
                 throw $e;
             }
@@ -299,7 +305,4 @@ abstract class AbstractAssetsPackage
     {
         return DirectoryHelper::slashDirname($this->getAssetsRealPath()) . $this->getAssetsVendorDirectory();
     }
-    
 }
-
-// Endfile

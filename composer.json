@@ -27,9 +27,15 @@
         "sami/sami": "@stable",
         "composer/composer": "1.*@dev",
         "phpunit/phpunit": "@stable",
+        "fabpot/php-cs-fixer": "@stable",
         "phpmd/phpmd" : "@stable"
     },
-    "autoload": { "psr-0": { "AssetsManager": "src" } },
+    "autoload": { "psr-4": { "AssetsManager\\": "src/AssetsManager/" } },
+    "scripts": {
+        "build-doc": "php vendor/bin/sami.php update .sami.php",
+        "update-doc": "php vendor/bin/sami.php update .sami.php",
+        "cs-fixer": "php vendor/bin/php-cs-fixer fix -v"
+    },
     "extra": {
         "class": "\\AssetsManager\\Composer\\AssetsManagerPlugin",
         "branch-alias": {
