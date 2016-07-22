@@ -21,7 +21,7 @@
         "php": ">=5.3.0",
         "atelierspierrot/patterns": "1.*",
         "atelierspierrot/library": "1.*",
-        "composer-plugin-api": "1.0.0"
+        "composer-plugin-api": "^1.0"
     },
     "require-dev": {
         "sami/sami": "@stable",
